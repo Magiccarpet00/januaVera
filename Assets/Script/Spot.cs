@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Spot : MonoBehaviour
 {
-    [SerializeField] private List<Spot> adjacentSpots = new List<Spot>();
-    [SerializeField] private List<Spot> adjacentSecretSpots = new List<Spot>();
+    [SerializeField] private List<GameObject> adjacentSpots = new List<GameObject>();
+    [SerializeField] private List<GameObject> adjacentSecretSpots = new List<GameObject>();
+
+
+    public void AddAdjacentSpots(GameObject newSpot, bool secretSpot)
+    {
+        if (secretSpot)
+            adjacentSecretSpots.Add(newSpot);
+        else
+            adjacentSpots.Add(newSpot);
+    }
+
+    public List<GameObject> GetAdjacentSpots()
+    {
+        return adjacentSpots;
+    }
 }

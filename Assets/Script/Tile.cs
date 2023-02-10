@@ -20,9 +20,8 @@ public class Tile : MonoBehaviour
      2 = DOWN
      3 = LEFT
      */
-    [SerializeField] private Tile[] adjacentTiles = new Tile[4];    // Remplit dans unity en fonction de chaque sprite
-    [SerializeField] private Spot[] borderSpots = new Spot[4];
-    [SerializeField] private List<Spot> allSpots = new List<Spot>();
+    [SerializeField] private GameObject[] borderSpots = new GameObject[4];
+    [SerializeField] private List<GameObject> allSpots = new List<GameObject>();
     
 
     // FX
@@ -45,9 +44,29 @@ public class Tile : MonoBehaviour
         animatorCloud.SetTrigger("triggerHide"); //[CODE PRUDENCE] peut etre à l'origine de BUG le 1
     }
 
-    public Spot[] GetBorderSpots()
+    /*
+     Attention
+
+     Quand on utilise cette fonction il faut faire attention a la corespondance des spots
+
+     exemple : le borderSpot 0 de la tuile T1 est a coté du borderSpot 2 de la tuille T2
+
+                ----    Border Spot
+                |T2|        
+                ----        0
+                ----       3 1
+                |T1|        2
+                ----
+     */
+    public GameObject[] GetBorderSpots()
     {
         return borderSpots;
+    }
+
+    public GameObject GetBorderSpots(int dir)
+    {
+        int id = (dir + 2) % 4;
+        return borderSpots[id];
     }
 
     /*

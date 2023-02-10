@@ -36,12 +36,16 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         //SEED RNG
-        SeedRandom((int)Random.Range(0, 9999999));
-        //SeedRandom(5);
+        //SeedRandom((int)Random.Range(0, 9999999));
+        SeedRandom(5);
 
         SetUpListTiles();
         CreateProtoWorld();
         CreateWorld();
+        //MakeLink();
+
+
+
     }
 
     public void Update()
@@ -53,10 +57,36 @@ public class GameManager : MonoBehaviour
             RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
             foreach (RaycastHit2D h in hits)
             {
-                Debug.Log(h);
+                int c = h.transform.gameObject.GetComponent<Spot>().GetAdjacentSpots().Count;
+                Debug.Log(c);
+                
             }
         }
     }
+
+    //private void MakeLink()
+    //{
+    //    for (int y = 0; y < SIZE_BOARD; y++)
+    //    {
+    //        for (int x = 0; x < SIZE_BOARD; x++)
+    //        {
+    //            Tile currentTile = allTilesInGame[x, y].GetComponentInChildren<Tile>();
+    //            GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
+
+    //            for (int i = 0; i < 4; i++)
+    //            {
+    //                int i_x = (int)Mathf.Sin(i * Mathf.PI / 2);
+    //                int i_y = (int)Mathf.Cos(i * Mathf.PI / 2);
+
+    //                if(currentTileBorderSpot[i] != null){
+    //                    Tile adjacentTile = allTilesInGame[x+i_x, y+i_y].GetComponentInChildren<Tile>();
+    //                    currentTileBorderSpot[i].AddAdjacentSpots(adjacentTile.GetBorderSpots(i), false);
+    //                }
+    //            }
+
+    //        }
+    //    }
+    //}
 
     private void SetUpListTiles()
     {
@@ -80,37 +110,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //private void CreateTilesOld() 
-    //{
-    //    for (int i = 0; i < SIZE_BOARD; i++)
-    //    {
-    //        for (int j = 0; j < SIZE_BOARD; j++)
-    //        {
-    //            Vector3 pos = new Vector3(i * OFF_SET_TILE, j * OFF_SET_TILE, 0f);
-    //            int rng = Random.Range(0, prefabTiles.Count); // [CODE PROVISOIRE]
-
-    //            GameObject newTile = Instantiate(prefabTiles[rng], pos, Quaternion.identity);
-    //            allTilesInGame.Add(newTile);
-
-    //            GameObject newParentTile = Instantiate(prefabParentTile, pos, Quaternion.identity);
-    //            newTile.transform.parent = newParentTile.transform;
-    //        }
-    //    }
-    //}
-
     private void CreateWorld()
     {
         for (int y = 0; y < SIZE_BOARD; y++)
         {
             for (int x = 0; x < SIZE_BOARD; x++)
             {
-                if(allTilesInGame[x,y] == null)
+                if (allTilesInGame[x, y] == null)
                 {
                     TileToBuild(x, y, protoWorld[x, y]);
                 }
             }
         }
     }
+
+    //TEST 
+    //private IEnumerator CreateWorld()
+    //{
+    //    for (int y = 0; y < SIZE_BOARD; y++)
+    //    {
+    //        for (int x = 0; x < SIZE_BOARD; x++)
+    //        {
+    //            if (allTilesInGame[x, y] == null)
+    //            {
+    //                yield return new WaitForSeconds(1f);
+    //                TileToBuild(x, y, protoWorld[x, y]);
+    //            }
+    //        }
+    //    }
+    //}
 
     private void TileToBuild(int x, int y, TileType protoTileType)
     {
@@ -173,7 +201,7 @@ public class GameManager : MonoBehaviour
         Tile tile = newListPrefabTiles[rng].GetComponentInChildren<Tile>();
 
         bool valide = true;
-        Spot[] borderSpot = tile.GetBorderSpots();
+        GameObject[] borderSpot = tile.GetBorderSpots();
 
         // On compare les deux tableaux pour savoir si la tuile correspond à nos attentes
         for (int i = 0; i < 4; i++)
@@ -234,9 +262,6 @@ public class GameManager : MonoBehaviour
 
         return infoBorder;
     }
-
-
-
 
 
     /*
@@ -419,17 +444,6 @@ public class GameManager : MonoBehaviour
         }
         return res;
     }
-
-
-
-    //private void CreateTiles(int id, Vector2 pos) // id == indice de prefabTiles
-    //{
-    //    GameObject newTile = Instantiate(prefabTiles[id], pos, Quaternion.identity);
-    //    allTilesInGame.Add(newTile);
-
-    //    GameObject newParentTile = Instantiate(prefabParentTile, pos, Quaternion.identity);
-    //    newTile.transform.parent = newParentTile.transform;
-    //}
 
     private void SeedRandom(int seed)
     {
