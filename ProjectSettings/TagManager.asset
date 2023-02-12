@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tile
   layers:
   - Default
   - TransparentFX
@@ -41,9 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: tile
-    uniqueID: 340865039
+  - name: Tile
+    uniqueID: 154541379
     locked: 0
-  - name: cloud
-    uniqueID: 3122056573
+  - name: Cloud
+    uniqueID: 583549929
     locked: 0

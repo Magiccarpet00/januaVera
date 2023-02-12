@@ -9,17 +9,16 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-
     }
 
-
+    // DEBUG
+    public GameObject CircleTest;
 
     //CREATION DU MONDE
     private static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     private static int SIZE_BOARD = 5;          // Le nombres de tuiles sur un coté lors de la création
 
-    private GameObject[,] allTilesInGame = new GameObject[SIZE_BOARD, SIZE_BOARD]; // Le tableau de toutes les tuilles du jeu
+    [SerializeField] public GameObject[,] allTilesInGame = new GameObject[SIZE_BOARD, SIZE_BOARD]; // TODO a supprime ou refactot
 
     [SerializeField] private List<GameObject> prefabTiles = new List<GameObject>();
     [SerializeField] private GameObject prefabParentTile;
@@ -37,12 +36,12 @@ public class GameManager : MonoBehaviour
     {
         //SEED RNG
         //SeedRandom((int)Random.Range(0, 9999999));
-        SeedRandom(5);
+        SeedRandom(7);
 
         SetUpListTiles();
         CreateProtoWorld();
         CreateWorld();
-        MakeLink();
+        StartCoroutine(MakeLink());
 
 
 
@@ -57,36 +56,75 @@ public class GameManager : MonoBehaviour
             RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
             foreach (RaycastHit2D h in hits)
             {
-                int c = h.transform.gameObject.GetComponent<Spot>().GetAdjacentSpots().Count;
-                Debug.Log(c);
+                if (h.transform.gameObject.CompareTag("Spot"))
+                {
+                    int c = h.transform.gameObject.GetComponent<Spot>().GetAdjacentSpots().Count;
+                    Debug.Log(c);
+                }
+                
                 
             }
         }
     }
 
-    private void MakeLink()
+    private IEnumerator MakeLink()
     {
         for (int y = 0; y < SIZE_BOARD; y++)
         {
             for (int x = 0; x < SIZE_BOARD; x++)
             {
-                Tile currentTile = allTilesInGame[x, y].GetComponentInChildren<Tile>();
-                GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
+                yield return new WaitForSeconds(0.5f);
+                
+                GameObject currentGameObjetTile = GetTile(x, y, true);
 
-                for (int i = 0; i < 4; i++)
+                if(currentGameObjetTile != null)
                 {
-                    int i_x = (int)Mathf.Sin(i * Mathf.PI / 2);
-                    int i_y = (int)Mathf.Cos(i * Mathf.PI / 2);
+                    Tile currentTile = currentGameObjetTile.GetComponentInChildren<Tile>();
+                    GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
 
-                    if (currentTileBorderSpot[i] != null)
+                    for (int i = 0; i < 4; i++)
                     {
-                        Tile adjacentTile = allTilesInGame[x + i_x, y + i_y].GetComponentInChildren<Tile>();
-                        currentTileBorderSpot[i].GetComponent<Spot>().AddAdjacentSpots(adjacentTile.GetBorderSpots(i), false);
+                        int i_x = (int)Mathf.Sin(i * Mathf.PI / 2);
+                        int i_y = (int)Mathf.Cos(i * Mathf.PI / 2);
+
+                        if (currentTileBorderSpot[i] != null)
+                        {
+                            GameObject adjacentGameObjetTile = GetTile(x + i_x, y + i_y, false);
+                            if(adjacentGameObjetTile == null)
+                            {
+                                Debug.Log("Bug : Monde ouvert");
+                            }
+                            else
+                            {
+                                Tile adjacentTile = adjacentGameObjetTile.GetComponentInChildren<Tile>();
+
+                                if (adjacentTile != null)
+                                    currentTileBorderSpot[i].GetComponent<Spot>().AddAdjacentSpots(adjacentTile.GetBorderSpots(i), false);
+                            }
+                        }
                     }
                 }
-
             }
         }
+    }
+
+    public GameObject GetTile(int x, int y, bool debugDraw)
+    {
+        GameObject res = null;
+
+        Vector2 pos = new Vector2(x * OFF_SET_TILE, y * OFF_SET_TILE);
+        Collider2D[] target = Physics2D.OverlapCircleAll(pos, 1f);
+
+        foreach (Collider2D item in target)
+        {
+            if (item.CompareTag("Tile"))
+            {
+                res = item.transform.gameObject;
+                if(debugDraw) Instantiate(CircleTest, pos, Quaternion.identity);
+            }
+        }
+
+        return res;
     }
 
     private void SetUpListTiles()
@@ -125,21 +163,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //TEST 
-    //private IEnumerator CreateWorld()
-    //{
-    //    for (int y = 0; y < SIZE_BOARD; y++)
-    //    {
-    //        for (int x = 0; x < SIZE_BOARD; x++)
-    //        {
-    //            if (allTilesInGame[x, y] == null)
-    //            {
-    //                yield return new WaitForSeconds(1f);
-    //                TileToBuild(x, y, protoWorld[x, y]);
-    //            }
-    //        }
-    //    }
-    //}
 
     private void TileToBuild(int x, int y, TileType protoTileType)
     {
@@ -161,22 +184,23 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        if (tileToBuild == null){
+        if (tileToBuild == null)
+        {
             Debug.Log("404 baby");
-            
+
             tileToBuild = RandomChoiceTile(prefabTiles, infoBorder);
         }
 
         if (tileToBuild == null)
         {
             Debug.Log("404");
-        } 
+        }
         else
         {
             Debug.Log("create");
             Vector2 pos = new Vector2(x * OFF_SET_TILE, y * OFF_SET_TILE);
 
-            GameObject newTile = Instantiate(tileToBuild, pos, Quaternion.identity);            
+            GameObject newTile = Instantiate(tileToBuild, pos, Quaternion.identity);
             allTilesInGame[x, y] = tileToBuild;
 
             GameObject newParentTile = Instantiate(prefabParentTile, pos, Quaternion.identity);

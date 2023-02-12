@@ -20,8 +20,8 @@ public class Tile : MonoBehaviour
      2 = DOWN
      3 = LEFT
      */
-    [SerializeField] private GameObject[] borderSpots = new GameObject[4];
-    [SerializeField] private List<GameObject> allSpots = new List<GameObject>();
+    [SerializeField] private GameObject[] borderSpots = new GameObject[4];          //TODO peut etre un liste de bool
+    [SerializeField] private List<GameObject> allSpots = new List<GameObject>();    //TODO peut etre a suprimer
     
 
     // FX

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 473985743643762561}
   m_Layer: 0
   m_Name: spot
-  m_TagString: Untagged
+  m_TagString: Spot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 340865039
+  m_SortingLayerID: 154541379
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -598396635, guid: 2c0be05f19d87e441befdf44f5c9850a, type: 3}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 8236070018115876257}
   m_Layer: 0
   m_Name: spot (1)
-  m_TagString: Untagged
+  m_TagString: Spot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
