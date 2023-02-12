@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         SetUpListTiles();
         CreateProtoWorld();
         CreateWorld();
-        //MakeLink();
+        MakeLink();
 
 
 
@@ -64,29 +64,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //private void MakeLink()
-    //{
-    //    for (int y = 0; y < SIZE_BOARD; y++)
-    //    {
-    //        for (int x = 0; x < SIZE_BOARD; x++)
-    //        {
-    //            Tile currentTile = allTilesInGame[x, y].GetComponentInChildren<Tile>();
-    //            GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
+    private void MakeLink()
+    {
+        for (int y = 0; y < SIZE_BOARD; y++)
+        {
+            for (int x = 0; x < SIZE_BOARD; x++)
+            {
+                Tile currentTile = allTilesInGame[x, y].GetComponentInChildren<Tile>();
+                GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
 
-    //            for (int i = 0; i < 4; i++)
-    //            {
-    //                int i_x = (int)Mathf.Sin(i * Mathf.PI / 2);
-    //                int i_y = (int)Mathf.Cos(i * Mathf.PI / 2);
+                for (int i = 0; i < 4; i++)
+                {
+                    int i_x = (int)Mathf.Sin(i * Mathf.PI / 2);
+                    int i_y = (int)Mathf.Cos(i * Mathf.PI / 2);
 
-    //                if(currentTileBorderSpot[i] != null){
-    //                    Tile adjacentTile = allTilesInGame[x+i_x, y+i_y].GetComponentInChildren<Tile>();
-    //                    currentTileBorderSpot[i].AddAdjacentSpots(adjacentTile.GetBorderSpots(i), false);
-    //                }
-    //            }
+                    if (currentTileBorderSpot[i] != null)
+                    {
+                        Tile adjacentTile = allTilesInGame[x + i_x, y + i_y].GetComponentInChildren<Tile>();
+                        currentTileBorderSpot[i].GetComponent<Spot>().AddAdjacentSpots(adjacentTile.GetBorderSpots(i), false);
+                    }
+                }
 
-    //        }
-    //    }
-    //}
+            }
+        }
+    }
 
     private void SetUpListTiles()
     {

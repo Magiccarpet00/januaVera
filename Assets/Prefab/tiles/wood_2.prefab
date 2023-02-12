@@ -356,6 +356,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: spot (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 9041822603583598827, guid: 71ecee1e5e0968d468c7013cc82cef89, type: 3}
+      propertyPath: adjacentSecretSpots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041822603583598827, guid: 71ecee1e5e0968d468c7013cc82cef89, type: 3}
+      propertyPath: adjacentSecretSpots.Array.data[0]
+      value: 
+      objectReference: {fileID: 5038197694178469284}
+    - target: {fileID: 9041822603583598827, guid: 71ecee1e5e0968d468c7013cc82cef89, type: 3}
+      propertyPath: adjacentSecretSpots.Array.data[1]
+      value: 
+      objectReference: {fileID: 3306171091221668660}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71ecee1e5e0968d468c7013cc82cef89, type: 3}
 --- !u!1 &6642342093451098881 stripped
