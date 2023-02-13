@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     private static int SIZE_BOARD = 5;          // Le nombres de tuiles sur un coté lors de la création
 
-    [SerializeField] public GameObject[,] allTilesInGame = new GameObject[SIZE_BOARD, SIZE_BOARD]; // TODO a supprime ou refactot
+    [SerializeField] private GameObject[,] allTilesInGame = new GameObject[SIZE_BOARD, SIZE_BOARD]; // TODO a supprime ou refactot
 
     [SerializeField] private List<GameObject> prefabTiles = new List<GameObject>();
     [SerializeField] private GameObject prefabParentTile;
@@ -41,10 +41,7 @@ public class GameManager : MonoBehaviour
         SetUpListTiles();
         CreateProtoWorld();
         CreateWorld();
-        StartCoroutine(MakeLink());
-
-
-
+        MakeLink();
     }
 
     public void Update()
@@ -67,15 +64,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator MakeLink()
+    private void MakeLink()
     {
         for (int y = 0; y < SIZE_BOARD; y++)
         {
             for (int x = 0; x < SIZE_BOARD; x++)
             {
-                yield return new WaitForSeconds(0.5f);
-                
-                GameObject currentGameObjetTile = GetTile(x, y, true);
+                GameObject currentGameObjetTile = GetTile(x, y);
 
                 if(currentGameObjetTile != null)
                 {
@@ -89,7 +84,7 @@ public class GameManager : MonoBehaviour
 
                         if (currentTileBorderSpot[i] != null)
                         {
-                            GameObject adjacentGameObjetTile = GetTile(x + i_x, y + i_y, false);
+                            GameObject adjacentGameObjetTile = GetTile(x + i_x, y + i_y);
                             if(adjacentGameObjetTile == null)
                             {
                                 Debug.Log("Bug : Monde ouvert");
@@ -108,7 +103,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject GetTile(int x, int y, bool debugDraw)
+    public GameObject GetTile(int x, int y, bool debugDraw = false)
     {
         GameObject res = null;
 
@@ -263,6 +258,14 @@ public class GameManager : MonoBehaviour
      1 = RIGHT
      2 = DOWN
      3 = LEFT
+
+
+     INFO BORDER
+
+      0 = coté lise
+      1 = coté ouvert
+     -1 = n'importe
+
      */
     private int[] getBorder(int x, int y)
     {

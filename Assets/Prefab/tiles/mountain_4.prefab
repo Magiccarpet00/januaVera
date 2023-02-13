@@ -463,7 +463,7 @@ MonoBehaviour:
   borderSpots:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 2975318491510302595}
   - {fileID: 7705218439884790454}
+  - {fileID: 2975318491510302595}
   allSpots: []
   animatorCloud: {fileID: 0}

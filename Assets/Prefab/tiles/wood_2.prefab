@@ -531,7 +531,7 @@ MonoBehaviour:
   borderSpots:
   - {fileID: 5038197694178469284}
   - {fileID: 9070474812580928556}
-  - {fileID: 6642342093451098881}
+  - {fileID: 3306171091221668660}
   - {fileID: 0}
   allSpots: []
   animatorCloud: {fileID: 0}
