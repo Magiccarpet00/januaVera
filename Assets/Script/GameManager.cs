@@ -13,10 +13,11 @@ public class GameManager : MonoBehaviour
 
     // DEBUG
     public GameObject CircleTest;
+    public Character characterTest;
 
     //CREATION DU MONDE
     private static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
-    private static int SIZE_BOARD = 5;          // Le nombres de tuiles sur un coté lors de la création
+    private static int SIZE_BOARD = 8;          // Le nombres de tuiles sur un coté lors de la création
 
     [SerializeField] private GameObject[,] allTilesInGame = new GameObject[SIZE_BOARD, SIZE_BOARD]; // TODO a supprime ou refactot
 
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviour
         CreateProtoWorld();
         CreateWorld();
         MakeLink();
+
+        //StartCoroutine(ProtoMoveCharacter());
+
+        
+
     }
 
     public void Update()
@@ -61,6 +67,34 @@ public class GameManager : MonoBehaviour
                 
                 
             }
+        }
+    }
+
+
+    private IEnumerator ProtoMoveCharacter()
+    {
+        GameObject go = GetTile(1, 1);
+        Tile currentTile = go.GetComponentInChildren<Tile>();
+        GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
+        foreach (GameObject spot in currentTileBorderSpot)
+        {
+            if(spot != null)
+            {
+                characterTest.Move(spot);
+            }
+
+        }
+        for (int i = 0; i < 2000; i++)
+        {
+            yield return new WaitForSeconds(0.05f);
+            GameObject gameObjectSpot = characterTest.GetCurrentSpot();
+            Spot spot = gameObjectSpot.GetComponent<Spot>();
+
+            List<GameObject> adjacentSpot = spot.GetAdjacentSpots();
+
+            int rng = Random.Range(0, adjacentSpot.Count);
+
+            characterTest.Move(adjacentSpot[rng]);
         }
     }
 
