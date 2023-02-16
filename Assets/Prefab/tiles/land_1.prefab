@@ -259,11 +259,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740996ef814195d408c96b46092c8df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileData: {fileID: 11400000, guid: 482df605299e7704e86424d13b832066, type: 2}
+  tileData: {fileID: 11400000, guid: fd45d7367530daf4a8890813e1607a63, type: 2}
   borderSpots:
   - {fileID: 473985743643762562}
   - {fileID: 473985743643762562}
   - {fileID: 8236070018115876258}
   - {fileID: 8236070018115876258}
-  allSpots: []
+  allSpots:
+  - {fileID: 473985743643762562}
+  - {fileID: 8236070018115876258}
   animatorCloud: {fileID: 0}

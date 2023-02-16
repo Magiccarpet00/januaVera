@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tile
+  - Spot
+  - Location
   layers:
   - Default
   - TransparentFX
@@ -44,6 +46,9 @@ TagManager:
     locked: 0
   - name: Tile
     uniqueID: 154541379
+    locked: 0
+  - name: Location
+    uniqueID: 2787856521
     locked: 0
   - name: Cloud
     uniqueID: 583549929

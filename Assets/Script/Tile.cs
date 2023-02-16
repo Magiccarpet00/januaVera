@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,12 +36,51 @@ public class Tile : MonoBehaviour
     {
         //Animator
         animatorCloud = transform.parent.GetComponentInChildren<Animator>();
+
+        //Location à metre en fonction apres
+        for (int i = 0; i < tileData.locationDatas.Length; i++)
+        {
+            if(tileData.locationDatas[i] != null)
+            {
+                LocationData locationData = tileData.locationDatas[i];
+
+                int intervalUp, intervalDown;
+
+                int rng = Random.Range(0, 100);
+                int choice = 0;
+
+                int nblocation = locationData.locations.Length;
+
+
+                intervalDown = 0;
+                intervalUp = locationData.dropChance[0];
+                for (int j = 0; j < nblocation; j++)
+                {
+                    if (rng >= intervalDown && rng < intervalUp)
+                    {
+                        choice = j;
+                    }
+                    else if(j < nblocation - 1)
+                    {
+                        intervalDown += locationData.dropChance[j];
+                        intervalUp += locationData.dropChance[j + 1];
+                    }
+                }
+
+                // LA FIN MARCHE
+                GameObject g = Instantiate(GameManager.instance.prefabLocations[choice], allSpots[i].transform.position, Quaternion.identity);
+                g.transform.parent = allSpots[i].transform;
+            }
+        }
     }
 
     private void CleanCloud()
     {
         animatorCloud.SetTrigger("triggerHide"); //[CODE PRUDENCE] peut etre à l'origine de BUG le 1
     }
+
+
+
 
     /*
      Attention

@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
     public Character characterTest;
 
     //CREATION DU MONDE
+
+    //TILE
     private static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     private static int SIZE_BOARD = 8;          // Le nombres de tuiles sur un coté lors de la création
 
-    [SerializeField] private GameObject[,] allTilesInGame = new GameObject[SIZE_BOARD, SIZE_BOARD]; // TODO a supprime ou refactot
+    [SerializeField] private GameObject[,] allTilesInGame = new GameObject[SIZE_BOARD, SIZE_BOARD];
 
     [SerializeField] private List<GameObject> prefabTiles = new List<GameObject>();
     [SerializeField] private GameObject prefabParentTile;
@@ -29,15 +31,18 @@ public class GameManager : MonoBehaviour
     private List<GameObject> prefabTilesMountain = new List<GameObject>();
 
     private TileType[,] protoWorld = new TileType[SIZE_BOARD,SIZE_BOARD]; // La map qui contient uniquement les types de tiles potentiels
-    
+
+    //LOCATION
+    public List<GameObject> prefabLocations = new List<GameObject>(); //TODO a transformer en dico
+
 
 
 
     public void Start()
     {
         //SEED RNG
-        //SeedRandom((int)Random.Range(0, 9999999));
-        SeedRandom(7);
+        SeedRandom((int)Random.Range(0, 9999999));
+        //SeedRandom(8);
 
         SetUpListTiles();
         CreateProtoWorld();
@@ -45,9 +50,6 @@ public class GameManager : MonoBehaviour
         MakeLink();
 
         //StartCoroutine(ProtoMoveCharacter());
-
-        
-
     }
 
     public void Update()
@@ -64,8 +66,12 @@ public class GameManager : MonoBehaviour
                     int c = h.transform.gameObject.GetComponent<Spot>().GetAdjacentSpots().Count;
                     Debug.Log(c);
                 }
-                
-                
+
+                if (h.transform.gameObject.CompareTag("Location"))
+                {
+                    Debug.Log(h.transform.name);
+                }
+
             }
         }
     }
@@ -86,7 +92,7 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < 2000; i++)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.2f);
             GameObject gameObjectSpot = characterTest.GetCurrentSpot();
             Spot spot = gameObjectSpot.GetComponent<Spot>();
 
@@ -192,7 +198,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void TileToBuild(int x, int y, TileType protoTileType)
     {
         int[] infoBorder = new int[4];
@@ -215,18 +220,18 @@ public class GameManager : MonoBehaviour
 
         if (tileToBuild == null)
         {
-            Debug.Log("404 baby");
+            //Debug.Log("404 baby");
 
             tileToBuild = RandomChoiceTile(prefabTiles, infoBorder);
         }
 
         if (tileToBuild == null)
         {
-            Debug.Log("404");
+            //Debug.Log("404");
         }
         else
         {
-            Debug.Log("create");
+            //Debug.Log("create");
             Vector2 pos = new Vector2(x * OFF_SET_TILE, y * OFF_SET_TILE);
 
             GameObject newTile = Instantiate(tileToBuild, pos, Quaternion.identity);
@@ -510,13 +515,19 @@ public class GameManager : MonoBehaviour
     private void SeedRandom(int seed)
     {
         Random.InitState(seed);
+        
     }
 
 }
 
-public enum TileType{
+public enum TileType {
     PRE_BUILD,
     LAND,
     WOOD,
     MOUNTAIN
+}
+
+public enum LocationType {
+    LAND_HAMLET,
+    LAND_STONE
 }

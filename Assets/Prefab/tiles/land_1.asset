@@ -10,17 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0390e7b620a0fa347aa32ddea641aa6d, type: 3}
-  m_Name: basic_wood
+  m_Name: land_1
   m_EditorClassIdentifier: 
-  tileType: 2
+  tileType: 1
   manaPoolYellow: 0
   manaPoolBlack: 0
   manaPoolPurple: 0
   manaPoolGreen: 0
   locationDatas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: fcffae4d8011607449626cc940913c0b, type: 2}
+  - {fileID: 11400000, guid: 406d041d91ac9034babc005086df05fd, type: 2}

@@ -26,8 +26,6 @@ public class Character : MonoBehaviour
         Vector3 v = new Vector3(t.position.x, t.position.y, t.position.z);
 
         transform.SetPositionAndRotation(v,Quaternion.identity);
-        
-        //transform.gameObject.transform.position.Set(t.position.x, t.position.y, t.position.z);
     }
 
     public GameObject GetCurrentSpot()
