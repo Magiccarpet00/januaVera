@@ -21,55 +21,62 @@ public class Tile : MonoBehaviour
      */
     [SerializeField] private GameObject[] borderSpots = new GameObject[4];          //TODO peut etre un liste de bool
     [SerializeField] private List<GameObject> allSpots = new List<GameObject>();    //TODO peut etre a suprimer
-    
 
     // FX
     [SerializeField] private Animator animatorCloud;
 
     void Start()
     {
-        SetUp();
+        SetUpComponant();
+        SetUpLocation();
         CleanCloud();
     }
 
-    private void SetUp()
+    private void SetUpComponant()
     {
-        //Animator
         animatorCloud = transform.parent.GetComponentInChildren<Animator>();
+    }
 
-        //Location à metre en fonction apres
+    //Methode va faire apparaitre les location dans les spots de la tile 
+    private void SetUpLocation()
+    {
         for (int i = 0; i < tileData.locationDatas.Length; i++)
         {
-            if(tileData.locationDatas[i] != null)
+            if (tileData.locationDatas[i] != null)
             {
                 LocationData locationData = tileData.locationDatas[i];
 
                 int intervalUp, intervalDown;
-
                 int rng = Random.Range(0, 100);
                 int choice = 0;
-
                 int nblocation = locationData.locations.Length;
-
 
                 intervalDown = 0;
                 intervalUp = locationData.dropChance[0];
+
                 for (int j = 0; j < nblocation; j++)
                 {
                     if (rng >= intervalDown && rng < intervalUp)
                     {
                         choice = j;
                     }
-                    else if(j < nblocation - 1)
+
+                    if (j < nblocation - 1)
                     {
                         intervalDown += locationData.dropChance[j];
                         intervalUp += locationData.dropChance[j + 1];
                     }
+                    else if (intervalUp != 100)
+                    {
+                        Debug.LogError("ERROR RNG " + locationData);    // La somme des drop est != de 100
+                    }
                 }
 
-                // LA FIN MARCHE
-                GameObject g = Instantiate(GameManager.instance.prefabLocations[choice], allSpots[i].transform.position, Quaternion.identity);
-                g.transform.parent = allSpots[i].transform;
+                if (choice != 0)
+                {
+                    GameObject g = Instantiate(GameManager.instance.prefabLocations[choice - 1], allSpots[i].transform.position, Quaternion.identity);
+                    g.transform.parent = allSpots[i].transform;
+                }
             }
         }
     }
@@ -78,9 +85,6 @@ public class Tile : MonoBehaviour
     {
         animatorCloud.SetTrigger("triggerHide"); //[CODE PRUDENCE] peut etre à l'origine de BUG le 1
     }
-
-
-
 
     /*
      Attention

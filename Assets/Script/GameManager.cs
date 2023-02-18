@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         //SEED RNG
-        SeedRandom((int)Random.Range(0, 9999999));
-        //SeedRandom(8);
+        //SeedRandom((int)Random.Range(0, 9999999));
+        SeedRandom(8);
 
         SetUpListTiles();
         CreateProtoWorld();
@@ -515,7 +515,6 @@ public class GameManager : MonoBehaviour
     private void SeedRandom(int seed)
     {
         Random.InitState(seed);
-        
     }
 
 }
@@ -528,6 +527,7 @@ public enum TileType {
 }
 
 public enum LocationType {
+    EMPTY,
     LAND_HAMLET,
     LAND_STONE
 }
