@@ -24,12 +24,13 @@ public class Tile : MonoBehaviour
 
     // FX
     [SerializeField] private Animator animatorCloud;
+    [SerializeField] private bool isDiscovered;
 
     void Start()
     {
         SetUpComponant();
         SetUpLocation();
-        CleanCloud();
+        //CleanCloud();
     }
 
     private void SetUpComponant()
@@ -81,9 +82,9 @@ public class Tile : MonoBehaviour
         }
     }
 
-    private void CleanCloud()
+    public void CleanCloud()
     {
-        animatorCloud.SetTrigger("triggerHide"); //[CODE PRUDENCE] peut etre à l'origine de BUG le 1
+        animatorCloud.SetTrigger("triggerHide");
     }
 
     /*

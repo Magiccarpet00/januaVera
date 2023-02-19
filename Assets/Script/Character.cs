@@ -5,7 +5,15 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] private GameObject currentSpot;
-    
+
+
+    //TMP
+    private Vector3 target;
+    private float smoothTime = 0.2F;
+    private Vector3 velocity = Vector3.zero;
+
+    public bool isHero;
+
     void Start()
     {
         
@@ -13,7 +21,7 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-        
+        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
     }
 
     public void Move(GameObject spot)
@@ -21,11 +29,8 @@ public class Character : MonoBehaviour
         currentSpot = spot;
         Transform t = currentSpot.transform;
 
-        Debug.Log(t.position.x + " " + t.position.y + " " + t.position.z);
-
-        Vector3 v = new Vector3(t.position.x, t.position.y, t.position.z);
-
-        transform.SetPositionAndRotation(v,Quaternion.identity);
+        target = new Vector3(t.position.x, t.position.y, t.position.z);
+        //transform.SetPositionAndRotation(v,Quaternion.identity);
     }
 
     public GameObject GetCurrentSpot()

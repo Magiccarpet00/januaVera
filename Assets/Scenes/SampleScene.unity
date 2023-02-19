@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpot: {fileID: 0}
+  isHero: 0
 --- !u!4 &815666319
 Transform:
   m_ObjectHideFlags: 0
