@@ -137,7 +137,7 @@ SpriteRenderer:
   m_SortingLayerID: 154541379
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -598396635, guid: 2c0be05f19d87e441befdf44f5c9850a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 412792de104b877488b85fa4fd02f534, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -269,3 +269,4 @@ MonoBehaviour:
   - {fileID: 473985743643762562}
   - {fileID: 8236070018115876258}
   animatorCloud: {fileID: 0}
+  isDiscovered: 0
