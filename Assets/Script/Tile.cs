@@ -75,7 +75,7 @@ public class Tile : MonoBehaviour
 
                 if (choice != 0)
                 {
-                    GameObject g = Instantiate(GameManager.instance.prefabLocations[choice - 1], allSpots[i].transform.position, Quaternion.identity);
+                    GameObject g = Instantiate(WorldBuilder.instance.prefabLocations[choice - 1], allSpots[i].transform.position, Quaternion.identity);
                     g.transform.parent = allSpots[i].transform;
                 }
             }
