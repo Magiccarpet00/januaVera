@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     public float panBorder;
     public Vector2 panLimit; //todo pour ne pas sortir de la map
-    
+    public Vector2 clampZoom;
     void Update()
     {   
         if(!freezeCam)
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
             Camera cam = Camera.main;
             float camSize = cam.orthographicSize - ( scroll * scrollSpeed * Time.deltaTime);
 
-            cam.orthographicSize = Mathf.Clamp(camSize, 8, 16); //[CODI FLEME] 
+            cam.orthographicSize = Mathf.Clamp(camSize, clampZoom.x, clampZoom.y);
             
 
             transform.position = pos;

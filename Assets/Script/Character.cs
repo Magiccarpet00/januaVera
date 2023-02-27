@@ -14,11 +14,6 @@ public class Character : MonoBehaviour
 
     public bool isHero;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
@@ -26,11 +21,36 @@ public class Character : MonoBehaviour
 
     public void Move(GameObject spot)
     {
-        currentSpot = spot;
-        Transform t = currentSpot.transform;
 
-        target = new Vector3(t.position.x, t.position.y, t.position.z);
-        //transform.SetPositionAndRotation(v,Quaternion.identity);
+        List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
+
+        //clic sur un spot adj
+        if (adjSpot.Contains(spot))
+        {
+            currentSpot = spot;
+            Transform t_spot = currentSpot.transform;
+            target = new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z);
+
+            //Enlever les nuages
+            Vector3 v = t_spot.parent.position;
+            List<GameObject> tiles = GameManager.instance.GetTiles(((int)v.x) / 10 - 1, ((int)v.y / 10) - 1, ((int)v.x / 10) + 1, ((int)v.y / 10) + 1);
+            foreach (GameObject tile in tiles)
+            {
+                Tile t = tile.GetComponentInChildren<Tile>();
+                t.CleanCloud();
+            }
+        }
+        else
+        {
+            //TODO faire le AStarMove quand on aura les pilles d'action
+            AStarMove();
+        }
+        
+    }
+
+    private void AStarMove()
+    {
+        //TODO
     }
 
     public GameObject GetCurrentSpot()
@@ -38,6 +58,11 @@ public class Character : MonoBehaviour
         return currentSpot;
     }
 
-        
+    public void SetCurrentSpot(GameObject spot)
+    {
+        currentSpot = spot;
+    }
+
+
 
 }

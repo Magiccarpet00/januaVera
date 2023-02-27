@@ -19,8 +19,8 @@ public class Tile : MonoBehaviour
      2 = DOWN
      3 = LEFT
      */
-    [SerializeField] private GameObject[] borderSpots = new GameObject[4];          //TODO peut etre un liste de bool
-    [SerializeField] private List<GameObject> allSpots = new List<GameObject>();    //TODO peut etre a suprimer
+    [SerializeField] private GameObject[] borderSpots = new GameObject[4];
+    [SerializeField] private List<GameObject> allSpots = new List<GameObject>();
 
     // FX
     [SerializeField] private Animator animatorCloud;
@@ -30,7 +30,6 @@ public class Tile : MonoBehaviour
     {
         SetUpComponant();
         SetUpLocation();
-        //CleanCloud();
     }
 
     private void SetUpComponant()
@@ -85,6 +84,7 @@ public class Tile : MonoBehaviour
     public void CleanCloud()
     {
         animatorCloud.SetTrigger("triggerHide");
+        isDiscovered = true;
     }
 
     /*
@@ -127,5 +127,9 @@ public class Tile : MonoBehaviour
         return tileData;
     }
 
+    public bool GetIsDiscovered()
+    {
+        return isDiscovered;
+    }
     
 }

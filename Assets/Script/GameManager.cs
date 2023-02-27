@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    //SINGLETON
     public static GameManager instance;
     void Awake()
     {
@@ -18,52 +17,68 @@ public class GameManager : MonoBehaviour
     public Character characterTest;
     public WorldBuilder worldBuilder;
 
+    public int turn;
+
     public void Start()
     {
         //SEED RNG
-        //SeedRandom((int)Random.Range(0, 9999999));
-        SeedRandom(8);
+        SeedRandom((int)Random.Range(0, 9999999));
+        //SeedRandom(8);
+
         worldBuilder.StartWorldBuilder();
-        StartCoroutine(ProtoMoveCharacter());
+        //StartCoroutine(ProtoMoveCharacter());
+        StartCoroutine(StartLateOne());
+    }
+
+    public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appélé dans start mais elle s'execute apres tout les autre starts
+    {
+        yield return new WaitForSeconds(1f);
+        SetUpPlayer();
     }
 
     public void Update()
     {
+        GetMouseInput();
+    }
+
+    private void GetMouseInput()
+    {
         // [CODE PROVISOIRE]
-        if(Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
             foreach (RaycastHit2D h in hits)
             {
-                if (h.transform.gameObject.CompareTag("Spot"))
+                GameObject gameObjectHit = h.transform.gameObject;
+
+                if (gameObjectHit.CompareTag("Spot"))
                 {
-                    int c = h.transform.gameObject.GetComponent<Spot>().GetAdjacentSpots().Count;
-                    Debug.Log(c);
+                    characterTest.Move(gameObjectHit);
                 }
 
-                if (h.transform.gameObject.CompareTag("Location"))
+                if (gameObjectHit.CompareTag("Location"))
                 {
-                    Debug.Log(h.transform.name);
+                    Debug.Log(gameObjectHit.name);
                 }
 
             }
         }
     }
 
+    private void SetUpPlayer()
+    {
+        GameObject g = GetTile(1, 1);
+        Tile currentTile = g.GetComponentInChildren<Tile>();
+        GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
+
+        characterTest.SetCurrentSpot(currentTileBorderSpot[0]);
+        currentTile.CleanCloud();
+        characterTest.Move(currentTileBorderSpot[0]);
+    }
+
     private IEnumerator ProtoMoveCharacter() //CODE ULTRA SPAGETI
     {
-        GameObject go = GetTile(1, 1);
-        Tile currentTile = go.GetComponentInChildren<Tile>();
-        GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
-        foreach (GameObject spot in currentTileBorderSpot)
-        {
-            if(spot != null)
-            {
-                characterTest.Move(spot);
-            }
-
-        }
         for (int i = 0; i < 2000; i++)
         {
             yield return new WaitForSeconds(0.4f);

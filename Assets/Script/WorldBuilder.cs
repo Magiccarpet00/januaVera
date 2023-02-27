@@ -111,7 +111,7 @@ public class WorldBuilder : MonoBehaviour
     private void TileToBuild(int x, int y, TileType protoTileType)
     {
         int[] infoBorder = new int[4];
-        infoBorder = getBorder(x, y);
+        infoBorder = GetBorder(x, y);
         GameObject tileToBuild = null;
 
 
@@ -219,7 +219,7 @@ public class WorldBuilder : MonoBehaviour
      -1 = n'importe
 
      */
-    private int[] getBorder(int x, int y)
+    private int[] GetBorder(int x, int y)
     {
         int[] infoBorder = new int[4];
 
