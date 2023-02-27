@@ -13,6 +13,6 @@ public class TileData : ScriptableObject
     public float manaPoolPurple;
     public float manaPoolGreen;
 
-    public LocationData[] locationDatas;
+    public SpotLocationRNGData[] locationDatas;
 
 }

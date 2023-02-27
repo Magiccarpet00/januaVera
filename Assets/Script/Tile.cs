@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour
         {
             if (tileData.locationDatas[i] != null)
             {
-                LocationData locationData = tileData.locationDatas[i];
+                SpotLocationRNGData locationData = tileData.locationDatas[i];
 
                 int intervalUp, intervalDown;
                 int rng = Random.Range(0, 100);
@@ -74,7 +74,7 @@ public class Tile : MonoBehaviour
 
                 if (choice != 0)
                 {
-                    GameObject g = Instantiate(WorldBuilder.instance.prefabLocations[choice - 1], allSpots[i].transform.position, Quaternion.identity);
+                    GameObject g = Instantiate(WorldBuilder.instance.dic_prefabLocations[locationData.locations[choice]], allSpots[i].transform.position, Quaternion.identity);
                     g.transform.parent = allSpots[i].transform;
                 }
             }

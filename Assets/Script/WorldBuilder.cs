@@ -22,15 +22,23 @@ public class WorldBuilder : MonoBehaviour
     private TileType[,] protoWorld = new TileType[GlobalVariable.SIZE_BOARD, GlobalVariable.SIZE_BOARD]; // La map qui contient uniquement les types de tiles potentiels
 
     //LOCATION
-    public List<GameObject> prefabLocations = new List<GameObject>(); //TODO a transformer en dico
-    
+    // Attnetion il faut metre a jour le dico
+    [SerializeField] private GameObject[] prefabLocations;
+    [HideInInspector] public Dictionary<LocationType, GameObject> dic_prefabLocations = new Dictionary<LocationType, GameObject>();
     
     public void StartWorldBuilder()
     {
         SetUpListTiles();
+        SetUpDicPrefabLocation();
         CreateProtoWorld();
         CreateWorld();
         MakeLink();
+    }
+
+    private void SetUpDicPrefabLocation()
+    {
+        dic_prefabLocations.Add(LocationType.LAND_HAMLET, prefabLocations[0]);
+        dic_prefabLocations.Add(LocationType.LAND_STONE, prefabLocations[1]);
     }
 
     private void MakeLink()

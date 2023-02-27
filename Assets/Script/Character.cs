@@ -63,6 +63,11 @@ public class Character : MonoBehaviour
         currentSpot = spot;
     }
 
+    public void SetTarget(Vector3 t)
+    {
+        target = t;
+    }
+
 
 
 }

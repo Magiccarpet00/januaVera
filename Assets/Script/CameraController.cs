@@ -38,7 +38,6 @@ public class CameraController : MonoBehaviour
                 pos.x -= panSpeed * Time.deltaTime;
             }
 
-            //todo fini avec le tuto
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             Camera cam = Camera.main;
             float camSize = cam.orthographicSize - ( scroll * scrollSpeed * Time.deltaTime);

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LocationData", menuName = "JanuaVera/Location Data")]
-public class LocationData : ScriptableObject
+[CreateAssetMenu(fileName = "SpotLocationRNGData", menuName = "JanuaVera/SpotLocationRNG Data")]
+public class SpotLocationRNGData : ScriptableObject
 {
     /*
         La structure de donnée est plutot etrange elle fonctionnne

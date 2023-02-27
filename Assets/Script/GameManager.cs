@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         //SEED RNG
-        SeedRandom((int)Random.Range(0, 9999999));
-        //SeedRandom(8);
+        //SeedRandom((int)Random.Range(0, 9999999));
+        SeedRandom(8);
 
         worldBuilder.StartWorldBuilder();
         //StartCoroutine(ProtoMoveCharacter());
@@ -74,7 +74,9 @@ public class GameManager : MonoBehaviour
 
         characterTest.SetCurrentSpot(currentTileBorderSpot[0]);
         currentTile.CleanCloud();
-        characterTest.Move(currentTileBorderSpot[0]);
+
+        Transform t_spot = currentTileBorderSpot[0].transform;
+        characterTest.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
     }
 
     private IEnumerator ProtoMoveCharacter() //CODE ULTRA SPAGETI

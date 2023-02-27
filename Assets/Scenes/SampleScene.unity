@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f45b076eccf7d349b4f3245dcba4827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freezeCam: 1
+  freezeCam: 0
   panSpeed: 20
   scrollSpeed: 2000
   panBorder: 20

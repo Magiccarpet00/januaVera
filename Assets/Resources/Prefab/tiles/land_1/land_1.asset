@@ -18,5 +18,5 @@ MonoBehaviour:
   manaPoolPurple: 0
   manaPoolGreen: 0
   locationDatas:
-  - {fileID: 11400000, guid: fcffae4d8011607449626cc940913c0b, type: 2}
-  - {fileID: 11400000, guid: 406d041d91ac9034babc005086df05fd, type: 2}
+  - {fileID: 11400000, guid: 2f41eafbe80bff14ab7c65eb97a0a49b, type: 2}
+  - {fileID: 11400000, guid: cb8c5eb6e8c3dc047b5aa2620eda268b, type: 2}

@@ -20,4 +20,10 @@ public class Spot : MonoBehaviour
     {
         return adjacentSpots;
     }
+
+    void OnMouseEnter()
+    {
+        //TODO FX
+        Debug.Log("Mouse is over GameObject.");
+    }
 }
