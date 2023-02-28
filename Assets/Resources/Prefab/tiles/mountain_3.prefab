@@ -48,6 +48,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 7064444303818358535}
   adjacentSecretSpots: []
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &4298338534245709252
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,6 +113,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 5134137793663458727}
   adjacentSecretSpots: []
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5016617984540415120
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -177,6 +179,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 5134137793663458727}
   - {fileID: 7064444303818358535}
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5031613595802692870
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -242,6 +245,7 @@ MonoBehaviour:
   - {fileID: 5016617984540415123}
   adjacentSecretSpots:
   - {fileID: 5031613595802692869}
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5134137793663458724
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -391,6 +395,7 @@ MonoBehaviour:
   - {fileID: 4298338534245709255}
   adjacentSecretSpots:
   - {fileID: 5031613595802692869}
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &7064444303818358532
 CircleCollider2D:
   m_ObjectHideFlags: 0

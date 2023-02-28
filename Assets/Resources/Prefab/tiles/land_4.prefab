@@ -48,6 +48,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 8458596818421865069}
   adjacentSecretSpots: []
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &4334604949614546830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 4334604949614546829}
   adjacentSecretSpots: []
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &8458596818421865070
 CircleCollider2D:
   m_ObjectHideFlags: 0

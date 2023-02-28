@@ -50,6 +50,9 @@ TagManager:
   - name: Location
     uniqueID: 2787856521
     locked: 0
+  - name: FX
+    uniqueID: 2634945529
+    locked: 0
   - name: Cloud
     uniqueID: 583549929
     locked: 0
