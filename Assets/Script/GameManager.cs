@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour
@@ -17,23 +17,59 @@ public class GameManager : MonoBehaviour
     public Character characterTest;
     public WorldBuilder worldBuilder;
 
-    public int turn;
+    private int turn = 0;
+
+    // UI
+    public Text nbTurn;
+    public Image imgLandscape;
+    [SerializeField] private Sprite[] allImgLandscape_tile;
+    [HideInInspector] public Dictionary<TileType, Sprite> dic_imgLandscape_tile = new Dictionary<TileType, Sprite>();
+
+    [SerializeField] private Sprite[] allImgLandscape_location;
+    [HideInInspector] public Dictionary<LocationType, Sprite> dic_imgLandscape_location = new Dictionary<LocationType, Sprite>(); //TODO autre img a metre dans ce dico
+
 
     public void Start()
     {
+        SetUpUI();
         //SEED RNG
         //SeedRandom((int)Random.Range(0, 9999999));
         SeedRandom(8);
 
         worldBuilder.StartWorldBuilder();
-        //StartCoroutine(ProtoMoveCharacter());
+
+        //UI
+        AddTurn(0);
+
         StartCoroutine(StartLateOne());
+    }
+
+    private void SetUpUI()
+    {
+        dic_imgLandscape_tile.Add(TileType.LAND,     allImgLandscape_tile[0]);
+        dic_imgLandscape_tile.Add(TileType.MOUNTAIN, allImgLandscape_tile[1]);
+        dic_imgLandscape_tile.Add(TileType.WOOD,     allImgLandscape_tile[2]);
+
+        dic_imgLandscape_location.Add(LocationType.LAND_HAMLET, allImgLandscape_location[0]);
+        dic_imgLandscape_location.Add(LocationType.FARMHOUSE, allImgLandscape_location[1]);
+        dic_imgLandscape_location.Add(LocationType.STONE, allImgLandscape_location[2]);
+        dic_imgLandscape_location.Add(LocationType.TOWER, allImgLandscape_location[3]);
+        dic_imgLandscape_location.Add(LocationType.LAC, allImgLandscape_location[4]);
+        dic_imgLandscape_location.Add(LocationType.ELF_HOUSE, allImgLandscape_location[5]);
+        dic_imgLandscape_location.Add(LocationType.WOOD_HAMLET, allImgLandscape_location[6]);
+        dic_imgLandscape_location.Add(LocationType.FLOWERS, allImgLandscape_location[7]);
+        dic_imgLandscape_location.Add(LocationType.DRUIDE_HOUSE, allImgLandscape_location[8]);
+        dic_imgLandscape_location.Add(LocationType.CAVE, allImgLandscape_location[9]);
+        dic_imgLandscape_location.Add(LocationType.MOUNTAIN_HAMLET, allImgLandscape_location[10]);
+        dic_imgLandscape_location.Add(LocationType.CIRCLE_STONES, allImgLandscape_location[11]);
+
     }
 
     public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appélé dans start mais elle s'execute apres tout les autre starts
     {
         yield return new WaitForSeconds(1f);
-        SetUpPlayer();
+        SetUpPlayer();       
+
     }
 
     public void Update()
@@ -59,7 +95,7 @@ public class GameManager : MonoBehaviour
 
                 if (gameObjectHit.CompareTag("Location"))
                 {
-                    Debug.Log(gameObjectHit.name);
+                    
                 }
 
             }
@@ -77,6 +113,8 @@ public class GameManager : MonoBehaviour
 
         Transform t_spot = currentTileBorderSpot[0].transform;
         characterTest.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+
+        UpdateUILandscape(false);
     }
 
     private IEnumerator ProtoMoveCharacter() //CODE ULTRA SPAGETI
@@ -159,6 +197,31 @@ public class GameManager : MonoBehaviour
         Random.InitState(seed);
     }
 
+
+
+
+
+
+
+
+
+
+
+    // UI
+    public void AddTurn(int amount)
+    {
+        turn += amount;
+        nbTurn.text = turn.ToString();
+    }
+
+    public void UpdateUILandscape(bool inLocation) {
+        
+        if(inLocation)
+            ;
+        else
+            imgLandscape.sprite = dic_imgLandscape_tile[characterTest.GetCurrentTileType()];
+    }
+
 }
 
 public enum TileType {
@@ -171,7 +234,18 @@ public enum TileType {
 public enum LocationType {
     EMPTY,
     LAND_HAMLET,
-    LAND_STONE
+    FARMHOUSE,
+    STONE,
+    TOWER,
+    LAC,
+    ELF_HOUSE,
+    WOOD_HAMLET,
+    FLOWERS,
+    DRUIDE_HOUSE,
+    CAVE,
+    MOUNTAIN_HAMLET,
+    CIRCLE_STONES
+
 }
 
 public class GlobalVariable {

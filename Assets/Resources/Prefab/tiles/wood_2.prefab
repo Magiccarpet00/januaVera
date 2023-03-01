@@ -183,7 +183,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 6642342093451098881}
   - {fileID: 3306171091221668660}
-  prefabOverMouse_fx: {fileID: 0}
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5038197694178469287
 CircleCollider2D:
   m_ObjectHideFlags: 0

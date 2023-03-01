@@ -44,6 +44,11 @@ public class Character : MonoBehaviour
         
     }
 
+    public TileType GetCurrentTileType()
+    {
+        return currentSpot.transform.parent.GetComponent<Tile>().GetTileData().tileType;
+    }
+
     private void AStarMove()
     {
         //TODO

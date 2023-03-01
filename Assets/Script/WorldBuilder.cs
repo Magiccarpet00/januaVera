@@ -38,7 +38,7 @@ public class WorldBuilder : MonoBehaviour
     private void SetUpDicPrefabLocation()
     {
         dic_prefabLocations.Add(LocationType.LAND_HAMLET, prefabLocations[0]);
-        dic_prefabLocations.Add(LocationType.LAND_STONE, prefabLocations[1]);
+        dic_prefabLocations.Add(LocationType.STONE, prefabLocations[1]);
     }
 
     private void MakeLink()
