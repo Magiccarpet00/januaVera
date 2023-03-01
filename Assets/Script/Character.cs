@@ -15,9 +15,12 @@ public class Character : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
     }
 
+
+    // TODO 
+    // [CODI BUG]
+    // Quand on clic sur la même case ça fait quand meme passer un tour, à réparer
     public virtual void Move(GameObject spot)
     {
-
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
 
         //clic sur un spot adj
