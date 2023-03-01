@@ -14,6 +14,12 @@ public class CameraController : MonoBehaviour
     public Vector2 clampZoom;
     void Update()
     {   
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            if (freezeCam) freezeCam = false;
+            else freezeCam = true;
+        }
+
         if(!freezeCam)
         {
             Vector3 pos = transform.position;

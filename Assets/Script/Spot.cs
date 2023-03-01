@@ -24,8 +24,6 @@ public class Spot : MonoBehaviour
         return adjacentSpots;
     }
 
-
-
     //FX
     void OnMouseEnter()
     {

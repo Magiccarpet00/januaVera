@@ -5,21 +5,17 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] private GameObject currentSpot;
-
-
     //TMP
     private Vector3 target;
     private float smoothTime = 0.2F;
     private Vector3 velocity = Vector3.zero;
-
-    public bool isHero;
 
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
     }
 
-    public void Move(GameObject spot)
+    public virtual void Move(GameObject spot)
     {
 
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
@@ -67,7 +63,4 @@ public class Character : MonoBehaviour
     {
         target = t;
     }
-
-
-
 }
