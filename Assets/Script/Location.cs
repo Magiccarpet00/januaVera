@@ -6,4 +6,8 @@ public class Location : MonoBehaviour
 {
     public LocationData locationData;
 
+    void Start()
+    {
+
+    }
 }

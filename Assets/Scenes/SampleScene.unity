@@ -1162,6 +1162,10 @@ MonoBehaviour:
   prefabLocations:
   - {fileID: 8149957913592602003, guid: 95b10da57b616b84598cda3741585329, type: 3}
   - {fileID: 8149957913592602003, guid: 49c52b6d170442843a1452349cd26bd8, type: 3}
+  prefabLocation: {fileID: 0}
+  allLocationDatas:
+  - {fileID: 11400000, guid: 03724e022724f874a97b8ee61eb250eb, type: 2}
+  - {fileID: 11400000, guid: dab2f871e96ab7043a14e9c15704f1f7, type: 2}
 --- !u!1 &1947701088
 GameObject:
   m_ObjectHideFlags: 0

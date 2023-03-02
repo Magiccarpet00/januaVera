@@ -123,6 +123,19 @@ public class GameManager : MonoBehaviour
 
             }
         }
+
+
+        //CHEAT CODE
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            List<GameObject> tiles = GetTiles(0, 0, GlobalVariable.SIZE_BOARD, GlobalVariable.SIZE_BOARD);
+
+            foreach (GameObject item in tiles)
+            {
+                item.GetComponentInChildren<Tile>().CleanCloud();
+            }
+        }
+
     }
 
 
