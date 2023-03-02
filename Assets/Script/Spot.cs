@@ -24,15 +24,51 @@ public class Spot : MonoBehaviour
         return adjacentSpots;
     }
 
-    //FX
+
+
+
+
+
+
+    //
+    //      FX
+    //
     void OnMouseEnter()
     {
         GameObject over = Instantiate(prefabOverMouse_fx, this.transform.position, Quaternion.identity);
         AnimatorOverMouse_fx = over.GetComponent<Animator>();
     }
-
     void OnMouseExit()
     {
         AnimatorOverMouse_fx.SetTrigger("end");
     }
+
+
+
+
+
+
+
+
+    //
+    //      GET & SET
+    //
+    public LocationType GetLocationInSpot()
+    {
+        LocationType res = LocationType.EMPTY;
+        
+        if(transform.childCount == 1)
+        {
+            Location selfLocation = GetComponentInChildren<Location>();
+            res = selfLocation.locationData.locationType;
+        }
+        else
+        {
+            Debug.LogError("Appel de GetLocationInSpot impossible");
+        }
+
+        return res;
+    }
+
+
 }

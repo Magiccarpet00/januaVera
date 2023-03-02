@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8149957913592602001}
   - component: {fileID: 5611196990773178775}
+  - component: {fileID: 5148726634711908297}
   m_Layer: 0
   m_Name: location_stone
   m_TagString: Location
@@ -133,3 +134,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &5148726634711908297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149957913592602003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ed711eea8cf374285aebff7df5a9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locationData: {fileID: 11400000, guid: dab2f871e96ab7043a14e9c15704f1f7, type: 2}

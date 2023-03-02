@@ -47,14 +47,27 @@ public class Character : MonoBehaviour
         
     }
 
+    private void AStarMove()
+    {
+        //TODO
+    }
+
+
+
+
+
+
+    //
+    //      GET & SET
+    //
     public TileType GetCurrentTileType()
     {
         return currentSpot.transform.parent.GetComponent<Tile>().GetTileData().tileType;
     }
 
-    private void AStarMove()
+    public LocationType GetCurrentLocationType()
     {
-        //TODO
+        return currentSpot.GetComponent<Spot>().GetLocationInSpot();
     }
 
     public GameObject GetCurrentSpot()

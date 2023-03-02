@@ -11,16 +11,12 @@ public class Player : Character
 
         if (GetCurrentSpot().transform.childCount == 1)
         {
-            Transform childTransform = GetCurrentSpot().transform.GetChild(0);
-            
-            GameManager.instance.UpdateUILandscape(true);
+            GameManager.instance.UpdateUILandscape(GetCurrentLocationType());
         }
         else
         {
-            GameManager.instance.UpdateUILandscape(false);
+            GameManager.instance.UpdateUILandscape();
         }
 
-        
     }
-
 }

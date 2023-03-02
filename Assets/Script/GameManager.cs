@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
         Transform t_spot = currentTileBorderSpot[0].transform;
         characterTest.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
 
-        UpdateUILandscape(false);
+        UpdateUILandscape();
     }
 
     private IEnumerator ProtoMoveCharacter() //CODE ULTRA SPAGETI
@@ -214,15 +214,18 @@ public class GameManager : MonoBehaviour
         nbTurn.text = turn.ToString();
     }
 
-    public void UpdateUILandscape(bool inLocation) {
-        
-        if(inLocation)
-            ;
-        else
-            imgLandscape.sprite = dic_imgLandscape_tile[characterTest.GetCurrentTileType()];
+    public void UpdateUILandscape() //Si on est sur spot vide
+    {
+        imgLandscape.sprite = dic_imgLandscape_tile[characterTest.GetCurrentTileType()];
+    }
+
+    public void UpdateUILandscape(LocationType location) //Si on est sur spot avec location
+    {
+        imgLandscape.sprite = dic_imgLandscape_location[location];
     }
 
 }
+
 
 public enum TileType {
     PRE_BUILD,
@@ -230,6 +233,7 @@ public enum TileType {
     WOOD,
     MOUNTAIN
 }
+
 
 public enum LocationType {
     EMPTY,
@@ -247,6 +251,7 @@ public enum LocationType {
     CIRCLE_STONES
 
 }
+
 
 public class GlobalVariable {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
