@@ -32,13 +32,19 @@ public class Tile : MonoBehaviour
         SetUpLocation();
     }
 
+
+
+
+
+    //
+    //      SETUP 
+    //
     private void SetUpComponant()
     {
         animatorCloud = transform.parent.GetComponentInChildren<Animator>();
     }
-
-    //Methode va faire apparaitre les location dans les spots de la tile 
-    private void SetUpLocation()
+    
+    private void SetUpLocation() //Fait apparaitre les location dans les spots de la tile 
     {
         for (int i = 0; i < tileData.locationDatas.Length; i++)
         {
@@ -81,17 +87,29 @@ public class Tile : MonoBehaviour
         }
     }
 
+
+
+
+
+    //
+    //      FX
+    //
     public void CleanCloud()
     {
         animatorCloud.SetTrigger("triggerHide");
         isDiscovered = true;
     }
 
+
+
+
+
+    //
+    //      GET & SET
+    //
     /*
-     Attention
-
+     ATTENTION
      Quand on utilise cette fonction il faut faire attention a la corespondance des spots
-
      exemple : le borderSpot 0 de la tuile T1 est a coté du borderSpot 2 de la tuille T2
 
                 ----    Border Spot

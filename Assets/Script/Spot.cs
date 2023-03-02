@@ -28,8 +28,6 @@ public class Spot : MonoBehaviour
 
 
 
-
-
     //
     //      FX
     //
@@ -42,8 +40,6 @@ public class Spot : MonoBehaviour
     {
         AnimatorOverMouse_fx.SetTrigger("end");
     }
-
-
 
 
 

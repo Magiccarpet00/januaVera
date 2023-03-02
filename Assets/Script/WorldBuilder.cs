@@ -41,6 +41,28 @@ public class WorldBuilder : MonoBehaviour
         dic_prefabLocations.Add(LocationType.STONE, prefabLocations[1]);
     }
 
+    private void SetUpListTiles()
+    {
+        foreach (GameObject tile in prefabTiles)
+        {
+            TileData tileData = tile.GetComponent<Tile>().GetTileData();
+            switch (tileData.tileType)
+            {
+                case TileType.LAND:
+                    prefabTilesLand.Add(tile);
+                    break;
+                case TileType.WOOD:
+                    prefabTilesWood.Add(tile);
+                    break;
+                case TileType.MOUNTAIN:
+                    prefabTilesMountain.Add(tile);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     private void MakeLink()
     {
         for (int y = 0; y < GlobalVariable.SIZE_BOARD; y++)
@@ -76,28 +98,6 @@ public class WorldBuilder : MonoBehaviour
                         }
                     }
                 }
-            }
-        }
-    }
-
-    private void SetUpListTiles()
-    {
-        foreach (GameObject tile in prefabTiles)
-        {
-            TileData tileData = tile.GetComponent<Tile>().GetTileData();
-            switch (tileData.tileType)
-            {
-                case TileType.LAND:
-                    prefabTilesLand.Add(tile);
-                    break;
-                case TileType.WOOD:
-                    prefabTilesWood.Add(tile);
-                    break;
-                case TileType.MOUNTAIN:
-                    prefabTilesMountain.Add(tile);
-                    break;
-                default:
-                    break;
             }
         }
     }
@@ -250,7 +250,6 @@ public class WorldBuilder : MonoBehaviour
 
         return infoBorder;
     }
-
 
     /*
      Foncrion recursive en brute force qui va crée le protoWorld 

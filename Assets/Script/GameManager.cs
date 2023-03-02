@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite[] allImgLandscape_location;
     [HideInInspector] public Dictionary<LocationType, Sprite> dic_imgLandscape_location = new Dictionary<LocationType, Sprite>(); //TODO autre img a metre dans ce dico
 
-
     public void Start()
     {
         SetUpUI();
@@ -43,7 +42,21 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(StartLateOne());
     }
+    public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appélé dans start mais elle s'execute apres tout les autre starts
+    {
+        yield return new WaitForSeconds(1f);
+        SetUpPlayer();
 
+    }
+    public void Update()
+    {
+        GetMouseInput();
+    }
+
+
+    //
+    //      SETUP
+    //
     private void SetUpUI()
     {
         dic_imgLandscape_tile.Add(TileType.LAND,     allImgLandscape_tile[0]);
@@ -65,18 +78,28 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appélé dans start mais elle s'execute apres tout les autre starts
+    private void SetUpPlayer()
     {
-        yield return new WaitForSeconds(1f);
-        SetUpPlayer();       
+        GameObject g = GetTile(1, 1);
+        Tile currentTile = g.GetComponentInChildren<Tile>();
+        GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
 
+        characterTest.SetCurrentSpot(currentTileBorderSpot[0]);
+        currentTile.CleanCloud();
+
+        Transform t_spot = currentTileBorderSpot[0].transform;
+        characterTest.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+
+        UpdateUILandscape();
     }
 
-    public void Update()
-    {
-        GetMouseInput();
-    }
 
+
+
+
+    //
+    //      INPUT PLAYER
+    //
     private void GetMouseInput()
     {
         // [CODE PROVISOIRE]
@@ -102,46 +125,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SetUpPlayer()
-    {
-        GameObject g = GetTile(1, 1);
-        Tile currentTile = g.GetComponentInChildren<Tile>();
-        GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
 
-        characterTest.SetCurrentSpot(currentTileBorderSpot[0]);
-        currentTile.CleanCloud();
 
-        Transform t_spot = currentTileBorderSpot[0].transform;
-        characterTest.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
 
-        UpdateUILandscape();
-    }
 
-    private IEnumerator ProtoMoveCharacter() //CODE ULTRA SPAGETI
-    {
-        for (int i = 0; i < 2000; i++)
-        {
-            yield return new WaitForSeconds(0.4f);
-            GameObject gameObjectSpot = characterTest.GetCurrentSpot();
-            Spot spot = gameObjectSpot.GetComponent<Spot>();
-
-            List<GameObject> adjacentSpot = spot.GetAdjacentSpots();
-
-            int rng = Random.Range(0, adjacentSpot.Count);
-
-            characterTest.Move(adjacentSpot[rng]);
-
-            //Enlever les nuages
-            Vector3 v = gameObjectSpot.transform.parent.position;
-            List<GameObject> tiles = GetTiles(((int)v.x)/10 - 1, ((int)v.y/10) - 1, ((int)v.x/10) + 1, ((int)v.y/10) +1);
-            foreach (GameObject tile in tiles)
-            {
-                Tile t = tile.GetComponentInChildren<Tile>();
-                t.CleanCloud();
-            }
-        }
-    }
-
+    //
+    //      GET & SET
+    //
     public GameObject GetTile(int x, int y, bool debugDraw = false)
     {
         GameObject res = null;
@@ -154,12 +144,11 @@ public class GameManager : MonoBehaviour
             if (item.CompareTag("Tile"))
             {
                 res = item.transform.gameObject;
-                if(debugDraw) Instantiate(CircleTest, pos, Quaternion.identity);
+                if (debugDraw) Instantiate(CircleTest, pos, Quaternion.identity);
             }
         }
         return res;
     }
-
 
     /*
         Ca recupere les tiles dans un caré comme ça  
@@ -192,38 +181,60 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void SeedRandom(int seed)
-    {
-        Random.InitState(seed);
-    }
 
 
-
-
-
-
-
-
-
-
-
-    // UI
+    //
+    //      UI
+    //
     public void AddTurn(int amount)
     {
         turn += amount;
         nbTurn.text = turn.ToString();
     }
-
     public void UpdateUILandscape() //Si on est sur spot vide
     {
         imgLandscape.sprite = dic_imgLandscape_tile[characterTest.GetCurrentTileType()];
     }
-
     public void UpdateUILandscape(LocationType location) //Si on est sur spot avec location
     {
         imgLandscape.sprite = dic_imgLandscape_location[location];
     }
 
+
+
+
+
+    //
+    //      OTHER
+    //
+    private IEnumerator ProtoMoveCharacter() //CODE ULTRA SPAGETI
+    {
+        for (int i = 0; i < 2000; i++)
+        {
+            yield return new WaitForSeconds(0.4f);
+            GameObject gameObjectSpot = characterTest.GetCurrentSpot();
+            Spot spot = gameObjectSpot.GetComponent<Spot>();
+
+            List<GameObject> adjacentSpot = spot.GetAdjacentSpots();
+
+            int rng = Random.Range(0, adjacentSpot.Count);
+
+            characterTest.Move(adjacentSpot[rng]);
+
+            //Enlever les nuages
+            Vector3 v = gameObjectSpot.transform.parent.position;
+            List<GameObject> tiles = GetTiles(((int)v.x) / 10 - 1, ((int)v.y / 10) - 1, ((int)v.x / 10) + 1, ((int)v.y / 10) + 1);
+            foreach (GameObject tile in tiles)
+            {
+                Tile t = tile.GetComponentInChildren<Tile>();
+                t.CleanCloud();
+            }
+        }
+    }
+    private void SeedRandom(int seed)
+    {
+        Random.InitState(seed);
+    }
 }
 
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class TileData : ScriptableObject
 {
     public TileType tileType;
-    
+
     //MANA
     public float manaPoolYellow;
     public float manaPoolBlack;
