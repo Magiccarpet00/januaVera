@@ -5,7 +5,10 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] private GameObject currentSpot;
-    //TMP
+
+    public CharacterData characterData;
+
+    //MOVE
     private Vector3 target;
     private float smoothTime = 0.2F;
     private Vector3 velocity = Vector3.zero;

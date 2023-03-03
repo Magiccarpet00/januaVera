@@ -531,6 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpot: {fileID: 0}
+  characterData: {fileID: 11400000, guid: bcfaed210dd3aeb41a2f7599311107f8, type: 2}
 --- !u!1 &1195361212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CircleTest: {fileID: 8607141512307440147, guid: 787d1a549080b974198634e040711513, type: 3}
-  characterTest: {fileID: 815666320}
+  player: {fileID: 0}
   worldBuilder: {fileID: 1915923813}
   nbTurn: {fileID: 1406182011}
   imgLandscape: {fileID: 556910849}

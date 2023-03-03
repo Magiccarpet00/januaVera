@@ -14,9 +14,10 @@ public class GameManager : MonoBehaviour
 
     // DEBUG
     public GameObject CircleTest;
-    public Character characterTest;
-    public WorldBuilder worldBuilder;
 
+    // GLOBAL VAR
+    public Character player;
+    public WorldBuilder worldBuilder;
     private int turn = 0;
 
     // UI
@@ -93,14 +94,14 @@ public class GameManager : MonoBehaviour
         Tile currentTile = g.GetComponentInChildren<Tile>();
         GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
 
-        characterTest.SetCurrentSpot(currentTileBorderSpot[0]);
+        player.SetCurrentSpot(currentTileBorderSpot[0]);
         currentTile.CleanCloud();
 
         Transform t_spot = currentTileBorderSpot[0].transform;
-        characterTest.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+        player.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
 
         UpdateUILandscape();
-        UpdateUIButtonGrid(characterTest.GetCurrentButtonAction());
+        UpdateUIButtonGrid(player.GetCurrentButtonAction());
     }
 
 
@@ -123,7 +124,7 @@ public class GameManager : MonoBehaviour
 
                 if (gameObjectHit.CompareTag("Spot"))
                 {
-                    characterTest.Move(gameObjectHit);
+                    player.Move(gameObjectHit);
                 }
 
                 if (gameObjectHit.CompareTag("Location"))
@@ -138,7 +139,7 @@ public class GameManager : MonoBehaviour
         //CHEAT CODE
         if(Input.GetKeyDown(KeyCode.C))
         {
-            List<GameObject> tiles = GetTiles(0, 0, GlobalVariable.SIZE_BOARD, GlobalVariable.SIZE_BOARD);
+            List<GameObject> tiles = GetTiles(0, 0, GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD);
 
             foreach (GameObject item in tiles)
             {
@@ -159,7 +160,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject res = null;
 
-        Vector2 pos = new Vector2(x * GlobalVariable.OFF_SET_TILE, y * GlobalVariable.OFF_SET_TILE);
+        Vector2 pos = new Vector2(x * GlobalConst.OFF_SET_TILE, y * GlobalConst.OFF_SET_TILE);
         Collider2D[] target = Physics2D.OverlapCircleAll(pos, 1f);
 
         foreach (Collider2D item in target)
@@ -224,7 +225,7 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateUILandscape() //Si on est sur spot vide
     {
-        imgLandscape.sprite = dic_imgLandscape_tile[characterTest.GetCurrentTileType()];
+        imgLandscape.sprite = dic_imgLandscape_tile[player.GetCurrentTileType()];
     }
     public void UpdateUILandscape(LocationType location) //Si on est sur spot avec location
     {
@@ -256,14 +257,14 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 2000; i++)
         {
             yield return new WaitForSeconds(0.4f);
-            GameObject gameObjectSpot = characterTest.GetCurrentSpot();
+            GameObject gameObjectSpot = player.GetCurrentSpot();
             Spot spot = gameObjectSpot.GetComponent<Spot>();
 
             List<GameObject> adjacentSpot = spot.GetAdjacentSpots();
 
             int rng = Random.Range(0, adjacentSpot.Count);
 
-            characterTest.Move(adjacentSpot[rng]);
+            player.Move(adjacentSpot[rng]);
 
             //Enlever les nuages
             Vector3 v = gameObjectSpot.transform.parent.position;
@@ -280,7 +281,6 @@ public class GameManager : MonoBehaviour
         Random.InitState(seed);
     }
 }
-
 
 public enum TileType {
     PRE_BUILD,
@@ -304,7 +304,6 @@ public enum LocationType {
     CAVE,
     MOUNTAIN_HAMLET,
     CIRCLE_STONES
-
 }
 
 public enum ButtonType { 
@@ -313,8 +312,35 @@ public enum ButtonType {
     HIDE
 }
 
+public enum Element {
+    FIRE,
+    LIGHTNING,
+    WATER,
+    WIND,
+    METAL,
+    WOOD,
+    ROCK,
+    FUR,
+    PLUME,
+    LEATHER,
+    SKIN,
+    DIVIN
+}
 
-public class GlobalVariable {
+public enum Divinity {
+    SOLAR,
+    WIZENED,
+    ARSTAL,
+    NATURE
+}
+
+public enum DamageType {
+    SMASH,
+    SHARP,
+    ELEM
+}
+
+public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
 }

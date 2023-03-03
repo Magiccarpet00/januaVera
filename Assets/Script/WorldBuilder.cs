@@ -10,7 +10,7 @@ public class WorldBuilder : MonoBehaviour
         instance = this;
     }
 
-    [SerializeField] private GameObject[,] allTilesInGame = new GameObject[GlobalVariable.SIZE_BOARD, GlobalVariable.SIZE_BOARD];
+    [SerializeField] private GameObject[,] allTilesInGame = new GameObject[GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD];
 
     [SerializeField] private List<GameObject> prefabTiles = new List<GameObject>();
     [SerializeField] private GameObject prefabParentTile;
@@ -19,7 +19,7 @@ public class WorldBuilder : MonoBehaviour
     private List<GameObject> prefabTilesWood = new List<GameObject>();
     private List<GameObject> prefabTilesMountain = new List<GameObject>();
 
-    private TileType[,] protoWorld = new TileType[GlobalVariable.SIZE_BOARD, GlobalVariable.SIZE_BOARD]; // La map qui contient uniquement les types de tiles potentiels
+    private TileType[,] protoWorld = new TileType[GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD]; // La map qui contient uniquement les types de tiles potentiels
 
     //LOCATION
     // Attnetion il faut metre a jour le dico
@@ -65,9 +65,9 @@ public class WorldBuilder : MonoBehaviour
 
     private void MakeLink()
     {
-        for (int y = 0; y < GlobalVariable.SIZE_BOARD; y++)
+        for (int y = 0; y < GlobalConst.SIZE_BOARD; y++)
         {
-            for (int x = 0; x < GlobalVariable.SIZE_BOARD; x++)
+            for (int x = 0; x < GlobalConst.SIZE_BOARD; x++)
             {
                 GameObject currentGameObjetTile = GameManager.instance.GetTile(x, y);
 
@@ -104,9 +104,9 @@ public class WorldBuilder : MonoBehaviour
 
     private void CreateWorld()
     {
-        for (int y = 0; y < GlobalVariable.SIZE_BOARD; y++)
+        for (int y = 0; y < GlobalConst.SIZE_BOARD; y++)
         {
-            for (int x = 0; x < GlobalVariable.SIZE_BOARD; x++)
+            for (int x = 0; x < GlobalConst.SIZE_BOARD; x++)
             {
                 if (allTilesInGame[x, y] == null)
                 {
@@ -151,7 +151,7 @@ public class WorldBuilder : MonoBehaviour
         else
         {
             //Debug.Log("create");
-            Vector2 pos = new Vector2(x * GlobalVariable.OFF_SET_TILE, y * GlobalVariable.OFF_SET_TILE);
+            Vector2 pos = new Vector2(x * GlobalConst.OFF_SET_TILE, y * GlobalConst.OFF_SET_TILE);
 
             GameObject newTile = Instantiate(tileToBuild, pos, Quaternion.identity);
             allTilesInGame[x, y] = tileToBuild;
@@ -231,11 +231,11 @@ public class WorldBuilder : MonoBehaviour
     {
         int[] infoBorder = new int[4];
 
-        if (y == GlobalVariable.SIZE_BOARD - 1) infoBorder[0] = 0;
+        if (y == GlobalConst.SIZE_BOARD - 1) infoBorder[0] = 0;
         else if (allTilesInGame[x, y + 1] == null) infoBorder[0] = -1;
         else infoBorder[0] = allTilesInGame[x, y + 1].GetComponentInChildren<Tile>().GetDirectionBorder(2);
 
-        if (x == GlobalVariable.SIZE_BOARD - 1) infoBorder[1] = 0;
+        if (x == GlobalConst.SIZE_BOARD - 1) infoBorder[1] = 0;
         else if (allTilesInGame[x + 1, y] == null) infoBorder[1] = -1;
         else infoBorder[1] = allTilesInGame[x + 1, y].GetComponentInChildren<Tile>().GetDirectionBorder(3);
 
@@ -260,9 +260,9 @@ public class WorldBuilder : MonoBehaviour
     {
         protoWorld[2, 2] = TileType.LAND; //TODO a refactot pour que les tiles de départ change 
 
-        for (int y = 0; y < GlobalVariable.SIZE_BOARD; y++)
+        for (int y = 0; y < GlobalConst.SIZE_BOARD; y++)
         {
-            for (int x = 0; x < GlobalVariable.SIZE_BOARD; x++)
+            for (int x = 0; x < GlobalConst.SIZE_BOARD; x++)
             {
                 if (protoWorld[x, y] == TileType.PRE_BUILD)
                 {
@@ -271,9 +271,9 @@ public class WorldBuilder : MonoBehaviour
             }
         }
 
-        for (int y = 0; y < GlobalVariable.SIZE_BOARD; y++)
+        for (int y = 0; y < GlobalConst.SIZE_BOARD; y++)
         {
-            for (int x = 0; x < GlobalVariable.SIZE_BOARD; x++)
+            for (int x = 0; x < GlobalConst.SIZE_BOARD; x++)
             {
                 if (protoWorld[x, y] == TileType.PRE_BUILD)
                 {
@@ -296,7 +296,7 @@ public class WorldBuilder : MonoBehaviour
         int nbMountain = 0;
 
         //[CODE PANIQUE] ne pas ouvrir ;)
-        if (x < GlobalVariable.SIZE_BOARD - 1)
+        if (x < GlobalConst.SIZE_BOARD - 1)
         {
             switch (protoWorld[x + 1, y])
             {
@@ -334,7 +334,7 @@ public class WorldBuilder : MonoBehaviour
                     break;
             }
         }
-        if (y < GlobalVariable.SIZE_BOARD - 1)
+        if (y < GlobalConst.SIZE_BOARD - 1)
         {
             switch (protoWorld[x, y + 1])
             {
