@@ -84,4 +84,12 @@ public class Character : MonoBehaviour
     {
         target = t;
     }
+
+    public List<ButtonType> GetCurrentButtonAction()
+    {
+        return currentSpot.GetComponent<Spot>().GetActionInSpot();
+    }
+
+
+
 }

@@ -28,6 +28,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Sprite[] allImgLandscape_location;
     [HideInInspector] public Dictionary<LocationType, Sprite> dic_imgLandscape_location = new Dictionary<LocationType, Sprite>(); //TODO autre img a metre dans ce dico
 
+    [SerializeField] private GameObject btn_grid;
+    [SerializeField] private GameObject[] allButton;
+    [HideInInspector] public Dictionary<ButtonType, GameObject> dic_button = new Dictionary<ButtonType, GameObject>();
+    private List<GameObject> currentButtons = new List<GameObject>();
+
+
     public void Start()
     {
         SetUpUI();
@@ -63,19 +69,22 @@ public class GameManager : MonoBehaviour
         dic_imgLandscape_tile.Add(TileType.MOUNTAIN, allImgLandscape_tile[1]);
         dic_imgLandscape_tile.Add(TileType.WOOD,     allImgLandscape_tile[2]);
 
-        dic_imgLandscape_location.Add(LocationType.LAND_HAMLET, allImgLandscape_location[0]);
-        dic_imgLandscape_location.Add(LocationType.FARMHOUSE, allImgLandscape_location[1]);
-        dic_imgLandscape_location.Add(LocationType.STONE, allImgLandscape_location[2]);
-        dic_imgLandscape_location.Add(LocationType.TOWER, allImgLandscape_location[3]);
-        dic_imgLandscape_location.Add(LocationType.LAC, allImgLandscape_location[4]);
-        dic_imgLandscape_location.Add(LocationType.ELF_HOUSE, allImgLandscape_location[5]);
-        dic_imgLandscape_location.Add(LocationType.WOOD_HAMLET, allImgLandscape_location[6]);
-        dic_imgLandscape_location.Add(LocationType.FLOWERS, allImgLandscape_location[7]);
-        dic_imgLandscape_location.Add(LocationType.DRUIDE_HOUSE, allImgLandscape_location[8]);
-        dic_imgLandscape_location.Add(LocationType.CAVE, allImgLandscape_location[9]);
+        dic_imgLandscape_location.Add(LocationType.LAND_HAMLET,     allImgLandscape_location[0]);
+        dic_imgLandscape_location.Add(LocationType.FARMHOUSE,       allImgLandscape_location[1]);
+        dic_imgLandscape_location.Add(LocationType.STONE,           allImgLandscape_location[2]);
+        dic_imgLandscape_location.Add(LocationType.TOWER,           allImgLandscape_location[3]);
+        dic_imgLandscape_location.Add(LocationType.LAC,             allImgLandscape_location[4]);
+        dic_imgLandscape_location.Add(LocationType.ELF_HOUSE,       allImgLandscape_location[5]);
+        dic_imgLandscape_location.Add(LocationType.WOOD_HAMLET,     allImgLandscape_location[6]);
+        dic_imgLandscape_location.Add(LocationType.FLOWERS,         allImgLandscape_location[7]);
+        dic_imgLandscape_location.Add(LocationType.DRUIDE_HOUSE,    allImgLandscape_location[8]);
+        dic_imgLandscape_location.Add(LocationType.CAVE,            allImgLandscape_location[9]);
         dic_imgLandscape_location.Add(LocationType.MOUNTAIN_HAMLET, allImgLandscape_location[10]);
-        dic_imgLandscape_location.Add(LocationType.CIRCLE_STONES, allImgLandscape_location[11]);
+        dic_imgLandscape_location.Add(LocationType.CIRCLE_STONES,   allImgLandscape_location[11]);
 
+        dic_button.Add(ButtonType.TALK, allButton[0]);
+        dic_button.Add(ButtonType.HIDE, allButton[1]);
+        dic_button.Add(ButtonType.REST, allButton[2]);
     }
 
     private void SetUpPlayer()
@@ -91,6 +100,7 @@ public class GameManager : MonoBehaviour
         characterTest.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
 
         UpdateUILandscape();
+        UpdateUIButtonGrid(characterTest.GetCurrentButtonAction());
     }
 
 
@@ -193,6 +203,14 @@ public class GameManager : MonoBehaviour
         return res;
     }
 
+    public List<ButtonType> GetStandarActionButton()
+    {
+        List<ButtonType> actionButtonStandar = new List<ButtonType>();
+        actionButtonStandar.Add(ButtonType.REST);
+        actionButtonStandar.Add(ButtonType.HIDE);
+        return actionButtonStandar;
+    }
+
 
 
 
@@ -211,6 +229,19 @@ public class GameManager : MonoBehaviour
     public void UpdateUILandscape(LocationType location) //Si on est sur spot avec location
     {
         imgLandscape.sprite = dic_imgLandscape_location[location];
+    }
+    public void UpdateUIButtonGrid(List<ButtonType> buttonType) //A chaque apelle de la methode on destroy tous les bouton est on les recrées
+    {
+        foreach (GameObject btn in currentButtons)
+        {
+            Destroy(btn);
+        }
+
+        foreach (ButtonType btnType in buttonType)
+        {
+            GameObject newBtn = Instantiate(dic_button[btnType], btn_grid.transform);
+            currentButtons.Add(newBtn);
+        }
     }
 
 
@@ -274,6 +305,12 @@ public enum LocationType {
     MOUNTAIN_HAMLET,
     CIRCLE_STONES
 
+}
+
+public enum ButtonType { 
+    TALK,
+    REST,
+    HIDE
 }
 
 

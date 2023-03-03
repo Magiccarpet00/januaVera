@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: land_hamlet
   m_EditorClassIdentifier: 
   locationType: 1
-  sprite: {fileID: -201997998, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
+  actionsButton: 00000000

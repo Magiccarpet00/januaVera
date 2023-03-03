@@ -10,4 +10,9 @@ public class Location : MonoBehaviour
     {
 
     }
+
+    public List<ButtonType> GetAction()
+    {
+        return locationData.actionsButton;
+    }
 }

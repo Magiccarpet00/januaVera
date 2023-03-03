@@ -52,19 +52,31 @@ public class Spot : MonoBehaviour
     public LocationType GetLocationInSpot()
     {
         LocationType res = LocationType.EMPTY;
-        
-        if(transform.childCount == 1)
+
+        if (transform.childCount == 1)
         {
             Location selfLocation = GetComponentInChildren<Location>();
             res = selfLocation.locationData.locationType;
-        }
-        else
-        {
-            Debug.LogError("Appel de GetLocationInSpot impossible");
         }
 
         return res;
     }
 
+    public List<ButtonType> GetActionInSpot() 
+    {
+        List<ButtonType> res = new List<ButtonType>();
+
+        res.AddRange(GameManager.instance.GetStandarActionButton()); // Les btn de base 
+
+        if (GetLocationInSpot() != LocationType.EMPTY)               // Les btn de la location
+        {
+            Location selfLocation = GetComponentInChildren<Location>();
+            res.AddRange(selfLocation.GetAction());
+        }
+
+        //TODO Les btn des enemies, pnj sur la map
+
+        return res;
+    }
 
 }
