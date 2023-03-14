@@ -10,6 +10,8 @@ public class WorldBuilder : MonoBehaviour
         instance = this;
     }
 
+    [SerializeField] private GameObject folderTile;
+
     [SerializeField] private GameObject[,] allTilesInGame = new GameObject[GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD];
 
     [SerializeField] private List<GameObject> prefabTiles = new List<GameObject>();
@@ -158,6 +160,8 @@ public class WorldBuilder : MonoBehaviour
 
             GameObject newParentTile = Instantiate(prefabParentTile, pos, Quaternion.identity);
             newTile.transform.parent = newParentTile.transform;
+
+            
         }
     }
 

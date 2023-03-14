@@ -6,11 +6,15 @@ using UnityEngine;
 public class CharacterData : ScriptableObject
 {
     public Element shape;
+    public Divinity typeDivinity; //uniquement si le character est divin
     public int shape_value;
+
+    
 
     public int stamina;
     public int nbWound;
 
-    public int dodgeSpeed;
+    public int dodgeTime;
+    
 
 }

@@ -280,6 +280,11 @@ public class GameManager : MonoBehaviour
     {
         Random.InitState(seed);
     }
+
+    private void PopEnemy(GameObject enemy, GameObject spot)
+    {
+        
+    }
 }
 
 public enum TileType {
@@ -328,6 +333,7 @@ public enum Element {
 }
 
 public enum Divinity {
+    EMPTY,
     SOLAR,
     WIZENED,
     ARSTAL,
