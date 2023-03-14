@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
 
     // DEBUG
     public GameObject CircleTest;
+    public GameObject prefabTmpEnemy;
 
     // GLOBAL VAR
-    public Character player;
+    public GameObject prefabPlayer;
+    [HideInInspector] public GameObject player;
     public WorldBuilder worldBuilder;
     private int turn = 0;
 
@@ -43,18 +45,12 @@ public class GameManager : MonoBehaviour
         SeedRandom(8);
 
         worldBuilder.StartWorldBuilder();
+        SetUpPlayer();
 
         //UI
         AddTurn(0);
-
-        StartCoroutine(StartLateOne());
     }
-    public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appélé dans start mais elle s'execute apres tout les autre starts
-    {
-        yield return new WaitForSeconds(1f);
-        SetUpPlayer();
 
-    }
     public void Update()
     {
         GetMouseInput();
@@ -90,18 +86,11 @@ public class GameManager : MonoBehaviour
 
     private void SetUpPlayer()
     {
-        GameObject g = GetTile(1, 1);
-        Tile currentTile = g.GetComponentInChildren<Tile>();
-        GameObject[] currentTileBorderSpot = currentTile.GetBorderSpots();
-
-        player.SetCurrentSpot(currentTileBorderSpot[0]);
-        currentTile.CleanCloud();
-
-        Transform t_spot = currentTileBorderSpot[0].transform;
-        player.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
-
+        GameObject currentTile = GetTile(1, 1);
+        Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
+        player = CreateCharacter(prefabPlayer, spot[0].gameObject);
         UpdateUILandscape();
-        UpdateUIButtonGrid(player.GetCurrentButtonAction());
+        UpdateUIButtonGrid(player.GetComponent<Character>().GetCurrentButtonAction());
     }
 
 
@@ -124,7 +113,7 @@ public class GameManager : MonoBehaviour
 
                 if (gameObjectHit.CompareTag("Spot"))
                 {
-                    player.Move(gameObjectHit);
+                    player.GetComponent<Character>().Move(gameObjectHit);
                 }
 
                 if (gameObjectHit.CompareTag("Location"))
@@ -137,7 +126,7 @@ public class GameManager : MonoBehaviour
 
 
         //CHEAT CODE
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.C)) //CLEAN CLOUD
         {
             List<GameObject> tiles = GetTiles(0, 0, GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD);
 
@@ -145,6 +134,14 @@ public class GameManager : MonoBehaviour
             {
                 item.GetComponentInChildren<Tile>().CleanCloud();
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.I)) //CREATE ENEMY
+        {
+            GameObject currentTile = GetTile(2, 2);
+            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
+
+            CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
         }
 
     }
@@ -225,7 +222,7 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateUILandscape() //Si on est sur spot vide
     {
-        imgLandscape.sprite = dic_imgLandscape_tile[player.GetCurrentTileType()];
+        imgLandscape.sprite = dic_imgLandscape_tile[player.GetComponent<Character>().GetCurrentTileType()];
     }
     public void UpdateUILandscape(LocationType location) //Si on est sur spot avec location
     {
@@ -252,38 +249,20 @@ public class GameManager : MonoBehaviour
     //
     //      OTHER
     //
-    private IEnumerator ProtoMoveCharacter() //CODE ULTRA SPAGETI
-    {
-        for (int i = 0; i < 2000; i++)
-        {
-            yield return new WaitForSeconds(0.4f);
-            GameObject gameObjectSpot = player.GetCurrentSpot();
-            Spot spot = gameObjectSpot.GetComponent<Spot>();
-
-            List<GameObject> adjacentSpot = spot.GetAdjacentSpots();
-
-            int rng = Random.Range(0, adjacentSpot.Count);
-
-            player.Move(adjacentSpot[rng]);
-
-            //Enlever les nuages
-            Vector3 v = gameObjectSpot.transform.parent.position;
-            List<GameObject> tiles = GetTiles(((int)v.x) / 10 - 1, ((int)v.y / 10) - 1, ((int)v.x / 10) + 1, ((int)v.y / 10) + 1);
-            foreach (GameObject tile in tiles)
-            {
-                Tile t = tile.GetComponentInChildren<Tile>();
-                t.CleanCloud();
-            }
-        }
-    }
     private void SeedRandom(int seed)
     {
         Random.InitState(seed);
     }
 
-    private void PopEnemy(GameObject enemy, GameObject spot)
+    private GameObject CreateCharacter(GameObject character, GameObject spot)
     {
-        
+        GameObject newCharacter = Instantiate(character, spot.transform.position, Quaternion.identity);
+        Character _chatacter = newCharacter.GetComponent<Character>();
+        _chatacter.SetCurrentSpot(spot);
+        Transform t_spot = spot.transform;
+        _chatacter.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+
+        return newCharacter;
     }
 }
 

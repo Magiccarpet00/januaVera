@@ -161,7 +161,7 @@ public class WorldBuilder : MonoBehaviour
             GameObject newParentTile = Instantiate(prefabParentTile, pos, Quaternion.identity);
             newTile.transform.parent = newParentTile.transform;
 
-            
+            newParentTile.transform.parent = folderTile.transform;
         }
     }
 
