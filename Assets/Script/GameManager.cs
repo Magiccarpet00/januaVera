@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,17 +45,23 @@ public class GameManager : MonoBehaviour
         SeedRandom(8);
 
         worldBuilder.StartWorldBuilder();
-        SetUpPlayer();
+
+        StartCoroutine(StartLateOne());
 
         //UI
         AddTurn(0);
     }
 
-    public void Update()
+    public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appï¿½lï¿½ dans start mais elle s'execute apres tout les autre starts
+    {
+        yield return new WaitForSeconds(1f);
+        SetUpPlayer();
+    }
+
+    private void Update()
     {
         GetMouseInput();
     }
-
 
     //
     //      SETUP
@@ -86,11 +92,26 @@ public class GameManager : MonoBehaviour
 
     private void SetUpPlayer()
     {
-        GameObject currentTile = GetTile(1, 1);
+        Vector2Int startLocation = new Vector2Int(1, 1);
+        
+        GameObject currentTile = GetTile(startLocation.x, startLocation.y);
         Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
         player = CreateCharacter(prefabPlayer, spot[0].gameObject);
         UpdateUILandscape();
         UpdateUIButtonGrid(player.GetComponent<Character>().GetCurrentButtonAction());
+
+        //Clean les nuages a la main
+        List<GameObject> nearTiles = GetTiles(startLocation.x - 1,
+                                              startLocation.y - 1,
+                                              startLocation.x + 1,
+                                              startLocation.y + 1);
+
+        foreach (GameObject tile in nearTiles)
+        {
+            tile.GetComponentInChildren<Tile>().CleanCloud();
+        }
+
+
     }
 
 
@@ -114,6 +135,7 @@ public class GameManager : MonoBehaviour
                 if (gameObjectHit.CompareTag("Spot"))
                 {
                     player.GetComponent<Character>().Move(gameObjectHit);
+                    Debug.Log("Ã§a clic ?");
                 }
 
                 if (gameObjectHit.CompareTag("Location"))
@@ -172,7 +194,7 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-        Ca recupere les tiles dans un caré comme ça  
+        Ca recupere les tiles dans un carÃ© comme Ã§a  
 
         ###  ###  ###       +     +    +   
         ###  ###  ###       +     +    y2  
@@ -228,7 +250,7 @@ public class GameManager : MonoBehaviour
     {
         imgLandscape.sprite = dic_imgLandscape_location[location];
     }
-    public void UpdateUIButtonGrid(List<ButtonType> buttonType) //A chaque apelle de la methode on destroy tous les bouton est on les recrées
+    public void UpdateUIButtonGrid(List<ButtonType> buttonType) //A chaque apelle de la methode on destroy tous les bouton est on les recrÃ©es
     {
         foreach (GameObject btn in currentButtons)
         {
@@ -326,6 +348,6 @@ public enum DamageType {
 }
 
 public class GlobalConst {
-    public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
-    public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
+    public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la crÃ©eation
+    public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un cotÃ© lors de la crÃ©ation
 }
