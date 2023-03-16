@@ -1000,6 +1000,7 @@ MonoBehaviour:
   prefabPlayer: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   player: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   worldBuilder: {fileID: 1915923813}
+  prefabAction: {fileID: 0}
   nbTurn: {fileID: 1406182011}
   imgLandscape: {fileID: 556910849}
   allImgLandscape_tile:

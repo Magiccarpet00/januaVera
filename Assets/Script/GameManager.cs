@@ -19,8 +19,14 @@ public class GameManager : MonoBehaviour
     // GLOBAL VAR
     public GameObject prefabPlayer;
     [HideInInspector] public GameObject player;
+
     public WorldBuilder worldBuilder;
+
     private int turn = 0;
+
+    public List<Action> actionQueue = new List<Action>();
+    
+
 
     // UI
     public Text nbTurn;
@@ -134,8 +140,9 @@ public class GameManager : MonoBehaviour
 
                 if (gameObjectHit.CompareTag("Spot"))
                 {
-                    player.GetComponent<Character>().Move(gameObjectHit);
-                    Debug.Log("ça clic ?");
+                    //player.GetComponent<Character>().Move(gameObjectHit);
+                    player.GetComponent<Character>().CommandMove(gameObjectHit);
+                    ExecuteActionQueue();
                 }
 
                 if (gameObjectHit.CompareTag("Location"))
@@ -276,7 +283,7 @@ public class GameManager : MonoBehaviour
         Random.InitState(seed);
     }
 
-    private GameObject CreateCharacter(GameObject character, GameObject spot)
+    public GameObject CreateCharacter(GameObject character, GameObject spot)
     {
         GameObject newCharacter = Instantiate(character, spot.transform.position, Quaternion.identity);
         Character _chatacter = newCharacter.GetComponent<Character>();
@@ -286,6 +293,17 @@ public class GameManager : MonoBehaviour
 
         return newCharacter;
     }
+
+    public void ExecuteActionQueue()
+    {
+        foreach (Action action in actionQueue)
+        {
+            action.PerfomAction();
+        }
+
+        actionQueue.Clear();
+    }
+    
 }
 
 public enum TileType {

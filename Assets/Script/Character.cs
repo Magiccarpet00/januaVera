@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class Character : MonoBehaviour
 
     //MOVE
     private Vector3 target;
-    private float smoothTime = 0.2F;
+    private readonly float smoothTime = 0.2F;
     private Vector3 velocity = Vector3.zero;
 
     void Update()
@@ -44,7 +43,7 @@ public class Character : MonoBehaviour
         }
         else
         {
-            //TODO faire le AStarMove quand on aura les pilles d'action
+            //TODO faire le AStarMove quand on aura les piles d'action
             AStarMove();
         }
         
@@ -53,6 +52,17 @@ public class Character : MonoBehaviour
     private void AStarMove()
     {
         //TODO
+    }
+
+    public virtual void CommandMove(GameObject spot)
+    {
+        ActionMove newMove = new ActionMove(0, this, spot);
+        GameManager.instance.actionQueue.Add(newMove);
+
+        foreach (Action action in GameManager.instance.actionQueue)
+        {
+            Debug.Log(action.GetUser());
+        }
     }
 
 
