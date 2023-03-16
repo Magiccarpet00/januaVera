@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private int turn = 0;
 
     public List<Action> actionQueue = new List<Action>();
+    public List<Character> listPnj = new List<Character>();
     
 
 
@@ -170,7 +171,8 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(2, 2);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
+            GameObject newPnj = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
+            listPnj.Add(newPnj.GetComponent<Character>());
         }
 
     }
@@ -294,7 +296,7 @@ public class GameManager : MonoBehaviour
         return newCharacter;
     }
 
-    public void ExecuteActionQueue()
+    public void ExecuteActionQueue() // Va executer toute les actions des characters
     {
         foreach (Action action in actionQueue)
         {
@@ -302,6 +304,17 @@ public class GameManager : MonoBehaviour
         }
 
         actionQueue.Clear();
+        CommandPnj();
+    }
+
+    public void CommandPnj() // Envoie la commande d'action de tout les pnj
+    {
+        foreach (Character pnj in listPnj)
+        {
+            List<GameObject> adjSpot =  pnj.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+            int rng = Random.Range(0, adjSpot.Count);
+            pnj.CommandMove(adjSpot[rng]);
+        }
     }
     
 }
@@ -312,7 +325,6 @@ public enum TileType {
     WOOD,
     MOUNTAIN
 }
-
 
 public enum LocationType {
     EMPTY,
