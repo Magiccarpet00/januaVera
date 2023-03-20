@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character
@@ -6,7 +7,14 @@ public class Player : Character
     {
         base.Move(spot);
 
-        GameManager.instance.AddTurn(1);
+        //Enlever les nuages
+        Vector3 v = spot.transform.parent.position;
+        List<GameObject> tiles = GameManager.instance.GetTiles(((int)v.x) / 10 - 1, ((int)v.y / 10) - 1, ((int)v.x / 10) + 1, ((int)v.y / 10) + 1);
+        foreach (GameObject tile in tiles)
+        {
+            Tile t = tile.GetComponentInChildren<Tile>();
+            t.CleanCloud();
+        }
 
         if (GetCurrentSpot().transform.childCount == 1)
         {
@@ -20,5 +28,15 @@ public class Player : Character
 
         GameManager.instance.UpdateUIButtonGrid(GetCurrentButtonAction());
 
+    }
+
+
+
+    //
+    //      GET & SET
+    //
+    public override bool isPlayer()
+    {
+        return true;
     }
 }

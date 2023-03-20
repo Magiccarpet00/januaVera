@@ -19,14 +19,15 @@ public class GameManager : MonoBehaviour
     // GLOBAL VAR
     public GameObject prefabPlayer;
     [HideInInspector] public GameObject player;
+    [HideInInspector] public Player playerCharacter;
 
     public WorldBuilder worldBuilder;
 
     private int turn = 0;
+    public bool inputBlock;
 
-    public List<Action> actionQueue = new List<Action>();
-    public List<Character> listPnj = new List<Character>();
-    
+    public List<Action> actionQueue = new List<Action>(); // liste de chaque action de tout les characters du current turn
+    public List<Character> characterList = new List<Character>(); // list de tout les characters en jeu
 
 
     // UI
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
         AddTurn(0);
     }
 
-    public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est app�l� dans start mais elle s'execute apres tout les autre starts
+    public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appele dans start mais elle s'execute apres tout les autre starts
     {
         yield return new WaitForSeconds(1f);
         SetUpPlayer();
@@ -104,8 +105,9 @@ public class GameManager : MonoBehaviour
         GameObject currentTile = GetTile(startLocation.x, startLocation.y);
         Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
         player = CreateCharacter(prefabPlayer, spot[0].gameObject);
+        playerCharacter = player.GetComponent<Player>();
         UpdateUILandscape();
-        UpdateUIButtonGrid(player.GetComponent<Character>().GetCurrentButtonAction());
+        UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
 
         //Clean les nuages a la main
         List<GameObject> nearTiles = GetTiles(startLocation.x - 1,
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour
     private void GetMouseInput()
     {
         // [CODE PROVISOIRE]
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && inputBlock==false)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
@@ -141,9 +143,8 @@ public class GameManager : MonoBehaviour
 
                 if (gameObjectHit.CompareTag("Spot"))
                 {
-                    //player.GetComponent<Character>().Move(gameObjectHit);
-                    player.GetComponent<Character>().CommandMove(gameObjectHit);
-                    ExecuteActionQueue();
+                    playerCharacter.CommandMove(gameObjectHit);
+                    StartCoroutine(ExecuteActionQueue());
                 }
 
                 if (gameObjectHit.CompareTag("Location"))
@@ -172,7 +173,7 @@ public class GameManager : MonoBehaviour
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
             GameObject newPnj = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
-            listPnj.Add(newPnj.GetComponent<Character>());
+            newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
     }
@@ -253,7 +254,7 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateUILandscape() //Si on est sur spot vide
     {
-        imgLandscape.sprite = dic_imgLandscape_tile[player.GetComponent<Character>().GetCurrentTileType()];
+        imgLandscape.sprite = dic_imgLandscape_tile[playerCharacter.GetCurrentTileType()];
     }
     public void UpdateUILandscape(LocationType location) //Si on est sur spot avec location
     {
@@ -292,28 +293,53 @@ public class GameManager : MonoBehaviour
         _chatacter.SetCurrentSpot(spot);
         Transform t_spot = spot.transform;
         _chatacter.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+        characterList.Add(_chatacter);
 
         return newCharacter;
     }
 
-    public void ExecuteActionQueue() // Va executer toute les actions des characters
+    public IEnumerator ExecuteActionQueue() // Va executer toute les actions des characters
     {
-        foreach (Action action in actionQueue)
+        inputBlock = true;
+
+        AddTurn(1);
+
+        foreach (Character character in characterList) // On recupere la dernière action de chaque character
         {
+            actionQueue.Add(character.PopAction());
+        }
+
+        foreach (Action action in actionQueue)  // On execute tout les actions dans l'ordre des prioritées
+        {
+            //TODO faire les priorités
             action.PerfomAction();
         }
 
         actionQueue.Clear();
         CommandPnj();
+
+        if(playerCharacter.isStackActionEmpty() == false)
+        {
+            yield return new WaitForSeconds(GlobalConst.TIME_TURN_SEC);
+            StartCoroutine(ExecuteActionQueue());
+        }
+        else
+        {
+            yield return new WaitForSeconds(GlobalConst.TIME_TURN_SEC);
+            inputBlock = false;
+        }
     }
 
     public void CommandPnj() // Envoie la commande d'action de tout les pnj
     {
-        foreach (Character pnj in listPnj)
+        foreach (Character character in characterList)
         {
-            List<GameObject> adjSpot =  pnj.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-            int rng = Random.Range(0, adjSpot.Count);
-            pnj.CommandMove(adjSpot[rng]);
+            if(character.isPlayer() == false)
+            {
+                List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                int rng = Random.Range(0, adjSpot.Count);
+                character.CommandMove(adjSpot[rng]); //[CODE TMP] commande move pour l'instant
+            }
         }
     }
     
@@ -380,4 +406,12 @@ public enum DamageType {
 public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
+
+    public static float TIME_TURN_SEC = 0.6f;    // Le temps de voir les actions se faire
+
+    // -- PRIORITE D'ACTION --
+    // les actions suivent un ordre de priorité croissant
+    public static int EMPTY_PRIORITY = 1;
+    public static int HIDE_PRIORITY  = 2;
+    public static int MOVE_PRIORITY  = 3;
 }

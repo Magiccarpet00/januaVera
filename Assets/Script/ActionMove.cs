@@ -3,9 +3,12 @@ using UnityEngine;
 public class ActionMove : Action
 {
     private GameObject destinationSpot;
-    public ActionMove(int p, Character u, GameObject spot) : base(p,u)
+    private bool isHideMove;
+    public ActionMove(Character u, GameObject spot, bool _hideMove = false) : base(GlobalConst.MOVE_PRIORITY, u)
     {
         destinationSpot = spot;
+        isHideMove = _hideMove;
+        
     }
 
     public override void PerfomAction()

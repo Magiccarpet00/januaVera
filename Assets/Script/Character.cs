@@ -3,50 +3,61 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] private GameObject currentSpot;
 
     public CharacterData characterData;
 
-    //MOVE
+    // REAL TIME MOVE
     private Vector3 target;
-    private readonly float smoothTime = 0.2F;
+    private float smoothTime;
     private Vector3 velocity = Vector3.zero;
+
+
+    [SerializeField] private GameObject currentSpot;
+    [SerializeField] private bool isHide;
+    private bool onPath; // quand on est on path on est sur le chemin vers le currentSpot mais on est pas encore sur ce spot à ce tour
+
+
+    private Stack<Action> stackAction = new Stack<Action>();
 
     void Update()
     {
+        if (isHide)
+            smoothTime = 0.8f;
+        else
+            smoothTime = 0.2f;
+
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
     }
 
 
-    // TODO 
+
+
+    //
+    //      ACTION
+    //
+
     // [CODI BUG]
     // Quand on clic sur la même case ça fait quand meme passer un tour, à réparer
     public virtual void Move(GameObject spot)
     {
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
-
-        //clic sur un spot adj
+        
         if (adjSpot.Contains(spot))
         {
+            if(isHide)
+            {
+                smoothTime = (0.2F + GlobalConst.TIME_TURN_SEC) * 2;
+                onPath = true;
+                Debug.Log("hide move");
+            }
             currentSpot = spot;
             Transform t_spot = currentSpot.transform;
             target = new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z);
-
-            //Enlever les nuages
-            Vector3 v = t_spot.parent.position;
-            List<GameObject> tiles = GameManager.instance.GetTiles(((int)v.x) / 10 - 1, ((int)v.y / 10) - 1, ((int)v.x / 10) + 1, ((int)v.y / 10) + 1);
-            foreach (GameObject tile in tiles)
-            {
-                Tile t = tile.GetComponentInChildren<Tile>();
-                t.CleanCloud();
-            }
         }
         else
         {
-            //TODO faire le AStarMove quand on aura les piles d'action
             AStarMove();
         }
-        
     }
 
     private void AStarMove()
@@ -54,16 +65,41 @@ public class Character : MonoBehaviour
         //TODO
     }
 
+
+    public void Hide()
+    {
+        isHide = true;
+        Debug.Log("hide");
+    }
+
+
+
+
+
+
+    //
+    //      COMMAND
+    //
+    public virtual void CommandEmpty()
+    {
+        stackAction.Push(new ActionEmpty(this));
+    }
+
     public virtual void CommandMove(GameObject spot)
     {
-        ActionMove newMove = new ActionMove(0, this, spot);
-        GameManager.instance.actionQueue.Add(newMove);
-
-        foreach (Action action in GameManager.instance.actionQueue)
-        {
-            Debug.Log(action.GetUser());
-        }
+        if(isHide)
+            stackAction.Push(new ActionEmpty(this));
+        
+        stackAction.Push(new ActionMove(this, spot));
+        
     }
+
+    public virtual void CommandHide()
+    {
+        stackAction.Push(new ActionHide(this));
+    }
+
+    
 
 
 
@@ -103,6 +139,23 @@ public class Character : MonoBehaviour
         return currentSpot.GetComponent<Spot>().GetActionInSpot();
     }
 
+    public Action PopAction()
+    {
+        return stackAction.Pop();
+    }
+
+    public bool isStackActionEmpty()
+    {
+        if(stackAction.Count == 0)
+            return true;
+        else
+            return false;
+    }
+
+    public virtual bool isPlayer()
+    {
+        return false;
+    }
 
 
 }
