@@ -65,13 +65,17 @@ public class Character : MonoBehaviour
         //TODO
     }
 
-
     public void Hide()
     {
         isHide = true;
-        Debug.Log("hide");
     }
 
+    public void UnHide()
+    {
+        isHide = false;
+    }
+
+    
 
 
 
@@ -91,7 +95,6 @@ public class Character : MonoBehaviour
             stackAction.Push(new ActionEmpty(this));
         
         stackAction.Push(new ActionMove(this, spot));
-        
     }
 
     public virtual void CommandHide()
@@ -99,7 +102,11 @@ public class Character : MonoBehaviour
         stackAction.Push(new ActionHide(this));
     }
 
-    
+    public virtual void CommandUnHide()
+    {
+        stackAction.Push(new ActionUnHide(this));
+    }
+
 
 
 
@@ -155,6 +162,11 @@ public class Character : MonoBehaviour
     public virtual bool isPlayer()
     {
         return false;
+    }
+
+    public bool GetHide()
+    {
+        return isHide;
     }
 
 

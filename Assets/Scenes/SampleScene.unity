@@ -999,8 +999,10 @@ MonoBehaviour:
   prefabTmpEnemy: {fileID: 468640492003026094, guid: 5f982bdb4bb62b247acee9b8f4055265, type: 3}
   prefabPlayer: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   player: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
+  playerCharacter: {fileID: 0}
   worldBuilder: {fileID: 1915923813}
-  prefabAction: {fileID: 0}
+  inputBlock: 0
+  characterList: []
   nbTurn: {fileID: 1406182011}
   imgLandscape: {fileID: 556910849}
   allImgLandscape_tile:
@@ -1025,6 +1027,7 @@ MonoBehaviour:
   - {fileID: 6683567811945661742, guid: 73d5f0a214fd81b4bb6a442ddce62349, type: 3}
   - {fileID: 3891409678922949209, guid: d24b838c4d2f7eb46bcc01367dc859af, type: 3}
   - {fileID: 2455649663024616122, guid: 25eee5da0e4ced04da626f225f68fbf4, type: 3}
+  - {fileID: 3891409678922949209, guid: 1ab2b90d3fe314d4e8223201cf1c25e8, type: 3}
 --- !u!114 &1915923813
 MonoBehaviour:
   m_ObjectHideFlags: 0

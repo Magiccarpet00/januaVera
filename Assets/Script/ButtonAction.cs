@@ -7,8 +7,18 @@ public class ButtonAction : MonoBehaviour
     {
         if(GameManager.instance.inputBlock == false)
         {
-            GameManager.instance.player.GetComponent<Character>().CommandHide();
-            StartCoroutine(GameManager.instance.ExecuteActionQueue());
+            GameManager.instance.playerCharacter.CommandHide();
+            GameManager.instance._ExecuteActionQueue();
+            //GameManager.instance.UpdateUIButtonGrid(GameManager.instance.playerCharacter.GetCurrentButtonAction());
+        }
+    }
+
+    public void UnHide() //Unhide est une action "gratuite" car elle ne consome pas un tour
+    {
+        if (GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.UnHide();
+            GameManager.instance.UpdateUIButtonGrid(GameManager.instance.playerCharacter.GetCurrentButtonAction());
         }
     }
 

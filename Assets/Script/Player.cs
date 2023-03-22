@@ -26,7 +26,7 @@ public class Player : Character
         }
 
 
-        GameManager.instance.UpdateUIButtonGrid(GetCurrentButtonAction());
+        
 
     }
 

@@ -93,9 +93,10 @@ public class GameManager : MonoBehaviour
         dic_imgLandscape_location.Add(LocationType.MOUNTAIN_HAMLET, allImgLandscape_location[10]);
         dic_imgLandscape_location.Add(LocationType.CIRCLE_STONES,   allImgLandscape_location[11]);
 
-        dic_button.Add(ButtonType.TALK, allButton[0]);
-        dic_button.Add(ButtonType.HIDE, allButton[1]);
-        dic_button.Add(ButtonType.REST, allButton[2]);
+        dic_button.Add(ButtonType.TALK,   allButton[0]);
+        dic_button.Add(ButtonType.HIDE,   allButton[1]);
+        dic_button.Add(ButtonType.REST,   allButton[2]);
+        dic_button.Add(ButtonType.UNHIDE, allButton[3]);
     }
 
     private void SetUpPlayer()
@@ -119,7 +120,6 @@ public class GameManager : MonoBehaviour
         {
             tile.GetComponentInChildren<Tile>().CleanCloud();
         }
-
 
     }
 
@@ -174,6 +174,12 @@ public class GameManager : MonoBehaviour
 
             GameObject newPnj = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
             newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
         }
 
     }
@@ -237,7 +243,12 @@ public class GameManager : MonoBehaviour
     {
         List<ButtonType> actionButtonStandar = new List<ButtonType>();
         actionButtonStandar.Add(ButtonType.REST);
-        actionButtonStandar.Add(ButtonType.HIDE);
+
+        if(playerCharacter.GetHide() == false)
+            actionButtonStandar.Add(ButtonType.HIDE);
+        else
+            actionButtonStandar.Add(ButtonType.UNHIDE);
+
         return actionButtonStandar;
     }
 
@@ -252,15 +263,19 @@ public class GameManager : MonoBehaviour
         turn += amount;
         nbTurn.text = turn.ToString();
     }
-    public void UpdateUILandscape() //Si on est sur spot vide
+    public void UpdateUILandscape() 
     {
         imgLandscape.sprite = dic_imgLandscape_tile[playerCharacter.GetCurrentTileType()];
     }
-    public void UpdateUILandscape(LocationType location) //Si on est sur spot avec location
+
+    //Si on est sur spot avec location
+    public void UpdateUILandscape(LocationType location) 
     {
         imgLandscape.sprite = dic_imgLandscape_location[location];
     }
-    public void UpdateUIButtonGrid(List<ButtonType> buttonType) //A chaque apelle de la methode on destroy tous les bouton est on les recrées
+
+    //A chaque apelle de la methode on destroy tous les bouton est on les recrées
+    public void UpdateUIButtonGrid(List<ButtonType> buttonType) 
     {
         foreach (GameObject btn in currentButtons)
         {
@@ -298,7 +313,22 @@ public class GameManager : MonoBehaviour
         return newCharacter;
     }
 
-    public IEnumerator ExecuteActionQueue() // Va executer toute les actions des characters
+
+
+
+    public void _ExecuteActionQueue()
+    {
+        StartCoroutine(ExecuteActionQueue());
+    }
+    //      -- METHODE IMPORTANTE --
+    // Va executer toute les actions des characters
+    //
+    // [ANALYSE DE BUG RESOLU]
+    // Quand on appele StartCoroutine(ExecuteActionQueue()) depuis un autre script, par exemple ButtonAction,
+    // si le gameObject qui contient le script ButtonAction est detruit pendant un yield return
+    // new WaitForSeconds de la methode : Alors la suite de la methode ne va pas s'executer (je crois).
+    // Du coup j'utilise le subterfuge ci-dessus...
+    private IEnumerator ExecuteActionQueue() 
     {
         inputBlock = true;
 
@@ -318,7 +348,9 @@ public class GameManager : MonoBehaviour
         actionQueue.Clear();
         CommandPnj();
 
-        if(playerCharacter.isStackActionEmpty() == false)
+        UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
+
+        if (playerCharacter.isStackActionEmpty() == false)
         {
             yield return new WaitForSeconds(GlobalConst.TIME_TURN_SEC);
             StartCoroutine(ExecuteActionQueue());
@@ -330,7 +362,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CommandPnj() // Envoie la commande d'action de tout les pnj
+    // Envoie la commande d'action de tout les pnj
+    public void CommandPnj() 
     {
         foreach (Character character in characterList)
         {
@@ -371,7 +404,8 @@ public enum LocationType {
 public enum ButtonType { 
     TALK,
     REST,
-    HIDE
+    HIDE,
+    UNHIDE
 }
 
 public enum Element {
