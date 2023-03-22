@@ -41,15 +41,16 @@ public class Character : MonoBehaviour
     public virtual void Move(GameObject spot)
     {
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
-        
+
+        if (isHide)
+        {
+            smoothTime = (0.2F + GlobalConst.TIME_TURN_SEC) * 2;
+            onPath = true;
+        }
+
         if (adjSpot.Contains(spot))
         {
-            if(isHide)
-            {
-                smoothTime = (0.2F + GlobalConst.TIME_TURN_SEC) * 2;
-                onPath = true;
-                Debug.Log("hide move");
-            }
+            
             currentSpot = spot;
             Transform t_spot = currentSpot.transform;
             target = new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z);
@@ -128,7 +129,10 @@ public class Character : MonoBehaviour
 
     public GameObject GetCurrentSpot()
     {
-        return currentSpot;
+        if (onPath)
+            return null;
+        else
+            return currentSpot;
     }
 
     public void SetCurrentSpot(GameObject spot)
