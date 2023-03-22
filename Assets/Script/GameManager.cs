@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
     public bool inputBlock;
 
     public List<Action> actionQueue = new List<Action>(); // liste de chaque action de tout les characters du current turn
-    public List<Character> characterList = new List<Character>(); // list de tout les characters en jeu
-
+    public List<Character> characterList = new List<Character>(); // liste de tout les characters en jeu
+    public List<Effect> effectList = new List<Effect>(); 
 
     // UI
     public Text nbTurn;
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
                 if (gameObjectHit.CompareTag("Spot"))
                 {
                     playerCharacter.CommandMove(gameObjectHit);
-                    StartCoroutine(ExecuteActionQueue());
+                    _ExecuteActionQueue();
                 }
 
                 if (gameObjectHit.CompareTag("Location"))
@@ -263,15 +263,13 @@ public class GameManager : MonoBehaviour
         turn += amount;
         nbTurn.text = turn.ToString();
     }
-    public void UpdateUILandscape() 
-    {
-        imgLandscape.sprite = dic_imgLandscape_tile[playerCharacter.GetCurrentTileType()];
-    }
 
-    //Si on est sur spot avec location
-    public void UpdateUILandscape(LocationType location) 
+    public void UpdateUILandscape(LocationType location = LocationType.EMPTY)
     {
-        imgLandscape.sprite = dic_imgLandscape_location[location];
+        if(location == LocationType.EMPTY)
+            imgLandscape.sprite = dic_imgLandscape_tile[playerCharacter.GetCurrentTileType()];
+        else
+            imgLandscape.sprite = dic_imgLandscape_location[location];
     }
 
     //A chaque apelle de la methode on destroy tous les bouton est on les recrées
@@ -321,7 +319,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ExecuteActionQueue());
     }
     //      -- METHODE IMPORTANTE --
-    // Va executer toute les actions des characters
+    // Va executer toute les actions des characters jusqu'a ce que player n'ai plus d'action dans sont stack
     //
     // [ANALYSE DE BUG RESOLU]
     // Quand on appele StartCoroutine(ExecuteActionQueue()) depuis un autre script, par exemple ButtonAction,
@@ -334,6 +332,13 @@ public class GameManager : MonoBehaviour
 
         AddTurn(1);
 
+        foreach (Effect effect in effectList)
+        {
+            //TODO faire les priorités
+            if (effect.Clock())
+                effectList.Remove(effect); //TODO CONTINUE ici ça doit bug pcq je retire effect de la liste sur laquelle on est en train de loop
+        }
+
         foreach (Character character in characterList) // On recupere la dernière action de chaque character
         {
             actionQueue.Add(character.PopAction());
@@ -345,10 +350,13 @@ public class GameManager : MonoBehaviour
             action.PerfomAction();
         }
 
+        
+
         actionQueue.Clear();
         CommandPnj();
 
         UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
+        UpdateUILandscape(playerCharacter.GetCurrentLocationType());
 
         if (playerCharacter.isStackActionEmpty() == false)
         {
@@ -448,4 +456,7 @@ public class GlobalConst {
     public static int EMPTY_PRIORITY = 1;
     public static int HIDE_PRIORITY  = 2;
     public static int MOVE_PRIORITY  = 3;
+
+    // -- PRIOTITE D'EFFET --
+    public static int ONPATH_PRIORITY = 1;
 }

@@ -46,11 +46,11 @@ public class Character : MonoBehaviour
         {
             smoothTime = (0.2F + GlobalConst.TIME_TURN_SEC) * 2;
             onPath = true;
+            GameManager.instance.effectList.Add(new EffectOnPath(this, this));
         }
 
         if (adjSpot.Contains(spot))
         {
-            
             currentSpot = spot;
             Transform t_spot = currentSpot.transform;
             target = new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z);
@@ -77,6 +77,20 @@ public class Character : MonoBehaviour
     }
 
     
+
+
+
+
+    //
+    //      EFFECT
+    //
+    public void ResetOnPath()
+    {
+        onPath = false;
+    }
+
+
+
 
 
 

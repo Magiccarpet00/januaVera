@@ -8,8 +8,7 @@ public class ButtonAction : MonoBehaviour
         if(GameManager.instance.inputBlock == false)
         {
             GameManager.instance.playerCharacter.CommandHide();
-            GameManager.instance._ExecuteActionQueue();
-            //GameManager.instance.UpdateUIButtonGrid(GameManager.instance.playerCharacter.GetCurrentButtonAction());
+            GameManager.instance._ExecuteActionQueue();            
         }
     }
 

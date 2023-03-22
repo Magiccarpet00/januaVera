@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class Action
 {
-    private int priority;
     private Character user;
+    private int priority;
 
     public Action(int p, Character u)
     {
@@ -16,6 +16,11 @@ public abstract class Action
     public int GetPriority()
     {
         return priority;
+    }
+
+    public void SetPriority(int i)
+    {
+        priority = i;
     }
 
     public Character GetUser()

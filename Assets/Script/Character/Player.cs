@@ -16,14 +16,6 @@ public class Player : Character
             t.CleanCloud();
         }
 
-        if (GetCurrentSpot() != null && GetCurrentSpot().transform.childCount == 1)
-        {
-            GameManager.instance.UpdateUILandscape(GetCurrentLocationType());
-        }
-        else
-        {
-            GameManager.instance.UpdateUILandscape();
-        }
     }
 
 
