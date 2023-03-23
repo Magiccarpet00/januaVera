@@ -21,7 +21,7 @@ public abstract class Effect
     public bool Clock() //[CODE ACADEMIE] trouver un autre nom a la methode
     {
         deltaTurn--;
-        if (deltaTurn < 0)
+        if (deltaTurn == 0)
         {
             PerfomEffect();
             return true;

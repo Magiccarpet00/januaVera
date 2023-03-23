@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     public float scrollSpeed;
 
     public float panBorder;
-    public Vector2 panLimit; //todo pour ne pas sortir de la map
+    public Vector2 panLimit; //TODO pour ne pas sortir de la map
     public Vector2 clampZoom;
     void Update()
     {   

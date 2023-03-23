@@ -117,11 +117,6 @@ public class Character : MonoBehaviour
         stackAction.Push(new ActionHide(this));
     }
 
-    public virtual void CommandUnHide()
-    {
-        stackAction.Push(new ActionUnHide(this));
-    }
-
 
 
 
@@ -185,6 +180,11 @@ public class Character : MonoBehaviour
     public bool GetHide()
     {
         return isHide;
+    }
+
+    public bool GetOnPath()
+    {
+        return onPath;
     }
 
 

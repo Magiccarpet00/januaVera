@@ -6,11 +6,6 @@ public class Location : MonoBehaviour
 {
     public LocationData locationData;
 
-    void Start()
-    {
-
-    }
-
     public List<ButtonType> GetAction()
     {
         return locationData.actionsButton;

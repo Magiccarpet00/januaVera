@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Dictionary<TileType, Sprite> dic_imgLandscape_tile = new Dictionary<TileType, Sprite>();
 
     [SerializeField] private Sprite[] allImgLandscape_location;
-    [HideInInspector] public Dictionary<LocationType, Sprite> dic_imgLandscape_location = new Dictionary<LocationType, Sprite>(); //TODO autre img a metre dans ce dico
+    [HideInInspector] public Dictionary<LocationType, Sprite> dic_imgLandscape_location = new Dictionary<LocationType, Sprite>();
 
     [SerializeField] private GameObject btn_grid;
     [SerializeField] private GameObject[] allButton;
@@ -48,9 +48,12 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         SetUpUI();
-        //SEED RNG
+
+        //--------SEED RNG---------
         //SeedRandom((int)Random.Range(0, 9999999));
-        SeedRandom(8);
+        string seed = "Miriamo54";
+        SeedRandom(seed.GetHashCode());
+        //-------------------------
 
         worldBuilder.StartWorldBuilder();
 
@@ -332,32 +335,42 @@ public class GameManager : MonoBehaviour
 
         AddTurn(1);
 
-        foreach (Effect effect in effectList)
+        // Application des effects
+        List<int> effectToDelete = new List<int>();
+        for (int i = 0; i < effectList.Count; i++)
         {
-            //TODO faire les priorités
-            if (effect.Clock())
-                effectList.Remove(effect); //TODO CONTINUE ici ça doit bug pcq je retire effect de la liste sur laquelle on est en train de loop
+            if (effectList[i].Clock())
+                effectToDelete.Add(i);
+        }
+        for (int i = 0; i < effectToDelete.Count; i++)
+        {
+            effectList.RemoveAt(effectToDelete[i]);
         }
 
-        foreach (Character character in characterList) // On recupere la dernière action de chaque character
+        // Recuperation des actions de chaque character
+        foreach (Character character in characterList) 
         {
             actionQueue.Add(character.PopAction());
         }
 
-        foreach (Action action in actionQueue)  // On execute tout les actions dans l'ordre des prioritées
+        // Execution des actions de chaque character
+        foreach (Action action in actionQueue)  
         {
             //TODO faire les priorités
             action.PerfomAction();
         }
 
-        
-
         actionQueue.Clear();
         CommandPnj();
 
-        UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
-        UpdateUILandscape(playerCharacter.GetCurrentLocationType());
+        //On fait les updates de UI uniquement si le player n'est pas sur un chemin
+        if(!playerCharacter.GetOnPath())
+        {
+            UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
+            UpdateUILandscape(playerCharacter.GetCurrentLocationType());
+        }
 
+        // Appele recursif de la fonction tant que la pile d'actions du player n'est pas vide
         if (playerCharacter.isStackActionEmpty() == false)
         {
             yield return new WaitForSeconds(GlobalConst.TIME_TURN_SEC);
