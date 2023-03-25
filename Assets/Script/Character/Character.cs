@@ -11,6 +11,8 @@ public class Character : MonoBehaviour
     private float smoothTime;
     private Vector3 velocity = Vector3.zero;
 
+    public Animator animator;
+
 
     [SerializeField] private GameObject currentSpot;
     [SerializeField] private bool isHide;
@@ -18,6 +20,7 @@ public class Character : MonoBehaviour
 
 
     private Stack<Action> stackAction = new Stack<Action>();
+
 
     void Update()
     {
@@ -41,7 +44,7 @@ public class Character : MonoBehaviour
     public virtual void Move(GameObject spot)
     {
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
-
+    
         if (isHide)
         {
             smoothTime = (0.2F + GlobalConst.TIME_TURN_SEC) * 2;
@@ -59,6 +62,7 @@ public class Character : MonoBehaviour
         {
             AStarMove();
         }
+
     }
 
     private void AStarMove()
@@ -69,13 +73,19 @@ public class Character : MonoBehaviour
     public void Hide()
     {
         isHide = true;
+        animator.SetBool("hide", isHide);
     }
 
     public void UnHide()
     {
         isHide = false;
+        animator.SetBool("hide", isHide);
     }
 
+    public void Rest()
+    {
+        //TODO rest
+    }
     
 
 
@@ -115,6 +125,29 @@ public class Character : MonoBehaviour
     public virtual void CommandHide()
     {
         stackAction.Push(new ActionHide(this));
+    }
+
+    public virtual void CommandRest()
+    {
+        stackAction.Push(new ActionRest(this));
+    }
+
+
+
+
+
+    
+    
+    
+    //
+    //      OTHER
+    //
+    public bool isValideMove(GameObject spot)
+    {
+        if (spot == currentSpot)
+            return false;
+
+        return true;
     }
 
 

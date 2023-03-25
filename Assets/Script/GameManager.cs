@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour
     }
 
     // DEBUG
+    [Header("DEGUB")]
     public GameObject CircleTest;
     public GameObject prefabTmpEnemy;
 
     // GLOBAL VAR
+    [Header("GLOBAL VAR")]
     public GameObject prefabPlayer;
     [HideInInspector] public GameObject player;
     [HideInInspector] public Player playerCharacter;
@@ -28,9 +30,10 @@ public class GameManager : MonoBehaviour
 
     public List<Action> actionQueue = new List<Action>(); // liste de chaque action de tout les characters du current turn
     public List<Character> characterList = new List<Character>(); // liste de tout les characters en jeu
-    public List<Effect> effectList = new List<Effect>(); 
+    public List<Effect> effectList = new List<Effect>();
 
     // UI
+    [Header("UI")]
     public Text nbTurn;
     public Image imgLandscape;
     [SerializeField] private Sprite[] allImgLandscape_tile;
@@ -144,7 +147,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject gameObjectHit = h.transform.gameObject;
 
-                if (gameObjectHit.CompareTag("Spot"))
+                if (gameObjectHit.CompareTag("Spot") && playerCharacter.isValideMove(gameObjectHit))
                 {
                     playerCharacter.CommandMove(gameObjectHit);
                     _ExecuteActionQueue();
@@ -329,7 +332,7 @@ public class GameManager : MonoBehaviour
     // si le gameObject qui contient le script ButtonAction est detruit pendant un yield return
     // new WaitForSeconds de la methode : Alors la suite de la methode ne va pas s'executer (je crois).
     // Du coup j'utilise le subterfuge ci-dessus...
-    private IEnumerator ExecuteActionQueue() 
+    private IEnumerator ExecuteActionQueue()
     {
         inputBlock = true;
 
@@ -469,7 +472,10 @@ public class GlobalConst {
     public static int EMPTY_PRIORITY = 1;
     public static int HIDE_PRIORITY  = 2;
     public static int MOVE_PRIORITY  = 3;
+    public static int REST_PRIORITY  = 5;
 
     // -- PRIOTITE D'EFFET --
     public static int ONPATH_PRIORITY = 1;
+
+    
 }

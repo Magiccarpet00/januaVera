@@ -23,7 +23,11 @@ public class ButtonAction : MonoBehaviour
 
     public void Rest()
     {
-        
+        if (GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandRest();
+            GameManager.instance._ExecuteActionQueue();
+        }
     }
 
     public void Talk()
