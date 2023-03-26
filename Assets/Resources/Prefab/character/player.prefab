@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7379619800762806692}
   - component: {fileID: 7379619800762806715}
+  - component: {fileID: 8508389343032901378}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -49,6 +50,22 @@ MonoBehaviour:
   animator: {fileID: 7049016750269207359}
   currentSpot: {fileID: 0}
   isHide: 0
+--- !u!58 &8508389343032901378
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7379619800762806694}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &7379619802042984630
 GameObject:
   m_ObjectHideFlags: 0

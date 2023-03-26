@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4933194267980111289}
   - component: {fileID: 3414628772382782096}
+  - component: {fileID: 5510879221857987606}
   m_Layer: 0
   m_Name: tmpEnemy
   m_TagString: Untagged
@@ -45,8 +46,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736f18b81feacbc4a930401143f5a95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpot: {fileID: 0}
   characterData: {fileID: 11400000, guid: f3c1ca029b6c3394f9b5d31fab6ef0d4, type: 2}
+  animator: {fileID: 0}
+  currentSpot: {fileID: 0}
+  isHide: 0
+--- !u!58 &5510879221857987606
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468640492003026094}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &2046837586198170256
 GameObject:
   m_ObjectHideFlags: 0

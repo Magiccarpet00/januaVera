@@ -107,6 +107,24 @@ public class Character : MonoBehaviour
 
 
     //
+    //      FX
+    //
+    void OnMouseEnter()
+    {
+        GameManager.instance.CreateInfoGridLayoutGroupe();
+    }
+
+    void OnMouseExit()
+    {
+        GameManager.instance.DestroyInfoGridLayoutGroupe();
+    }
+
+
+
+
+
+
+    //
     //      COMMAND
     //
     public virtual void CommandEmpty()

@@ -56,3 +56,6 @@ TagManager:
   - name: Cloud
     uniqueID: 583549929
     locked: 0
+  - name: Info
+    uniqueID: 4076270893
+    locked: 0

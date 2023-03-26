@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Dictionary<ButtonType, GameObject> dic_button = new Dictionary<ButtonType, GameObject>();
     private List<GameObject> currentButtons = new List<GameObject>();
 
+    [SerializeField] private Transform worldCanvas;
+    [SerializeField] private Vector3 offSetInfoGrid;
+    [SerializeField] private GameObject prefabInfoGridLayoutGroupe;
+    private GameObject currentInfoGridLayoutGroupe;
+
 
     public void Start()
     {
@@ -291,6 +296,26 @@ public class GameManager : MonoBehaviour
             GameObject newBtn = Instantiate(dic_button[btnType], btn_grid.transform);
             currentButtons.Add(newBtn);
         }
+    }
+
+    public void CreateInfoGridLayoutGroupe()
+    {
+        Vector3 pos = Vector3.zero;
+        pos.x = offSetInfoGrid.x + player.transform.position.x;
+        pos.y = offSetInfoGrid.y + player.transform.position.y;
+
+
+
+        Debug.Log(pos);
+
+        currentInfoGridLayoutGroupe = Instantiate(prefabInfoGridLayoutGroupe, pos, Quaternion.identity);
+        currentInfoGridLayoutGroupe.transform.SetParent(worldCanvas,true);
+
+    }
+
+    public void DestroyInfoGridLayoutGroupe()
+    {
+        Destroy(currentInfoGridLayoutGroupe);
     }
 
 
