@@ -8,7 +8,6 @@ public class ActionMove : Action
     {
         destinationSpot = spot;
         isHideMove = _hideMove;
-        
     }
 
     public override void PerfomAction()

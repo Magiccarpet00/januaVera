@@ -21,14 +21,13 @@ public class Character : MonoBehaviour
 
     private Stack<Action> stackAction = new Stack<Action>();
 
+    //GROUPE
+    private Character leader; //si le character A un leader alors il suis certaine action de son leader;
+    private List<Character> crew = new List<Character>(); //si le character EST un leader alors il a un crew
+    private int idCrew = 0; //la place dans le groupe. 0 = etre leader 
 
     void Update()
     {
-        if (isHide)
-            smoothTime = 0.8f;
-        else
-            smoothTime = 0.2f;
-
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
     }
 
@@ -47,7 +46,6 @@ public class Character : MonoBehaviour
     
         if (isHide)
         {
-            smoothTime = (0.2F + GlobalConst.TIME_TURN_SEC) * 2;
             onPath = true;
             GameManager.instance.effectList.Add(new EffectOnPath(this, this));
         }
@@ -74,12 +72,14 @@ public class Character : MonoBehaviour
     {
         isHide = true;
         animator.SetBool("hide", isHide);
+        UpdateSmoothTime();
     }
 
     public void UnHide()
     {
         isHide = false;
         animator.SetBool("hide", isHide);
+        UpdateSmoothTime();
     }
 
     public void Rest()
@@ -111,7 +111,7 @@ public class Character : MonoBehaviour
     //
     void OnMouseEnter()
     {
-        GameManager.instance.CreateInfoGridLayoutGroupe();
+        GameManager.instance.CreateInfoGridLayoutGroupe(transform.position);
     }
 
     void OnMouseExit()
@@ -138,6 +138,16 @@ public class Character : MonoBehaviour
             stackAction.Push(new ActionEmpty(this));
         
         stackAction.Push(new ActionMove(this, spot));
+
+
+        //[CODE DOUTEUX] pas sur de la place de l'ordre
+        if(isLeader())
+        {
+            foreach (Character character in crew)
+            {
+                character.CommandMove(spot);
+            }
+        }
     }
 
     public virtual void CommandHide()
@@ -149,9 +159,6 @@ public class Character : MonoBehaviour
     {
         stackAction.Push(new ActionRest(this));
     }
-
-
-
 
 
     
@@ -171,6 +178,17 @@ public class Character : MonoBehaviour
 
 
 
+
+    //  
+    //      CREW
+    //
+    public void UpdateSmoothTime()
+    {
+        if (isHide)
+            smoothTime = GlobalConst.HIDE_SMOOTHTIME + GlobalConst.DELTA_SMOOTH_CREW * idCrew;
+        else
+            smoothTime = GlobalConst.BASIC_SMOOTHTIME + GlobalConst.DELTA_SMOOTH_CREW * idCrew;
+    }
 
 
 
@@ -238,5 +256,26 @@ public class Character : MonoBehaviour
         return onPath;
     }
 
+    public void SetCrew(List<Character> c)
+    {
+        crew = c;
+    }
 
+    public void SetLeader(Character l)
+    {
+        leader = l;
+    }
+
+    public bool isLeader()
+    {
+        if (leader == null)
+            return true;
+        else
+            return false;
+    }
+
+    public void SetIdCrew(int i)
+    {
+        idCrew = i;
+    }
 }

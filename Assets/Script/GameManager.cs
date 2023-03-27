@@ -187,10 +187,25 @@ public class GameManager : MonoBehaviour
             newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
-
-        if (Input.GetKeyDown(KeyCode.T))
+        if(Input.GetKeyDown(KeyCode.G)) //CREATE GROUPE 
         {
-            UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
+            GameObject currentTile = GetTile(2, 1);
+            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
+
+            GameObject newPnj1 = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
+            GameObject newPnj2 = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
+            GameObject newPnj3 = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
+
+            List<Character> grp_char = new List<Character>();
+            grp_char.Add(newPnj1.GetComponent<Character>());
+            grp_char.Add(newPnj2.GetComponent<Character>());
+
+            CreateGroupe(newPnj3.GetComponent<Character>(), grp_char);
+
+
+            newPnj1.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
+            newPnj2.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
+            newPnj3.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
     }
@@ -298,17 +313,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateInfoGridLayoutGroupe()
+    public void CreateInfoGridLayoutGroupe(Vector3 pos)
     {
-        Vector3 pos = Vector3.zero;
-        pos.x = offSetInfoGrid.x + player.transform.position.x;
-        pos.y = offSetInfoGrid.y + player.transform.position.y;
+        Vector3 newPos = Vector3.zero;
+        newPos.x = offSetInfoGrid.x + pos.x;
+        newPos.y = offSetInfoGrid.y + pos.y;
 
-
-
-        Debug.Log(pos);
-
-        currentInfoGridLayoutGroupe = Instantiate(prefabInfoGridLayoutGroupe, pos, Quaternion.identity);
+        currentInfoGridLayoutGroupe = Instantiate(prefabInfoGridLayoutGroupe, newPos, Quaternion.identity);
         currentInfoGridLayoutGroupe.transform.SetParent(worldCanvas,true);
 
     }
@@ -337,9 +348,25 @@ public class GameManager : MonoBehaviour
         _chatacter.SetCurrentSpot(spot);
         Transform t_spot = spot.transform;
         _chatacter.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+        _chatacter.UpdateSmoothTime();
         characterList.Add(_chatacter);
 
         return newCharacter;
+    }
+
+    public void CreateGroupe(Character leader, List<Character> crew)
+    {
+        int i = 0;
+        foreach (Character character in crew)
+        {
+            i++;
+            character.SetLeader(leader);
+            character.SetIdCrew(i);
+            character.UpdateSmoothTime();
+        }
+
+        leader.SetCrew(crew);
+
     }
 
 
@@ -416,7 +443,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (Character character in characterList)
         {
-            if(character.isPlayer() == false)
+            if(character.isPlayer() == false && character.isLeader() == true)
             {
                 List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
                 int rng = Random.Range(0, adjSpot.Count);
@@ -491,6 +518,10 @@ public class GlobalConst {
     public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
 
     public static float TIME_TURN_SEC = 0.6f;    // Le temps de voir les actions se faire
+
+    public static float BASIC_SMOOTHTIME = 0.4f;
+    public static float HIDE_SMOOTHTIME = 0.8f;
+    public static float DELTA_SMOOTH_CREW = 0.2f;   // Pour que les groupes se suive à la queue leu leu 
 
     // -- PRIORITE D'ACTION --
     // les actions suivent un ordre de priorité croissant
