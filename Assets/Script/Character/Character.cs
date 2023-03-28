@@ -11,14 +11,14 @@ public class Character : MonoBehaviour
     private Vector3 target;
     private float smoothTime;
     private Vector3 velocity = Vector3.zero;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Collider2D collider2d;
 
     public Animator animator;
-
 
     [SerializeField] private GameObject currentSpot;
     [SerializeField] private bool isHide;
     private bool onPath; // quand on est on path on est sur le chemin vers le currentSpot mais on est pas encore sur ce spot à ce tour
-
 
     private Stack<Action> stackAction = new Stack<Action>();
 
@@ -30,6 +30,8 @@ public class Character : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
+
+        // Deplacement des crewmate
         if (!isLeader() && Vector3.Distance(transform.position, target) < 0.2f)
             Visible(false);
         else
@@ -195,23 +197,14 @@ public class Character : MonoBehaviour
             smoothTime = GlobalConst.BASIC_SMOOTHTIME + GlobalConst.DELTA_SMOOTH_CREW * idCrew;
     }
 
+    // Rend visible les characater du group pendant le move du leader
     public void Visible(bool enable)
     {
-        SpriteRenderer sp = GetComponentInChildren<SpriteRenderer>();
-        Collider2D collider = GetComponent<Collider2D>();
-
-        sp.enabled = enable;
-        collider.enabled = enable;
+        spriteRenderer.enabled = enable;
+        collider2d.enabled = enable;
     }
 
-    // Rend visible les characater du group pendant le move du leader
-    private IEnumerator TravelFxCrew()
-    {
-        Visible(true);
-        yield return new WaitForSeconds(GlobalConst.TIME_TURN_SEC);
-        Visible(false);
-    }
-
+    
 
 
     //

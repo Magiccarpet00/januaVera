@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: bcfaed210dd3aeb41a2f7599311107f8, type: 2}
+  spriteRenderer: {fileID: 7379619802042984927}
+  collider2d: {fileID: 8508389343032901378}
   animator: {fileID: 7049016750269207359}
   currentSpot: {fileID: 0}
   isHide: 0
