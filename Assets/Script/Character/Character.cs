@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,11 +25,15 @@ public class Character : MonoBehaviour
     //GROUPE
     private Character leader; //si le character A un leader alors il suis certaine action de son leader;
     private List<Character> crew = new List<Character>(); //si le character EST un leader alors il a un crew
-    private int idCrew = 0; //la place dans le groupe. 0 = etre leader 
+    private int idCrew = 0; //la place dans le groupe. 0 = etre leader
 
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
+        if (!isLeader() && Vector3.Distance(transform.position, target) < 0.2f)
+            Visible(false);
+        else
+            Visible(true);
     }
 
 
@@ -86,7 +91,7 @@ public class Character : MonoBehaviour
     {
         //TODO rest
     }
-    
+
 
 
 
@@ -188,6 +193,23 @@ public class Character : MonoBehaviour
             smoothTime = GlobalConst.HIDE_SMOOTHTIME + GlobalConst.DELTA_SMOOTH_CREW * idCrew;
         else
             smoothTime = GlobalConst.BASIC_SMOOTHTIME + GlobalConst.DELTA_SMOOTH_CREW * idCrew;
+    }
+
+    public void Visible(bool enable)
+    {
+        SpriteRenderer sp = GetComponentInChildren<SpriteRenderer>();
+        Collider2D collider = GetComponent<Collider2D>();
+
+        sp.enabled = enable;
+        collider.enabled = enable;
+    }
+
+    // Rend visible les characater du group pendant le move du leader
+    private IEnumerator TravelFxCrew()
+    {
+        Visible(true);
+        yield return new WaitForSeconds(GlobalConst.TIME_TURN_SEC);
+        Visible(false);
     }
 
 

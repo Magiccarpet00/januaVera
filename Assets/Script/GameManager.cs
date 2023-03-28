@@ -357,12 +357,13 @@ public class GameManager : MonoBehaviour
     public void CreateGroupe(Character leader, List<Character> crew)
     {
         int i = 0;
-        foreach (Character character in crew)
+        foreach (Character teammate in crew)
         {
             i++;
-            character.SetLeader(leader);
-            character.SetIdCrew(i);
-            character.UpdateSmoothTime();
+            teammate.SetLeader(leader);
+            teammate.SetIdCrew(i);
+            teammate.UpdateSmoothTime();
+            teammate.Visible(false);
         }
 
         leader.SetCrew(crew);
@@ -522,6 +523,7 @@ public class GlobalConst {
     public static float BASIC_SMOOTHTIME = 0.4f;
     public static float HIDE_SMOOTHTIME = 0.8f;
     public static float DELTA_SMOOTH_CREW = 0.2f;   // Pour que les groupes se suive à la queue leu leu 
+    
 
     // -- PRIORITE D'ACTION --
     // les actions suivent un ordre de priorité croissant
