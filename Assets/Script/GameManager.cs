@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Player playerCharacter;
 
     public WorldBuilder worldBuilder;
+    public LocaleSelector localeSelector; 
 
     private int turn = 0;
     public bool inputBlock;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
+        localeSelector.ChangeLocale(0);
 
         StartCoroutine(StartLateOne());
 
