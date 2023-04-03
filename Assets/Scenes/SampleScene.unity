@@ -1258,6 +1258,7 @@ MonoBehaviour:
   worldCanvas: {fileID: 113513967}
   offSetInfoGrid: {x: 4, y: 0, z: 0}
   prefabInfoGridLayoutGroupe: {fileID: 7107082791737578349, guid: e24b792b475f96c4bae420563a98f99c, type: 3}
+  prefabInfoCharacter: {fileID: 4267781497862045117, guid: d85b88c6eee5aa6408c71f0c58fc88b9, type: 3}
 --- !u!114 &1915923813
 MonoBehaviour:
   m_ObjectHideFlags: 0

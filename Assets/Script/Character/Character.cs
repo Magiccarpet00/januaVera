@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
 
     //GROUPE
     private Character leader; //si le character A un leader alors il suis certaine action de son leader;
-    private List<Character> crew = new List<Character>(); //si le character EST un leader alors il a un crew
+    private List<Character> crewmates = new List<Character>(); //si le character EST un leader alors il a un crew
     private int idCrew = 0; //la place dans le groupe. 0 = etre leader
 
     void Update()
@@ -118,7 +118,8 @@ public class Character : MonoBehaviour
     //
     void OnMouseEnter()
     {
-        GameManager.instance.CreateInfoGridLayoutGroupe(transform.position);
+        if(isLeader())
+            GameManager.instance.CreateInfoGridLayoutGroupe(transform.position, this);
     }
 
     void OnMouseExit()
@@ -150,7 +151,7 @@ public class Character : MonoBehaviour
         //[CODE DOUTEUX] pas sur de la place de l'ordre
         if(isLeader())
         {
-            foreach (Character character in crew)
+            foreach (Character character in crewmates)
             {
                 character.CommandMove(spot);
             }
@@ -271,9 +272,9 @@ public class Character : MonoBehaviour
         return onPath;
     }
 
-    public void SetCrew(List<Character> c)
+    public void SetCrewmates(List<Character> c)
     {
-        crew = c;
+        crewmates = c;
     }
 
     public void SetLeader(Character l)
@@ -292,5 +293,16 @@ public class Character : MonoBehaviour
     public void SetIdCrew(int i)
     {
         idCrew = i;
+    }
+
+    public List<Character> GetSquad()
+    {
+        List<Character> squad = new List<Character>();
+        squad.Add(leader);
+        foreach (Character mates in crewmates)
+        {
+            squad.Add(mates);
+        }
+        return squad;
     }
 }

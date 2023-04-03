@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector3 offSetInfoGrid;
     [SerializeField] private GameObject prefabInfoGridLayoutGroupe;
     private GameObject currentInfoGridLayoutGroupe;
+    [SerializeField] private GameObject prefabInfoCharacter;
 
 
     public void Start()
@@ -202,7 +203,7 @@ public class GameManager : MonoBehaviour
             grp_char.Add(newPnj1.GetComponent<Character>());
             grp_char.Add(newPnj2.GetComponent<Character>());
 
-            CreateGroupe(newPnj3.GetComponent<Character>(), grp_char);
+            CreateSquad(newPnj3.GetComponent<Character>(), grp_char);
 
 
             newPnj1.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
@@ -315,7 +316,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateInfoGridLayoutGroupe(Vector3 pos)
+    public void CreateInfoGridLayoutGroupe(Vector3 pos, Character leader)
     {
         Vector3 newPos = Vector3.zero;
         newPos.x = offSetInfoGrid.x + pos.x;
@@ -323,6 +324,20 @@ public class GameManager : MonoBehaviour
 
         currentInfoGridLayoutGroupe = Instantiate(prefabInfoGridLayoutGroupe, newPos, Quaternion.identity);
         currentInfoGridLayoutGroupe.transform.SetParent(worldCanvas,true);
+        
+        Transform gridTransform = currentInfoGridLayoutGroupe.transform;
+        foreach (Character mate in leader.GetSquad())
+        {
+            CreateInfoCharacter(mate, pos, gridTransform);
+        }
+    }
+
+    public void CreateInfoCharacter(Character character, Vector3 pos, Transform InfoGridLayoutGroupe)
+    {
+        GameObject currentInfoCharacter = Instantiate(prefabInfoCharacter, pos, Quaternion.identity);
+        currentInfoCharacter.transform.SetParent(InfoGridLayoutGroupe);
+
+        //currentInfoCharacter.GetComponentInChildren<Image>().sprite = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
 
     }
 
@@ -356,19 +371,19 @@ public class GameManager : MonoBehaviour
         return newCharacter;
     }
 
-    public void CreateGroupe(Character leader, List<Character> crew)
+    public void CreateSquad(Character leader, List<Character> crewmate)
     {
         int i = 0;
-        foreach (Character teammate in crew)
+        foreach (Character mate in crewmate)
         {
             i++;
-            teammate.SetLeader(leader);
-            teammate.SetIdCrew(i);
-            teammate.UpdateSmoothTime();
-            teammate.Visible(false);
+            mate.SetLeader(leader);
+            mate.SetIdCrew(i);
+            mate.UpdateSmoothTime();
+            mate.Visible(false);
         }
 
-        leader.SetCrew(crew);
+        leader.SetCrewmates(crewmate);
 
     }
 
