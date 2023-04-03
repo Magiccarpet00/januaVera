@@ -338,7 +338,7 @@ public class GameManager : MonoBehaviour
         currentInfoCharacter.transform.SetParent(InfoGridLayoutGroupe);
 
         //currentInfoCharacter.GetComponentInChildren<Image>().sprite = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
-
+        currentInfoCharacter.GetComponent<T>
     }
 
     public void DestroyInfoGridLayoutGroupe()
