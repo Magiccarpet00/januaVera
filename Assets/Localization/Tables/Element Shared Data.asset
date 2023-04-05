@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Element Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Element
+  m_TableCollectionNameGuidString: e8e634ea902dcf9489857270bf49734c
+  m_Entries:
+  - m_Id: 43118235648
+    m_Key: FIRE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101586833408
+    m_Key: LIGHTNING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122562547712
+    m_Key: WATER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 153306796032
+    m_Key: WIND
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167156387840
+    m_Key: METAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 187481985024
+    m_Key: WOOD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209904734208
+    m_Key: ROCK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228577775616
+    m_Key: FUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 243924733952
+    m_Key: PLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 259582070784
+    m_Key: LEATHER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273515548672
+    m_Key: SKIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286576611328
+    m_Key: DIVIN
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6044892939516641282
+  references:
+    version: 2
+    RefIds:
+    - rid: 6044892939516641282
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1680650586285

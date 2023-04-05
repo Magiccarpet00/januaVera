@@ -335,10 +335,15 @@ public class GameManager : MonoBehaviour
     public void CreateInfoCharacter(Character character, Vector3 pos, Transform InfoGridLayoutGroupe)
     {
         GameObject currentInfoCharacter = Instantiate(prefabInfoCharacter, pos, Quaternion.identity);
+        InfoCharacter infoCharacter = currentInfoCharacter.GetComponent<InfoCharacter>();
         currentInfoCharacter.transform.SetParent(InfoGridLayoutGroupe);
 
-        //currentInfoCharacter.GetComponentInChildren<Image>().sprite = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
-        currentInfoCharacter.GetComponent<T>
+        Sprite spr = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
+        string shape = character.characterData.shape.ToString();
+        int shapeValue = character.characterData.shape_value;
+        int dodgeValue = character.characterData.dodgeTime;
+
+        infoCharacter.SetInfoCharacter(spr, shape, shapeValue, dodgeValue);
     }
 
     public void DestroyInfoGridLayoutGroupe()

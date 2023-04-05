@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Element_fr
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: fr
+  m_SharedData: {fileID: 11400000, guid: e8e634ea902dcf9489857270bf49734c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 43118235648
+    m_Localized: Feu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101586833408
+    m_Localized: Foudre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122562547712
+    m_Localized: Eau
+    m_Metadata:
+      m_Items: []
+  - m_Id: 153306796032
+    m_Localized: Vent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 167156387840
+    m_Localized: Metal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 187481985024
+    m_Localized: Bois
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209904734208
+    m_Localized: Pierre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 228577775616
+    m_Localized: Fourrure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 243924733952
+    m_Localized: Plume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 259582070784
+    m_Localized: Cuir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273515548672
+    m_Localized: Peau
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286576611328
+    m_Localized: Divain
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

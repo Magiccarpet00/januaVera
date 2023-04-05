@@ -298,11 +298,20 @@ public class Character : MonoBehaviour
     public List<Character> GetSquad()
     {
         List<Character> squad = new List<Character>();
-        squad.Add(leader);
-        foreach (Character mates in crewmates)
+        if (isLeader())
         {
-            squad.Add(mates);
+            squad.Add(this);
+            foreach (Character mates in crewmates)
+            {
+                squad.Add(mates);
+            }
+            return squad;
         }
-        return squad;
+        else
+        {
+            Debug.LogError("GetSquad only use by a leader");
+            return null;
+        }
+        
     }
 }

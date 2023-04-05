@@ -18,7 +18,13 @@ MonoBehaviour:
   m_GUID: 3d65fedfa425f3d4fba0741f2fdd3a0e
   m_SerializeEntries:
   - m_GUID: ad138b3ebdce7b347a04aa8b8e4fa6d7
-    m_Address: StringTableFelixo_en
+    m_Address: StringTableGlobal_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: 3f8bbb7e57bbd474eaf16271267aff80
+    m_Address: Element_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
