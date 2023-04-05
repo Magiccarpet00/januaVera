@@ -35,4 +35,13 @@ public class ButtonAction : MonoBehaviour
         
     }
 
+    public void Fight()
+    {
+        if(GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandFight();
+            GameManager.instance._ExecuteActionQueue();
+        }
+    }
+
 }

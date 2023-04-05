@@ -6,6 +6,8 @@ public class Spot : MonoBehaviour
 {
     [SerializeField] private List<GameObject> adjacentSpots = new List<GameObject>();
     [SerializeField] private List<GameObject> adjacentSecretSpots = new List<GameObject>();
+
+    [SerializeField] private List<Character> charactersOnSpot = new List<Character>();
     
     //FX
     [SerializeField] private GameObject prefabOverMouse_fx;
@@ -75,8 +77,19 @@ public class Spot : MonoBehaviour
         }
 
         //TODO Les btn des enemies, pnj sur la map
+        
 
         return res;
+    }
+
+    public void AddCharacterInSpot(Character c)
+    {
+        charactersOnSpot.Add(c);
+    }
+
+    public void RemoveCharacterInSpot(Character c)
+    {
+        charactersOnSpot.Remove(c);
     }
 
 }

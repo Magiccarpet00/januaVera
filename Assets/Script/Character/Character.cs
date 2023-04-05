@@ -59,9 +59,16 @@ public class Character : MonoBehaviour
 
         if (adjSpot.Contains(spot))
         {
+            if (currentSpot != null)
+                currentSpot.GetComponent<Spot>().RemoveCharacterInSpot(this);
+            
             currentSpot = spot;
+
+            currentSpot.GetComponent<Spot>().AddCharacterInSpot(this);
+
             Transform t_spot = currentSpot.transform;
             target = new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z);
+            
         }
         else
         {
@@ -168,10 +175,15 @@ public class Character : MonoBehaviour
         stackAction.Push(new ActionRest(this));
     }
 
+    public virtual void CommandFight()
+    {
+        stackAction.Push(new ActionFight(this));
+    }
 
-    
-    
-    
+
+
+
+
     //
     //      OTHER
     //

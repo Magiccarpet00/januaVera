@@ -550,8 +550,9 @@ public class GlobalConst {
     // -- PRIORITE D'ACTION --
     // les actions suivent un ordre de priorité croissant
     public static int EMPTY_PRIORITY = 1;
-    public static int HIDE_PRIORITY  = 2;
-    public static int MOVE_PRIORITY  = 3;
+    public static int FIGHT_PRIORITY = 2;
+    public static int HIDE_PRIORITY  = 3;
+    public static int MOVE_PRIORITY  = 4;
     public static int REST_PRIORITY  = 5;
 
     // -- PRIOTITE D'EFFET --

@@ -21,7 +21,7 @@ public class InfoCharacter : MonoBehaviour
         image.sprite = spr;
         shapeString.SetEntry(shape);
         shapeValue.text = _shapeValue.ToString();
-        dodgeString.SetEntry("DODGE");
+        //dodgeString.SetEntry("DODGE"); 
         dodgeValue.text = _dodgeValue.ToString();
     }
 
