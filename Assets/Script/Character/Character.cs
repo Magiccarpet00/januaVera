@@ -27,6 +27,13 @@ public class Character : MonoBehaviour
     private List<Character> crewmates = new List<Character>(); //si le character EST un leader alors il a un crew
     private int idCrew = 0; //la place dans le groupe. 0 = etre leader
 
+
+
+    //VIE ET CORPS
+    private List<Member> corps = new List<Member>();
+
+
+
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
@@ -193,6 +200,19 @@ public class Character : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    public void createHumanCorps()
+    {
+        corps.Add(new Member(MemberType.HEAD, Element.SKIN, 1, true));
+
+        corps.Add(new Member(MemberType.BODY, Element.SKIN, 3, true));
+
+        corps.Add(new Member(MemberType.ARM, Element.SKIN, 2, false));
+        corps.Add(new Member(MemberType.ARM, Element.SKIN, 2, false));
+
+        corps.Add(new Member(MemberType.LEG, Element.SKIN, 2, false));
+        corps.Add(new Member(MemberType.LEG, Element.SKIN, 2, false));
     }
 
 

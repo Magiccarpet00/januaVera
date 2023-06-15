@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour
         dic_button.Add(ButtonType.HIDE,   allButton[1]);
         dic_button.Add(ButtonType.REST,   allButton[2]);
         dic_button.Add(ButtonType.UNHIDE, allButton[3]);
+        dic_button.Add(ButtonType.FIGHT,  allButton[4]);
     }
 
     private void SetUpPlayer()
@@ -278,6 +279,8 @@ public class GameManager : MonoBehaviour
         else
             actionButtonStandar.Add(ButtonType.UNHIDE);
 
+        actionButtonStandar.Add(ButtonType.FIGHT);
+
         return actionButtonStandar;
     }
 
@@ -371,6 +374,7 @@ public class GameManager : MonoBehaviour
         Transform t_spot = spot.transform;
         _chatacter.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
         _chatacter.UpdateSmoothTime();
+        _chatacter.createHumanCorps(); //[CODE TMP] tout les characters ne sont pas des humains
         characterList.Add(_chatacter);
 
         return newCharacter;
@@ -504,7 +508,8 @@ public enum ButtonType {
     TALK,
     REST,
     HIDE,
-    UNHIDE
+    UNHIDE,
+    FIGHT
 }
 
 public enum Element {
@@ -534,6 +539,14 @@ public enum DamageType {
     SMASH,
     SHARP,
     ELEM
+}
+
+public enum MemberType {
+    HEAD,
+    BODY,
+    ARM,
+    LEG,
+    TAIL
 }
 
 public class GlobalConst {
