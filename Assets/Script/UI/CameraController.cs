@@ -12,15 +12,13 @@ public class CameraController : MonoBehaviour
     public float panBorder;
     public Vector2 panLimit; //TODO pour ne pas sortir de la map
     public Vector2 clampZoom;
+
+    public Vector3 bufferedPos;
+    public float bufferedZoom;
+
     void Update()
     {   
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            if (freezeCam) freezeCam = false;
-            else freezeCam = true;
-        }
-
-        if(!freezeCam)
+        if(!freezeCam && !CombatManager.instance.GetOnFight())
         {
             Vector3 pos = transform.position;
 
@@ -44,14 +42,35 @@ public class CameraController : MonoBehaviour
                 pos.x -= panSpeed * Time.deltaTime;
             }
 
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
             Camera cam = Camera.main;
-            float camSize = cam.orthographicSize - ( scroll * scrollSpeed * Time.deltaTime);
 
-            cam.orthographicSize = Mathf.Clamp(camSize, clampZoom.x, clampZoom.y);
-            
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            bufferedZoom = cam.orthographicSize - (scroll * scrollSpeed * Time.deltaTime);
+            cam.orthographicSize = Mathf.Clamp(bufferedZoom, clampZoom.x, clampZoom.y);
 
-            transform.position = pos;
+
+            bufferedPos = pos;
+            transform.position = bufferedPos;
+
+        }
+    }
+
+
+    public void ToggleFreezeCam()
+    {
+        if (freezeCam) freezeCam = false;
+        else freezeCam = true;
+    }
+
+    public void ToggleCamPos()
+    {
+        Camera cam = Camera.main;
+
+        ToggleFreezeCam();
+        if(CombatManager.instance.GetOnFight())
+        {
+            transform.position = bufferedPos;
+            cam.orthographicSize = Mathf.Clamp(bufferedZoom, clampZoom.x, clampZoom.y);
         }
     }
 }

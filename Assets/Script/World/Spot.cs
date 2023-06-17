@@ -82,6 +82,11 @@ public class Spot : MonoBehaviour
         return res;
     }
 
+    public List<Character> GetAllCharactersInSpot()
+    {
+        return charactersOnSpot;
+    }
+
     public void AddCharacterInSpot(Character c)
     {
         charactersOnSpot.Add(c);

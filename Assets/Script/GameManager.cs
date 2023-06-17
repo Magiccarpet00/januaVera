@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     // GLOBAL VAR
     [Header("GLOBAL VAR")]
+    public GameObject cam;
     public GameObject prefabPlayer;
     [HideInInspector] public GameObject player;
     [HideInInspector] public Player playerCharacter;
@@ -53,6 +55,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject prefabInfoGridLayoutGroupe;
     private GameObject currentInfoGridLayoutGroupe;
     [SerializeField] private GameObject prefabInfoCharacter;
+
+    // FIGHT
+    [Header("FIGHT")]
+    [SerializeField] private Transform posFight;
+
 
 
     public void Start()
@@ -210,6 +217,17 @@ public class GameManager : MonoBehaviour
             newPnj1.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
             newPnj2.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
             newPnj3.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CameraController cc = cam.GetComponent<CameraController>();
+            cc.ToggleFreezeCam();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            QuitCombatScene();
         }
 
     }
@@ -478,7 +496,43 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //
+    //      COMBAT
+    //
+    public void StartFight()
+    {
+        CombatManager.instance.ToggleFight();
+
+        Vector3 newPos = new Vector3(posFight.position.x, posFight.position.y, -10f);
+        cam.transform.SetPositionAndRotation(newPos, Quaternion.identity);
+
+        CameraController cc = cam.GetComponent<CameraController>();
+        
+
+
+
+        CombatManager.instance.LoadCharacter(playerCharacter.GetAllCharactersInSpot());
+    }
+
+    public void QuitCombatScene()
+    {
+        CombatManager.instance.ToggleFight();
+    }
+
+
 }
 
 public enum TileType {

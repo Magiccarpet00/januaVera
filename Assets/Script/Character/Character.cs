@@ -346,4 +346,9 @@ public class Character : MonoBehaviour
         }
         
     }
+
+    public List<Character> GetAllCharactersInSpot()
+    {
+        return currentSpot.GetComponent<Spot>().GetAllCharactersInSpot();
+    }
 }
