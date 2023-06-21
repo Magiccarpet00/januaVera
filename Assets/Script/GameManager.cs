@@ -51,14 +51,13 @@ public class GameManager : MonoBehaviour
     private List<GameObject> currentButtons = new List<GameObject>();
 
     [SerializeField] private Transform worldCanvas;
+    [SerializeField] private GameObject actionCanvas;
     [SerializeField] private Vector3 offSetInfoGrid;
     [SerializeField] private GameObject prefabInfoGridLayoutGroupe;
     private GameObject currentInfoGridLayoutGroupe;
     [SerializeField] private GameObject prefabInfoCharacter;
 
-    // FIGHT
-    [Header("FIGHT")]
-    [SerializeField] private Transform posFight;
+    
 
 
 
@@ -450,15 +449,21 @@ public class GameManager : MonoBehaviour
         // Recuperation des actions de chaque character
         foreach (Character character in characterList) 
         {
+            character.CancelReset();
             actionQueue.Add(character.PopAction());
         }
 
         // Execution des actions de chaque character
-        foreach (Action action in actionQueue)  
+        for (int i = 0; i < GlobalConst.RANGE_PRIOTITY; i++)
         {
-            //TODO faire les priorités
-            action.PerfomAction();
+            foreach (Action action in actionQueue)
+            {
+
+                if(action.GetPriority() == i &&  !action.GetUser().isCanceled())
+                    action.PerfomAction();
+            }
         }
+        
 
         actionQueue.Clear();
         CommandPnj();
@@ -514,24 +519,34 @@ public class GameManager : MonoBehaviour
     //
     public void StartFight()
     {
+        //Cancel toute les actions des character sur le spot
+        List<Character> allCharactersInSpot = new List<Character>();
+        allCharactersInSpot = playerCharacter.GetAllCharactersInSpot();
+
+        foreach (Character character in allCharactersInSpot)
+        {
+            character.CancelAction();
+        }
+
+        CombatManager.instance.LoadCharacter(allCharactersInSpot);
+
+
+        //Visuel
+        actionCanvas.SetActive(false);
         CombatManager.instance.ToggleFight();
+        cam.GetComponent<CameraController>().ToggleCamPos();
 
-        Vector3 newPos = new Vector3(posFight.position.x, posFight.position.y, -10f);
-        cam.transform.SetPositionAndRotation(newPos, Quaternion.identity);
-
-        CameraController cc = cam.GetComponent<CameraController>();
         
-
-
-
-        CombatManager.instance.LoadCharacter(playerCharacter.GetAllCharactersInSpot());
     }
 
     public void QuitCombatScene()
     {
+        actionCanvas.SetActive(true);
         CombatManager.instance.ToggleFight();
-    }
+        cam.GetComponent<CameraController>().ToggleCamPos();
 
+        CombatManager.instance.ClearCombatScene();
+    }
 
 }
 
@@ -621,6 +636,8 @@ public class GlobalConst {
     public static int HIDE_PRIORITY  = 3;
     public static int MOVE_PRIORITY  = 4;
     public static int REST_PRIORITY  = 5;
+
+    public static int RANGE_PRIOTITY = 5; // Le nombre total de priority d'action
 
     // -- PRIOTITE D'EFFET --
     public static int ONPATH_PRIORITY = 1;

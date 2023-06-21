@@ -21,6 +21,7 @@ public class Character : MonoBehaviour
     private bool onPath; // quand on est on path on est sur le chemin vers le currentSpot mais on est pas encore sur ce spot à ce tour
 
     private Stack<Action> stackAction = new Stack<Action>();
+    private bool canceled; // si il est canceled il ne peut par faire sont action de la actionQueue
 
     //GROUPE
     private Character leader; //si le character A un leader alors il suis certaine action de son leader;
@@ -112,6 +113,7 @@ public class Character : MonoBehaviour
 
 
 
+
     //
     //      EFFECT
     //
@@ -187,6 +189,16 @@ public class Character : MonoBehaviour
         stackAction.Push(new ActionFight(this));
     }
 
+    public void CancelAction()
+    {
+        stackAction.Clear();
+        canceled = true;
+    }
+
+    public void CancelReset()
+    {
+        canceled = false;
+    }
 
 
 
@@ -350,5 +362,10 @@ public class Character : MonoBehaviour
     public List<Character> GetAllCharactersInSpot()
     {
         return currentSpot.GetComponent<Spot>().GetAllCharactersInSpot();
+    }
+
+    public bool isCanceled()
+    {
+        return canceled;
     }
 }

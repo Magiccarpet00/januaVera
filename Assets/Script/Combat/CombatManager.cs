@@ -14,9 +14,10 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private List<Character> characters = new List<Character>();
     [SerializeField] private List<CombatSpot> combatSpots = new List<CombatSpot>();
     private bool onFight;
+    [SerializeField] private Vector3 posFight;
 
 
-    [System.Obsolete]
+
     private void Update()
     {
         
@@ -46,9 +47,17 @@ public class CombatManager : MonoBehaviour
         else onFight = false;
     }
 
-    
+    public void ClearCombatScene()
+    {
+        // characters.Clear();
+        // [BUG RESOLUE]
+        // Supprimer la list de character dans CombatManager supprime la list des characters dans spot
+        // du coup je fait pas de clear mais je comprend pas pourquoi
+    }
 
-    
+
+
+
 
 
     //
@@ -57,5 +66,10 @@ public class CombatManager : MonoBehaviour
     public bool GetOnFight()
     {
         return onFight;
+    }
+
+    public Vector3 GetPosFight()
+    {
+        return posFight;
     }
 }

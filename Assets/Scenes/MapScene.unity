@@ -856,6 +856,8 @@ MonoBehaviour:
   panBorder: 20
   panLimit: {x: 0, y: 0}
   clampZoom: {x: 8, y: 20}
+  bufferedPos: {x: 0, y: 0, z: 0}
+  bufferedZoom: 0
 --- !u!1 &556910847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters: []
   combatSpots: []
+  posFight: {x: 0, y: -30, z: 0}
 --- !u!1001 &1637361156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2176,10 +2179,10 @@ MonoBehaviour:
   - {fileID: 3891409678922949209, guid: 1ab2b90d3fe314d4e8223201cf1c25e8, type: 3}
   - {fileID: 3891409678922949209, guid: 9949b5bdff8ca914d929489f93777325, type: 3}
   worldCanvas: {fileID: 113513967}
+  actionCanvas: {fileID: 1721163261}
   offSetInfoGrid: {x: 4, y: 0, z: 0}
   prefabInfoGridLayoutGroupe: {fileID: 7107082791737578349, guid: e24b792b475f96c4bae420563a98f99c, type: 3}
   prefabInfoCharacter: {fileID: 4267781497862045117, guid: d85b88c6eee5aa6408c71f0c58fc88b9, type: 3}
-  posFight: {fileID: 1489098019}
 --- !u!114 &1915923813
 MonoBehaviour:
   m_ObjectHideFlags: 0

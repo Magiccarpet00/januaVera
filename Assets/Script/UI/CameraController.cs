@@ -67,10 +67,16 @@ public class CameraController : MonoBehaviour
         Camera cam = Camera.main;
 
         ToggleFreezeCam();
-        if(CombatManager.instance.GetOnFight())
+        if(!CombatManager.instance.GetOnFight())
         {
             transform.position = bufferedPos;
             cam.orthographicSize = Mathf.Clamp(bufferedZoom, clampZoom.x, clampZoom.y);
+        }
+        else
+        {
+            cam.orthographicSize = clampZoom.x;
+            Vector3 newPos = new Vector3(CombatManager.instance.GetPosFight().x, CombatManager.instance.GetPosFight().y, -10f);
+            cam.transform.SetPositionAndRotation(newPos, Quaternion.identity);
         }
     }
 }
