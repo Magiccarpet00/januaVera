@@ -233,7 +233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5789795, y: -211.80994}
+  m_AnchoredPosition: {x: -0.5789795, y: -211.80995}
   m_SizeDelta: {x: -201.48, y: -1130.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &87757839
@@ -858,6 +858,7 @@ MonoBehaviour:
   clampZoom: {x: 8, y: 20}
   bufferedPos: {x: 0, y: 0, z: 0}
   bufferedZoom: 0
+  camMapUI: {fileID: 1195361212}
 --- !u!1 &556910847
 GameObject:
   m_ObjectHideFlags: 0

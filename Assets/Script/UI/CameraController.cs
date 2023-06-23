@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
     public Vector3 bufferedPos;
     public float bufferedZoom;
 
+    public GameObject camMapUI;
+
     void Update()
     {   
         if(!freezeCam && !CombatManager.instance.GetOnFight())
@@ -71,12 +73,16 @@ public class CameraController : MonoBehaviour
         {
             transform.position = bufferedPos;
             cam.orthographicSize = Mathf.Clamp(bufferedZoom, clampZoom.x, clampZoom.y);
+            cam.rect = new Rect(-0.25f, 0.0f, 1.0f, 1.0f);
+            camMapUI.SetActive(true);
         }
         else
         {
             cam.orthographicSize = clampZoom.x;
             Vector3 newPos = new Vector3(CombatManager.instance.GetPosFight().x, CombatManager.instance.GetPosFight().y, -10f);
             cam.transform.SetPositionAndRotation(newPos, Quaternion.identity);
+            cam.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+            camMapUI.SetActive(false);
         }
     }
 }
