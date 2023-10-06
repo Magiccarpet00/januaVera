@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
 
     //VIE ET CORPS
     private List<Member> corps = new List<Member>();
-    private int currentLife;
+    public int currentLife;
 
 
     //FIGHT

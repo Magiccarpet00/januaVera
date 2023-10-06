@@ -982,14 +982,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1489098019}
     m_Modifications:
+    - target: {fileID: 1447200335, guid: 0655697186f89094380f8c59ca1cdeb1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1783191690, guid: 0655697186f89094380f8c59ca1cdeb1, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2092461399}
     - target: {fileID: 1627062532223557830, guid: 0655697186f89094380f8c59ca1cdeb1, type: 3}
       propertyPath: m_Name
       value: CombatSpot
       objectReference: {fileID: 0}
-    - target: {fileID: 4255435999310298820, guid: 0655697186f89094380f8c59ca1cdeb1, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 2092461399}
     - target: {fileID: 6007669899797750450, guid: 0655697186f89094380f8c59ca1cdeb1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1621,7 +1625,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -218696403
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &991759018 stripped

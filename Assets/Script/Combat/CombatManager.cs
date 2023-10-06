@@ -33,10 +33,14 @@ public class CombatManager : MonoBehaviour
         foreach (Character c in characters)
         {
             combatSpots[countSpot].GetComponent<CombatSpot>().character = c;
+            combatSpots[countSpot].GetComponent<CombatSpot>().UpdateLife();
+
             GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
             characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
             charactersSprites.Add(characterSprite);
             characterSprite.GetComponent<SpriteRenderer>().sprite = characters[countSpot].characterData.spriteFight;
+
+            // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
 
             countSpot++;
         }
