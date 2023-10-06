@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class CombatSpot : MonoBehaviour
 {
-    public List<Character> characters = new List<Character>();
+    public Character character;
+
+    
 }

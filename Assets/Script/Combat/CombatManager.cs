@@ -12,33 +12,63 @@ public class CombatManager : MonoBehaviour
     }
 
     [SerializeField] private List<Character> characters = new List<Character>();
-    [SerializeField] private List<CombatSpot> combatSpots = new List<CombatSpot>();
+    private List<GameObject> charactersSprites = new List<GameObject>();
+
+    [SerializeField] private List<GameObject> combatSpots = new List<GameObject>();
     private bool onFight;
     [SerializeField] private Vector3 posFight;
+    [SerializeField] private GameObject prefabSpriteCharacter;
 
 
+    //Button
+    [SerializeField] private GameObject buttonAtk;
 
-    private void Update()
-    {
-        
-    }
-
+    public bool inTargetMode;
+    public List<Character> targetedCharacter = new List<Character>(); // La liste actuelle des characters selectionné
+    public int nbTarget; 
 
     public void FillSpot()
     {
         int countSpot = 0;
         foreach (Character c in characters)
-        {   
-            for (int i = 0; i < 3; i++)
-            {
-                combatSpots[countSpot].characters.Add(c);
-            }
+        {
+            combatSpots[countSpot].GetComponent<CombatSpot>().character = c;
+            GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
+            characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
+            charactersSprites.Add(characterSprite);
+            characterSprite.GetComponent<SpriteRenderer>().sprite = characters[countSpot].characterData.spriteFight;
+
+            countSpot++;
         }
+    }
+
+    public void ClickButtonAtk()
+    {
+        TargetMode(1);
+    }
+
+    public void ClickEndButton()
+    {
+
+    }
+
+    public void TargetMode(int _nbTarget)
+    {
+        nbTarget = _nbTarget;
+        inTargetMode = true;
+    }
+
+    public void MinusTarget() // Decrementation du nombre de target
+    {
+        nbTarget--;
+        if (nbTarget == 0)
+            inTargetMode = false;
     }
 
     public void LoadCharacter(List<Character> _characters)
     {
         characters = _characters;
+        FillSpot();
     }
 
     public void ToggleFight()
@@ -50,15 +80,12 @@ public class CombatManager : MonoBehaviour
     public void ClearCombatScene()
     {
         // characters.Clear();
+        characters = new List<Character>();
+        
         // [BUG RESOLUE]
         // Supprimer la list de character dans CombatManager supprime la list des characters dans spot
         // du coup je fait pas de clear mais je comprend pas pourquoi
     }
-
-
-
-
-
 
     //
     //      GET && SET

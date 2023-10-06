@@ -94,7 +94,6 @@ public class Spot : MonoBehaviour
 
     public void RemoveCharacterInSpot(Character c)
     {
-        Debug.Log("zizi");
         charactersOnSpot.Remove(c);
     }
 

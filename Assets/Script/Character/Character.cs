@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Collider2D collider2d;
+    private bool inFight;
 
     public Animator animator;
 
@@ -32,7 +33,18 @@ public class Character : MonoBehaviour
 
     //VIE ET CORPS
     private List<Member> corps = new List<Member>();
+    private int currentLife;
 
+
+    //FIGHT
+    public List<Character> selectedCharacter = new List<Character>();
+
+
+    private void Start()
+    {
+        spriteRenderer.sprite = characterData.spriteMap;
+        currentLife = characterData.maxLife;
+    }
 
 
     void Update()
@@ -122,13 +134,6 @@ public class Character : MonoBehaviour
         onPath = false;
     }
 
-
-
-
-
-
-
-
     //
     //      FX
     //
@@ -142,10 +147,6 @@ public class Character : MonoBehaviour
     {
         GameManager.instance.DestroyInfoGridLayoutGroupe();
     }
-
-
-
-
 
 
     //
@@ -367,5 +368,15 @@ public class Character : MonoBehaviour
     public bool isCanceled()
     {
         return canceled;
+    }
+
+    public bool isInFight()
+    {
+        return inFight;
+    }
+
+    public void setInFight(bool b) 
+    {
+        inFight = b;
     }
 }

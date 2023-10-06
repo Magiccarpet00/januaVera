@@ -7,7 +7,7 @@ public class CharacterData : ScriptableObject
 {
     public Element shape;
     public Divinity typeDivinity; //uniquement si le character est divin
-    public int shape_value;
+    public int maxLife;
 
     
 
@@ -15,6 +15,10 @@ public class CharacterData : ScriptableObject
     public int nbWound;
 
     public int dodgeTime;
+
+    public Sprite spriteMap;
+    public Sprite spriteFight;
+
     
 
 }

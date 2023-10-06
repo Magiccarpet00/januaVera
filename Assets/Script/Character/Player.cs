@@ -15,10 +15,7 @@ public class Player : Character
             Tile t = tile.GetComponentInChildren<Tile>();
             t.CleanCloud();
         }
-
     }
-
-
 
     //
     //      GET & SET

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 10
   typeDivinity: 0
-  shape_value: 2
+  maxLife: 10
   stamina: 3
   nbWound: 0
   dodgeTime: 4
+  spriteMap: {fileID: 21300000, guid: 7da1d6f7c24cf85468b02c45979b7573, type: 3}
+  spriteFight: {fileID: 21300000, guid: 9ae9a15325134f14d9593bbb89746bb4, type: 3}

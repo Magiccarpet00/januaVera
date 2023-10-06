@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     // GLOBAL VAR
     [Header("GLOBAL VAR")]
     public GameObject cam;
+    public GameObject cam_fight;
     public GameObject prefabPlayer;
     [HideInInspector] public GameObject player;
     [HideInInspector] public Player playerCharacter;
@@ -360,10 +361,10 @@ public class GameManager : MonoBehaviour
 
         Sprite spr = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
         string shape = character.characterData.shape.ToString();
-        int shapeValue = character.characterData.shape_value;
+        int life = character.characterData.maxLife;
         int dodgeValue = character.characterData.dodgeTime;
 
-        infoCharacter.SetInfoCharacter(spr, shape, shapeValue, dodgeValue);
+        infoCharacter.SetInfoCharacter(spr, shape, life, dodgeValue);
     }
 
     public void DestroyInfoGridLayoutGroupe()
@@ -414,19 +415,21 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-
     public void _ExecuteActionQueue()
     {
         StartCoroutine(ExecuteActionQueue());
     }
     //      -- METHODE IMPORTANTE --
-    // Va executer toute les actions des characters jusqu'a ce que player n'ai plus d'action dans sont stack
+    // Va executer toute les actions des characters
+    // jusqu'a ce que player n'ai plus d'action dans sa stackAction
     //
     // [ANALYSE DE BUG RESOLU]
-    // Quand on appele StartCoroutine(ExecuteActionQueue()) depuis un autre script, par exemple ButtonAction,
-    // si le gameObject qui contient le script ButtonAction est detruit pendant un yield return
-    // new WaitForSeconds de la methode : Alors la suite de la methode ne va pas s'executer (je crois).
+    // Quand on appele StartCoroutine(ExecuteActionQueue())
+    // depuis un autre script, par exemple ButtonAction,
+    // si le gameObject qui contient le script ButtonAction 
+    // est detruit pendant un yield return
+    // new WaitForSeconds de la methode : Alors la suite de la methode
+    // ne va pas s'executer (je crois).
     // Du coup j'utilise le subterfuge ci-dessus...
     private IEnumerator ExecuteActionQueue()
     {
@@ -503,17 +506,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     //
     //      COMBAT
     //
@@ -530,13 +522,10 @@ public class GameManager : MonoBehaviour
 
         CombatManager.instance.LoadCharacter(allCharactersInSpot);
 
-
         //Visuel
         actionCanvas.SetActive(false);
         CombatManager.instance.ToggleFight();
         cam.GetComponent<CameraController>().ToggleCamPos();
-
-        
     }
 
     public void QuitCombatScene()
