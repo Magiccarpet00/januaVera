@@ -19,7 +19,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private Vector3 posFight;
     [SerializeField] private GameObject prefabSpriteCharacter;
 
-
     //Button
     [SerializeField] private GameObject buttonAtk;
 
@@ -32,9 +31,13 @@ public class CombatManager : MonoBehaviour
         int countSpot = 0;
         foreach (Character c in characters)
         {
-            combatSpots[countSpot].GetComponent<CombatSpot>().character = c;
-            combatSpots[countSpot].GetComponent<CombatSpot>().UpdateLife();
+            // COMBAT SPOT
+            CombatSpot cs = combatSpots[countSpot].GetComponent<CombatSpot>();
+            cs.character = c;
+            cs.SetActiveLifeText(true);
+            cs.UpdateLife();
 
+            // CHARACTER SPRITE
             GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
             characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
             charactersSprites.Add(characterSprite);
@@ -53,7 +56,25 @@ public class CombatManager : MonoBehaviour
 
     public void ClickEndButton()
     {
+        foreach (Character character in targetedCharacter)
+        {
+            character.TakeDamage(2);
+        }
+        UpdateAllUI();
+        DeselecteTargetedCharacter();
+    }
 
+    public void DeselecteTargetedCharacter()
+    {
+        targetedCharacter = new List<Character>();
+    }
+
+    public void UpdateAllUI()
+    {
+        foreach(GameObject cs in combatSpots)
+        {
+            cs.GetComponent<CombatSpot>().UpdateUI();
+        }
     }
 
     public void TargetMode(int _nbTarget)
@@ -81,14 +102,22 @@ public class CombatManager : MonoBehaviour
         else onFight = false;
     }
 
+    // [BUG RESOLUE]
+    // Supprimer la list de character dans CombatManager supprime la list des characters dans spot
+    // du coup je fait pas de clear mais je comprend pas pourquoi
     public void ClearCombatScene()
     {
-        // characters.Clear();
         characters = new List<Character>();
-        
-        // [BUG RESOLUE]
-        // Supprimer la list de character dans CombatManager supprime la list des characters dans spot
-        // du coup je fait pas de clear mais je comprend pas pourquoi
+        foreach (GameObject cs in charactersSprites)
+        {
+            Destroy(cs);
+        }
+            
+        foreach(GameObject cs in combatSpots)
+        {
+            cs.GetComponent<CombatSpot>().SetActiveLifeText(false);
+        }
+
     }
 
     //

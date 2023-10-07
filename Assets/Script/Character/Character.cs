@@ -249,8 +249,20 @@ public class Character : MonoBehaviour
         spriteRenderer.enabled = enable;
         collider2d.enabled = enable;
     }
-
     
+
+    //      FIGHT
+    public void TakeDamage(int i)
+    {
+        currentLife -= i;
+        if(currentLife <= 0)
+            Die();
+    }
+
+    public void Die()
+    {
+        Debug.Log(this + " est mort");
+    }
 
 
     //
