@@ -66,6 +66,10 @@ public class CombatManager : MonoBehaviour
 
     public void DeselecteTargetedCharacter()
     {
+        foreach (GameObject cs in charactersSprites)
+        {
+            cs.GetComponent<SpriteFight>().ResetSelected();
+        }
         targetedCharacter = new List<Character>();
     }
 
@@ -117,7 +121,6 @@ public class CombatManager : MonoBehaviour
         {
             cs.GetComponent<CombatSpot>().SetActiveLifeText(false);
         }
-
     }
 
     //
