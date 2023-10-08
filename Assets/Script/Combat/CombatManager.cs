@@ -24,7 +24,11 @@ public class CombatManager : MonoBehaviour
 
     public bool inTargetMode;
     public List<Character> targetedCharacter = new List<Character>(); // La liste actuelle des characters selectionné
-    public int nbTarget; 
+    public int nbTarget;
+
+    //Panel
+    public GameObject panelGlobal;
+    public GameObject panelWeapon;
 
     public void FillSpot()
     {
@@ -49,9 +53,18 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void ClickButtonAtk()
+    
+
+    public void ClickButtonWeapon()
     {
-        TargetMode(1);
+        panelGlobal.SetActive(false);
+        panelWeapon.SetActive(true);
+    }
+
+    public void ClickButtonEscape()
+    {
+        GameManager.instance.QuitCombatScene();
+        
     }
 
     public void ClickEndButton()
@@ -62,6 +75,7 @@ public class CombatManager : MonoBehaviour
         }
         UpdateAllUI();
         DeselecteTargetedCharacter();
+        ResetPanel();
     }
 
     public void DeselecteTargetedCharacter()
@@ -79,6 +93,12 @@ public class CombatManager : MonoBehaviour
         {
             cs.GetComponent<CombatSpot>().UpdateUI();
         }
+    }
+
+    public void ResetPanel()
+    {
+        panelGlobal.SetActive(true);
+        panelWeapon.SetActive(false);
     }
 
     public void TargetMode(int _nbTarget)

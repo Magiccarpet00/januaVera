@@ -23,7 +23,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 15306538618880
-    m_Localized: esquive
+    m_Localized: Esquive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70296820895191040
+    m_Localized: Equipement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70298420242026496
+    m_Localized: Fuir
     m_Metadata:
       m_Items: []
   references:

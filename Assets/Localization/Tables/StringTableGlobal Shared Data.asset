@@ -23,6 +23,14 @@ MonoBehaviour:
     m_Key: DODGE
     m_Metadata:
       m_Items: []
+  - m_Id: 70296820895191040
+    m_Key: WEAPON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70298420242026496
+    m_Key: ESCAPE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

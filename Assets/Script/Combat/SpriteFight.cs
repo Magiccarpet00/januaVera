@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpriteFight : MonoBehaviour
 {
     private Character character;
-    public bool selected;
 
     //OVER
     public SpriteRenderer over;
@@ -13,20 +12,18 @@ public class SpriteFight : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(!selected)
-            over.gameObject.SetActive(false);
+        animatorOver.SetBool("over", false);
     }
 
     private void OnMouseOver()
     {
-        over.gameObject.SetActive(true);
+        animatorOver.SetBool("over", true);
     }
 
     private void OnMouseUp()
     {
         if (CombatManager.instance.inTargetMode) 
         {
-            selected = true;
             animatorOver.SetTrigger("selected");
             CombatManager.instance.targetedCharacter.Add(character);
             CombatManager.instance.MinusTarget();
@@ -35,8 +32,7 @@ public class SpriteFight : MonoBehaviour
 
     public void ResetSelected()
     {
-        animatorOver.SetTrigger("refresh");
-        //over.gameObject.SetActive(false);
+        animatorOver.SetTrigger("reset");
     }
 
     public void SetCharacter(Character c)
