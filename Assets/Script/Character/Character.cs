@@ -40,7 +40,9 @@ public class Character : MonoBehaviour
     public List<Character> selectedCharacter = new List<Character>();
 
 
-    private void Start()
+    public List<Weapon> weaponInventory = new List<Weapon>();
+
+    public virtual void Start()
     {
         spriteRenderer.sprite = characterData.spriteMap;
         currentLife = characterData.maxLife;

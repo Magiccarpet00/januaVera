@@ -58,9 +58,12 @@ public class GameManager : MonoBehaviour
     private GameObject currentInfoGridLayoutGroupe;
     [SerializeField] private GameObject prefabInfoCharacter;
 
-    
 
-
+    //TMP
+    [Header("TMP")]
+    public GameObject weaponPrefab;
+    public Weapon tmpWeapon;
+    public WeaponData longSword;
 
     public void Start()
     {
@@ -79,7 +82,15 @@ public class GameManager : MonoBehaviour
 
         //UI
         AddTurn(0);
+
+        //TMP
+        GameObject tmpWeaponGO = Instantiate(weaponPrefab);
+        tmpWeapon = tmpWeaponGO.GetComponent<Weapon>();
+        tmpWeapon.weaponData = longSword;
+        tmpWeapon.Init();
     }
+
+    
 
     public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appele dans start mais elle s'execute apres tout les autre starts
     {
@@ -228,6 +239,11 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             QuitCombatScene();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            playerCharacter.weaponInventory.Add(tmpWeapon);
         }
 
     }
@@ -605,6 +621,10 @@ public enum MemberType {
     ARM,
     LEG,
     TAIL
+}
+
+public enum WeaponStyle {
+    LONG_SWORD
 }
 
 public class GlobalConst {
