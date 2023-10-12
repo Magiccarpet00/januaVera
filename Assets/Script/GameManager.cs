@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
     private GameObject currentInfoGridLayoutGroupe;
     [SerializeField] private GameObject prefabInfoCharacter;
 
+    // NAME ENUM
+    public Dictionary<WeaponStyle, string> dic_weaponStyle = new Dictionary<WeaponStyle, string>();
+    public Dictionary<Element, string> dic_element = new Dictionary<Element, string>();
+
 
     //TMP
     [Header("TMP")]
@@ -68,6 +72,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         SetUpUI();
+        SetUpDicEnum();
 
         //--------SEED RNG---------
         //SeedRandom((int)Random.Range(0, 9999999));
@@ -130,6 +135,24 @@ public class GameManager : MonoBehaviour
         dic_button.Add(ButtonType.REST,   allButton[2]);
         dic_button.Add(ButtonType.UNHIDE, allButton[3]);
         dic_button.Add(ButtonType.FIGHT,  allButton[4]);
+    }
+
+    private void SetUpDicEnum()
+    {
+        dic_weaponStyle.Add(WeaponStyle.LONG_SWORD, "Long sword");
+
+        dic_element.Add(Element.DIVIN, "Divin");
+        dic_element.Add(Element.FIRE, "Fire");
+        dic_element.Add(Element.FUR, "Fur");
+        dic_element.Add(Element.LEATHER, "Leather");
+        dic_element.Add(Element.LIGHTNING, "Lightning");
+        dic_element.Add(Element.METAL, "Metal");
+        dic_element.Add(Element.PLUME, "Plume");
+        dic_element.Add(Element.ROCK, "Rock");
+        dic_element.Add(Element.SKIN, "Skin");
+        dic_element.Add(Element.WATER, "Water");
+        dic_element.Add(Element.WIND, "Wind");
+        dic_element.Add(Element.WOOD, "Wood");
     }
 
     private void SetUpPlayer()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,8 @@ public class CombatManager : MonoBehaviour
     //Panel
     public GameObject panelGlobal;
     public GameObject panelWeapon;
+    public GameObject prefabButtonWeapon;
+    public List<GameObject> buttonsWeapons = new List<GameObject>();
 
     public void FillSpot()
     {
@@ -59,12 +62,35 @@ public class CombatManager : MonoBehaviour
     {
         panelGlobal.SetActive(false);
         panelWeapon.SetActive(true);
+
+        foreach (Weapon weapon in GameManager.instance.playerCharacter.weaponInventory)
+        {
+            GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
+            btnWeapon.transform.SetParent(panelWeapon.transform);
+            btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
+
+            ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
+            bw.btnName.text = weapon.weaponData.name;
+            bw.btnStyle.text = GameManager.instance.dic_weaponStyle[weapon.weaponData.style];
+            bw.btnState.text = weapon.currentState.ToString() + "/" + weapon.weaponData.maxState.ToString();
+            bw.btnMaterial.text = GameManager.instance.dic_element[weapon.weaponData.material];
+
+            buttonsWeapons.Add(btnWeapon);
+        }
     }
+
+    public void ClearButtonWeapon() 
+    {
+        for (int i = 0; i < buttonsWeapons.Count; i++)
+        {
+            Destroy(buttonsWeapons[i]);
+        }
+    }
+
 
     public void ClickButtonEscape()
     {
         GameManager.instance.QuitCombatScene();
-        
     }
 
     public void ClickEndButton()
@@ -76,9 +102,10 @@ public class CombatManager : MonoBehaviour
         UpdateAllUI();
         DeselecteTargetedCharacter();
         ResetPanel();
+        ClearButtonWeapon(); //TMP
     }
 
-    public void DeselecteTargetedCharacter()
+    public void DeselecteTargetedCharacter() //TODO upgarde system 
     {
         foreach (GameObject cs in charactersSprites)
         {
@@ -95,7 +122,7 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void ResetPanel()
+    public void ResetPanel() //TODO faire une pile
     {
         panelGlobal.SetActive(true);
         panelWeapon.SetActive(false);

@@ -8,7 +8,6 @@ public class CombatSpot : MonoBehaviour
     public Character character;
     public TextMeshProUGUI lifeTxt;
 
-
     public void UpdateUI()
     {
         if(lifeTxt.gameObject.activeSelf)
