@@ -125,7 +125,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3133706932334542456}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -8644028299242681628}
+        m_TargetAssemblyTypeName: ButtonWeapon, Assembly-CSharp
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-8644028299242681628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +154,7 @@ MonoBehaviour:
   btnStyle: {fileID: 3133706933759793407}
   btnState: {fileID: 3133706933694569085}
   btnMaterial: {fileID: 3133706932337041196}
+  weapon: {fileID: 0}
 --- !u!1 &3133706932337041194
 GameObject:
   m_ObjectHideFlags: 0

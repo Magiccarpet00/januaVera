@@ -8,4 +8,6 @@ public class WeaponData : ScriptableObject
     public WeaponStyle style;
     public int maxState;
     public Element material;
+    public List<SkillData> skills = new List<SkillData>();
+    
 }

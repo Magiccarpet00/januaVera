@@ -559,7 +559,7 @@ public class GameManager : MonoBehaviour
             character.CancelAction();
         }
 
-        CombatManager.instance.LoadCharacter(allCharactersInSpot);
+        CombatManager.instance.SetUpFight(allCharactersInSpot);
 
         //Visuel
         actionCanvas.SetActive(false);
@@ -648,6 +648,10 @@ public enum MemberType {
 
 public enum WeaponStyle {
     LONG_SWORD
+}
+
+public enum SkillType{
+    ATTACK
 }
 
 public class GlobalConst {

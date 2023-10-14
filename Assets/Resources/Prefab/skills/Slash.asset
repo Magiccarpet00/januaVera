@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
-  m_Name: longSword
+  m_Script: {fileID: 11500000, guid: 030c8579d5cbd9c4f90b1933e8acd926, type: 3}
+  m_Name: Slash
   m_EditorClassIdentifier: 
-  style: 0
-  maxState: 4
-  material: 4
-  skills:
-  - {fileID: 11400000, guid: cdd1e1165ac1f2840879b92484a754cc, type: 2}
+  skillType: 0
+  speed: 1
+  nbTarget: 1
+  damage: 2

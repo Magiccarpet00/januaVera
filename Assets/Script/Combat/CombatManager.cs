@@ -30,8 +30,18 @@ public class CombatManager : MonoBehaviour
     //Panel
     public GameObject panelGlobal;
     public GameObject panelWeapon;
+    public GameObject panelSkill;
+
+    public Stack<GameObject> panelStack = new Stack<GameObject>();
+
     public GameObject prefabButtonWeapon;
     public List<GameObject> buttonsWeapons = new List<GameObject>();
+
+    public GameObject prefabButtonSkill;
+    public List<GameObject> buttonsSkills = new List<GameObject>();
+
+    //Skill
+    public SkillData currentSkill;
 
     public void FillSpot()
     {
@@ -51,17 +61,13 @@ public class CombatManager : MonoBehaviour
             characterSprite.GetComponent<SpriteRenderer>().sprite = characters[countSpot].characterData.spriteFight;
 
             // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
-
             countSpot++;
         }
     }
 
-    
-
-    public void ClickButtonWeapon()
-    {
-        panelGlobal.SetActive(false);
-        panelWeapon.SetActive(true);
+    public void ClickButtonWeaponGlobal()
+    { 
+        PushPanel(panelWeapon);
 
         foreach (Weapon weapon in GameManager.instance.playerCharacter.weaponInventory)
         {
@@ -70,6 +76,7 @@ public class CombatManager : MonoBehaviour
             btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
 
             ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
+            bw.weapon = weapon;
             bw.btnName.text = weapon.weaponData.name;
             bw.btnStyle.text = GameManager.instance.dic_weaponStyle[weapon.weaponData.style];
             bw.btnState.text = weapon.currentState.ToString() + "/" + weapon.weaponData.maxState.ToString();
@@ -79,7 +86,51 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void ClearButtonWeapon() 
+    public void ClickButtonWeapon(Weapon weapon)
+    {
+        PushPanel(panelSkill);
+
+        foreach (SkillData skill in weapon.weaponData.skills)
+        {
+            GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
+            btnSkill.transform.SetParent(panelSkill.transform);
+            btnSkill.transform.localScale = new Vector3(1, 1, 1);
+
+            ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
+            bs.skillData = skill;
+            bs.btnName.text = skill.name;
+            bs.btnText.text = skill.damage.ToString();
+
+            buttonsSkills.Add(btnSkill);
+        }
+    }
+
+    public void ClickButtonSkill(SkillData skillData)
+    {
+        currentSkill = skillData;
+        TargetMode(skillData.nbTarget);
+    }
+
+    public void CastSkill()
+    {
+        switch (currentSkill.skillType)
+        {
+            case SkillType.ATTACK:
+
+                foreach (Character character in targetedCharacter)
+                {
+                    character.TakeDamage(currentSkill.damage);
+                }
+
+                break;
+            default:
+                break;
+        }
+
+        currentSkill = null;
+    }
+
+    public void ClearButtonWeapon()
     {
         for (int i = 0; i < buttonsWeapons.Count; i++)
         {
@@ -87,22 +138,31 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void ClearButtonSkill()
+    {
+        for (int i = 0; i < buttonsSkills.Count; i++)
+        {
+            Destroy(buttonsSkills[i]);
+        }
+    }
 
     public void ClickButtonEscape()
     {
         GameManager.instance.QuitCombatScene();
     }
 
-    public void ClickEndButton()
+    public void ClickEndButton() //A REFACTOT
     {
-        foreach (Character character in targetedCharacter)
-        {
-            character.TakeDamage(2);
-        }
+        CastSkill();
         UpdateAllUI();
         DeselecteTargetedCharacter();
-        ResetPanel();
         ClearButtonWeapon(); //TMP
+        ClearButtonSkill();
+
+        while(panelStack.Peek() != panelGlobal)
+        {
+            PopPanel();
+        }
     }
 
     public void DeselecteTargetedCharacter() //TODO upgarde system 
@@ -122,11 +182,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void ResetPanel() //TODO faire une pile
-    {
-        panelGlobal.SetActive(true);
-        panelWeapon.SetActive(false);
-    }
 
     public void TargetMode(int _nbTarget)
     {
@@ -141,16 +196,46 @@ public class CombatManager : MonoBehaviour
             inTargetMode = false;
     }
 
-    public void LoadCharacter(List<Character> _characters)
+
+
+    //STACK PANEL
+    public void PushPanel(GameObject panel)
     {
-        characters = _characters;
-        FillSpot();
+        if(panelStack.Count != 0)
+            panelStack.Peek().SetActive(false);
+        panelStack.Push(panel);
+        panel.SetActive(true);
     }
 
+    public void PopPanel()
+    {
+        panelStack.Pop().SetActive(false);
+        panelStack.Peek().SetActive(true);
+    }
+
+
+
+    //SET UP
     public void ToggleFight()
     {
         if (onFight == false) onFight = true;
         else onFight = false;
+    }
+
+    public void SetUpFight(List<Character> _characters)
+    {
+        characters = _characters;
+        FillSpot();
+        SetUpPanel();
+    }
+
+    public void SetUpPanel()
+    {
+        panelGlobal.SetActive(false);
+        panelWeapon.SetActive(false);
+        panelSkill.SetActive(false);
+
+        PushPanel(panelGlobal);
     }
 
     // [BUG RESOLUE]
