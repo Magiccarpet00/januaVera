@@ -25,7 +25,10 @@ public class SpriteFight : MonoBehaviour
         if (CombatManager.instance.inTargetMode) 
         {
             animatorOver.SetTrigger("selected");
-            CombatManager.instance.targetedCharacter.Add(character);
+            //CombatManager.instance.targetedCharacter.Add(character);
+
+            GameManager.instance.playerCharacter.selectedCharacter.Add(character);
+
             CombatManager.instance.MinusTarget();
         }
     }

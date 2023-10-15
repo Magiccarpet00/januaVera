@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CombatManager : MonoBehaviour
+public class CombatManager : MonoBehaviour //TODO faire le tour de l'enemy aussi
 {
     public static CombatManager instance;
     void Awake()
@@ -12,6 +12,7 @@ public class CombatManager : MonoBehaviour
         instance = this;
     }
 
+    //Global
     [SerializeField] private List<Character> characters = new List<Character>();
     private List<GameObject> charactersSprites = new List<GameObject>();
 
@@ -20,11 +21,14 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private Vector3 posFight;
     [SerializeField] private GameObject prefabSpriteCharacter;
 
-    //Button
-    [SerializeField] private GameObject buttonAtk;
+    //Logique fight
+    //public List<SkillData> skillsToCast = new List<SkillData>();
 
+
+    //Target (uniquement pour player)
+    //public SkillData currentPlayerSkill;
     public bool inTargetMode;
-    public List<Character> targetedCharacter = new List<Character>(); // La liste actuelle des characters selectionné
+    //public List<Character> targetedCharacter = new List<Character>(); // La liste actuelle des characters selectionné
     public int nbTarget;
 
     //Panel
@@ -40,8 +44,6 @@ public class CombatManager : MonoBehaviour
     public GameObject prefabButtonSkill;
     public List<GameObject> buttonsSkills = new List<GameObject>();
 
-    //Skill
-    public SkillData currentSkill;
 
     public void FillSpot()
     {
@@ -107,27 +109,39 @@ public class CombatManager : MonoBehaviour
 
     public void ClickButtonSkill(SkillData skillData)
     {
-        currentSkill = skillData;
+        GameManager.instance.playerCharacter.currentLoadedSkill = skillData;        
         TargetMode(skillData.nbTarget);
+    }
+
+
+    public void LoadSkill()
+    {
+        //currentPlayerSkill.owner = GameManager.instance.playerCharacter;
+        //currentPlayerSkill.targets.AddRange(targetedCharacter);
+
+        //GameManager.instance.playerCharacter.selectedCharacter
+        
     }
 
     public void CastSkill()
     {
-        switch (currentSkill.skillType)
+        foreach (Character character in characters)
         {
-            case SkillType.ATTACK:
+            switch (character.currentLoadedSkill.skillType)
+            {
+                case SkillType.ATTACK:
+                    foreach (Character characterTarget in character.selectedCharacter)
+                    {
+                        characterTarget.TakeDamage(character.currentLoadedSkill.damage);
+                    }
+                    break;
 
-                foreach (Character character in targetedCharacter)
-                {
-                    character.TakeDamage(currentSkill.damage);
-                }
-
-                break;
-            default:
-                break;
+                default:
+                    break;
+            }
         }
 
-        currentSkill = null;
+        //currentPlayerSkill = null;
     }
 
     public void ClearButtonWeapon()
@@ -151,8 +165,23 @@ public class CombatManager : MonoBehaviour
         GameManager.instance.QuitCombatScene();
     }
 
+
+    public void LoadSkillAI()
+    {
+        foreach (Character character in characters)
+        {
+            if (character.isPlayer() == false)
+            {
+                List<Character> tmp = new List<Character>();
+                tmp.Add(GameManager.instance.playerCharacter);
+                character.SetRandomLoadedSkill(tmp);
+            }
+        }
+    }
+
     public void ClickEndButton() //A REFACTOT
     {
+        //Player
         CastSkill();
         UpdateAllUI();
         DeselecteTargetedCharacter();
@@ -171,7 +200,7 @@ public class CombatManager : MonoBehaviour
         {
             cs.GetComponent<SpriteFight>().ResetSelected();
         }
-        targetedCharacter = new List<Character>();
+        GameManager.instance.playerCharacter.selectedCharacter = new List<Character>();
     }
 
     public void UpdateAllUI()
@@ -195,7 +224,6 @@ public class CombatManager : MonoBehaviour
         if (nbTarget == 0)
             inTargetMode = false;
     }
-
 
 
     //STACK PANEL
@@ -227,6 +255,7 @@ public class CombatManager : MonoBehaviour
         characters = _characters;
         FillSpot();
         SetUpPanel();
+        LoadSkillAI();
     }
 
     public void SetUpPanel()

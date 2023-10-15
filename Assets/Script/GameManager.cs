@@ -266,7 +266,10 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            playerCharacter.weaponInventory.Add(tmpWeapon);
+            foreach (Character character in characterList)
+            {
+                character.weaponInventory.Add(tmpWeapon);
+            }
         }
 
     }

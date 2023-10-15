@@ -52,6 +52,10 @@ MonoBehaviour:
   animator: {fileID: 5999102342575825044}
   currentSpot: {fileID: 0}
   isHide: 0
+  currentLife: 0
+  selectedCharacter: []
+  currentLoadedSkill: {fileID: 0}
+  weaponInventory: []
 --- !u!58 &5510879221857987606
 CircleCollider2D:
   m_ObjectHideFlags: 0

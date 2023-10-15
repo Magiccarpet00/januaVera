@@ -38,6 +38,7 @@ public class Character : MonoBehaviour
 
     //FIGHT
     public List<Character> selectedCharacter = new List<Character>();
+    public SkillData currentLoadedSkill;
 
 
     public List<Weapon> weaponInventory = new List<Weapon>();
@@ -265,6 +266,27 @@ public class Character : MonoBehaviour
     {
         Debug.Log(this + " est mort");
     }
+
+    //      IA
+    public void SetRandomLoadedSkill(List<Character> charactersTarget) //TODO à ameliorer
+    {
+        int countInventory = weaponInventory.Count;
+        Weapon rngWeapon = weaponInventory[Random.Range(0, countInventory)];
+
+        int countWeapon = rngWeapon.weaponData.skills.Count;
+        currentLoadedSkill = rngWeapon.weaponData.skills[Random.Range(0, countWeapon)];
+        selectedCharacter = charactersTarget;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     //
