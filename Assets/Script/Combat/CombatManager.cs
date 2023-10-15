@@ -47,7 +47,6 @@ public class CombatManager : MonoBehaviour
             CombatSpot cs = combatSpots[countSpot].GetComponent<CombatSpot>();
             cs.character = c;
             cs.SetActiveLifeText(true);
-            cs.UpdateLife();
 
             // CHARACTER SPRITE
             GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
@@ -268,6 +267,7 @@ public class CombatManager : MonoBehaviour
         FillSpot();
         SetUpPanel();
         LoadSkillAI();
+        UpdateAllUI();
     }
 
     public void SetUpPanel()

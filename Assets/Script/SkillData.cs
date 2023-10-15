@@ -12,6 +12,7 @@ public class SkillData : ScriptableObject
 
     [Header("Attack")]
     public int damage;
+    public DamageType damageType;
 
 
 }

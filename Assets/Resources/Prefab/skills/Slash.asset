@@ -16,3 +16,4 @@ MonoBehaviour:
   speed: 1
   nbTarget: 1
   damage: 2
+  damageType: 1
