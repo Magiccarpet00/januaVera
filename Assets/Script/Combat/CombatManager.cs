@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class CombatManager : MonoBehaviour //TODO faire le tour de l'enemy aussi
+public class CombatManager : MonoBehaviour
 {
     public static CombatManager instance;
     void Awake()
@@ -21,14 +20,8 @@ public class CombatManager : MonoBehaviour //TODO faire le tour de l'enemy aussi
     [SerializeField] private Vector3 posFight;
     [SerializeField] private GameObject prefabSpriteCharacter;
 
-    //Logique fight
-    //public List<SkillData> skillsToCast = new List<SkillData>();
-
-
     //Target (uniquement pour player)
-    //public SkillData currentPlayerSkill;
     public bool inTargetMode;
-    //public List<Character> targetedCharacter = new List<Character>(); // La liste actuelle des characters selectionné
     public int nbTarget;
 
     //Panel
@@ -114,6 +107,25 @@ public class CombatManager : MonoBehaviour //TODO faire le tour de l'enemy aussi
     }
 
 
+    public void ClickButtonBack()
+    {
+        PanelBack();
+    }
+
+    public void PanelBack()
+    {
+        if (panelStack.Peek() == panelGlobal)
+            return;
+
+        if (panelStack.Peek() == panelWeapon)
+            ClearButtonWeapon();
+
+        if (panelStack.Peek() == panelSkill)
+            ClearButtonSkill();
+
+        PopPanel();
+    }
+
     public void LoadSkill()
     {
         //currentPlayerSkill.owner = GameManager.instance.playerCharacter;
@@ -190,7 +202,7 @@ public class CombatManager : MonoBehaviour //TODO faire le tour de l'enemy aussi
 
         while(panelStack.Peek() != panelGlobal)
         {
-            PopPanel();
+            PanelBack();
         }
     }
 
