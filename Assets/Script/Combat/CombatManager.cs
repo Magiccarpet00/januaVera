@@ -131,11 +131,13 @@ public class CombatManager : MonoBehaviour
         //currentPlayerSkill.targets.AddRange(targetedCharacter);
 
         //GameManager.instance.playerCharacter.selectedCharacter
-        
     }
 
-    public void CastSkill()
+    public void CastSkills()
     {
+        List<SkillData> skillToCast = new List<SkillData>(); //TODO faire une list de speel et on itere sur les speels en fonciton de la vitesse
+
+
         foreach (Character character in characters)
         {
             switch (character.currentLoadedSkill.skillType)
@@ -151,8 +153,6 @@ public class CombatManager : MonoBehaviour
                     break;
             }
         }
-
-        //currentPlayerSkill = null;
     }
 
     public void ClearButtonWeapon()
@@ -193,7 +193,7 @@ public class CombatManager : MonoBehaviour
     public void ClickEndButton() //A REFACTOT
     {
         //Player
-        CastSkill();
+        CastSkills();
         UpdateAllUI();
         DeselecteTargetedCharacter();
         ClearButtonWeapon(); //TMP
