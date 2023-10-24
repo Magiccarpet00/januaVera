@@ -218,7 +218,7 @@ public class Character : MonoBehaviour
         return true;
     }
 
-    public void createHumanCorps()
+    public void createHumanCorps() //[CODE INUTILE]
     {
         corps.Add(new Member(MemberType.HEAD, Element.SKIN, 1, true));
 
@@ -252,7 +252,6 @@ public class Character : MonoBehaviour
         spriteRenderer.enabled = enable;
         collider2d.enabled = enable;
     }
-    
 
     //      FIGHT
     public void TakeDamage(int i)

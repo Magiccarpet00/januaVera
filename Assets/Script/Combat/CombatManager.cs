@@ -14,11 +14,17 @@ public class CombatManager : MonoBehaviour
     //Global
     [SerializeField] private List<Character> characters = new List<Character>();
     private List<GameObject> charactersSprites = new List<GameObject>();
+    public Dictionary<Character, SpriteFight> dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
 
     [SerializeField] private List<GameObject> combatSpots = new List<GameObject>();
+
     private bool onFight;
     [SerializeField] private Vector3 posFight;
     [SerializeField] private GameObject prefabSpriteCharacter;
+
+    //FIGHT SEQUENCE
+    private float TIME_FIGHT = 0.5f;
+    private int speedInstant = 0;
 
     //Target (uniquement pour player)
     public bool inTargetMode;
@@ -52,7 +58,10 @@ public class CombatManager : MonoBehaviour
             GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
             characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
             charactersSprites.Add(characterSprite);
-            characterSprite.GetComponent<SpriteRenderer>().sprite = characters[countSpot].characterData.spriteFight;
+            characterSprite.GetComponentInChildren<SpriteRenderer>().sprite = characters[countSpot].characterData.spriteFight;
+
+            // DICO
+            dic_CharacterSpriteFight.Add(c, characterSprite.GetComponent<SpriteFight>());
 
             // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
             countSpot++;
@@ -105,7 +114,6 @@ public class CombatManager : MonoBehaviour
         TargetMode(skillData.nbTarget);
     }
 
-
     public void ClickButtonBack()
     {
         PanelBack();
@@ -135,22 +143,23 @@ public class CombatManager : MonoBehaviour
 
     public void CastSkills()
     {
-        List<SkillData> skillToCast = new List<SkillData>(); //TODO faire une list de speel et on itere sur les speels en fonciton de la vitesse
-
-
         foreach (Character character in characters)
         {
-            switch (character.currentLoadedSkill.skillType)
+            if(character.currentLoadedSkill.speed == speedInstant)
             {
-                case SkillType.ATTACK:
-                    foreach (Character characterTarget in character.selectedCharacter)
-                    {
-                        characterTarget.TakeDamage(character.currentLoadedSkill.damage);
-                    }
-                    break;
+                switch (character.currentLoadedSkill.skillType)
+                {
+                    case SkillType.ATTACK:
+                        foreach (Character characterTarget in character.selectedCharacter)
+                        {
+                            characterTarget.TakeDamage(character.currentLoadedSkill.damage);
+                            dic_CharacterSpriteFight[character].AnimAtk();
+                        }
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -192,17 +201,31 @@ public class CombatManager : MonoBehaviour
 
     public void ClickEndButton() //A REFACTOT
     {
-        //Player
-        CastSkills();
-        UpdateAllUI();
-        DeselecteTargetedCharacter();
         ClearButtonWeapon(); //TMP
         ClearButtonSkill();
-
         while(panelStack.Peek() != panelGlobal)
         {
             PanelBack();
         }
+
+
+
+        StartCoroutine(FightSequence());
+    }
+
+    public IEnumerator FightSequence()
+    {
+        while(speedInstant != 6)
+        {
+            CastSkills();
+            UpdateAllUI();
+
+            yield return new WaitForSeconds(TIME_FIGHT);
+            speedInstant++;
+        }
+        speedInstant = 0;
+        DeselecteTargetedCharacter();
+
     }
 
     public void DeselecteTargetedCharacter() //TODO upgarde system 
@@ -222,7 +245,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-
     public void TargetMode(int _nbTarget)
     {
         nbTarget = _nbTarget;
@@ -235,7 +257,6 @@ public class CombatManager : MonoBehaviour
         if (nbTarget == 0)
             inTargetMode = false;
     }
-
 
     //STACK PANEL
     public void PushPanel(GameObject panel)

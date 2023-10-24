@@ -8,6 +8,7 @@ public class SpriteFight : MonoBehaviour
 
     //OVER
     public SpriteRenderer over;
+    public Animator mainAnimator;
     public Animator animatorOver;
 
     private void OnMouseExit()
@@ -26,11 +27,14 @@ public class SpriteFight : MonoBehaviour
         {
             animatorOver.SetTrigger("selected");
             //CombatManager.instance.targetedCharacter.Add(character);
-
             GameManager.instance.playerCharacter.selectedCharacter.Add(character);
-
             CombatManager.instance.MinusTarget();
         }
+    }
+
+    public void AnimAtk()
+    {
+        mainAnimator.SetTrigger("atk");
     }
 
     public void ResetSelected()

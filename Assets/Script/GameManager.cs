@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject cam_fight;
     public GameObject prefabPlayer;
     [HideInInspector] public GameObject player;
-    [HideInInspector] public Player playerCharacter;
+    public Player playerCharacter;
 
     public WorldBuilder worldBuilder;
     public LocaleSelector localeSelector; 
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
     //
     //      INPUT PLAYER
     //
-    private void GetMouseInput()
+    private void GetMouseInput() //TODO [CODI MALAISE]
     {
         // [CODE PROVISOIRE]
         if (Input.GetMouseButtonDown(0) && inputBlock==false)
@@ -475,6 +475,8 @@ public class GameManager : MonoBehaviour
     // Du coup j'utilise le subterfuge ci-dessus...
     private IEnumerator ExecuteActionQueue()
     {
+        
+
         inputBlock = true;
 
         AddTurn(1);
