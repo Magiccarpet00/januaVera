@@ -186,32 +186,8 @@ public class GameManager : MonoBehaviour
     //
     //      INPUT PLAYER
     //
-    private void GetMouseInput() //TODO [CODI MALAISE]
+    private void GetMouseInput()
     {
-        // [CODE PROVISOIRE]
-        if (Input.GetMouseButtonDown(0) && inputBlock==false)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D[] hits = Physics2D.RaycastAll(ray.origin, ray.direction, Mathf.Infinity);
-            foreach (RaycastHit2D h in hits)
-            {
-                GameObject gameObjectHit = h.transform.gameObject;
-
-                if (gameObjectHit.CompareTag("Spot") && playerCharacter.isValideMove(gameObjectHit))
-                {
-                    playerCharacter.CommandMove(gameObjectHit);
-                    _ExecuteActionQueue();
-                }
-
-                if (gameObjectHit.CompareTag("Location"))
-                {
-                    
-                }
-
-            }
-        }
-
-
         //CHEAT CODE
         if(Input.GetKeyDown(KeyCode.C)) //CLEAN CLOUD
         {

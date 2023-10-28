@@ -43,7 +43,14 @@ public class Spot : MonoBehaviour
         AnimatorOverMouse_fx.SetTrigger("end");
     }
 
-
+    private void OnMouseUpAsButton()
+    {
+        if(GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandMove(this.gameObject);
+            GameManager.instance._ExecuteActionQueue();
+        }
+    }
 
 
 

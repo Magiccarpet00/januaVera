@@ -306,6 +306,8 @@ public class CombatManager : MonoBehaviour
     public void ClearCombatScene()
     {
         characters = new List<Character>();
+        dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
+
         foreach (GameObject cs in charactersSprites)
         {
             Destroy(cs);
