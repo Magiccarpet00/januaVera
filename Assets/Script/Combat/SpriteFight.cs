@@ -42,6 +42,16 @@ public class SpriteFight : MonoBehaviour
         animatorOver.SetTrigger("reset");
     }
 
+    public void AnimDie()
+    {
+        mainAnimator.SetTrigger("die");
+    }
+
+    public void AnimDieUI()
+    {
+        CombatManager.instance.dic_CharacterCombatSpot[character].SetActiveSpotUI(false);
+    }
+
     public void SetCharacter(Character c)
     {
         character = c;

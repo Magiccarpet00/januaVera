@@ -34,6 +34,8 @@ public class Character : MonoBehaviour
     //VIE ET CORPS
     private List<Member> corps = new List<Member>();
     public int currentLife;
+    public bool isDying; //pour le fight
+    public bool isDead; 
 
 
     //FIGHT
@@ -258,12 +260,23 @@ public class Character : MonoBehaviour
     {
         currentLife -= i;
         if(currentLife <= 0)
+        {
             Die();
+        }
     }
 
-    public void Die()
+    public void Die() //[CODI BE CARFULL] Il faut appeler la fonction Die 2 fois pour tuer un character
     {
-        Debug.Log(this + " est mort");
+        if (isDying == false)
+        {
+            //Debug.Log(this + " dying");
+            isDying = true;
+        }
+        else
+        {
+            //Debug.Log(this + " dead");
+            isDead = true;
+        }
     }
 
     //      IA
@@ -369,6 +382,7 @@ public class Character : MonoBehaviour
         else
             return false;
     }
+
 
     public void SetIdCrew(int i)
     {

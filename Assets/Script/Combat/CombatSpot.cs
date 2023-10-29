@@ -30,7 +30,7 @@ public class CombatSpot : MonoBehaviour
         lifeTxt.text = character.currentLife + "/" + character.characterData.maxLife;
     }
 
-    public void SetActiveLifeText(bool b)
+    public void SetActiveSpotUI(bool b)
     {
         lifeTxt.gameObject.SetActive(b);
         intentionTxt.gameObject.SetActive(b);

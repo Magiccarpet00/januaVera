@@ -17,6 +17,7 @@ public class CombatManager : MonoBehaviour
     public Dictionary<Character, SpriteFight> dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
 
     [SerializeField] private List<GameObject> combatSpots = new List<GameObject>();
+    public Dictionary<Character, CombatSpot> dic_CharacterCombatSpot = new Dictionary<Character, CombatSpot>();
 
     private bool onFight;
     [SerializeField] private Vector3 posFight;
@@ -25,6 +26,8 @@ public class CombatManager : MonoBehaviour
     //FIGHT SEQUENCE
     private float TIME_FIGHT = 0.5f;
     private int speedInstant = 0;
+    public TimerFight timerFight;
+
 
     //Target (uniquement pour player)
     public bool inTargetMode;
@@ -52,7 +55,7 @@ public class CombatManager : MonoBehaviour
             // COMBAT SPOT
             CombatSpot cs = combatSpots[countSpot].GetComponent<CombatSpot>();
             cs.character = c;
-            cs.SetActiveLifeText(true);
+            cs.SetActiveSpotUI(true);
 
             // CHARACTER SPRITE
             GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
@@ -62,6 +65,8 @@ public class CombatManager : MonoBehaviour
 
             // DICO
             dic_CharacterSpriteFight.Add(c, characterSprite.GetComponent<SpriteFight>());
+            dic_CharacterCombatSpot.Add(c, cs);
+
 
             // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
             countSpot++;
@@ -145,7 +150,7 @@ public class CombatManager : MonoBehaviour
     {
         foreach (Character character in characters)
         {
-            if(character.currentLoadedSkill.speed == speedInstant)
+            if(character.currentLoadedSkill.speed == speedInstant && character.isDead == false)
             {
                 switch (character.currentLoadedSkill.skillType)
                 {
@@ -161,6 +166,19 @@ public class CombatManager : MonoBehaviour
                         break;
                 }
             }
+
+
+            //On verrifer les morts
+            foreach (Character _character in characters)
+            {
+                if (_character.isDying == true && _character.isDead == false)
+                {
+                    _character.Die();
+                    dic_CharacterSpriteFight[_character].AnimDie();
+                }
+            }
+
+
         }
     }
 
@@ -207,35 +225,34 @@ public class CombatManager : MonoBehaviour
         {
             PanelBack();
         }
-
-
-
         StartCoroutine(FightSequence());
     }
 
     public IEnumerator FightSequence()
     {
-        while(speedInstant != 6)
+
+        foreach (GameObject cs in charactersSprites)
         {
+            cs.GetComponent<SpriteFight>().ResetSelected();
+        }
+
+        timerFight.ActiveTimer(true);
+        while (speedInstant != 6)
+        {
+            timerFight.SetTimer(speedInstant);
             CastSkills();
             UpdateAllUI();
 
             yield return new WaitForSeconds(TIME_FIGHT);
             speedInstant++;
+            
         }
         speedInstant = 0;
-        DeselecteTargetedCharacter();
+        timerFight.ActiveTimer(false);
 
-    }
-
-    public void DeselecteTargetedCharacter() //TODO upgarde system 
-    {
-        foreach (GameObject cs in charactersSprites)
-        {
-            cs.GetComponent<SpriteFight>().ResetSelected();
-        }
         GameManager.instance.playerCharacter.selectedCharacter = new List<Character>();
     }
+
 
     public void UpdateAllUI()
     {
@@ -315,7 +332,7 @@ public class CombatManager : MonoBehaviour
             
         foreach(GameObject cs in combatSpots)
         {
-            cs.GetComponent<CombatSpot>().SetActiveLifeText(false);
+            cs.GetComponent<CombatSpot>().SetActiveSpotUI(false);
         }
     }
 

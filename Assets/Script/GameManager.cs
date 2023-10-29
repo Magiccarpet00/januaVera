@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
     private GameObject currentInfoGridLayoutGroupe;
     [SerializeField] private GameObject prefabInfoCharacter;
 
+
     // NAME ENUM
     public Dictionary<WeaponStyle, string> dic_weaponStyle = new Dictionary<WeaponStyle, string>();
     public Dictionary<Element, string> dic_element = new Dictionary<Element, string>();
