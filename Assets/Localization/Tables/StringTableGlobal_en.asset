@@ -34,6 +34,14 @@ MonoBehaviour:
     m_Localized: Escape
     m_Metadata:
       m_Items: []
+  - m_Id: 78392256495357952
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78392357284483072
+    m_Localized: End
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

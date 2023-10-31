@@ -10,43 +10,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: StringTableGlobal Shared Data
+  m_Name: Weapon Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: StringTableGlobal
-  m_TableCollectionNameGuidString: c9731ac5e53e94b4aba62b11eb1d7e79
+  m_TableCollectionName: Weapon
+  m_TableCollectionNameGuidString: 9bea7d6aef56776468b3435f390732a7
   m_Entries:
-  - m_Id: 11304439808
-    m_Key: TURN
+  - m_Id: 38739382272
+    m_Key: TYPE
     m_Metadata:
       m_Items: []
-  - m_Id: 15306538618880
-    m_Key: DODGE
+  - m_Id: 446320873472
+    m_Key: STATE
     m_Metadata:
       m_Items: []
-  - m_Id: 70296820895191040
-    m_Key: WEAPON
+  - m_Id: 714055880704
+    m_Key: MATERIAL
     m_Metadata:
       m_Items: []
-  - m_Id: 70298420242026496
-    m_Key: ESCAPE
+  - m_Id: 9889041354752
+    m_Key: LONG_SWORD
     m_Metadata:
       m_Items: []
-  - m_Id: 78392256495357952
-    m_Key: BACK
+  - m_Id: 10995788156928
+    m_Key: SWORD
     m_Metadata:
       m_Items: []
-  - m_Id: 78392357284483072
-    m_Key: END
+  - m_Id: 16799471767552
+    m_Key: STAFF
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 9176758891726241816
+    rid: 3258153822799790086
   references:
     version: 2
     RefIds:
-    - rid: 9176758891726241816
+    - rid: 3258153822799790086
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1680023842841
+        m_CustomEpoch: 1698715297031

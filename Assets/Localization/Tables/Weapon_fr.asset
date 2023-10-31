@@ -10,36 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: StringTableGlobal_fr
+  m_Name: Weapon_fr
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: fr
-  m_SharedData: {fileID: 11400000, guid: c9731ac5e53e94b4aba62b11eb1d7e79, type: 2}
+  m_SharedData: {fileID: 11400000, guid: 9bea7d6aef56776468b3435f390732a7, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 11304439808
-    m_Localized: Tour
+  - m_Id: 38739382272
+    m_Localized: Type
     m_Metadata:
       m_Items: []
-  - m_Id: 15306538618880
-    m_Localized: Esquive
+  - m_Id: 446320873472
+    m_Localized: Etat
     m_Metadata:
       m_Items: []
-  - m_Id: 70296820895191040
-    m_Localized: Equipement
+  - m_Id: 714055880704
+    m_Localized: "Mat\xE9rielle"
     m_Metadata:
       m_Items: []
-  - m_Id: 70298420242026496
-    m_Localized: Fuir
+  - m_Id: 9889041354752
+    m_Localized: "Ep\xE9e longue"
     m_Metadata:
       m_Items: []
-  - m_Id: 78392256495357952
-    m_Localized: Retour
+  - m_Id: 10995788156928
+    m_Localized: "Ep\xE9e"
     m_Metadata:
       m_Items: []
-  - m_Id: 78392357284483072
-    m_Localized: Fin
+  - m_Id: 16799471767552
+    m_Localized: Baton
     m_Metadata:
       m_Items: []
   references:

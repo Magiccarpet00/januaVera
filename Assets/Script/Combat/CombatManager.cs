@@ -84,11 +84,8 @@ public class CombatManager : MonoBehaviour
             btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
 
             ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
-            bw.weapon = weapon;
-            bw.btnName.text = weapon.weaponData.name;
-            bw.btnStyle.text = GameManager.instance.dic_weaponStyle[weapon.weaponData.style];
-            bw.btnState.text = weapon.currentState.ToString() + "/" + weapon.weaponData.maxState.ToString();
-            bw.btnMaterial.text = GameManager.instance.dic_element[weapon.weaponData.material];
+            bw.SetUpUI(weapon);
+            
 
             buttonsWeapons.Add(btnWeapon);
         }
