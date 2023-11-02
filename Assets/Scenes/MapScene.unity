@@ -4008,6 +4008,8 @@ MonoBehaviour:
   weaponPrefab: {fileID: 5011286862368166044, guid: 4c70bba7a67018e47baf96339888ab9a, type: 3}
   tmpWeapon: {fileID: 0}
   longSword: {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
+  crakedWeapon: {fileID: 0}
+  crakedWeaponData: {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
 --- !u!114 &1915923813
 MonoBehaviour:
   m_ObjectHideFlags: 0

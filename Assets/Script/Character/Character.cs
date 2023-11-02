@@ -52,7 +52,7 @@ public class Character : MonoBehaviour
     }
 
 
-    void Update()
+    void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
 
@@ -61,6 +61,9 @@ public class Character : MonoBehaviour
             Visible(false);
         else
             Visible(true);
+
+        if(isDead == true)
+            collider2d.enabled = false;
     }
 
 
@@ -276,7 +279,15 @@ public class Character : MonoBehaviour
         {
             //Debug.Log(this + " dead");
             isDead = true;
+            DieForMap();
         }
+    }
+
+    private void DieForMap()
+    {
+        spriteRenderer.gameObject.SetActive(false);
+        
+        
     }
 
     //      IA
@@ -406,7 +417,6 @@ public class Character : MonoBehaviour
             Debug.LogError("GetSquad only use by a leader");
             return null;
         }
-        
     }
 
     public List<Character> GetAllCharactersInSpot()

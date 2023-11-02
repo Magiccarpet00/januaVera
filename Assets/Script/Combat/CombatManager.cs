@@ -24,7 +24,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject prefabSpriteCharacter;
 
     //FIGHT SEQUENCE
-    private float TIME_FIGHT = 0.5f;
+    private float TIME_FIGHT = 0.2f;
     private int speedInstant = 0;
     public TimerFight timerFight;
 
@@ -298,6 +298,7 @@ public class CombatManager : MonoBehaviour
 
     public void SetUpFight(List<Character> _characters)
     {
+
         characters = _characters;
         FillSpot();
         SetUpPanel();
@@ -321,16 +322,20 @@ public class CombatManager : MonoBehaviour
     {
         characters = new List<Character>();
         dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
+        dic_CharacterCombatSpot = new Dictionary<Character, CombatSpot>();
 
         foreach (GameObject cs in charactersSprites)
         {
             Destroy(cs);
         }
-            
-        foreach(GameObject cs in combatSpots)
+
+        charactersSprites = new List<GameObject>();
+
+        foreach (GameObject cs in combatSpots)
         {
             cs.GetComponent<CombatSpot>().SetActiveSpotUI(false);
         }
+
     }
 
     //

@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
     public Weapon tmpWeapon;
     public WeaponData longSword;
 
+    public Weapon crakedWeapon;
+    public WeaponData crakedWeaponData;
+
+
+
     public void Start()
     {
         SetUpUI();
@@ -94,6 +99,12 @@ public class GameManager : MonoBehaviour
         tmpWeapon = tmpWeaponGO.GetComponent<Weapon>();
         tmpWeapon.weaponData = longSword;
         tmpWeapon.Init();
+
+        GameObject tmpWeaponCR = Instantiate(weaponPrefab);
+        crakedWeapon = tmpWeaponCR.GetComponent<Weapon>();
+        crakedWeapon.weaponData = crakedWeaponData;
+        crakedWeapon.Init();
+
     }
 
     
@@ -245,7 +256,10 @@ public class GameManager : MonoBehaviour
         {
             foreach (Character character in characterList)
             {
-                character.weaponInventory.Add(tmpWeapon);
+                if (character.isPlayer())
+                    character.weaponInventory.Add(crakedWeapon);
+                else
+                    character.weaponInventory.Add(tmpWeapon);
             }
         }
 
@@ -513,15 +527,25 @@ public class GameManager : MonoBehaviour
     }
 
     // Envoie la commande d'action de tout les pnj
-    public void CommandPnj() 
+    public void CommandPnj() //[CODE TMP] commande move pour l'instant
     {
         foreach (Character character in characterList)
         {
-            if(character.isPlayer() == false && character.isLeader() == true)
+            if(character.isPlayer() == false && 
+               character.isLeader() == true)
             {
-                List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                int rng = Random.Range(0, adjSpot.Count);
-                character.CommandMove(adjSpot[rng]); //[CODE TMP] commande move pour l'instant
+                
+                if(character.isDead == true)
+                {
+                    character.CommandEmpty();
+                }
+                else
+                {
+                    List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                    int rng = Random.Range(0, adjSpot.Count);
+                    character.CommandMove(adjSpot[rng]);
+                }
+
             }
         }
     }
@@ -534,14 +558,19 @@ public class GameManager : MonoBehaviour
     {
         //Cancel toute les actions des character sur le spot
         List<Character> allCharactersInSpot = new List<Character>();
+        List<Character> allCharactersAliveInSpot = new List<Character>();
         allCharactersInSpot = playerCharacter.GetAllCharactersInSpot();
 
         foreach (Character character in allCharactersInSpot)
         {
-            character.CancelAction();
+            if(character.isDead == false)
+            {
+                character.CancelAction();
+                allCharactersAliveInSpot.Add(character);
+            }
         }
 
-        CombatManager.instance.SetUpFight(allCharactersInSpot);
+        CombatManager.instance.SetUpFight(allCharactersAliveInSpot);
 
         //Visuel
         actionCanvas.SetActive(false);
