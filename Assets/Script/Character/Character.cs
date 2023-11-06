@@ -32,7 +32,6 @@ public class Character : MonoBehaviour
 
 
     //VIE ET CORPS
-    private List<Member> corps = new List<Member>();
     public int currentLife;
     public bool isDying; //pour le fight
     public bool isDead; 
@@ -222,22 +221,6 @@ public class Character : MonoBehaviour
 
         return true;
     }
-
-    public void createHumanCorps() //[CODE INUTILE]
-    {
-        corps.Add(new Member(MemberType.HEAD, Element.SKIN, 1, true));
-
-        corps.Add(new Member(MemberType.BODY, Element.SKIN, 3, true));
-
-        corps.Add(new Member(MemberType.ARM, Element.SKIN, 2, false));
-        corps.Add(new Member(MemberType.ARM, Element.SKIN, 2, false));
-
-        corps.Add(new Member(MemberType.LEG, Element.SKIN, 2, false));
-        corps.Add(new Member(MemberType.LEG, Element.SKIN, 2, false));
-    }
-
-
-
 
 
     //  
