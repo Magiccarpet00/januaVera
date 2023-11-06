@@ -3929,6 +3929,7 @@ GameObject:
   - component: {fileID: 1915923812}
   - component: {fileID: 1915923813}
   - component: {fileID: 1915923814}
+  - component: {fileID: 1915923815}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4005,11 +4006,6 @@ MonoBehaviour:
   offSetInfoGrid: {x: 4, y: 0, z: 0}
   prefabInfoGridLayoutGroupe: {fileID: 7107082791737578349, guid: e24b792b475f96c4bae420563a98f99c, type: 3}
   prefabInfoCharacter: {fileID: 4267781497862045117, guid: d85b88c6eee5aa6408c71f0c58fc88b9, type: 3}
-  weaponPrefab: {fileID: 5011286862368166044, guid: 4c70bba7a67018e47baf96339888ab9a, type: 3}
-  tmpWeapon: {fileID: 0}
-  longSword: {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
-  crakedWeapon: {fileID: 0}
-  crakedWeaponData: {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
 --- !u!114 &1915923813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4052,6 +4048,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e6797075977084399758ef4228471b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1915923815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915923810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fe589a4b68e8f4f9f75d4508059d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDatas:
+  - {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
+  - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
 --- !u!1 &1947701088
 GameObject:
   m_ObjectHideFlags: 0

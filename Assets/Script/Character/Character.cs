@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-
     public CharacterData characterData;
 
     // REAL TIME MOVE
@@ -208,9 +207,6 @@ public class Character : MonoBehaviour
         canceled = false;
     }
 
-
-
-
     //
     //      OTHER
     //
@@ -376,7 +372,6 @@ public class Character : MonoBehaviour
         else
             return false;
     }
-
 
     public void SetIdCrew(int i)
     {

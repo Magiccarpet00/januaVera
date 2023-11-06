@@ -64,14 +64,8 @@ public class GameManager : MonoBehaviour
     public Dictionary<Element, string> dic_element = new Dictionary<Element, string>();
 
 
-    //TMP
-    [Header("TMP")]
-    public GameObject weaponPrefab;
-    public Weapon tmpWeapon;
-    public WeaponData longSword;
 
-    public Weapon crakedWeapon;
-    public WeaponData crakedWeaponData;
+
 
 
 
@@ -93,17 +87,6 @@ public class GameManager : MonoBehaviour
 
         //UI
         AddTurn(0);
-
-        //TMP
-        GameObject tmpWeaponGO = Instantiate(weaponPrefab);
-        tmpWeapon = tmpWeaponGO.GetComponent<Weapon>();
-        tmpWeapon.weaponData = longSword;
-        tmpWeapon.Init();
-
-        GameObject tmpWeaponCR = Instantiate(weaponPrefab);
-        crakedWeapon = tmpWeaponCR.GetComponent<Weapon>();
-        crakedWeapon.weaponData = crakedWeaponData;
-        crakedWeapon.Init();
 
     }
 
@@ -257,9 +240,9 @@ public class GameManager : MonoBehaviour
             foreach (Character character in characterList)
             {
                 if (character.isPlayer())
-                    character.weaponInventory.Add(crakedWeapon);
+                    character.weaponInventory.Add(CreateWeapon("CRACKED"));
                 else
-                    character.weaponInventory.Add(tmpWeapon);
+                    character.weaponInventory.Add(CreateWeapon("SWORD"));
             }
         }
 
@@ -445,6 +428,13 @@ public class GameManager : MonoBehaviour
 
         leader.SetCrewmates(crewmate);
 
+    }
+
+    public Weapon CreateWeapon(string nameWeapon)
+    {
+        WeaponData wp = ObjectManager.instance.FindWeaponData(nameWeapon);
+        Weapon w = new Weapon(wp);
+        return w;
     }
 
 

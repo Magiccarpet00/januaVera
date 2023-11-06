@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon
 {
     public WeaponData weaponData;
     public int currentState;
 
-    public void Init()
+    public Weapon(WeaponData wd)
     {
+        weaponData = wd;
         currentState = weaponData.maxState;
     }
+
 }

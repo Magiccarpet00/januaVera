@@ -21,11 +21,6 @@ public class ButtonWeapon : MonoBehaviour
     public void SetUpUI(Weapon w)
     {
         weapon = w;
-
-        Debug.Log("zizi");
-        Debug.Log(w.weaponData.name);
-
-
         //LocalizationSettings.StringDatabase.GetLocalizedStringAsync("SWORD").Completed += result => nameValue.text = result;
 
         nameValue.SetEntry(w.weaponData.name);
