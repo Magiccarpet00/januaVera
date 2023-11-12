@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: land_1_spot_1
   m_EditorClassIdentifier: 
   dropChance: 460000001e000000
-  locations: 0000000001000000
+  locations:
+  - {fileID: 0}
+  - {fileID: 11400000, guid: dab2f871e96ab7043a14e9c15704f1f7, type: 2}

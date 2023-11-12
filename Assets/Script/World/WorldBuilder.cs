@@ -26,6 +26,7 @@ public class WorldBuilder : MonoBehaviour
     // Attnetion il faut metre a jour le dico
     [SerializeField] private GameObject[] prefabLocations;
     [HideInInspector] public Dictionary<LocationType, GameObject> dic_prefabLocations = new Dictionary<LocationType, GameObject>();
+    public GameObject locationPrefab;
     
     public void StartWorldBuilder()
     {

@@ -21,5 +21,7 @@ public class SpotLocationRNGData : ScriptableObject
      */
 
     public int[] dropChance;
-    public LocationType[] locations;
+    //public LocationType[] locations;
+    public LocationData[] locations;
+
 }

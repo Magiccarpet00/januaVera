@@ -11,22 +11,32 @@ public class ObjectManager : MonoBehaviour
     }
 
     public List<WeaponData> weaponDatas = new List<WeaponData>();
+    public List<LocationData> locationDatas = new List<LocationData>();
 
 
     public WeaponData FindWeaponData(string name)
     {
         WeaponData res = null;
-
-        foreach (WeaponData weaponData in weaponDatas)
+        foreach (WeaponData d in weaponDatas)
         {
-            if (weaponData.name.Equals(name))
-                res = weaponData;
+            if (d.name.Equals(name))
+                res = d;
         }
-
-        if (res == null)
-            Debug.LogError("ERROR: wrong name in FindWeaponData");
-
         return res;
     }
+
+    public LocationData FindLocationData(string name)
+    {
+        LocationData res = null;
+        foreach (LocationData d in locationDatas)
+        {
+            if (d.name.Equals(name))
+                res = d;
+        }
+        return res;
+    }
+
+
+
 
 }

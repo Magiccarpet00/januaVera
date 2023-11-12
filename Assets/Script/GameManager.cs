@@ -76,7 +76,8 @@ public class GameManager : MonoBehaviour
 
         //--------SEED RNG---------
         //SeedRandom((int)Random.Range(0, 9999999));
-        string seed = "Miriamo54";
+        string seed = "Miriamo54";        
+
         SeedRandom(seed.GetHashCode());
         //-------------------------
 

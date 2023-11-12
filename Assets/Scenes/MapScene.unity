@@ -4036,6 +4036,7 @@ MonoBehaviour:
   prefabLocations:
   - {fileID: 8149957913592602003, guid: 95b10da57b616b84598cda3741585329, type: 3}
   - {fileID: 8149957913592602003, guid: 49c52b6d170442843a1452349cd26bd8, type: 3}
+  locationPrefab: {fileID: 8149957913592602003, guid: ad7576a58f88d4e4482ab98e30c5ad06, type: 3}
 --- !u!114 &1915923814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4063,6 +4064,7 @@ MonoBehaviour:
   weaponDatas:
   - {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
+  locationDatas: []
 --- !u!1 &1947701088
 GameObject:
   m_ObjectHideFlags: 0

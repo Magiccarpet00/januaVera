@@ -79,7 +79,11 @@ public class Tile : MonoBehaviour
 
                 if (choice != 0)
                 {
-                    GameObject g = Instantiate(WorldBuilder.instance.dic_prefabLocations[locationData.locations[choice]], allSpots[i].transform.position, Quaternion.identity);
+                    //GameObject g = Instantiate(WorldBuilder.instance.dic_prefabLocations[locationData.locations[choice]], allSpots[i].transform.position, Quaternion.identity);
+                    GameObject g = Instantiate(WorldBuilder.instance.locationPrefab, allSpots[i].transform.position, Quaternion.identity);
+                    Location location = g.GetComponent<Location>();
+                    location.locationData = locationData.locations[choice];
+                    location.SetUpLocation();
                     g.transform.parent = allSpots[i].transform;
                 }
             }

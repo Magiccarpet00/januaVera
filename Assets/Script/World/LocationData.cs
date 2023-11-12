@@ -7,4 +7,5 @@ public class LocationData : ScriptableObject
 {
     public LocationType locationType;
     public List<ButtonType> actionsButton = new List<ButtonType>();
+    public Sprite sprite;
 }
