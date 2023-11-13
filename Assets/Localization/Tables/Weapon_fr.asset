@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: Baton
     m_Metadata:
       m_Items: []
+  - m_Id: 4687323741294592
+    m_Localized: "L'ep\xE9e des chads"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape: 10
   typeDivinity: 0
-  maxLife: 10
+  maxLife: 100
   stamina: 3
   nbWound: 0
   dodgeTime: 4

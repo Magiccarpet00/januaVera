@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: STAFF
     m_Metadata:
       m_Items: []
+  - m_Id: 4687323741294592
+    m_Key: CRACKED
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
