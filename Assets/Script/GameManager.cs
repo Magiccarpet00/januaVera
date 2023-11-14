@@ -558,7 +558,6 @@ public class GameManager : MonoBehaviour
 
         CombatManager.instance.ClearCombatScene();
     }
-
 }
 
 public enum TileType {
@@ -615,6 +614,11 @@ public enum Divinity {
     NATURE
 }
 
+public enum Range {
+    CONTACT,
+    PROJECTILE
+}
+
 public enum DamageType {
     SMASH,
     SHARP,
@@ -626,7 +630,9 @@ public enum WeaponStyle {
 }
 
 public enum SkillType{
-    ATTACK
+    ATTACK,
+    PARRY,
+    SUMMON,
 }
 
 public class GlobalConst {

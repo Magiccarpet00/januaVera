@@ -46,7 +46,6 @@ public class CombatManager : MonoBehaviour
     public GameObject prefabButtonSkill;
     public List<GameObject> buttonsSkills = new List<GameObject>();
 
-
     public void FillSpot()
     {
         int countSpot = 0;
@@ -66,7 +65,6 @@ public class CombatManager : MonoBehaviour
             // DICO
             dic_CharacterSpriteFight.Add(c, characterSprite.GetComponent<SpriteFight>());
             dic_CharacterCombatSpot.Add(c, cs);
-
 
             // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
             countSpot++;
@@ -102,10 +100,7 @@ public class CombatManager : MonoBehaviour
             btnSkill.transform.localScale = new Vector3(1, 1, 1);
 
             ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
-            bs.skillData = skill;
-            bs.btnName.text = skill.name;
-            bs.btnText.text = skill.damage.ToString();
-
+            bs.SetUpUI(skill);
             buttonsSkills.Add(btnSkill);
         }
     }
@@ -227,7 +222,6 @@ public class CombatManager : MonoBehaviour
 
     public IEnumerator FightSequence()
     {
-
         foreach (GameObject cs in charactersSprites)
         {
             cs.GetComponent<SpriteFight>().ResetSelected();

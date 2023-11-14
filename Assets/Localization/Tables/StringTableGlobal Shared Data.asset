@@ -39,6 +39,18 @@ MonoBehaviour:
     m_Key: END
     m_Metadata:
       m_Items: []
+  - m_Id: 83781573942185984
+    m_Key: DAMAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83782142446538752
+    m_Key: SPEED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83782227762876416
+    m_Key: TARGET
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

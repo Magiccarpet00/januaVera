@@ -29,6 +29,18 @@ MonoBehaviour:
     m_Address: Assets/Localization/Tables/Weapon Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: 7439f4c014791254c8a2b2d3b646f919
+    m_Address: Assets/Localization/Tables/Skill Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: fff1413cfa144374d89abc31754b8f47
+    m_Address: Assets/Localization/Tables/DamageType Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 5cc7d2a6c5797164f84c63c60a7ef2de
+    m_Address: Assets/Localization/Tables/Range Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4ad098de06f6673488b65868d92e0617, type: 2}
   m_SchemaSet:

@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &92358192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3981,19 +3981,6 @@ MonoBehaviour:
   - {fileID: -1744226548, guid: 799b5c4e6792c9e4ebefd796b0b87573, type: 3}
   - {fileID: -488154645, guid: 799b5c4e6792c9e4ebefd796b0b87573, type: 3}
   - {fileID: 256655160, guid: 799b5c4e6792c9e4ebefd796b0b87573, type: 3}
-  allImgLandscape_location:
-  - {fileID: -201997998, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: 872637560, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: -1394799726, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: -991431784, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: 1519466172, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: 2090837313, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: -1691343148, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: 2081272763, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: -238783618, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: -714811886, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: 1284659729, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  - {fileID: -536245653, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
   btn_grid: {fileID: 87757837}
   allButton:
   - {fileID: 6683567811945661742, guid: 73d5f0a214fd81b4bb6a442ddce62349, type: 3}

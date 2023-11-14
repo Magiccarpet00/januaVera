@@ -157,7 +157,6 @@ MonoBehaviour:
   styleValue: {fileID: 1458497121}
   stateValue: {fileID: 3707247922120075809}
   materialValue: {fileID: 7807327313468321172}
-  weapon: {fileID: 0}
 --- !u!1 &3133706932337041194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,9 +1324,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:e8e634ea902dcf9489857270bf49734c
+      m_TableCollectionName: 
     m_TableEntryReference:
-      m_KeyId: 43118235648
+      m_KeyId: 0
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

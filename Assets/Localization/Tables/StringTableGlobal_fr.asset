@@ -42,6 +42,18 @@ MonoBehaviour:
     m_Localized: Fin
     m_Metadata:
       m_Items: []
+  - m_Id: 83781573942185984
+    m_Localized: "D\xE9g\xE2t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83782142446538752
+    m_Localized: Vitesse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83782227762876416
+    m_Localized: Cible
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

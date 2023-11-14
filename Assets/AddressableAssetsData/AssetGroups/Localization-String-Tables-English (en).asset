@@ -35,6 +35,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     - Preload
+  - m_GUID: f0d3dcc1dc4ae7c46a127b1ac9f1fb37
+    m_Address: Skill_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: d935a11171e65ca4285970188aec686f
+    m_Address: DamageType_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+  - m_GUID: 770a2160a7bc40541896447132ac3953
+    m_Address: Range_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4ad098de06f6673488b65868d92e0617, type: 2}
   m_SchemaSet:
