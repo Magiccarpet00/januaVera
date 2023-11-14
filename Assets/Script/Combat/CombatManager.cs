@@ -24,7 +24,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject prefabSpriteCharacter;
 
     //FIGHT SEQUENCE
-    private float TIME_FIGHT = 0.2f;
+    private float TIME_FIGHT = 0.5f;
     private int speedInstant = 0;
     public TimerFight timerFight;
 
@@ -130,14 +130,6 @@ public class CombatManager : MonoBehaviour
         PopPanel();
     }
 
-    public void LoadSkill()
-    {
-        //currentPlayerSkill.owner = GameManager.instance.playerCharacter;
-        //currentPlayerSkill.targets.AddRange(targetedCharacter);
-
-        //GameManager.instance.playerCharacter.selectedCharacter
-    }
-
     public void CastSkills()
     {
         foreach (Character character in characters)
@@ -154,11 +146,12 @@ public class CombatManager : MonoBehaviour
                         }
                         break;
 
+                    
+
                     default:
                         break;
                 }
             }
-
 
             //On verrifer les morts
             foreach (Character _character in characters)
@@ -236,7 +229,6 @@ public class CombatManager : MonoBehaviour
 
             yield return new WaitForSeconds(TIME_FIGHT);
             speedInstant++;
-            
         }
         speedInstant = 0;
         timerFight.ActiveTimer(false);
