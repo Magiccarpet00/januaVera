@@ -187,27 +187,6 @@ public class GameManager : MonoBehaviour
             newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
-        if(Input.GetKeyDown(KeyCode.G)) //CREATE GROUPE 
-        {
-            GameObject currentTile = GetTile(2, 1);
-            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-
-            GameObject newPnj1 = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
-            GameObject newPnj2 = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
-            GameObject newPnj3 = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
-
-            List<Character> grp_char = new List<Character>();
-            grp_char.Add(newPnj1.GetComponent<Character>());
-            grp_char.Add(newPnj2.GetComponent<Character>());
-
-            CreateSquad(newPnj3.GetComponent<Character>(), grp_char);
-
-
-            newPnj1.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
-            newPnj2.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
-            newPnj3.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
-        }
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             CameraController cc = cam.GetComponent<CameraController>();
@@ -335,7 +314,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateInfoGridLayoutGroupe(Vector3 pos, Character leader)
+    public void CreateInfoGridLayoutGroupe(Vector3 pos, List<Character> characters)
     {
         Vector3 newPos = Vector3.zero;
         newPos.x = offSetInfoGrid.x + pos.x;
@@ -345,9 +324,10 @@ public class GameManager : MonoBehaviour
         currentInfoGridLayoutGroupe.transform.SetParent(worldCanvas,true);
         
         Transform gridTransform = currentInfoGridLayoutGroupe.transform;
-        foreach (Character mate in leader.GetSquad())
+
+        foreach (Character character in characters)
         {
-            CreateInfoCharacter(mate, pos, gridTransform);
+            CreateInfoCharacter(character, pos, gridTransform);
         }
     }
 
@@ -394,22 +374,6 @@ public class GameManager : MonoBehaviour
         characterList.Add(_chatacter);
 
         return newCharacter;
-    }
-
-    public void CreateSquad(Character leader, List<Character> crewmate)
-    {
-        int i = 0;
-        foreach (Character mate in crewmate)
-        {
-            i++;
-            mate.SetLeader(leader);
-            mate.SetIdCrew(i);
-            mate.UpdateSmoothTime();
-            mate.Visible(false);
-        }
-
-        leader.SetCrewmates(crewmate);
-
     }
 
     public Weapon CreateWeapon(string nameWeapon)
@@ -503,10 +467,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (Character character in characterList)
         {
-            if(character.isPlayer() == false && 
-               character.isLeader() == true)
+            if(character.isPlayer() == false)
             {
-                
                 if(character.isDead == true)
                 {
                     character.CommandEmpty();
@@ -633,6 +595,11 @@ public enum SkillType{
     ATTACK,
     PARRY,
     SUMMON,
+}
+
+public enum ParryType{
+    SIMPLE,
+    COUNTER
 }
 
 public class GlobalConst {

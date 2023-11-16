@@ -17,4 +17,7 @@ public class SkillData : ScriptableObject
     public int damage;
     public DamageType damageType;
 
+    [Header("Parry")]
+    public ParryType parryType;
+
 }

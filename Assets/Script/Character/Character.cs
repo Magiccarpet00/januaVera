@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     private float smoothTime;
     private Vector3 velocity = Vector3.zero;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Collider2D collider2d;
+    [SerializeField] private Collider2D collider2d; //[CODE INUTILE]
     private bool inFight;
 
     public Animator animator;
@@ -23,14 +23,8 @@ public class Character : MonoBehaviour
     private Stack<Action> stackAction = new Stack<Action>();
     private bool canceled; // si il est canceled il ne peut par faire sont action de la actionQueue
 
-    //GROUPE
-    private Character leader; //si le character A un leader alors il suis certaine action de son leader;
-    private List<Character> crewmates = new List<Character>(); //si le character EST un leader alors il a un crew
-    private int idCrew = 0; //la place dans le groupe. 0 = etre leader
 
-
-
-    //VIE ET CORPS
+    //LIFE
     public int currentLife;
     public bool isDying; //pour le fight
     public bool isDead; 
@@ -54,17 +48,9 @@ public class Character : MonoBehaviour
     {
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
 
-        // Deplacement des crewmate
-        if (!isLeader() && Vector3.Distance(transform.position, target) < 0.2f)
+        if (isDead)
             Visible(false);
-        else
-            Visible(true);
-
-        if(isDead == true)
-            collider2d.enabled = false;
     }
-
-
 
 
     //
@@ -128,7 +114,13 @@ public class Character : MonoBehaviour
     }
 
 
-
+    public void UpdateSmoothTime()
+    {
+        if (isHide)
+            smoothTime = GlobalConst.HIDE_SMOOTHTIME;
+        else
+            smoothTime = GlobalConst.BASIC_SMOOTHTIME;
+    }
 
 
 
@@ -143,16 +135,15 @@ public class Character : MonoBehaviour
     //
     //      FX
     //
-    void OnMouseEnter()
-    {
-        if(isLeader())
-            GameManager.instance.CreateInfoGridLayoutGroupe(transform.position, this);
-    }
+    //void OnMouseEnter()
+    //{
+    //    GameManager.instance.CreateInfoGridLayoutGroupe(transform.position, this);
+    //}
 
-    void OnMouseExit()
-    {
-        GameManager.instance.DestroyInfoGridLayoutGroupe();
-    }
+    //void OnMouseExit()
+    //{
+    //    GameManager.instance.DestroyInfoGridLayoutGroupe();
+    //}
 
 
     //
@@ -169,16 +160,6 @@ public class Character : MonoBehaviour
             stackAction.Push(new ActionEmpty(this));
         
         stackAction.Push(new ActionMove(this, spot));
-
-
-        //[CODE DOUTEUX] pas sur de la place de l'ordre
-        if(isLeader())
-        {
-            foreach (Character character in crewmates)
-            {
-                character.CommandMove(spot);
-            }
-        }
     }
 
     public virtual void CommandHide()
@@ -219,23 +200,7 @@ public class Character : MonoBehaviour
     }
 
 
-    //  
-    //      CREW
-    //
-    public void UpdateSmoothTime()
-    {
-        if (isHide)
-            smoothTime = GlobalConst.HIDE_SMOOTHTIME + GlobalConst.DELTA_SMOOTH_CREW * idCrew;
-        else
-            smoothTime = GlobalConst.BASIC_SMOOTHTIME + GlobalConst.DELTA_SMOOTH_CREW * idCrew;
-    }
 
-    // Rend visible les characater du group pendant le move du leader
-    public void Visible(bool enable)
-    {
-        spriteRenderer.enabled = enable;
-        collider2d.enabled = enable;
-    }
 
     //      FIGHT
     public void TakeDamage(int i)
@@ -258,15 +223,19 @@ public class Character : MonoBehaviour
         {
             //Debug.Log(this + " dead");
             isDead = true;
-            DieForMap();
+            //DieForMap();
         }
     }
 
     private void DieForMap()
     {
         spriteRenderer.gameObject.SetActive(false);
-        
-        
+    }
+
+    public void Visible(bool enable)
+    {
+        spriteRenderer.enabled = enable;
+        collider2d.enabled = enable;
     }
 
     //      IA
@@ -353,48 +322,6 @@ public class Character : MonoBehaviour
     public bool GetOnPath()
     {
         return onPath;
-    }
-
-    public void SetCrewmates(List<Character> c)
-    {
-        crewmates = c;
-    }
-
-    public void SetLeader(Character l)
-    {
-        leader = l;
-    }
-
-    public bool isLeader()
-    {
-        if (leader == null)
-            return true;
-        else
-            return false;
-    }
-
-    public void SetIdCrew(int i)
-    {
-        idCrew = i;
-    }
-
-    public List<Character> GetSquad()
-    {
-        List<Character> squad = new List<Character>();
-        if (isLeader())
-        {
-            squad.Add(this);
-            foreach (Character mates in crewmates)
-            {
-                squad.Add(mates);
-            }
-            return squad;
-        }
-        else
-        {
-            Debug.LogError("GetSquad only use by a leader");
-            return null;
-        }
     }
 
     public List<Character> GetAllCharactersInSpot()
