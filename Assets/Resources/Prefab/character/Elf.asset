@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
   m_Name: Elf
   m_EditorClassIdentifier: 
+  race: 1
   shape: 10
   typeDivinity: 0
-  shape_value: 2
+  maxLife: 0
   stamina: 3
   nbWound: 0
   dodgeTime: 4
+  spriteMap: {fileID: 0}
+  spriteFight: {fileID: 0}

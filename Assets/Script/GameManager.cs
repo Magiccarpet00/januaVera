@@ -61,14 +61,14 @@ public class GameManager : MonoBehaviour
 
 
 
-
-
-
+    //RACISME
+    public List<RelationLine> relationshipsBoard = new List<RelationLine>();
 
     public void Start()
     {
         SetUpUI();
         SetUpDicEnum();
+        SetUpRacisme();
 
         //--------SEED RNG---------
         //SeedRandom((int)Random.Range(0, 9999999));
@@ -84,6 +84,9 @@ public class GameManager : MonoBehaviour
 
         //UI
         AddTurn(0);
+        
+
+
 
     }
 
@@ -156,6 +159,24 @@ public class GameManager : MonoBehaviour
             tile.GetComponentInChildren<Tile>().CleanCloud();
         }
 
+    }
+
+    public void SetUpRacisme()
+    {
+        //HUMAIN
+        relationshipsBoard.Add(new RelationLine(Race.HUMAN, Race.HUMAN, Relation.FRIEND));
+        relationshipsBoard.Add(new RelationLine(Race.HUMAN, Race.ELF, Relation.NEUTRAL));
+        relationshipsBoard.Add(new RelationLine(Race.HUMAN, Race.BEAST, Relation.NEUTRAL));
+
+        //ELF
+        relationshipsBoard.Add(new RelationLine(Race.ELF, Race.HUMAN, Relation.NEUTRAL));
+        relationshipsBoard.Add(new RelationLine(Race.ELF, Race.ELF, Relation.FRIEND));
+        relationshipsBoard.Add(new RelationLine(Race.ELF, Race.BEAST, Relation.FRIEND));
+
+        //BEAST
+        relationshipsBoard.Add(new RelationLine(Race.BEAST, Race.HUMAN, Relation.HOSTIL));
+        relationshipsBoard.Add(new RelationLine(Race.BEAST, Race.ELF, Relation.NEUTRAL));
+        relationshipsBoard.Add(new RelationLine(Race.BEAST, Race.BEAST, Relation.FRIEND));
     }
 
 
@@ -280,6 +301,19 @@ public class GameManager : MonoBehaviour
 
         return actionButtonStandar;
     }
+    public Relation GetRelationRace(Race race_judge, Race race_eval)
+    {
+        foreach (RelationLine relation in relationshipsBoard)
+        {
+            if(race_judge == relation.race_jugde && race_eval == relation.race_eval)
+            {
+                return relation.relation;
+            }
+        }
+
+        Debug.LogError("ERROR RELATION");
+        return Relation.ALLY;
+    }
 
 
 
@@ -357,6 +391,9 @@ public class GameManager : MonoBehaviour
     //
     //      OTHER
     //
+    
+
+
     private void SeedRandom(int seed)
     {
         Random.InitState(seed);
@@ -432,12 +469,21 @@ public class GameManager : MonoBehaviour
         {
             foreach (Action action in actionQueue)
             {
-
                 if(action.GetPriority() == i &&  !action.GetUser().isCanceled())
+                {
                     action.PerfomAction();
+                    yield return new WaitForSeconds(0.05f); //[CODE WARNING] Peut etre une source de bug (jsp)
+                }
             }
         }
-        
+
+
+        foreach(Character character in characterList)
+        {
+            character.Metting();
+        }
+
+
 
         actionQueue.Clear();
         CommandPnj();
@@ -591,16 +637,43 @@ public enum WeaponStyle {
     LONG_SWORD
 }
 
-public enum SkillType{
+public enum SkillType {
     ATTACK,
     PARRY,
     SUMMON,
 }
 
-public enum ParryType{
+public enum ParryType {
     SIMPLE,
     COUNTER
 }
+
+public enum Relation {
+    ALLY,       // Suive les deplacements et les combats
+    FRIEND,     // Aide au combat sur la même case
+    NEUTRAL,    // 
+    HOSTIL,     // Attaque si on est sur la même case
+    ENNMY       // Suive si on est pas trop loin
+}
+
+public enum Race {
+    HUMAN,
+    ELF,
+    BEAST
+}
+
+public class RelationLine {
+    public Race race_jugde;
+    public Race race_eval;
+    public Relation relation;
+
+    public RelationLine(Race rj, Race re, Relation rel){
+        race_jugde = rj;
+        race_eval = re;
+        relation = rel;
+    }
+}
+
 
 public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
@@ -611,7 +684,7 @@ public class GlobalConst {
     public static float BASIC_SMOOTHTIME = 0.4f;
     public static float HIDE_SMOOTHTIME = 0.8f;
     public static float DELTA_SMOOTH_CREW = 0.2f;   // Pour que les groupes se suive à la queue leu leu 
-    
+
 
     // -- PRIORITE D'ACTION --
     // les actions suivent un ordre de priorité croissant
@@ -625,6 +698,4 @@ public class GlobalConst {
 
     // -- PRIOTITE D'EFFET --
     public static int ONPATH_PRIORITY = 1;
-
-    
 }

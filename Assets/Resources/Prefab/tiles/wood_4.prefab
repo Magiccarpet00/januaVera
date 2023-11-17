@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 5475548427398861378}
   - {fileID: 5450011301034110090}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &1440796682602156432
 CircleCollider2D:
@@ -115,6 +116,7 @@ MonoBehaviour:
   - {fileID: 2638584520547603526}
   - {fileID: 5475548427398861378}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &2091826653307655737
 CircleCollider2D:
@@ -182,6 +184,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 5450011301034110090}
   - {fileID: 3759312036765159668}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &2638584520547603525
 CircleCollider2D:
@@ -248,6 +251,7 @@ MonoBehaviour:
   - {fileID: 3759312036765159668}
   - {fileID: 5475548427398861378}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &3475281896068323244
 CircleCollider2D:
@@ -315,6 +319,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 2638584520547603526}
   - {fileID: 5450011301034110090}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &3759312036765159671
 CircleCollider2D:
@@ -382,6 +387,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 2638584520547603526}
   - {fileID: 3759312036765159668}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5450011301034110089
 CircleCollider2D:
@@ -449,6 +455,7 @@ MonoBehaviour:
   - {fileID: 3475281896068323247}
   - {fileID: 1440796682602156435}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5475548427398861377
 CircleCollider2D:
@@ -608,6 +615,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 5450011301034110090}
   - {fileID: 3759312036765159668}
-  allSpots: []
+  allSpots:
+  - {fileID: 2638584520547603526}
+  - {fileID: 2091826653307655738}
+  - {fileID: 5475548427398861378}
+  - {fileID: 3759312036765159668}
+  - {fileID: 3475281896068323247}
+  - {fileID: 1440796682602156435}
+  - {fileID: 5450011301034110090}
   animatorCloud: {fileID: 0}
   isDiscovered: 0

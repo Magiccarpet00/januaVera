@@ -19,7 +19,7 @@ public class Tile : MonoBehaviour
      3 = LEFT
      */
     [SerializeField] private GameObject[] borderSpots = new GameObject[4];
-    [SerializeField] private List<GameObject> allSpots = new List<GameObject>();
+    [SerializeField] public List<GameObject> allSpots = new List<GameObject>();
 
     // FX
     [SerializeField] private Animator animatorCloud;
@@ -151,6 +151,18 @@ public class Tile : MonoBehaviour
     public bool GetIsDiscovered()
     {
         return isDiscovered;
+    }
+
+    public List<Spot> GetSpots()
+    {
+        List<Spot> spots = new List<Spot>();
+
+        foreach (GameObject spot in allSpots)
+        {
+            spots.Add(spot.GetComponent<Spot>());
+        }
+
+        return spots;
     }
     
 }

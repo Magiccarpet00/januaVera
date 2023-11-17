@@ -50,6 +50,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 6642342093451098881}
   - {fileID: 5038197694178469284}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &3306171091221668663
 CircleCollider2D:
@@ -116,6 +117,7 @@ MonoBehaviour:
   - {fileID: 5038197694178469284}
   - {fileID: 9070474812580928556}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &4795425052148928532
 CircleCollider2D:
@@ -183,6 +185,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 6642342093451098881}
   - {fileID: 3306171091221668660}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5038197694178469287
 CircleCollider2D:
@@ -249,6 +252,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 5038197694178469284}
   - {fileID: 3306171091221668660}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &6642342093451098882
 CircleCollider2D:
@@ -315,6 +319,7 @@ MonoBehaviour:
   - {fileID: 9070474812580928556}
   - {fileID: 3306171091221668660}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &7833331467838184886
 CircleCollider2D:
@@ -381,6 +386,7 @@ MonoBehaviour:
   - {fileID: 4795425052148928535}
   - {fileID: 7833331467838184885}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &9070474812580928559
 CircleCollider2D:
@@ -539,6 +545,12 @@ MonoBehaviour:
   - {fileID: 9070474812580928556}
   - {fileID: 3306171091221668660}
   - {fileID: 0}
-  allSpots: []
+  allSpots:
+  - {fileID: 5038197694178469284}
+  - {fileID: 4795425052148928535}
+  - {fileID: 9070474812580928556}
+  - {fileID: 7833331467838184885}
+  - {fileID: 3306171091221668660}
+  - {fileID: 6642342093451098881}
   animatorCloud: {fileID: 0}
   isDiscovered: 0

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
   m_Name: Wolf
   m_EditorClassIdentifier: 
+  race: 2
   shape: 7
   typeDivinity: 0
   maxLife: 5

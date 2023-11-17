@@ -7,7 +7,7 @@ public class Spot : MonoBehaviour
     [SerializeField] private List<GameObject> adjacentSpots = new List<GameObject>();
     [SerializeField] private List<GameObject> adjacentSecretSpots = new List<GameObject>();
 
-    [SerializeField] private List<Character> charactersOnSpot = new List<Character>();
+    [SerializeField] public List<Character> charactersOnSpot = new List<Character>();
     
     //FX
     [SerializeField] private GameObject prefabOverMouse_fx;
@@ -53,6 +53,22 @@ public class Spot : MonoBehaviour
             GameManager.instance._ExecuteActionQueue();
         }
     }
+
+
+    //
+    //      RELATION
+    //
+    //public void Meeting()
+    //{
+    //    foreach (Character character in charactersOnSpot)
+    //    {
+    //        character.Metting(charactersOnSpot);
+    //    }
+    //}
+
+
+
+
 
 
 

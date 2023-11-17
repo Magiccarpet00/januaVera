@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentSpots: []
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &4734810216708080547
 CircleCollider2D:
@@ -200,6 +201,7 @@ MonoBehaviour:
   - {fileID: 4734810216708080544}
   - {fileID: 4734810216708080544}
   - {fileID: 4734810216708080544}
-  allSpots: []
+  allSpots:
+  - {fileID: 4734810216708080544}
   animatorCloud: {fileID: 0}
   isDiscovered: 0

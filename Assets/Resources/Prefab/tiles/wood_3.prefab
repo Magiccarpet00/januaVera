@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 6288151413875187025}
   - {fileID: 1723396833948591590}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &511766120410485531
 CircleCollider2D:
@@ -114,6 +115,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 511766120410485528}
   adjacentSecretSpots: []
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &1723396833948591589
 CircleCollider2D:
@@ -180,6 +182,7 @@ MonoBehaviour:
   adjacentSecretSpots:
   - {fileID: 6288151413875187025}
   - {fileID: 6053569613511154531}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &2707561039855059082
 CircleCollider2D:
@@ -245,6 +248,7 @@ MonoBehaviour:
   adjacentSpots: []
   adjacentSecretSpots:
   - {fileID: 2707561039855059081}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &6053569613511154528
 CircleCollider2D:
@@ -311,6 +315,7 @@ MonoBehaviour:
   - {fileID: 511766120410485528}
   adjacentSecretSpots:
   - {fileID: 2707561039855059081}
+  charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &6288151413875187026
 CircleCollider2D:
@@ -468,6 +473,11 @@ MonoBehaviour:
   - {fileID: 1723396833948591590}
   - {fileID: 0}
   - {fileID: 6288151413875187025}
-  allSpots: []
+  allSpots:
+  - {fileID: 6288151413875187025}
+  - {fileID: 511766120410485528}
+  - {fileID: 1723396833948591590}
+  - {fileID: 2707561039855059081}
+  - {fileID: 6053569613511154531}
   animatorCloud: {fileID: 0}
   isDiscovered: 0

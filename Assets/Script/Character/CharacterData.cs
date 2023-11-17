@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterData", menuName = "JanuaVera/Character Data")]
 public class CharacterData : ScriptableObject
 {
+    public Race race;
     public Element shape;
     public Divinity typeDivinity; //uniquement si le character est divin
     public int maxLife;    

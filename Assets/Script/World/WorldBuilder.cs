@@ -12,6 +12,7 @@ public class WorldBuilder : MonoBehaviour
     [SerializeField] private GameObject folderTile;
 
     [SerializeField] private GameObject[,] allTilesInGame = new GameObject[GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD];
+    public List<Spot> allSpotInGame = new List<Spot>();
 
     [SerializeField] private List<GameObject> prefabTiles = new List<GameObject>();
     [SerializeField] private GameObject prefabParentTile;
@@ -35,6 +36,7 @@ public class WorldBuilder : MonoBehaviour
         CreateProtoWorld();
         CreateWorld();
         MakeLink();
+        allSpotInGame = GetAllSpot();
     }
 
     private void SetUpDicPrefabLocation()
@@ -254,6 +256,22 @@ public class WorldBuilder : MonoBehaviour
 
         return infoBorder;
     }
+
+    public List<Spot> GetAllSpot()
+    {
+        List<Spot> allSpot = new List<Spot>();
+        
+        foreach (GameObject tile in allTilesInGame)
+        {
+            if(tile != null)
+                allSpot.AddRange(tile.GetComponent<Tile>().GetSpots());
+        }
+
+        return allSpot;
+    }
+
+
+
 
     /*
      Foncrion recursive en brute force qui va crée le protoWorld 
