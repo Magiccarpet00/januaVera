@@ -115,7 +115,6 @@ public class Character : MonoBehaviour
     public void Rest()
     {
         //TODO rest
-        Debug.Log(charactersEncountered.Count);
     }
 
 
@@ -133,13 +132,22 @@ public class Character : MonoBehaviour
     //
     public void Metting()
     {
-        foreach (Character character in currentSpot.GetComponent<Spot>().GetAllCharactersInSpot())
+        foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersInSpot())
         {
-            if(charactersEncountered.ContainsKey(character) == false)
+            if(charactersEncountered.ContainsKey(characterOnSpot) == false)
             {
-                charactersEncountered.Add(character, GameManager.instance.GetRelationRace(this.characterData.race, characterData.race));
+                charactersEncountered.Add(characterOnSpot, GameManager.instance.GetRelationRace(this.characterData.race, characterOnSpot.characterData.race));
             }
         }
+    }
+
+    public bool WantToFight(Character character)
+    {
+        if (charactersEncountered[character] == Relation.HOSTIL ||
+            charactersEncountered[character] == Relation.ENNMY)
+            return true;
+        else
+            return false;
     }
 
 

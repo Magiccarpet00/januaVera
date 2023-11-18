@@ -439,8 +439,6 @@ public class GameManager : MonoBehaviour
     // Du coup j'utilise le subterfuge ci-dessus...
     private IEnumerator ExecuteActionQueue()
     {
-        
-
         inputBlock = true;
 
         AddTurn(1);
@@ -477,13 +475,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
         foreach(Character character in characterList)
         {
             character.Metting();
         }
-
-
 
         actionQueue.Clear();
         CommandPnj();
@@ -509,7 +504,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Envoie la commande d'action de tout les pnj
-    public void CommandPnj() //[CODE TMP] commande move pour l'instant
+    public void CommandPnj() //[CODE TMP] commande move pour l'instant ou bagare si il y a un enemy
     {
         foreach (Character character in characterList)
         {
@@ -521,11 +516,27 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                    int rng = Random.Range(0, adjSpot.Count);
-                    character.CommandMove(adjSpot[rng]);
-                }
+                    bool fightFound = false;
+                    List<Character> charactersInSpot = character.GetAllCharactersInSpot();
+                    foreach (Character _characterInSpot in charactersInSpot)
+                    {
+                        if(character.WantToFight(_characterInSpot))
+                        {
+                            fightFound = true;
+                        }
+                    } 
 
+                    if(fightFound)
+                    {
+                        character.CommandFight();
+                    }
+                    else
+                    {
+                        List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                        int rng = Random.Range(0, adjSpot.Count);
+                        character.CommandMove(adjSpot[rng]);
+                    }
+                }
             }
         }
     }
