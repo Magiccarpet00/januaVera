@@ -391,9 +391,6 @@ public class GameManager : MonoBehaviour
     //
     //      OTHER
     //
-    
-
-
     private void SeedRandom(int seed)
     {
         Random.InitState(seed);
@@ -467,7 +464,9 @@ public class GameManager : MonoBehaviour
         {
             foreach (Action action in actionQueue)
             {
-                if(action.GetPriority() == i &&  !action.GetUser().isCanceled())
+                yield return new WaitUntil(() => CombatManager.instance.GetOnFight() == false);
+
+                if (action.GetPriority() == i &&  !action.GetUser().isCanceled())
                 {
                     action.PerfomAction();
                     yield return new WaitForSeconds(0.05f); //[CODE WARNING] Peut etre une source de bug (jsp)
@@ -479,6 +478,8 @@ public class GameManager : MonoBehaviour
         {
             character.Metting();
         }
+
+        yield return new WaitUntil(() => CombatManager.instance.GetOnFight() == false);        
 
         actionQueue.Clear();
         CommandPnj();
