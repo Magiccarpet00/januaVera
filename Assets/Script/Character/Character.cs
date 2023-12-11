@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
     //FIGHT
     public List<Character> selectedCharacter = new List<Character>();
     public SkillData currentLoadedSkill;
+    public int nbGarde;
 
 
     //INVENTORY
@@ -238,6 +239,15 @@ public class Character : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public bool ParryableAttack(SkillData skillDataTaken)
+    {
+        if(nbGarde > 0)
+            if (currentLoadedSkill.damageTypeParryable.Contains(skillDataTaken.damageType))
+                return true;
+
+        return false;
     }
 
     public void Die() //[CODI BE CARFULL] Il faut appeler la fonction Die 2 fois pour tuer un character

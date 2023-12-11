@@ -469,7 +469,7 @@ public class GameManager : MonoBehaviour
                 if (action.GetPriority() == i &&  !action.GetUser().isCanceled())
                 {
                     action.PerfomAction();
-                    yield return new WaitForSeconds(0.05f); //[CODE WARNING] Peut etre une source de bug (jsp)
+                    yield return new WaitForSeconds(0.01f); //[CODE WARNING] Peut etre une source de bug (jsp)
                 }
             }
         }

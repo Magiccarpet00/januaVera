@@ -105,10 +105,13 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void ClickButtonSkill(SkillData skillData)
+    public void ClickButtonSkill(SkillData skillData) //[CODE WARNING] peut etre une source de bug dans pour les skills 0target lancer par des PNJ
     {
-        GameManager.instance.playerCharacter.currentLoadedSkill = skillData;        
-        TargetMode(skillData.nbTarget);
+        GameManager.instance.playerCharacter.currentLoadedSkill = skillData;
+        if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
+            TargetMode(skillData.nbTarget);
+        else
+            GameManager.instance.playerCharacter.selectedCharacter.Add(GameManager.instance.playerCharacter);
     }
 
     public void ClickButtonBack()
@@ -130,7 +133,7 @@ public class CombatManager : MonoBehaviour
         PopPanel();
     }
 
-    public void CastSkills()
+    public void CastSkills() //TODO fonction qui va toujours se remplire
     {
         foreach (Character character in characters)
         {
@@ -141,12 +144,39 @@ public class CombatManager : MonoBehaviour
                     case SkillType.ATTACK:
                         foreach (Character characterTarget in character.selectedCharacter)
                         {
-                            characterTarget.TakeDamage(character.currentLoadedSkill.damage);
-                            dic_CharacterSpriteFight[character].AnimAtk();
+                            //TODO regarder si on est pas parry
+                            if(!characterTarget.isDying)
+                            {
+                                if(characterTarget.ParryableAttack(character.currentLoadedSkill))
+                                {
+                                    if(characterTarget.currentLoadedSkill.parryType == ParryType.COUNTER)
+                                    {
+                                        
+                                        character.TakeDamage(characterTarget.currentLoadedSkill.damage);
+                                    }
+                                }
+                                else
+                                {
+                                    characterTarget.TakeDamage(character.currentLoadedSkill.damage);
+                                }
+
+                                dic_CharacterSpriteFight[character].AnimAtk();
+
+
+
+
+                            }
                         }
                         break;
 
-                    
+                    case SkillType.PARRY:
+                        foreach(Character characterTarget in character.selectedCharacter)
+                        {
+                            //TODO ne marche pas si on a plusieur type de parry en même temps
+                            //exemple parrade classique + bouclier aquatique
+                            character.nbGarde = character.currentLoadedSkill.nbGarde;
+                        }
+                        break;
 
                     default:
                         break;
@@ -234,6 +264,12 @@ public class CombatManager : MonoBehaviour
         timerFight.ActiveTimer(false);
 
         GameManager.instance.playerCharacter.selectedCharacter = new List<Character>();
+
+        //TMP pour les parry
+        foreach (Character character in characters)
+        {
+            character.nbGarde = 0;
+        }
     }
 
 
