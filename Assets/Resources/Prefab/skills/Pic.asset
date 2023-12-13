@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: PIC
   m_EditorClassIdentifier: 
   skillType: 0
+  element: 4
+  range: 1
   speed: 3
   nbTarget: 1
   damage: 3
-  damageType: 0
+  damageType: 1
+  parryType: 0
+  damageTypeParryable: 
+  nbGarde: 0

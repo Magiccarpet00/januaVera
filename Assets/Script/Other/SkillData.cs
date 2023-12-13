@@ -11,7 +11,6 @@ public class SkillData : ScriptableObject
     public Range range;
     public int speed;
     public int nbTarget;
-    
 
     [Header("Attack")]
     public int damage;

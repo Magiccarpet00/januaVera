@@ -23,11 +23,12 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private Vector3 posFight;
     [SerializeField] private GameObject prefabSpriteCharacter;
 
+
+
     //FIGHT SEQUENCE
     private float TIME_FIGHT = 0.5f;
     private int speedInstant = 0;
     public TimerFight timerFight;
-
 
     //Target (uniquement pour player)
     public bool inTargetMode;
@@ -45,6 +46,9 @@ public class CombatManager : MonoBehaviour
 
     public GameObject prefabButtonSkill;
     public List<GameObject> buttonsSkills = new List<GameObject>();
+
+    [Header("FX")]
+    public GameObject prefabFxSkills;
 
     public void FillSpot()
     {
@@ -144,27 +148,26 @@ public class CombatManager : MonoBehaviour
                     case SkillType.ATTACK:
                         foreach (Character characterTarget in character.selectedCharacter)
                         {
-                            //TODO regarder si on est pas parry
+                            
                             if(!characterTarget.isDying)
                             {
                                 if(characterTarget.ParryableAttack(character.currentLoadedSkill))
                                 {
                                     if(characterTarget.currentLoadedSkill.parryType == ParryType.COUNTER)
                                     {
-                                        
                                         character.TakeDamage(characterTarget.currentLoadedSkill.damage);
                                     }
                                 }
                                 else
                                 {
                                     characterTarget.TakeDamage(character.currentLoadedSkill.damage);
+                                    CreateFxFightSkill(dic_CharacterSpriteFight[characterTarget].transform,
+                                                       character.currentLoadedSkill.damageType,
+                                                       character.currentLoadedSkill.element);
+
                                 }
 
-                                dic_CharacterSpriteFight[character].AnimAtk();
-
-
-
-
+                                dic_CharacterSpriteFight[character].AnimAtk(); //TODO DEMAIN => ANIMATION
                             }
                         }
                         break;
@@ -359,6 +362,31 @@ public class CombatManager : MonoBehaviour
         }
 
     }
+
+
+
+
+    //
+    //      FX
+    //
+    public void CreateFxFightSkill(Transform _transform, DamageType damageType, Element element) //TODO Reflechir à l'anim de la contre
+    {
+        GameObject newFxFightSkill = Instantiate(prefabFxSkills, _transform.position, Quaternion.identity);
+
+        if(damageType == DamageType.ELEM)
+            newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(element.ToString());
+        else
+            newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(damageType.ToString());
+    }
+
+    
+
+
+
+
+
+
+
 
     //
     //      GET && SET
