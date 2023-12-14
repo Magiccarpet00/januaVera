@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: KILL
   m_EditorClassIdentifier: 
   skillType: 0
-  element: 11
+  element: 0
   range: 1
   speed: 1
   nbTarget: 3
   damage: 999
-  damageType: 1
+  damageType: 2
   parryType: 0
   damageTypeParryable: 
   nbGarde: 0

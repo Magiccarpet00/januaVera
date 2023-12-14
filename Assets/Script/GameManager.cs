@@ -437,7 +437,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator ExecuteActionQueue()
     {
         inputBlock = true;
-
         AddTurn(1);
 
         // Application des effects

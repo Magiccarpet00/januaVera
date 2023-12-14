@@ -153,20 +153,19 @@ public class CombatManager : MonoBehaviour
                             {
                                 if(characterTarget.ParryableAttack(character.currentLoadedSkill))
                                 {
+                                    CreateFxFightSkill(dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
+                                    
                                     if(characterTarget.currentLoadedSkill.parryType == ParryType.COUNTER)
                                     {
                                         character.TakeDamage(characterTarget.currentLoadedSkill.damage);
+                                        CreateFxFightSkill(dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill,true);
                                     }
                                 }
                                 else
                                 {
                                     characterTarget.TakeDamage(character.currentLoadedSkill.damage);
-                                    CreateFxFightSkill(dic_CharacterSpriteFight[characterTarget].transform,
-                                                       character.currentLoadedSkill.damageType,
-                                                       character.currentLoadedSkill.element);
-
+                                    CreateFxFightSkill(dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
-
                                 dic_CharacterSpriteFight[character].AnimAtk(); //TODO DEMAIN => ANIMATION
                             }
                         }
@@ -369,14 +368,42 @@ public class CombatManager : MonoBehaviour
     //
     //      FX
     //
-    public void CreateFxFightSkill(Transform _transform, DamageType damageType, Element element) //TODO Reflechir à l'anim de la contre
+    public void CreateFxFightSkill(Transform _transform, SkillData skillData, bool skillComingFromCaster = false) //TODO Reflechir à l'anim de la contre
     {
+        float offSet = 1;
         GameObject newFxFightSkill = Instantiate(prefabFxSkills, _transform.position, Quaternion.identity);
+        
+        switch(skillData.skillType)
+        {
+            case SkillType.ATTACK:
+                if(skillData.damageType == DamageType.ELEM)
+                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.element.ToString());
+                else
+                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.damageType.ToString());
+                
+                newFxFightSkill.transform.Translate(Random.Range(-offSet, offSet), Random.Range(-offSet, offSet), 0);
+                break;
 
-        if(damageType == DamageType.ELEM)
-            newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(element.ToString());
-        else
-            newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(damageType.ToString());
+            case SkillType.PARRY:
+                //[CODE SEPTIQUE] Je suis pas sur de faire qu'une seul anim de block pour les couters
+                //j'aimerai bien que le mur d'eau, la riposte et le block d'un bouclier est des anims
+                //differentes
+                newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill("BLOCK");
+                if(skillComingFromCaster) // [CODE DOUTEUX] j'ai pas trop ce copier la ligne du dessus à revoir
+                {
+                    if (skillData.damageType == DamageType.ELEM)
+                        newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.element.ToString());
+                    else
+                        newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.damageType.ToString());
+                    newFxFightSkill.transform.Translate(Random.Range(-offSet, offSet), Random.Range(-offSet, offSet), 0);
+                }
+                        
+                break;
+
+            case SkillType.SUMMON:
+                break;
+        }
+        
     }
 
     
