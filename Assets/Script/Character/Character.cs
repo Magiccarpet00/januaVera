@@ -244,7 +244,7 @@ public class Character : MonoBehaviour
     public bool ParryableAttack(SkillData skillDataTaken)
     {
         if(nbGarde > 0)
-            if (currentLoadedSkill.damageTypeParryable.Contains(skillDataTaken.damageType))
+            if (currentLoadedSkill.damageTypeParryable == skillDataTaken.damageType)
                 return true;
 
         return false;

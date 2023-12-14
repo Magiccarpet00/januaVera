@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: Slash
     m_Metadata:
       m_Items: []
+  - m_Id: 10718984836747264
+    m_Localized: Riposte
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

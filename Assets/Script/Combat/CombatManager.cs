@@ -166,7 +166,7 @@ public class CombatManager : MonoBehaviour
                                     characterTarget.TakeDamage(character.currentLoadedSkill.damage);
                                     CreateFxFightSkill(dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
-                                dic_CharacterSpriteFight[character].AnimAtk(); //TODO DEMAIN => ANIMATION
+                                dic_CharacterSpriteFight[character].AnimAtk();
                             }
                         }
                         break;

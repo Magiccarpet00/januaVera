@@ -27,6 +27,10 @@ MonoBehaviour:
     m_Key: SLASH
     m_Metadata:
       m_Items: []
+  - m_Id: 10718984836747264
+    m_Key: BLOCK_COUNTER
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

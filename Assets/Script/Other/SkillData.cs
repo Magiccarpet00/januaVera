@@ -18,7 +18,7 @@ public class SkillData : ScriptableObject
 
     [Header("Parry")]
     public ParryType parryType;
-    public List<DamageType> damageTypeParryable;
+    public DamageType damageTypeParryable;
     public int nbGarde; 
 
 }
