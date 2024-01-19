@@ -12,6 +12,7 @@ public class ObjectManager : MonoBehaviour
 
     public List<WeaponData> weaponDatas = new List<WeaponData>();
     public List<LocationData> locationDatas = new List<LocationData>();
+    public List<CharacterData> characterDatas = new List<CharacterData>();
 
 
     public WeaponData FindWeaponData(string name)
@@ -36,6 +37,16 @@ public class ObjectManager : MonoBehaviour
         return res;
     }
 
+    public CharacterData FindCharacterData(string name)
+    {
+        CharacterData res = null;
+        foreach (CharacterData d in characterDatas)
+        {
+            if (d.name.Equals(name))
+                res = d;
+        }
+        return res;
+    }
 
 
 

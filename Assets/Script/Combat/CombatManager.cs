@@ -23,8 +23,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private Vector3 posFight;
     [SerializeField] private GameObject prefabSpriteCharacter;
 
-
-
     //FIGHT SEQUENCE
     private float TIME_FIGHT = 0.5f;
     private int speedInstant = 0;

@@ -3966,10 +3966,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CircleTest: {fileID: 8607141512307440147, guid: 787d1a549080b974198634e040711513, type: 3}
-  prefabTmpEnemy: {fileID: 468640492003026094, guid: 5f982bdb4bb62b247acee9b8f4055265, type: 3}
   cam: {fileID: 519420028}
   cam_fight: {fileID: 2092461398}
   prefabPlayer: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
+  prefabCharacter: {fileID: 468640492003026094, guid: d8742ad2c7d3e00449f51aa4b0c6110d, type: 3}
   player: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   playerCharacter: {fileID: 0}
   worldBuilder: {fileID: 1915923813}
@@ -4053,7 +4053,13 @@ MonoBehaviour:
   weaponDatas:
   - {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
-  locationDatas: []
+  locationDatas:
+  - {fileID: 11400000, guid: 03724e022724f874a97b8ee61eb250eb, type: 2}
+  - {fileID: 11400000, guid: dab2f871e96ab7043a14e9c15704f1f7, type: 2}
+  characterDatas:
+  - {fileID: 11400000, guid: 04e93ea1a3602754db5bfccb2d6a8484, type: 2}
+  - {fileID: 11400000, guid: bcfaed210dd3aeb41a2f7599311107f8, type: 2}
+  - {fileID: 11400000, guid: f3c1ca029b6c3394f9b5d31fab6ef0d4, type: 2}
 --- !u!1 &1947701088
 GameObject:
   m_ObjectHideFlags: 0

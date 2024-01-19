@@ -20,5 +20,5 @@ MonoBehaviour:
   damage: 2
   damageType: 1
   parryType: 1
-  damageTypeParryable: 0100000000000000
+  damageTypeParryable: 1
   nbGarde: 1

@@ -16,5 +16,4 @@ MonoBehaviour:
   maxState: 4
   material: 4
   skills:
-  - {fileID: 11400000, guid: cdd1e1165ac1f2840879b92484a754cc, type: 2}
   - {fileID: 11400000, guid: ca0d8f56626cc2a4a9e161a51af78a06, type: 2}

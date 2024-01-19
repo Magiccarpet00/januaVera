@@ -16,13 +16,14 @@ public class GameManager : MonoBehaviour
     // DEBUG
     [Header("DEGUB")]
     public GameObject CircleTest;
-    public GameObject prefabTmpEnemy;
+    //public GameObject prefabTmpEnemy;
 
     // GLOBAL VAR
     [Header("GLOBAL VAR")]
     public GameObject cam;
     public GameObject cam_fight;
     public GameObject prefabPlayer;
+    public GameObject prefabCharacter;
     [HideInInspector] public GameObject player;
     public Player playerCharacter;
 
@@ -143,7 +144,7 @@ public class GameManager : MonoBehaviour
         
         GameObject currentTile = GetTile(startLocation.x, startLocation.y);
         Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-        player = CreateCharacter(prefabPlayer, spot[0].gameObject);
+        player = CreateCharacter(ObjectManager.instance.FindCharacterData("Player"), spot[0].gameObject);
         playerCharacter = player.GetComponent<Player>();
         UpdateUILandscape();
         UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
@@ -204,7 +205,7 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(2, 2);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            GameObject newPnj = CreateCharacter(prefabTmpEnemy, spot[0].gameObject);
+            GameObject newPnj = CreateCharacter(ObjectManager.instance.FindCharacterData("Wolf"), spot[0].gameObject);
             newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
@@ -396,10 +397,17 @@ public class GameManager : MonoBehaviour
         Random.InitState(seed);
     }
 
-    public GameObject CreateCharacter(GameObject character, GameObject spot)
+    public GameObject CreateCharacter(CharacterData characterData, GameObject spot)
     {
-        GameObject newCharacter = Instantiate(character, spot.transform.position, Quaternion.identity);
+        GameObject newCharacter;
+        if (characterData.name == "Player")
+            newCharacter = Instantiate(prefabPlayer, spot.transform.position, Quaternion.identity);
+        else
+            newCharacter = Instantiate(prefabCharacter, spot.transform.position, Quaternion.identity);
+
         Character _chatacter = newCharacter.GetComponent<Character>();
+
+        _chatacter.characterData = characterData;
         _chatacter.SetCurrentSpot(spot);
         Transform t_spot = spot.transform;
         _chatacter.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
