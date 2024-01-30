@@ -21,12 +21,12 @@ public class ButtonWeapon : MonoBehaviour
     public void SetUpUI(Weapon w)
     {
         weapon = w;
+        WeaponData wd = (WeaponData)w.objectData;
         //LocalizationSettings.StringDatabase.GetLocalizedStringAsync("SWORD").Completed += result => nameValue.text = result;
-
-        nameValue.SetEntry(w.weaponData.name);
-        styleValue.SetEntry(w.weaponData.style.ToString()); //TODO recfactot nommage style/type
-        stateValue.text = w.currentState.ToString() + "/" + weapon.weaponData.maxState.ToString();
-        materialValue.SetEntry(w.weaponData.material.ToString());
+        nameValue.SetEntry(w.objectData.name);
+        styleValue.SetEntry(wd.style.ToString()); //TODO recfactot nommage style/type
+        stateValue.text = w.currentState.ToString() + "/" + wd.maxState.ToString();
+        materialValue.SetEntry(w.objectData.material.ToString());
     }
 
 }

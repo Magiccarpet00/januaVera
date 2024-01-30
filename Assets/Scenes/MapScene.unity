@@ -3989,6 +3989,7 @@ MonoBehaviour:
   - {fileID: 2455649663024616122, guid: 25eee5da0e4ced04da626f225f68fbf4, type: 3}
   - {fileID: 3891409678922949209, guid: 1ab2b90d3fe314d4e8223201cf1c25e8, type: 3}
   - {fileID: 3891409678922949209, guid: 9949b5bdff8ca914d929489f93777325, type: 3}
+  - {fileID: 5700167105990369799, guid: 623f98c66c6c7b24a94eddd88c373671, type: 3}
   worldCanvas: {fileID: 113513967}
   actionCanvas: {fileID: 1721163261}
   offSetInfoGrid: {x: 4, y: 0, z: 0}

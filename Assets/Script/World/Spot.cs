@@ -8,7 +8,8 @@ public class Spot : MonoBehaviour
     [SerializeField] private List<GameObject> adjacentSecretSpots = new List<GameObject>();
 
     [SerializeField] public List<Character> charactersOnSpot = new List<Character>();
-    
+
+    [SerializeField] public List<MyObject> objectsOnSpot = new List<MyObject>();
     //FX
     [SerializeField] private GameObject prefabOverMouse_fx;
     private Animator AnimatorOverMouse_fx;
@@ -33,17 +34,20 @@ public class Spot : MonoBehaviour
     //
     //      FX
     //
-    void OnMouseEnter()
-    {
-        GameObject over = Instantiate(prefabOverMouse_fx, this.transform.position, Quaternion.identity);
-        AnimatorOverMouse_fx = over.GetComponent<Animator>();
-        GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
-    }
-    void OnMouseExit()
-    {
-        AnimatorOverMouse_fx.SetTrigger("end");
-        GameManager.instance.DestroyInfoGridLayoutGroupe();
-    }
+    
+    //[CODE PLACARD] Je ne suis pas sur de cette fonctionaliter.
+
+    //void OnMouseEnter()
+    //{
+    //    GameObject over = Instantiate(prefabOverMouse_fx, this.transform.position, Quaternion.identity);
+    //    AnimatorOverMouse_fx = over.GetComponent<Animator>();
+    //    GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
+    //}
+    //void OnMouseExit()
+    //{
+    //    AnimatorOverMouse_fx.SetTrigger("end");
+    //    GameManager.instance.DestroyInfoGridLayoutGroupe();
+    //}
 
     private void OnMouseUpAsButton()
     {
@@ -120,6 +124,11 @@ public class Spot : MonoBehaviour
     public void RemoveCharacterInSpot(Character c)
     {
         charactersOnSpot.Remove(c);
+    }
+
+    public void AddObject(MyObject obj)
+    {
+        objectsOnSpot.Add(obj);
     }
 
 }

@@ -23,21 +23,19 @@ public class Character : MonoBehaviour
     private Stack<Action> stackAction = new Stack<Action>();
     private bool canceled; // si il est canceled il ne peut par faire sont action de la actionQueue
 
-
     //LIFE
     public int currentLife;
     public bool isDying; //pour le fight
     public bool isDead; 
-
 
     //FIGHT
     public List<Character> selectedCharacter = new List<Character>();
     public SkillData currentLoadedSkill;
     public int nbGarde;
 
-
     //INVENTORY
     public List<Weapon> weaponInventory = new List<Weapon>();
+    public List<MyObject> objectInventory = new List<MyObject>();
 
     //RELATION
     public Dictionary<Character, Relation> charactersEncountered = new Dictionary<Character, Relation>();
@@ -47,7 +45,6 @@ public class Character : MonoBehaviour
         spriteRenderer.sprite = characterData.spriteMap;
         currentLife = characterData.maxLife;
     }
-
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
@@ -117,6 +114,13 @@ public class Character : MonoBehaviour
     {
         //TODO rest
     }
+
+    public void Search()
+    {
+        //TODO searsh
+        Debug.Log(currentSpot.GetComponent<Spot>().objectsOnSpot);
+    }
+
 
 
     public void UpdateSmoothTime()
@@ -281,9 +285,11 @@ public class Character : MonoBehaviour
     {
         int countInventory = weaponInventory.Count;
         Weapon rngWeapon = weaponInventory[Random.Range(0, countInventory)];
+        WeaponData wd = (WeaponData)rngWeapon.objectData;
 
-        int countWeapon = rngWeapon.weaponData.skills.Count;
-        currentLoadedSkill = rngWeapon.weaponData.skills[Random.Range(0, countWeapon)];
+
+        int countWeapon = wd.skills.Count;
+        currentLoadedSkill = wd.skills[Random.Range(0, countWeapon)];
         selectedCharacter = charactersTarget;
     }
 

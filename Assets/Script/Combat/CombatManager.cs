@@ -94,8 +94,9 @@ public class CombatManager : MonoBehaviour
     public void ClickButtonWeapon(Weapon weapon)
     {
         PushPanel(panelSkill);
+        WeaponData wd = (WeaponData)weapon.objectData;
 
-        foreach (SkillData skill in weapon.weaponData.skills)
+        foreach (SkillData skill in wd.skills)
         {
             GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
             btnSkill.transform.SetParent(panelSkill.transform);
@@ -272,7 +273,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-
     public void UpdateAllUI()
     {
         foreach(GameObject cs in combatSpots)
@@ -366,7 +366,7 @@ public class CombatManager : MonoBehaviour
     //
     //      FX
     //
-    public void CreateFxFightSkill(Transform _transform, SkillData skillData, bool skillComingFromCaster = false) //TODO Reflechir à l'anim de la contre
+    public void CreateFxFightSkill(Transform _transform, SkillData skillData, bool skillComingFromCaster = false) 
     {
         float offSet = 1;
         GameObject newFxFightSkill = Instantiate(prefabFxSkills, _transform.position, Quaternion.identity);

@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public GameObject cam_fight;
     public GameObject prefabPlayer;
     public GameObject prefabCharacter;
+    public GameObject prefabObjectOnMap;
+
     [HideInInspector] public GameObject player;
     public Player playerCharacter;
 
@@ -118,6 +120,7 @@ public class GameManager : MonoBehaviour
         dic_button.Add(ButtonType.REST,   allButton[2]);
         dic_button.Add(ButtonType.UNHIDE, allButton[3]);
         dic_button.Add(ButtonType.FIGHT,  allButton[4]);
+        dic_button.Add(ButtonType.SEARCH, allButton[5]);
     }
 
     private void SetUpDicEnum()
@@ -231,6 +234,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            GameObject currentTile = GetTile(1, 2);
+            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
+
+            spot[0].AddObject(CreateObjectOnMap("Bottle"));
+        }
+
     }
 
 
@@ -299,6 +310,7 @@ public class GameManager : MonoBehaviour
             actionButtonStandar.Add(ButtonType.UNHIDE);
 
         actionButtonStandar.Add(ButtonType.FIGHT);
+        actionButtonStandar.Add(ButtonType.SEARCH);
 
         return actionButtonStandar;
     }
@@ -366,7 +378,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateInfoCharacter(Character character, Vector3 pos, Transform InfoGridLayoutGroupe)
+    public void CreateInfoCharacter(Character character, Vector3 pos, Transform InfoGridLayoutGroupe) //[CODE PLACARD] (cf OnMouseEnter() in Spot.cs)
     {
         GameObject currentInfoCharacter = Instantiate(prefabInfoCharacter, pos, Quaternion.identity);
         InfoCharacter infoCharacter = currentInfoCharacter.GetComponent<InfoCharacter>();
@@ -375,9 +387,9 @@ public class GameManager : MonoBehaviour
         Sprite spr = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
         string shape = character.characterData.shape.ToString();
         int life = character.characterData.maxLife;
-        int dodgeValue = character.characterData.dodgeTime;
+        //int dodgeValue = character.characterData.dodgeTime;
 
-        infoCharacter.SetInfoCharacter(spr, shape, life, dodgeValue);
+        //infoCharacter.SetInfoCharacter(spr, shape, life, dodgeValue);
     }
 
     public void DestroyInfoGridLayoutGroupe()
@@ -416,6 +428,16 @@ public class GameManager : MonoBehaviour
         characterList.Add(_chatacter);
 
         return newCharacter;
+    }
+
+    public MyObject CreateObjectOnMap(string nameObject)
+    {
+        ObjectData objData = ObjectManager.instance.FindObjectData("nameObject");
+        MyObject obj = new MyObject(objData);
+        return obj;
+
+
+        
     }
 
     public Weapon CreateWeapon(string nameWeapon)
@@ -615,7 +637,8 @@ public enum ButtonType {
     REST,
     HIDE,
     UNHIDE,
-    FIGHT
+    FIGHT,
+    SEARCH
 }
 
 public enum Element {
@@ -707,11 +730,12 @@ public class GlobalConst {
 
     // -- PRIORITE D'ACTION --
     // les actions suivent un ordre de priorité croissant
-    public static int EMPTY_PRIORITY = 1;
-    public static int FIGHT_PRIORITY = 2;
-    public static int HIDE_PRIORITY  = 3;
-    public static int MOVE_PRIORITY  = 4;
-    public static int REST_PRIORITY  = 5;
+    public static int EMPTY_PRIORITY  = 1;
+    public static int FIGHT_PRIORITY  = 2;
+    public static int HIDE_PRIORITY   = 3;
+    public static int MOVE_PRIORITY   = 4;
+    public static int SEARCH_PRIORITY = 5;
+    public static int REST_PRIORITY   = 6;
 
     public static int RANGE_PRIOTITY = 5; // Le nombre total de priority d'action
 
