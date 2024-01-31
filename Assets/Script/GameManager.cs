@@ -236,10 +236,20 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.O))
         {
-            GameObject currentTile = GetTile(1, 2);
+            GameObject currentTile = GetTile(1,1);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            spot[0].AddObject(CreateObjectOnMap("Bottle"));
+            MyObject obj = CreateObjectOnMap("Bottle");
+            spot[0].AddObject(obj);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            Debug.Log(playerCharacter.objectInventory.Count);
+            foreach (MyObject obj in playerCharacter.objectInventory)
+            {
+                Debug.Log(obj.objectData.name);
+            }
         }
 
     }
@@ -432,7 +442,7 @@ public class GameManager : MonoBehaviour
 
     public MyObject CreateObjectOnMap(string nameObject)
     {
-        ObjectData objData = ObjectManager.instance.FindObjectData("nameObject");
+        ObjectData objData = ObjectManager.instance.FindObjectData(nameObject);
         MyObject obj = new MyObject(objData);
         return obj;
 
@@ -737,7 +747,7 @@ public class GlobalConst {
     public static int SEARCH_PRIORITY = 5;
     public static int REST_PRIORITY   = 6;
 
-    public static int RANGE_PRIOTITY = 5; // Le nombre total de priority d'action
+    public static int RANGE_PRIOTITY = 6; // Le nombre total de priority d'action
 
     // -- PRIOTITE D'EFFET --
     public static int ONPATH_PRIORITY = 1;

@@ -77,7 +77,6 @@ public class Character : MonoBehaviour
                 currentSpot.GetComponent<Spot>().RemoveCharacterInSpot(this);
             
             currentSpot = spot;
-
             currentSpot.GetComponent<Spot>().AddCharacterInSpot(this);
 
             Transform t_spot = currentSpot.transform;
@@ -113,15 +112,16 @@ public class Character : MonoBehaviour
     public void Rest()
     {
         //TODO rest
+        Debug.Log("toto");
     }
 
     public void Search()
     {
-        //TODO searsh
-        Debug.Log(currentSpot.GetComponent<Spot>().objectsOnSpot);
+        //TODO Search
+        //Pour l'instant on prend le 1er object
+
+        this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
     }
-
-
 
     public void UpdateSmoothTime()
     {
@@ -210,6 +210,11 @@ public class Character : MonoBehaviour
         stackAction.Push(new ActionFight(this));
     }
 
+    public virtual void CommandSearch()
+    {
+        stackAction.Push(new ActionSearch(this));
+    }
+
     public void CancelAction()
     {
         stackAction.Clear();
@@ -232,6 +237,12 @@ public class Character : MonoBehaviour
         return true;
     }
 
+    public void AddObject(MyObject obj)
+    {
+        if (obj == null) return;
+
+        objectInventory.Add(obj);
+    }
 
 
 

@@ -131,4 +131,14 @@ public class Spot : MonoBehaviour
         objectsOnSpot.Add(obj);
     }
 
+    public MyObject TakeObject()
+    {
+        if (objectsOnSpot.Count == 0)
+            return null;
+        MyObject obj;
+        obj = objectsOnSpot[objectsOnSpot.Count-1];
+        objectsOnSpot.RemoveAt(objectsOnSpot.Count-1);
+        return obj;
+    }
+
 }

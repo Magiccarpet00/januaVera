@@ -44,4 +44,13 @@ public class ButtonAction : MonoBehaviour
         }
     }
 
+    public void Search()
+    {
+        if (GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandSearch();
+            GameManager.instance._ExecuteActionQueue();
+        }
+    }
+
 }
