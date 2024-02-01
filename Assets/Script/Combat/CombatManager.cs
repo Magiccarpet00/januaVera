@@ -183,18 +183,18 @@ public class CombatManager : MonoBehaviour
                         break;
                 }
             }
+        }
+    }
 
-            //On verrifer les morts
-            foreach (Character _character in characters)
+    public void CheckDying()
+    {
+        foreach (Character _character in characters)
+        {
+            if (_character.isDying == true && _character.isDead == false)
             {
-                if (_character.isDying == true && _character.isDead == false)
-                {
-                    _character.Die();
-                    dic_CharacterSpriteFight[_character].AnimDie();
-                }
+                _character.Die();
+                dic_CharacterSpriteFight[_character].AnimDie();
             }
-
-
         }
     }
 
@@ -256,6 +256,7 @@ public class CombatManager : MonoBehaviour
         {
             timerFight.SetTimer(speedInstant);
             CastSkills();
+            CheckDying();
             UpdateAllUI();
 
             yield return new WaitForSeconds(TIME_FIGHT);
