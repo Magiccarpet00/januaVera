@@ -56,7 +56,6 @@ public class CameraController : MonoBehaviour
         }
     }
 
-
     public void ToggleFreezeCam()
     {
         if (freezeCam) freezeCam = false;
@@ -78,7 +77,5 @@ public class CameraController : MonoBehaviour
             camMapUI.SetActive(false);
             GameManager.instance.cam_fight.SetActive(true);
         }
-
-
     }
 }

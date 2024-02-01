@@ -4052,18 +4052,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fe589a4b68e8f4f9f75d4508059d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDatas:
+  scriptableObjects:
+  - {fileID: 11400000, guid: c3ab801ae029f6c4f8b0c05c9733cb5e, type: 2}
+  - {fileID: 11400000, guid: 18e16bcf03fd5fe43b80f6c2afc1f1d0, type: 2}
+  - {fileID: 11400000, guid: 8f2a57c84c01e8c4e866c136342211fd, type: 2}
+  - {fileID: 11400000, guid: 874d275d1a1c33e46a173c6938f6bea7, type: 2}
+  - {fileID: 11400000, guid: 3109abff3d5c86347938d7b5142d72af, type: 2}
+  - {fileID: 11400000, guid: b80fde956cd53cf4abedc91ef1bad720, type: 2}
   - {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
-  locationDatas:
-  - {fileID: 11400000, guid: 03724e022724f874a97b8ee61eb250eb, type: 2}
-  - {fileID: 11400000, guid: dab2f871e96ab7043a14e9c15704f1f7, type: 2}
-  characterDatas:
-  - {fileID: 11400000, guid: 04e93ea1a3602754db5bfccb2d6a8484, type: 2}
-  - {fileID: 11400000, guid: bcfaed210dd3aeb41a2f7599311107f8, type: 2}
-  - {fileID: 11400000, guid: f3c1ca029b6c3394f9b5d31fab6ef0d4, type: 2}
-  objectDatas:
-  - {fileID: 11400000, guid: b80fde956cd53cf4abedc91ef1bad720, type: 2}
+  - {fileID: 11400000, guid: 0d73181b5c05a6e44a8954646c5660f1, type: 2}
+  - {fileID: 11400000, guid: d8b9ae35dbcfbfd4c93922f12273838e, type: 2}
+  - {fileID: 11400000, guid: e5b69d78cb00d2947a718963cbfc4e0f, type: 2}
+  - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}
 --- !u!1 &1947701088
 GameObject:
   m_ObjectHideFlags: 0

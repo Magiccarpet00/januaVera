@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         
         GameObject currentTile = GetTile(startLocation.x, startLocation.y);
         Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-        player = CreateCharacter(ObjectManager.instance.FindCharacterData("Player"), spot[0].gameObject);
+        player = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Player"), spot[0].gameObject);
         playerCharacter = player.GetComponent<Player>();
         UpdateUILandscape();
         UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
@@ -208,7 +208,7 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(2, 2);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            GameObject newPnj = CreateCharacter(ObjectManager.instance.FindCharacterData("Wolf"), spot[0].gameObject);
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Wolf"), spot[0].gameObject);
             newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
@@ -442,7 +442,7 @@ public class GameManager : MonoBehaviour
 
     public MyObject CreateObjectOnMap(string nameObject)
     {
-        ObjectData objData = ObjectManager.instance.FindObjectData(nameObject);
+        ObjectData objData = (ObjectData)ScriptableManager.instance.FindData(nameObject);
         MyObject obj = new MyObject(objData);
         return obj;
 
@@ -452,7 +452,7 @@ public class GameManager : MonoBehaviour
 
     public Weapon CreateWeapon(string nameWeapon)
     {
-        WeaponData wp = ObjectManager.instance.FindWeaponData(nameWeapon);
+        WeaponData wp = (WeaponData)ScriptableManager.instance.FindData(nameWeapon);
         Weapon w = new Weapon(wp);
         return w;
     }
