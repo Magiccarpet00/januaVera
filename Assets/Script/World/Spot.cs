@@ -8,7 +8,6 @@ public class Spot : MonoBehaviour
     [SerializeField] private List<GameObject> adjacentSecretSpots = new List<GameObject>();
 
     [SerializeField] public List<Character> charactersOnSpot = new List<Character>();
-    [SerializeField] public List<Character> charactersOnSpotBuffer = new List<Character>();
 
     [SerializeField] public List<MyObject> objectsOnSpot = new List<MyObject>();
     //FX
@@ -63,18 +62,6 @@ public class Spot : MonoBehaviour
     //
     //      RELATION
     //
-    //public void Meeting()
-    //{
-    //    foreach (Character character in charactersOnSpot)
-    //    {
-    //        character.Metting(charactersOnSpot);
-    //    }
-    //}
-
-
-
-
-
 
 
 
@@ -116,6 +103,8 @@ public class Spot : MonoBehaviour
     {
         return charactersOnSpot;
     }
+
+    
 
     public void AddCharacterInSpot(Character c)
     {

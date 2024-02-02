@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     public Animator animator;
 
     [SerializeField] private GameObject currentSpot;
+    [SerializeField] private GameObject lastSpot;
     [SerializeField] private bool isHide;
     private bool onPath; // quand on est on path on est sur le chemin vers le currentSpot mais on est pas encore sur ce spot à ce tour
 
@@ -74,7 +75,10 @@ public class Character : MonoBehaviour
         if (adjSpot.Contains(spot))
         {
             if (currentSpot != null)
+            {
                 currentSpot.GetComponent<Spot>().RemoveCharacterInSpot(this);
+                lastSpot = currentSpot;
+            }
             
             currentSpot = spot;
             currentSpot.GetComponent<Spot>().AddCharacterInSpot(this);
@@ -87,6 +91,8 @@ public class Character : MonoBehaviour
         {
             AStarMove();
         }
+
+        
 
     }
 
@@ -136,6 +142,30 @@ public class Character : MonoBehaviour
     //
     public void Metting()
     {
+        //On fait la rencontre sur le chemins que l'on viens de prendre
+        //On regarde ya qui sur notre last spot et si son lastspot c'est notre current spot
+
+        List<Character> charactersOnPath = new List<Character>();
+        charactersOnPath.Add(this);
+        bool wantBattle = false;
+
+        foreach (Character characterOnPath in lastSpot.GetComponent<Spot>().GetAllCharactersInSpot())
+        {
+            if(characterOnPath.lastSpot == this.currentSpot)
+            {
+                charactersOnPath.Add(characterOnPath);
+
+                if (charactersEncountered.ContainsKey(characterOnPath) == false)
+                    charactersEncountered.Add(characterOnPath, GameManager.instance.GetRelationRace(this.characterData.race, characterOnPath.characterData.race));
+            }
+
+            if(WantToFight(characterOnPath))
+                wantBattle = true;
+        }
+
+        if (wantBattle)
+            GameManager.instance.StartFight(charactersOnPath);
+
         foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersInSpot())
         {
             if(charactersEncountered.ContainsKey(characterOnSpot) == false)
@@ -317,6 +347,16 @@ public class Character : MonoBehaviour
     //
     //      GET & SET
     //
+    public void SetUp(CharacterData characterData, GameObject spot)
+    {
+        this.characterData = characterData;
+        this.currentSpot = spot;
+        this.lastSpot = spot;
+        Transform t_spot = spot.transform;
+        this.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+        this.UpdateSmoothTime();
+    }
+
     public TileType GetCurrentTileType()
     {
         return currentSpot.transform.parent.GetComponent<Tile>().GetTileData().tileType;
@@ -333,11 +373,6 @@ public class Character : MonoBehaviour
             return null;
         else
             return currentSpot;
-    }
-
-    public void SetCurrentSpot(GameObject spot)
-    {
-        currentSpot = spot;
     }
 
     public void SetTarget(Vector3 t)

@@ -437,13 +437,7 @@ public class GameManager : MonoBehaviour
             newCharacter = Instantiate(prefabCharacter, spot.transform.position, Quaternion.identity);
 
         Character _chatacter = newCharacter.GetComponent<Character>();
-
-        _chatacter.characterData = characterData;
-        _chatacter.SetCurrentSpot(spot);
-        Transform t_spot = spot.transform;
-        _chatacter.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
-        _chatacter.UpdateSmoothTime();
-        
+        _chatacter.SetUp(characterData, spot);
         characterList.Add(_chatacter);
 
         return newCharacter;
@@ -523,7 +517,6 @@ public class GameManager : MonoBehaviour
         }
 
         // TODO faire le Fight entre les clairieres ici
-
         foreach(Character character in characterList)
         {
             character.Metting();
@@ -613,6 +606,16 @@ public class GameManager : MonoBehaviour
         }
 
         CombatManager.instance.SetUpFight(allCharactersAliveInSpot);
+
+        //Visuel
+        actionCanvas.SetActive(false);
+        CombatManager.instance.ToggleFight();
+        cam.GetComponent<CameraController>().ToggleCamPos();
+    }
+
+    public void StartFight(List<Character> characters) //[CODE REFACTOT] Ya du boulot...
+    {
+        CombatManager.instance.SetUpFight(characters);
 
         //Visuel
         actionCanvas.SetActive(false);
