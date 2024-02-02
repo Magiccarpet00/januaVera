@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Collider2D collider2d; //[CODE INUTILE]
     private bool inFight;
+    public bool freezePosition;
 
     public Animator animator;
 
@@ -49,7 +50,8 @@ public class Character : MonoBehaviour
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
-        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
+        if(!freezePosition)
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
 
         if (isDead)
             Visible(false);
@@ -151,16 +153,19 @@ public class Character : MonoBehaviour
 
         foreach (Character characterOnPath in lastSpot.GetComponent<Spot>().GetAllCharactersInSpot())
         {
-            if(characterOnPath.lastSpot == this.currentSpot)
+            if(characterOnPath.lastSpot == this.currentSpot &&
+               characterOnPath.currentSpot == this.lastSpot &&
+               characterOnPath.isDead == false)
             {
                 charactersOnPath.Add(characterOnPath);
+                Debug.Log("coucou man !");
 
                 if (charactersEncountered.ContainsKey(characterOnPath) == false)
                     charactersEncountered.Add(characterOnPath, GameManager.instance.GetRelationRace(this.characterData.race, characterOnPath.characterData.race));
-            }
 
-            if(WantToFight(characterOnPath))
-                wantBattle = true;
+                if (WantToFight(characterOnPath))
+                    wantBattle = true;
+            }
         }
 
         if (wantBattle)

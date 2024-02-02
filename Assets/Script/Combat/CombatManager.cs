@@ -218,7 +218,7 @@ public class CombatManager : MonoBehaviour
 
     public void ClickButtonEscape()
     {
-        GameManager.instance.QuitCombatScene();
+        GameManager.instance.QuitCombatScene(characters);
     }
 
 

@@ -218,11 +218,6 @@ public class GameManager : MonoBehaviour
             cc.ToggleFreezeCam();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            QuitCombatScene();
-        }
-
         if (Input.GetKeyDown(KeyCode.W))
         {
             foreach (Character character in characterList)
@@ -589,9 +584,9 @@ public class GameManager : MonoBehaviour
     //
     //      COMBAT
     //
-    public void StartFight() //[CODE REFACTOT] Ya du boulot...
+    public void StartFight() //[CODE REFACTOT] Ya du boulot... (dans l'autre aussi)
     {
-        //Cancel toute les actions des character sur le spot
+        //Cancel toute les actions des characters sur le spot
         List<Character> allCharactersInSpot = new List<Character>();
         List<Character> allCharactersAliveInSpot = new List<Character>();
         allCharactersInSpot = playerCharacter.GetAllCharactersInSpot(); //TODO Ne marche pas quand c'est deux personne non joueur qui lance le fight car cest playerCharacter
@@ -613,18 +608,24 @@ public class GameManager : MonoBehaviour
         cam.GetComponent<CameraController>().ToggleCamPos();
     }
 
-    public void StartFight(List<Character> characters) //[CODE REFACTOT] Ya du boulot...
+    public void StartFight(List<Character> characters) 
     {
         CombatManager.instance.SetUpFight(characters);
 
         //Visuel
+        foreach (Character character in characters)
+            character.freezePosition = true;    
+
         actionCanvas.SetActive(false);
         CombatManager.instance.ToggleFight();
         cam.GetComponent<CameraController>().ToggleCamPos();
     }
 
-    public void QuitCombatScene()
+    public void QuitCombatScene(List<Character> characters)
     {
+        foreach (Character character in characters)
+            character.freezePosition = false;
+
         actionCanvas.SetActive(true);
         CombatManager.instance.ToggleFight();
         cam.GetComponent<CameraController>().ToggleCamPos();
