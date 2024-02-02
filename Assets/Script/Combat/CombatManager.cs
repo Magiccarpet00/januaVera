@@ -48,6 +48,8 @@ public class CombatManager : MonoBehaviour
     [Header("FX")]
     public GameObject prefabFxSkills;
 
+    
+
     public void FillSpot()
     {
         int countSpot = 0;

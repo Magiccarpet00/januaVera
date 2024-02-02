@@ -11,8 +11,6 @@ public class ButtonSkillTemplateAttack : MonoBehaviour
     public TextMeshProUGUI damageValue;
     public LocalizeStringEvent damageTypeValue;
 
-    public LocalizeStringEvent rangeTypeValue;
-
     public TextMeshProUGUI speedValue;
 
     public TextMeshProUGUI targetValue;
@@ -23,7 +21,6 @@ public class ButtonSkillTemplateAttack : MonoBehaviour
         
         damageValue.text = skillData.damage.ToString();
         damageTypeValue.SetEntry(skillData.damageType.ToString());
-        rangeTypeValue.SetEntry(skillData.range.ToString());
         speedValue.text = skillData.speed.ToString();
         targetValue.text = skillData.nbTarget.ToString();
     }

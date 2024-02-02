@@ -4028,6 +4028,7 @@ MonoBehaviour:
   - {fileID: 8149957913592602003, guid: 95b10da57b616b84598cda3741585329, type: 3}
   - {fileID: 8149957913592602003, guid: 49c52b6d170442843a1452349cd26bd8, type: 3}
   locationPrefab: {fileID: 8149957913592602003, guid: ad7576a58f88d4e4482ab98e30c5ad06, type: 3}
+  idTile: 0
 --- !u!114 &1915923814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4065,6 +4066,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8b9ae35dbcfbfd4c93922f12273838e, type: 2}
   - {fileID: 11400000, guid: e5b69d78cb00d2947a718963cbfc4e0f, type: 2}
   - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}
+  - {fileID: 11400000, guid: 499ff98e2dd8dc443a17e53ced3560d2, type: 2}
 --- !u!1 &1947701088
 GameObject:
   m_ObjectHideFlags: 0

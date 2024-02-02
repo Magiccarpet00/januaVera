@@ -252,6 +252,15 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            GameObject currentTile = GetTile(2, 2);
+            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
+
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[1].gameObject);
+            newPnj.GetComponent<Character>().CommandEmpty();
+        }
+
     }
 
 
@@ -513,6 +522,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        // TODO faire le Fight entre les clairieres ici
+
         foreach(Character character in characterList)
         {
             character.Metting();
@@ -585,12 +596,12 @@ public class GameManager : MonoBehaviour
     //
     //      COMBAT
     //
-    public void StartFight()
+    public void StartFight() //[CODE REFACTOT] Ya du boulot...
     {
         //Cancel toute les actions des character sur le spot
         List<Character> allCharactersInSpot = new List<Character>();
         List<Character> allCharactersAliveInSpot = new List<Character>();
-        allCharactersInSpot = playerCharacter.GetAllCharactersInSpot();
+        allCharactersInSpot = playerCharacter.GetAllCharactersInSpot(); //TODO Ne marche pas quand c'est deux personne non joueur qui lance le fight car cest playerCharacter
 
         foreach (Character character in allCharactersInSpot)
         {
@@ -672,11 +683,6 @@ public enum Divinity {
     WIZENED,
     ARSTAL,
     NATURE
-}
-
-public enum Range {
-    CONTACT,
-    PROJECTILE
 }
 
 public enum DamageType {

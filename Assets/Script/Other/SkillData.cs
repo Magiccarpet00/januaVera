@@ -8,7 +8,6 @@ public class SkillData : ScriptableObject
     [Header("Global")]
     public SkillType skillType;
     public Element element;
-    public Range range;
     public int speed;
     public int nbTarget;
 

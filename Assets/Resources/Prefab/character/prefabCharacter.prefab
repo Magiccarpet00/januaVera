@@ -49,7 +49,7 @@ MonoBehaviour:
   characterData: {fileID: 0}
   spriteRenderer: {fileID: 8841508422069734108}
   collider2d: {fileID: 5510879221857987606}
-  animator: {fileID: 5999102342575825044}
+  animator: {fileID: 0}
   currentSpot: {fileID: 0}
   isHide: 0
   currentLife: 0
@@ -84,7 +84,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1189347898977544622}
   - component: {fileID: 8841508422069734108}
-  - component: {fileID: 5999102342575825044}
   m_Layer: 0
   m_Name: sprite
   m_TagString: Untagged
@@ -159,23 +158,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5999102342575825044
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046837586198170256}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0ac16ff69a184e74898308339b9b7059, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
