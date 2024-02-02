@@ -17,8 +17,8 @@ MonoBehaviour:
   range: 1
   speed: 3
   nbTarget: 1
-  damage: 3
+  damage: 5
   damageType: 1
   parryType: 0
-  damageTypeParryable: 
+  damageTypeParryable: 0
   nbGarde: 0

@@ -112,7 +112,6 @@ public class Character : MonoBehaviour
     public void Rest()
     {
         //TODO rest
-        Debug.Log("toto");
     }
 
     public void Search()

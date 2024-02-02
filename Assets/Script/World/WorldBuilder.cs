@@ -28,7 +28,10 @@ public class WorldBuilder : MonoBehaviour
     [SerializeField] private GameObject[] prefabLocations;
     [HideInInspector] public Dictionary<LocationType, GameObject> dic_prefabLocations = new Dictionary<LocationType, GameObject>();
     public GameObject locationPrefab;
-    
+
+    //DEBUG
+    public int idTile = 0;
+
     public void StartWorldBuilder()
     {
         SetUpListTiles();
@@ -455,5 +458,11 @@ public class WorldBuilder : MonoBehaviour
                 break;
         }
         return res;
+    }
+
+    public string CreateNameTile()
+    {
+        idTile++;
+        return "Tile_" + idTile;
     }
 }

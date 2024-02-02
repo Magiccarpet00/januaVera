@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropChance: 460000001e000000
   locations:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: dab2f871e96ab7043a14e9c15704f1f7, type: 2}
+  - {fileID: 11400000, guid: 874d275d1a1c33e46a173c6938f6bea7, type: 2}
+  - {fileID: 11400000, guid: 3109abff3d5c86347938d7b5142d72af, type: 2}

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
   m_Name: CRACKED
   m_EditorClassIdentifier: 
-  style: 0
-  maxState: 3
   material: 11
+  maxState: 3
+  style: 0
   skills:
-  - {fileID: 11400000, guid: 3c9004af5848322478ceb40dcb1f8136, type: 2}
-  - {fileID: 11400000, guid: cdd1e1165ac1f2840879b92484a754cc, type: 2}
-  - {fileID: 11400000, guid: abf8775c6740d894e99da38d3e169b16, type: 2}
+  - {fileID: 11400000, guid: d8b9ae35dbcfbfd4c93922f12273838e, type: 2}
+  - {fileID: 11400000, guid: e5b69d78cb00d2947a718963cbfc4e0f, type: 2}
+  - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}

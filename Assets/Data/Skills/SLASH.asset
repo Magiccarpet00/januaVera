@@ -15,10 +15,10 @@ MonoBehaviour:
   skillType: 0
   element: 4
   range: 0
-  speed: 4
+  speed: 3
   nbTarget: 1
-  damage: 2
+  damage: 5
   damageType: 0
   parryType: 0
-  damageTypeParryable: 
+  damageTypeParryable: 0
   nbGarde: 0
