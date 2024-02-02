@@ -13,7 +13,6 @@ public class Character : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Collider2D collider2d; //[CODE INUTILE]
     private bool inFight;
-    public bool freezePosition;
 
     public Animator animator;
 
@@ -50,7 +49,7 @@ public class Character : MonoBehaviour
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
-        if(!freezePosition)
+        if(GameManager.instance.playerOnFight == false)
             transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
 
         if (isDead)
@@ -142,7 +141,7 @@ public class Character : MonoBehaviour
     //
     //      RELATION
     //
-    public void Metting()
+    public IEnumerator Metting()
     {
         //On fait la rencontre sur le chemins que l'on viens de prendre
         //On regarde ya qui sur notre last spot et si son lastspot c'est notre current spot
@@ -158,7 +157,6 @@ public class Character : MonoBehaviour
                characterOnPath.isDead == false)
             {
                 charactersOnPath.Add(characterOnPath);
-                Debug.Log("coucou man !");
 
                 if (charactersEncountered.ContainsKey(characterOnPath) == false)
                     charactersEncountered.Add(characterOnPath, GameManager.instance.GetRelationRace(this.characterData.race, characterOnPath.characterData.race));
@@ -168,8 +166,12 @@ public class Character : MonoBehaviour
             }
         }
 
+        yield return new WaitForSeconds(0.3f);
+
         if (wantBattle)
             GameManager.instance.StartFight(charactersOnPath);
+
+        yield return new WaitUntil(() => GameManager.instance.playerOnFight == false);
 
         foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersInSpot())
         {

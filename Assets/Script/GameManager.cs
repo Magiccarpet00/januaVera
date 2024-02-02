@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public List<Character> characterList = new List<Character>(); // liste de tout les characters en jeu
     public List<Effect> effectList = new List<Effect>();
 
+    public bool playerOnFight = false;
+
     // UI
     [Header("UI")]
     public Text nbTurn;
@@ -514,10 +516,10 @@ public class GameManager : MonoBehaviour
         // TODO faire le Fight entre les clairieres ici
         foreach(Character character in characterList)
         {
-            character.Metting();
+            StartCoroutine(character.Metting());
         }
 
-        yield return new WaitUntil(() => CombatManager.instance.GetOnFight() == false);        
+        yield return new WaitUntil(() => playerOnFight == false);
 
         actionQueue.Clear();
         CommandPnj();
@@ -586,6 +588,8 @@ public class GameManager : MonoBehaviour
     //
     public void StartFight() //[CODE REFACTOT] Ya du boulot... (dans l'autre aussi)
     {
+        playerOnFight = true;
+
         //Cancel toute les actions des characters sur le spot
         List<Character> allCharactersInSpot = new List<Character>();
         List<Character> allCharactersAliveInSpot = new List<Character>();
@@ -610,11 +614,10 @@ public class GameManager : MonoBehaviour
 
     public void StartFight(List<Character> characters) 
     {
+        playerOnFight = true;
+
         CombatManager.instance.SetUpFight(characters);
 
-        //Visuel
-        foreach (Character character in characters)
-            character.freezePosition = true;    
 
         actionCanvas.SetActive(false);
         CombatManager.instance.ToggleFight();
@@ -623,8 +626,7 @@ public class GameManager : MonoBehaviour
 
     public void QuitCombatScene(List<Character> characters)
     {
-        foreach (Character character in characters)
-            character.freezePosition = false;
+        playerOnFight = false;
 
         actionCanvas.SetActive(true);
         CombatManager.instance.ToggleFight();
