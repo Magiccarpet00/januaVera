@@ -184,11 +184,19 @@ public class Character : MonoBehaviour
 
     public bool WantToFight(Character character)
     {
-        if (charactersEncountered[character] == Relation.HOSTIL ||
+        if(charactersEncountered.ContainsKey(character))
+        {
+            if (charactersEncountered[character] == Relation.HOSTIL ||
             charactersEncountered[character] == Relation.ENNMY)
-            return true;
+                return true;
+            else
+                return false;
+        }
         else
+        {
             return false;
+        }
+        
     }
 
 
