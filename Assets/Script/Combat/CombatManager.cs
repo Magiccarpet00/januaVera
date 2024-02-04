@@ -323,14 +323,17 @@ public class CombatManager : MonoBehaviour
 
     public void SetUpFight(List<Character> _characters, bool playerInFight)
     {
-
         Debug.Log("playerInFight:" + playerInFight);
 
         characters = _characters;
-        FillSpot();
-        SetUpPanel();
         LoadSkillAI();
-        UpdateAllUI();
+
+        if (playerInFight)
+        {
+            FillSpot();
+            SetUpPanel();
+            UpdateAllUI();
+        }
     }
 
     public void SetUpPanel()

@@ -523,14 +523,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
-        // TODO faire le Fight entre les clairieres ici
+        
         foreach(Character character in characterList)
-        {
-            StartCoroutine(character.Metting());
-        }
+            StartCoroutine(character.MettingOnPath());
 
         yield return new WaitUntil(() => playerOnFight == false);
+
+        foreach (Character character in characterList)
+            character.MettingOnSpot();
 
         actionQueue.Clear();
         CommandPnj();
@@ -615,7 +615,9 @@ public class GameManager : MonoBehaviour
         }
 
         CombatManager.instance.SetUpFight(characters, playerInFight);
-        ToggleMapSceneFightScene(false);
+
+        if(playerInFight)
+            ToggleMapSceneFightScene(false);
     }
 
     public void QuitCombatScene(List<Character> characters)

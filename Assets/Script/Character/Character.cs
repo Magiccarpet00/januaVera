@@ -141,11 +141,8 @@ public class Character : MonoBehaviour
     //
     //      RELATION
     //
-    public IEnumerator Metting()
+    public IEnumerator MettingOnPath()
     {
-        //On fait la rencontre sur le chemins que l'on viens de prendre
-        //On regarde ya qui sur notre last spot et si son lastspot c'est notre current spot
-
         List<Character> charactersOnPath = new List<Character>();
         charactersOnPath.Add(this);
         bool wantBattle = false;
@@ -170,17 +167,19 @@ public class Character : MonoBehaviour
 
         if (wantBattle)
             GameManager.instance.StartFight(charactersOnPath);
+    }
 
-        yield return new WaitUntil(() => GameManager.instance.playerOnFight == false);
-
+    public void MettingOnSpot()
+    {
         foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersInSpot())
         {
-            if(charactersEncountered.ContainsKey(characterOnSpot) == false)
+            if (charactersEncountered.ContainsKey(characterOnSpot) == false)
             {
                 charactersEncountered.Add(characterOnSpot, GameManager.instance.GetRelationRace(this.characterData.race, characterOnSpot.characterData.race));
             }
         }
     }
+
 
     public bool WantToFight(Character character)
     {
