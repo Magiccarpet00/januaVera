@@ -1228,8 +1228,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1525517294}
-        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
+      - m_Target: {fileID: 1525517295}
+        m_TargetAssemblyTypeName: PlayerCombatManager, Assembly-CSharp
         m_MethodName: ClickEndButton
         m_Mode: 1
         m_Arguments:
@@ -1720,8 +1720,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1525517294}
-        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
+      - m_Target: {fileID: 1525517295}
+        m_TargetAssemblyTypeName: PlayerCombatManager, Assembly-CSharp
         m_MethodName: ClickButtonEscape
         m_Mode: 1
         m_Arguments:
@@ -2888,8 +2888,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1525517294}
-        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
+      - m_Target: {fileID: 1525517295}
+        m_TargetAssemblyTypeName: PlayerCombatManager, Assembly-CSharp
         m_MethodName: ClickButtonWeaponGlobal
         m_Mode: 1
         m_Arguments:
@@ -3022,8 +3022,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1525517294}
-        m_TargetAssemblyTypeName: CombatManager, Assembly-CSharp
+      - m_Target: {fileID: 1525517295}
+        m_TargetAssemblyTypeName: PlayerCombatManager, Assembly-CSharp
         m_MethodName: ClickButtonBack
         m_Mode: 1
         m_Arguments:
