@@ -3127,6 +3127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1525517293}
   - component: {fileID: 1525517294}
+  - component: {fileID: 1525517295}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -3162,6 +3163,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characters: []
+--- !u!114 &1525517295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525517292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290a7c1bc57fbec40bc62d62e8fe1b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charactersSprites: []
   combatSpots:
   - {fileID: 183222516}
   - {fileID: 1778053066}
@@ -3175,6 +3189,7 @@ MonoBehaviour:
   - {fileID: 991759018}
   posFight: {x: 0, y: -30, z: 0}
   prefabSpriteCharacter: {fileID: 3934576700232200583, guid: 1e3667177d8883d4a8143da275e8442e, type: 3}
+  TIME_FIGHT: 0.5
   timerFight: {fileID: 199920811}
   inTargetMode: 0
   nbTarget: 0
@@ -3966,6 +3981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CircleTest: {fileID: 8607141512307440147, guid: 787d1a549080b974198634e040711513, type: 3}
+  id: 0
   cam: {fileID: 519420028}
   cam_fight: {fileID: 2092461398}
   prefabPlayer: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
@@ -3977,6 +3993,7 @@ MonoBehaviour:
   localeSelector: {fileID: 1915923814}
   inputBlock: 0
   characterList: []
+  playerOnFight: 0
   nbTurn: {fileID: 1406182011}
   imgLandscape: {fileID: 556910849}
   allImgLandscape_tile:
@@ -4028,7 +4045,6 @@ MonoBehaviour:
   - {fileID: 8149957913592602003, guid: 95b10da57b616b84598cda3741585329, type: 3}
   - {fileID: 8149957913592602003, guid: 49c52b6d170442843a1452349cd26bd8, type: 3}
   locationPrefab: {fileID: 8149957913592602003, guid: ad7576a58f88d4e4482ab98e30c5ad06, type: 3}
-  idTile: 0
 --- !u!114 &1915923814
 MonoBehaviour:
   m_ObjectHideFlags: 0

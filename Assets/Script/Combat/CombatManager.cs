@@ -12,131 +12,14 @@ public class CombatManager : MonoBehaviour
     }
 
     //Global
-    [SerializeField] private List<Character> characters = new List<Character>();
-    private List<GameObject> charactersSprites = new List<GameObject>();
-    public Dictionary<Character, SpriteFight> dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
-
-    [SerializeField] private List<GameObject> combatSpots = new List<GameObject>();
-    public Dictionary<Character, CombatSpot> dic_CharacterCombatSpot = new Dictionary<Character, CombatSpot>();
-
+    public List<Character> characters = new List<Character>();
     private bool onFight;
-    [SerializeField] private Vector3 posFight;
-    [SerializeField] private GameObject prefabSpriteCharacter;
-
-    //FIGHT SEQUENCE
-    private float TIME_FIGHT = 0.5f;
     private int speedInstant = 0;
-    public TimerFight timerFight;
 
-    //Target (uniquement pour player)
-    public bool inTargetMode;
-    public int nbTarget;
 
-    //Panel
-    public GameObject panelGlobal;
-    public GameObject panelWeapon;
-    public GameObject panelSkill;
 
-    public Stack<GameObject> panelStack = new Stack<GameObject>();
 
-    public GameObject prefabButtonWeapon;
-    public List<GameObject> buttonsWeapons = new List<GameObject>();
-
-    public GameObject prefabButtonSkill;
-    public List<GameObject> buttonsSkills = new List<GameObject>();
-
-    [Header("FX")]
-    public GameObject prefabFxSkills;
-
-    // Ya du taf pour faire des combats simuler entre les ia mais pas montrer a l'ecran 
-
-    public void FillSpot()
-    {
-        int countSpot = 0;
-        foreach (Character c in characters)
-        {
-            // COMBAT SPOT
-            CombatSpot cs = combatSpots[countSpot].GetComponent<CombatSpot>();
-            cs.character = c;
-            cs.SetActiveSpotUI(true);
-
-            // CHARACTER SPRITE
-            GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
-            characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
-            charactersSprites.Add(characterSprite);
-            characterSprite.GetComponentInChildren<SpriteRenderer>().sprite = characters[countSpot].characterData.spriteFight;
-
-            // DICO
-            dic_CharacterSpriteFight.Add(c, characterSprite.GetComponent<SpriteFight>());
-            dic_CharacterCombatSpot.Add(c, cs);
-
-            // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
-            countSpot++;
-        }
-    }
-
-    public void ClickButtonWeaponGlobal()
-    { 
-        PushPanel(panelWeapon);
-
-        foreach (Weapon weapon in GameManager.instance.playerCharacter.weaponInventory)
-        {
-            GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
-            btnWeapon.transform.SetParent(panelWeapon.transform);
-            btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
-
-            ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
-            bw.SetUpUI(weapon);
-            
-
-            buttonsWeapons.Add(btnWeapon);
-        }
-    }
-
-    public void ClickButtonWeapon(Weapon weapon)
-    {
-        PushPanel(panelSkill);
-        WeaponData wd = (WeaponData)weapon.objectData;
-
-        foreach (SkillData skill in wd.skills)
-        {
-            GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
-            btnSkill.transform.SetParent(panelSkill.transform);
-            btnSkill.transform.localScale = new Vector3(1, 1, 1);
-
-            ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
-            bs.SetUpUI(skill);
-            buttonsSkills.Add(btnSkill);
-        }
-    }
-
-    public void ClickButtonSkill(SkillData skillData) //[CODE WARNING] peut etre une source de bug dans pour les skills 0target lancer par des PNJ
-    {
-        GameManager.instance.playerCharacter.currentLoadedSkill = skillData;
-        if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
-            TargetMode(skillData.nbTarget);
-        else
-            GameManager.instance.playerCharacter.selectedCharacter.Add(GameManager.instance.playerCharacter);
-    }
-
-    public void ClickButtonBack()
-    {
-        PanelBack();
-    }
-
-    public void PanelBack()
-    {
-        if (panelStack.Peek() == panelGlobal)
-            return;
-
-        if (panelStack.Peek() == panelWeapon)
-            ClearButtonWeapon();
-
-        if (panelStack.Peek() == panelSkill)
-            ClearButtonSkill();
-
-        PopPanel();
-    }
+    
 
     public void CastSkills() //TODO fonction qui va toujours se remplire
     {
@@ -154,20 +37,20 @@ public class CombatManager : MonoBehaviour
                             {
                                 if(characterTarget.ParryableAttack(character.currentLoadedSkill))
                                 {
-                                    CreateFxFightSkill(dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
+                                    PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
                                     
                                     if(characterTarget.currentLoadedSkill.parryType == ParryType.COUNTER)
                                     {
                                         character.TakeDamage(characterTarget.currentLoadedSkill.damage);
-                                        CreateFxFightSkill(dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill,true);
+                                        PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill,true);
                                     }
                                 }
                                 else
                                 {
                                     characterTarget.TakeDamage(character.currentLoadedSkill.damage);
-                                    CreateFxFightSkill(dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
+                                    PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
-                                dic_CharacterSpriteFight[character].AnimAtk();
+                                PlayerCombatManager.instance.dic_CharacterSpriteFight[character].AnimAtk();
                             }
                         }
                         break;
@@ -195,31 +78,12 @@ public class CombatManager : MonoBehaviour
             if (_character.isDying == true && _character.isDead == false)
             {
                 _character.Die();
-                dic_CharacterSpriteFight[_character].AnimDie();
+                PlayerCombatManager.instance.dic_CharacterSpriteFight[_character].AnimDie();
             }
         }
     }
 
-    public void ClearButtonWeapon()
-    {
-        for (int i = 0; i < buttonsWeapons.Count; i++)
-        {
-            Destroy(buttonsWeapons[i]);
-        }
-    }
-
-    public void ClearButtonSkill()
-    {
-        for (int i = 0; i < buttonsSkills.Count; i++)
-        {
-            Destroy(buttonsSkills[i]);
-        }
-    }
-
-    public void ClickButtonEscape()
-    {
-        GameManager.instance.QuitCombatScene(characters);
-    }
+    
 
 
     public void LoadSkillAI()
@@ -235,37 +99,27 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void ClickEndButton() //A REFACTOT
-    {
-        ClearButtonWeapon(); //TMP
-        ClearButtonSkill();
-        while(panelStack.Peek() != panelGlobal)
-        {
-            PanelBack();
-        }
-        StartCoroutine(FightSequence());
-    }
 
     public IEnumerator FightSequence()
     {
-        foreach (GameObject cs in charactersSprites)
+        foreach (GameObject cs in PlayerCombatManager.instance.charactersSprites)
         {
             cs.GetComponent<SpriteFight>().ResetSelected();
         }
 
-        timerFight.ActiveTimer(true);
+        PlayerCombatManager.instance.timerFight.ActiveTimer(true);
         while (speedInstant != 6)
         {
-            timerFight.SetTimer(speedInstant);
+            PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
             CastSkills();
             CheckDying();
-            UpdateAllUI();
+            PlayerCombatManager.instance.UpdateAllUI();
 
-            yield return new WaitForSeconds(TIME_FIGHT);
+            yield return new WaitForSeconds(PlayerCombatManager.instance.TIME_FIGHT);
             speedInstant++;
         }
         speedInstant = 0;
-        timerFight.ActiveTimer(false);
+        PlayerCombatManager.instance.timerFight.ActiveTimer(false);
 
         GameManager.instance.playerCharacter.selectedCharacter = new List<Character>();
 
@@ -275,43 +129,6 @@ public class CombatManager : MonoBehaviour
             character.nbGarde = 0;
         }
     }
-
-    public void UpdateAllUI()
-    {
-        foreach(GameObject cs in combatSpots)
-        {
-            cs.GetComponent<CombatSpot>().UpdateUI();
-        }
-    }
-
-    public void TargetMode(int _nbTarget)
-    {
-        nbTarget = _nbTarget;
-        inTargetMode = true;
-    }
-
-    public void MinusTarget() // Decrementation du nombre de target
-    {
-        nbTarget--;
-        if (nbTarget == 0)
-            inTargetMode = false;
-    }
-
-    //STACK PANEL
-    public void PushPanel(GameObject panel)
-    {
-        if(panelStack.Count != 0)
-            panelStack.Peek().SetActive(false);
-        panelStack.Push(panel);
-        panel.SetActive(true);
-    }
-
-    public void PopPanel()
-    {
-        panelStack.Pop().SetActive(false);
-        panelStack.Peek().SetActive(true);
-    }
-
 
 
     //SET UP
@@ -330,20 +147,13 @@ public class CombatManager : MonoBehaviour
 
         if (playerInFight)
         {
-            FillSpot();
-            SetUpPanel();
-            UpdateAllUI();
+            PlayerCombatManager.instance.FillSpot();
+            PlayerCombatManager.instance.SetUpPanel();
+            PlayerCombatManager.instance.UpdateAllUI();
         }
     }
 
-    public void SetUpPanel()
-    {
-        panelGlobal.SetActive(false);
-        panelWeapon.SetActive(false);
-        panelSkill.SetActive(false);
 
-        PushPanel(panelGlobal);
-    }
 
     // [BUG RESOLUE]
     // Supprimer la list de character dans CombatManager supprime la list des characters dans spot
@@ -351,75 +161,22 @@ public class CombatManager : MonoBehaviour
     public void ClearCombatScene()
     {
         characters = new List<Character>();
-        dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
-        dic_CharacterCombatSpot = new Dictionary<Character, CombatSpot>();
+        PlayerCombatManager.instance.dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
+        PlayerCombatManager.instance.dic_CharacterCombatSpot = new Dictionary<Character, CombatSpot>();
 
-        foreach (GameObject cs in charactersSprites)
+        foreach (GameObject cs in PlayerCombatManager.instance.charactersSprites)
         {
             Destroy(cs);
         }
 
-        charactersSprites = new List<GameObject>();
+        PlayerCombatManager.instance.charactersSprites = new List<GameObject>();
 
-        foreach (GameObject cs in combatSpots)
+        foreach (GameObject cs in PlayerCombatManager.instance.combatSpots)
         {
             cs.GetComponent<CombatSpot>().SetActiveSpotUI(false);
         }
 
     }
-
-
-
-
-    //
-    //      FX
-    //
-    public void CreateFxFightSkill(Transform _transform, SkillData skillData, bool skillComingFromCaster = false) 
-    {
-        float offSet = 1;
-        GameObject newFxFightSkill = Instantiate(prefabFxSkills, _transform.position, Quaternion.identity);
-        
-        switch(skillData.skillType)
-        {
-            case SkillType.ATTACK:
-                if(skillData.damageType == DamageType.ELEM)
-                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.element.ToString());
-                else
-                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.damageType.ToString());
-                
-                newFxFightSkill.transform.Translate(Random.Range(-offSet, offSet), Random.Range(-offSet, offSet), 0);
-                break;
-
-            case SkillType.PARRY:
-                //[CODE SEPTIQUE] Je suis pas sur de faire qu'une seul anim de block pour les couters
-                //j'aimerai bien que le mur d'eau, la riposte et le block d'un bouclier est des anims
-                //differentes
-                newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill("BLOCK");
-                if(skillComingFromCaster) // [CODE DOUTEUX] j'ai pas trop ce copier la ligne du dessus à revoir
-                {
-                    if (skillData.damageType == DamageType.ELEM)
-                        newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.element.ToString());
-                    else
-                        newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.damageType.ToString());
-                    newFxFightSkill.transform.Translate(Random.Range(-offSet, offSet), Random.Range(-offSet, offSet), 0);
-                }
-                        
-                break;
-
-            case SkillType.SUMMON:
-                break;
-        }
-        
-    }
-
-    
-
-
-
-
-
-
-
 
     //
     //      GET && SET
@@ -429,8 +186,4 @@ public class CombatManager : MonoBehaviour
         return onFight;
     }
 
-    public Vector3 GetPosFight()
-    {
-        return posFight;
-    }
 }

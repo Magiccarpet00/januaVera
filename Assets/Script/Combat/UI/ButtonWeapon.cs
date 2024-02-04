@@ -15,7 +15,7 @@ public class ButtonWeapon : MonoBehaviour
 
     public void Click()
     {
-        CombatManager.instance.ClickButtonWeapon(weapon);
+        PlayerCombatManager.instance.ClickButtonWeapon(weapon);
     }
 
     public void SetUpUI(Weapon w)

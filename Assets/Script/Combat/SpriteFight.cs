@@ -23,12 +23,12 @@ public class SpriteFight : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (CombatManager.instance.inTargetMode) 
+        if (PlayerCombatManager.instance.inTargetMode) 
         {
             animatorOver.SetTrigger("selected");
             //CombatManager.instance.targetedCharacter.Add(character);
             GameManager.instance.playerCharacter.selectedCharacter.Add(character);
-            CombatManager.instance.MinusTarget();
+            PlayerCombatManager.instance.MinusTarget();
         }
     }
 
@@ -49,7 +49,7 @@ public class SpriteFight : MonoBehaviour
 
     public void AnimDieUI()
     {
-        CombatManager.instance.dic_CharacterCombatSpot[character].SetActiveSpotUI(false);
+        PlayerCombatManager.instance.dic_CharacterCombatSpot[character].SetActiveSpotUI(false);
     }
 
     public void SetCharacter(Character c)

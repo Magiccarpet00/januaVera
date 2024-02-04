@@ -10,7 +10,7 @@ public class ButtonSkill : MonoBehaviour
 
     public void Click()
     {
-        CombatManager.instance.ClickButtonSkill(skillData);
+        PlayerCombatManager.instance.ClickButtonSkill(skillData);
     }
 
     public void SetUpUI(SkillData _skillData)
