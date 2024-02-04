@@ -48,7 +48,7 @@ public class CombatManager : MonoBehaviour
     [Header("FX")]
     public GameObject prefabFxSkills;
 
-    
+    // Ya du taf pour faire des combats simuler entre les ia mais pas montrer a l'ecran 
 
     public void FillSpot()
     {

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("DEGUB")]
     public GameObject CircleTest;
     //public GameObject prefabTmpEnemy;
+    public int id = 0;
 
     // GLOBAL VAR
     [Header("GLOBAL VAR")]
@@ -429,9 +430,14 @@ public class GameManager : MonoBehaviour
     {
         GameObject newCharacter;
         if (characterData.name == "Player")
+        {
             newCharacter = Instantiate(prefabPlayer, spot.transform.position, Quaternion.identity);
+        }
         else
+        {
             newCharacter = Instantiate(prefabCharacter, spot.transform.position, Quaternion.identity);
+            newCharacter.name = characterData.name + CreateId();
+        }
 
         Character _chatacter = newCharacter.GetComponent<Character>();
         _chatacter.SetUp(characterData, spot);
@@ -445,9 +451,6 @@ public class GameManager : MonoBehaviour
         ObjectData objData = (ObjectData)ScriptableManager.instance.FindData(nameObject);
         MyObject obj = new MyObject(objData);
         return obj;
-
-
-        
     }
 
     public Weapon CreateWeapon(string nameWeapon)
@@ -455,6 +458,12 @@ public class GameManager : MonoBehaviour
         WeaponData wp = (WeaponData)ScriptableManager.instance.FindData(nameWeapon);
         Weapon w = new Weapon(wp);
         return w;
+    }
+
+    public string CreateId()
+    {
+        id++;
+        return "_" + id.ToString();
     }
 
 

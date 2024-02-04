@@ -30,7 +30,7 @@ public class WorldBuilder : MonoBehaviour
     public GameObject locationPrefab;
 
     //DEBUG
-    public int idTile = 0;
+    
 
     public void StartWorldBuilder()
     {
@@ -458,11 +458,5 @@ public class WorldBuilder : MonoBehaviour
                 break;
         }
         return res;
-    }
-
-    public string CreateNameTile()
-    {
-        idTile++;
-        return "Tile_" + idTile;
     }
 }

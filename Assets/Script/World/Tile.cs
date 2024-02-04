@@ -27,7 +27,7 @@ public class Tile : MonoBehaviour
 
     void Start()
     {
-        gameObject.name = WorldBuilder.instance.CreateNameTile();
+        gameObject.name = GameManager.instance.CreateId();
         SetUpComponant();
         SetUpLocation();
     }
