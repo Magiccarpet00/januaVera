@@ -321,8 +321,10 @@ public class CombatManager : MonoBehaviour
         else onFight = false;
     }
 
-    public void SetUpFight(List<Character> _characters)
+    public void SetUpFight(List<Character> _characters, bool playerInFight)
     {
+
+        Debug.Log("playerInFight:" + playerInFight);
 
         characters = _characters;
         FillSpot();

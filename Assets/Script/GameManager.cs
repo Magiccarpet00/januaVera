@@ -504,7 +504,9 @@ public class GameManager : MonoBehaviour
         foreach (Character character in characterList) 
         {
             character.CancelReset();
-            actionQueue.Add(character.PopAction());
+            Action characterAction = character.PopAction();
+            if(characterAction != null)
+                actionQueue.Add(characterAction);
         }
 
         // Execution des actions de chaque character
@@ -595,53 +597,39 @@ public class GameManager : MonoBehaviour
     //
     //      COMBAT
     //
-    public void StartFight() //[CODE REFACTOT] Ya du boulot... (dans l'autre aussi)
+    public void StartFight(List<Character> characters) 
     {
-        playerOnFight = true;
+        List<Character> charactersCanFight = new List<Character>();
+        bool playerInFight = false;
 
-        //Cancel toute les actions des characters sur le spot
-        List<Character> allCharactersInSpot = new List<Character>();
-        List<Character> allCharactersAliveInSpot = new List<Character>();
-        allCharactersInSpot = playerCharacter.GetAllCharactersInSpot(); //TODO Ne marche pas quand c'est deux personne non joueur qui lance le fight car cest playerCharacter
-
-        foreach (Character character in allCharactersInSpot)
+        foreach (Character character in characters)
         {
-            if(character.isDead == false)
+            if (character.isPlayer())
+                playerInFight = true;
+
+            if (character.isDead == false)
             {
                 character.CancelAction();
-                allCharactersAliveInSpot.Add(character);
+                charactersCanFight.Add(character);
             }
         }
 
-        CombatManager.instance.SetUpFight(allCharactersAliveInSpot);
-
-        //Visuel
-        actionCanvas.SetActive(false);
-        CombatManager.instance.ToggleFight();
-        cam.GetComponent<CameraController>().ToggleCamPos();
-    }
-
-    public void StartFight(List<Character> characters) 
-    {
-        playerOnFight = true;
-
-        CombatManager.instance.SetUpFight(characters);
-
-
-        actionCanvas.SetActive(false);
-        CombatManager.instance.ToggleFight();
-        cam.GetComponent<CameraController>().ToggleCamPos();
+        CombatManager.instance.SetUpFight(characters, playerInFight);
+        ToggleMapSceneFightScene(false);
     }
 
     public void QuitCombatScene(List<Character> characters)
     {
-        playerOnFight = false;
+        playerOnFight = false; //TMP
+        ToggleMapSceneFightScene(true);
+        CombatManager.instance.ClearCombatScene();
+    }
 
-        actionCanvas.SetActive(true);
+    public void ToggleMapSceneFightScene(bool b)
+    {
+        actionCanvas.SetActive(b);
         CombatManager.instance.ToggleFight();
         cam.GetComponent<CameraController>().ToggleCamPos();
-
-        CombatManager.instance.ClearCombatScene();
     }
 }
 

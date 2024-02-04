@@ -184,6 +184,9 @@ public class Character : MonoBehaviour
 
     public bool WantToFight(Character character)
     {
+        if (isDead == true)
+            return false;
+
         if(charactersEncountered.ContainsKey(character))
         {
             if (charactersEncountered[character] == Relation.HOSTIL ||
@@ -402,6 +405,9 @@ public class Character : MonoBehaviour
 
     public Action PopAction()
     {
+        if (stackAction.Count == 0)
+            return null;
+
         return stackAction.Pop();
     }
 
