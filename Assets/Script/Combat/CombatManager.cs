@@ -51,8 +51,17 @@ public class CombatManager : MonoBehaviour
         if(!playerOnFight)
         {
             LoadSkillAI();
-            if(characters.Count > 1)
+
+            //------------ [CODE TMP] -------------
+            int countAlive = 0;
+            foreach (Character character in characters)
+            {
+                if (!character.isDead)
+                    countAlive++;
+            }
+            if(countAlive > 1)
                 StartCoroutine(FightSequence());
+            //-------------------------------------
         }
     }
 
