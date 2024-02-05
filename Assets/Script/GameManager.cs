@@ -40,8 +40,6 @@ public class GameManager : MonoBehaviour
     public List<Character> characterList = new List<Character>(); // liste de tout les characters en jeu
     public List<Effect> effectList = new List<Effect>();
 
-    public bool playerOnFight = false;
-
     // UI
     [Header("UI")]
     public Text nbTurn;
@@ -257,6 +255,12 @@ public class GameManager : MonoBehaviour
 
             GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[1].gameObject);
             newPnj.GetComponent<Character>().CommandEmpty();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            playerCharacter.CommandRest();
+            _ExecuteActionQueue();
         }
 
     }
@@ -527,7 +531,7 @@ public class GameManager : MonoBehaviour
         foreach(Character character in characterList)
             StartCoroutine(character.MettingOnPath());
 
-        yield return new WaitUntil(() => playerOnFight == false);
+        yield return new WaitUntil(() => CombatManager.instance.playerOnFight == false);
 
         foreach (Character character in characterList)
             character.MettingOnSpot();
@@ -622,7 +626,7 @@ public class GameManager : MonoBehaviour
 
     public void QuitCombatScene(List<Character> characters)
     {
-        playerOnFight = false; //TMP
+        CombatManager.instance.playerOnFight = false; //TMP
         ToggleMapSceneFightScene(true);
         CombatManager.instance.ClearCombatScene();
     }

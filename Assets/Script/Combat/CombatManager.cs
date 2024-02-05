@@ -15,48 +15,89 @@ public class CombatManager : MonoBehaviour
     public List<Character> characters = new List<Character>();
     private bool onFight;
     private int speedInstant = 0;
+    public bool playerOnFight = false;
 
+    public IEnumerator FightSequence()
+    {
+        if (playerOnFight) foreach (GameObject cs in PlayerCombatManager.instance.charactersSprites)
+            cs.GetComponent<SpriteFight>().ResetSelected();
 
+        if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
+        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
 
+        while (speedInstant != 6)
+        {
+            if (playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
 
-    
+            CastSkills();
+            CheckDying();
+
+            if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
+            if (playerOnFight) yield return new WaitForSeconds(PlayerCombatManager.instance.TIME_FIGHT);
+
+            speedInstant++;
+        }
+        speedInstant = 0;
+
+        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(false);
+        if (playerOnFight) GameManager.instance.playerCharacter.selectedCharacters = new List<Character>();
+
+        //TMP pour les parry
+        foreach (Character character in characters)
+        {
+            character.nbGarde = 0;
+        }
+
+        if(!playerOnFight)
+        {
+            LoadSkillAI();
+            if(characters.Count > 1)
+                StartCoroutine(FightSequence());
+        }
+    }
+
 
     public void CastSkills() //TODO fonction qui va toujours se remplire
     {
         foreach (Character character in characters)
         {
+            if (character.currentLoadedSkill == null) return;
+
             if(character.currentLoadedSkill.speed == speedInstant && character.isDead == false)
             {
                 switch (character.currentLoadedSkill.skillType)
                 {
                     case SkillType.ATTACK:
-                        foreach (Character characterTarget in character.selectedCharacter)
+
+                        if (character.selectedCharacters == null) return;
+
+                        foreach (Character characterTarget in character.selectedCharacters)
                         {
                             
                             if(!characterTarget.isDying)
                             {
                                 if(characterTarget.ParryableAttack(character.currentLoadedSkill))
                                 {
-                                    PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
+                                    if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
                                     
                                     if(characterTarget.currentLoadedSkill.parryType == ParryType.COUNTER)
                                     {
                                         character.TakeDamage(characterTarget.currentLoadedSkill.damage);
-                                        PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill,true);
+                                        if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill,true);
                                     }
                                 }
                                 else
                                 {
                                     characterTarget.TakeDamage(character.currentLoadedSkill.damage);
-                                    PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
+                                    if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
-                                PlayerCombatManager.instance.dic_CharacterSpriteFight[character].AnimAtk();
+                                if (playerOnFight) PlayerCombatManager.instance.dic_CharacterSpriteFight[character].AnimAtk();
                             }
                         }
                         break;
 
                     case SkillType.PARRY:
-                        foreach(Character characterTarget in character.selectedCharacter)
+                        foreach(Character characterTarget in character.selectedCharacters)
                         {
                             //TODO ne marche pas si on a plusieur type de parry en même temps
                             //exemple parrade classique + bouclier aquatique
@@ -78,13 +119,10 @@ public class CombatManager : MonoBehaviour
             if (_character.isDying == true && _character.isDead == false)
             {
                 _character.Die();
-                PlayerCombatManager.instance.dic_CharacterSpriteFight[_character].AnimDie();
+                if (playerOnFight) PlayerCombatManager.instance.dic_CharacterSpriteFight[_character].AnimDie();
             }
         }
     }
-
-    
-
 
     public void LoadSkillAI()
     {
@@ -92,44 +130,11 @@ public class CombatManager : MonoBehaviour
         {
             if (character.isPlayer() == false)
             {
-                List<Character> tmp = new List<Character>();
-                tmp.Add(GameManager.instance.playerCharacter);
-                character.SetRandomLoadedSkill(tmp);
+                character.AI_SetRandomLoadedSkill(characters);
             }
         }
     }
-
-
-    public IEnumerator FightSequence()
-    {
-        foreach (GameObject cs in PlayerCombatManager.instance.charactersSprites)
-        {
-            cs.GetComponent<SpriteFight>().ResetSelected();
-        }
-
-        PlayerCombatManager.instance.timerFight.ActiveTimer(true);
-        while (speedInstant != 6)
-        {
-            PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
-            CastSkills();
-            CheckDying();
-            PlayerCombatManager.instance.UpdateAllUI();
-
-            yield return new WaitForSeconds(PlayerCombatManager.instance.TIME_FIGHT);
-            speedInstant++;
-        }
-        speedInstant = 0;
-        PlayerCombatManager.instance.timerFight.ActiveTimer(false);
-
-        GameManager.instance.playerCharacter.selectedCharacter = new List<Character>();
-
-        //TMP pour les parry
-        foreach (Character character in characters)
-        {
-            character.nbGarde = 0;
-        }
-    }
-
+    
 
     //SET UP
     public void ToggleFight()
@@ -140,8 +145,7 @@ public class CombatManager : MonoBehaviour
 
     public void SetUpFight(List<Character> _characters, bool playerInFight)
     {
-        Debug.Log("playerInFight:" + playerInFight);
-
+        playerOnFight = playerInFight; //[CODE GRAMAIRE] bofbof le nommage...
         characters = _characters;
         LoadSkillAI();
 
@@ -151,6 +155,12 @@ public class CombatManager : MonoBehaviour
             PlayerCombatManager.instance.SetUpPanel();
             PlayerCombatManager.instance.UpdateAllUI();
         }
+        else
+        {
+            StartCoroutine(FightSequence());
+        }
+
+
     }
 
 

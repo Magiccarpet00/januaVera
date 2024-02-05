@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
     public bool isDead; 
 
     //FIGHT
-    public List<Character> selectedCharacter = new List<Character>();
+    public List<Character> selectedCharacters = new List<Character>();
     public SkillData currentLoadedSkill;
     public int nbGarde;
 
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
-        if(GameManager.instance.playerOnFight == false)
+        if(CombatManager.instance.playerOnFight == false)
             transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
 
         if (isDead)
@@ -183,7 +183,7 @@ public class Character : MonoBehaviour
 
     public bool WantToFight(Character character)
     {
-        if (isDead == true)
+        if (isDead == true || character == this)
             return false;
 
         if(charactersEncountered.ContainsKey(character))
@@ -338,18 +338,41 @@ public class Character : MonoBehaviour
     }
 
     //      IA
-    public void SetRandomLoadedSkill(List<Character> charactersTarget) //TODO à ameliorer
+    public void AI_SetRandomLoadedSkill(List<Character> allCharacterInFight) //TODO à ameliorer
     {
         int countInventory = weaponInventory.Count;
         Weapon rngWeapon = weaponInventory[Random.Range(0, countInventory)];
         WeaponData wd = (WeaponData)rngWeapon.objectData;
 
-
         int countWeapon = wd.skills.Count;
         currentLoadedSkill = wd.skills[Random.Range(0, countWeapon)];
-        selectedCharacter = charactersTarget;
+
+        selectedCharacters = AI_SelectTargets(allCharacterInFight, currentLoadedSkill.nbTarget);
     }
 
+    public List<Character> AI_SelectTargets(List<Character> allCharacterInFight, int maxTarget)
+    {
+        List<Character> charactersTarget = new List<Character>();
+        List<Character> res = new List<Character>();
+
+        foreach (Character characterTargetable in allCharacterInFight)
+        {
+            if (WantToFight(characterTargetable))
+                charactersTarget.Add(characterTargetable);
+        }
+
+        if (charactersTarget.Count == 0)
+            return null;
+
+        for (int i = 0; i < maxTarget; i++)
+        {
+            res.Add(charactersTarget[i]);
+        }
+
+        return res;
+        
+
+    }
 
 
 

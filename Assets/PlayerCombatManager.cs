@@ -80,7 +80,6 @@ public class PlayerCombatManager : MonoBehaviour
             ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
             bw.SetUpUI(weapon);
 
-
             buttonsWeapons.Add(btnWeapon);
         }
     }
@@ -108,7 +107,7 @@ public class PlayerCombatManager : MonoBehaviour
         if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
             TargetMode(skillData.nbTarget);
         else
-            GameManager.instance.playerCharacter.selectedCharacter.Add(GameManager.instance.playerCharacter);
+            GameManager.instance.playerCharacter.selectedCharacters.Add(GameManager.instance.playerCharacter);
     }
 
     public void ClickButtonBack()
@@ -239,7 +238,6 @@ public class PlayerCombatManager : MonoBehaviour
                         newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.damageType.ToString());
                     newFxFightSkill.transform.Translate(Random.Range(-offSet, offSet), Random.Range(-offSet, offSet), 0);
                 }
-
                 break;
 
             case SkillType.SUMMON:

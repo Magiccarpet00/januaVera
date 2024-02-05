@@ -27,7 +27,7 @@ public class SpriteFight : MonoBehaviour
         {
             animatorOver.SetTrigger("selected");
             //CombatManager.instance.targetedCharacter.Add(character);
-            GameManager.instance.playerCharacter.selectedCharacter.Add(character);
+            GameManager.instance.playerCharacter.selectedCharacters.Add(character);
             PlayerCombatManager.instance.MinusTarget();
         }
     }
