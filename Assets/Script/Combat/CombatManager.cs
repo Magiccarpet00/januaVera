@@ -63,13 +63,13 @@ public class CombatManager : MonoBehaviour
         {
             if (character.currentLoadedSkill == null) return;
 
-            if(character.currentLoadedSkill.speed == speedInstant && character.isDead == false)
+            if(character.currentLoadedSkill.speed == speedInstant &&
+               character.isDead == false &&
+               character.selectedCharacters != null)
             {
                 switch (character.currentLoadedSkill.skillType)
                 {
                     case SkillType.ATTACK:
-
-                        if (character.selectedCharacters == null) return;
 
                         foreach (Character characterTarget in character.selectedCharacters)
                         {
