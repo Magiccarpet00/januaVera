@@ -529,7 +529,9 @@ public class GameManager : MonoBehaviour
         }
         
         foreach(Character character in characterList)
-            StartCoroutine(character.MettingOnPath());
+        {
+            character.MettingOnPath();
+        }
 
         yield return new WaitUntil(() => CombatManager.instance.playerOnFight == false);
 
@@ -590,7 +592,8 @@ public class GameManager : MonoBehaviour
                     {
                         List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
                         int rng = Random.Range(0, adjSpot.Count);
-                        character.CommandMove(adjSpot[rng]);
+                        //character.CommandMove(adjSpot[rng]);
+                        character.CommandMove(adjSpot[0]);
                     }
                 }
             }
@@ -604,12 +607,12 @@ public class GameManager : MonoBehaviour
     public void StartFight(List<Character> characters) 
     {
         List<Character> charactersCanFight = new List<Character>();
-        bool playerInFight = false;
+        bool playerIsGoingToFight = false;
 
         foreach (Character character in characters)
         {
             if (character.isPlayer())
-                playerInFight = true;
+                playerIsGoingToFight = true;
 
             if (character.isDead == false)
             {
@@ -618,9 +621,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        CombatManager.instance.SetUpFight(characters, playerInFight);
+        if( !(playerIsGoingToFight && CombatManager.instance.playerOnFight) )
+            CombatManager.instance.SetUpFight(characters, playerIsGoingToFight);
 
-        if(playerInFight)
+        if(playerIsGoingToFight)
             ToggleMapSceneFightScene(false);
     }
 

@@ -141,17 +141,25 @@ public class Character : MonoBehaviour
     //
     //      RELATION
     //
-    public IEnumerator MettingOnPath()
+    public void MettingOnPath()
     {
         List<Character> charactersOnPath = new List<Character>();
-        charactersOnPath.Add(this);
+        List<Character> allCharactersInTwoSpot = new List<Character>();
         bool wantBattle = false;
 
-        foreach (Character characterOnPath in lastSpot.GetComponent<Spot>().GetAllCharactersInSpot())
+        
+        allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersInSpot());
+        allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersInSpot());
+
+        foreach (Character characterOnPath in allCharactersInTwoSpot)
         {
-            if(characterOnPath.lastSpot == this.currentSpot &&
-               characterOnPath.currentSpot == this.lastSpot &&
-               characterOnPath.isDead == false)
+            if((characterOnPath.lastSpot    == this.currentSpot &&
+                characterOnPath.currentSpot == this.lastSpot &&
+                characterOnPath.isDead      == false) 
+                    ||                
+               (characterOnPath.currentSpot == this.currentSpot &&
+                characterOnPath.lastSpot    == this.lastSpot &&
+                characterOnPath.isDead      == false))
             {
                 charactersOnPath.Add(characterOnPath);
 
@@ -160,13 +168,17 @@ public class Character : MonoBehaviour
 
                 if (WantToFight(characterOnPath))
                     wantBattle = true;
+
             }
         }
 
-        yield return new WaitForSeconds(0.3f);
+        //yield return new WaitForSeconds(0.3f);
 
         if (wantBattle)
+        {
+            //Debug.Log(this.gameObject.name + " start fight with count: " + charactersOnPath.Count + "  wantBattle = " + wantBattle);
             GameManager.instance.StartFight(charactersOnPath);
+        }
     }
 
     public void MettingOnSpot()
