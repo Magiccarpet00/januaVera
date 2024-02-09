@@ -287,6 +287,7 @@ public class GameManager : MonoBehaviour
                 if (debugDraw) Instantiate(CircleTest, pos, Quaternion.identity);
             }
         }
+
         return res;
     }
 

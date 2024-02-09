@@ -230,7 +230,7 @@ public class PlayerCombatManager : MonoBehaviour
                 //j'aimerai bien que le mur d'eau, la riposte et le block d'un bouclier est des anims
                 //differentes
                 newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill("BLOCK");
-                if (skillComingFromCaster) // [CODE DOUTEUX] j'ai pas trop ce copier la ligne du dessus à revoir
+                if (skillComingFromCaster) // [CODE DOUTEUX] j'aime pas trop ce copier la ligne du dessus à revoir
                 {
                     if (skillData.damageType == DamageType.ELEM)
                         newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.element.ToString());

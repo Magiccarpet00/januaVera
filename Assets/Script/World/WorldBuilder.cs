@@ -11,7 +11,7 @@ public class WorldBuilder : MonoBehaviour
 
     [SerializeField] private GameObject folderTile;
 
-    [SerializeField] private GameObject[,] allTilesInGame = new GameObject[GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD];
+    public GameObject[,] allTilesInGame = new GameObject[GlobalConst.SIZE_BOARD, GlobalConst.SIZE_BOARD];
     public List<Spot> allSpotInGame = new List<Spot>();
 
     [SerializeField] private List<GameObject> prefabTiles = new List<GameObject>();
