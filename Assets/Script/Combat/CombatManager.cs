@@ -53,15 +53,17 @@ public class CombatManager : MonoBehaviour
             LoadSkillAI();
 
             //------------ [CODE TMP] -------------
-            int countAlive = 0;
-            foreach (Character character in characters)
-            {
-                if (!character.isDead)
-                    countAlive++;
-            }
-            if(countAlive > 1)
-                StartCoroutine(FightSequence());
+            //int countAlive = 0;
+            //foreach (Character character in characters)
+            //{
+            //    if (!character.isDead)
+            //        countAlive++;
+            //}
+            //if(countAlive > 1)
             //-------------------------------------
+
+            if(!CheckFightEnd())
+                StartCoroutine(FightSequence());
         }
     }
 
@@ -168,10 +170,19 @@ public class CombatManager : MonoBehaviour
         {
             StartCoroutine(FightSequence());
         }
-
-
     }
 
+    public bool CheckFightEnd()
+    {
+        bool fightEnd = true;
+
+        foreach (Character characterWatching in characters)
+            foreach (Character characterWatched in characters)
+                if (characterWatching.WantToFight(characterWatched))
+                    fightEnd = false;
+
+        return fightEnd;
+    }
 
 
     // [BUG RESOLUE]
@@ -203,5 +214,7 @@ public class CombatManager : MonoBehaviour
     {
         return onFight;
     }
+
+
 
 }
