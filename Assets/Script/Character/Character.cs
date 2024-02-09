@@ -65,6 +65,7 @@ public class Character : MonoBehaviour
     // Quand on clic sur la même case ça fait quand meme passer un tour, à réparer
     public virtual void Move(GameObject spot)
     {
+        
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
     
         if (isHide)

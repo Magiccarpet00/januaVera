@@ -492,7 +492,8 @@ public class GameManager : MonoBehaviour
     {
         inputBlock = true;
         AddTurn(1);
-
+        float debugTime = Time.fixedTime;
+        
         // Application des effects
         List<int> effectToDelete = new List<int>();
         for (int i = 0; i < effectList.Count; i++)
@@ -514,36 +515,44 @@ public class GameManager : MonoBehaviour
                 actionQueue.Add(characterAction);
         }
 
+        Debug.Log("START:" + (Time.fixedTime - debugTime));
+
         // Execution des actions de chaque character
         for (int i = 0; i < GlobalConst.RANGE_PRIOTITY; i++)
         {
             foreach (Action action in actionQueue)
             {
-                yield return new WaitUntil(() => CombatManager.instance.GetOnFight() == false);
+                //yield return new WaitUntil(() => CombatManager.instance.GetOnFight() == false);
 
-                if (action.GetPriority() == i &&  !action.GetUser().isCanceled())
+                if (action.GetPriority() == i && !action.GetUser().isCanceled())
                 {
                     action.PerfomAction();
-                    yield return new WaitForSeconds(0.01f); //[CODE WARNING] Peut etre une source de bug (jsp)
+                    yield return new WaitForSeconds(0.001f); //[CODE WARNING] Peut etre une source de bug (jsp)
+
                 }
             }
         }
-        
-        foreach(Character character in characterList)
+
+        Debug.Log("END:" + (Time.fixedTime - debugTime));
+
+        foreach (Character character in characterList)
         {
             character.MettingOnPath();
         }
+
 
         yield return new WaitUntil(() => CombatManager.instance.playerOnFight == false);
 
         foreach (Character character in characterList)
             character.MettingOnSpot();
 
+
         actionQueue.Clear();
         CommandPnj();
 
+
         //On fait les updates de UI uniquement si le player n'est pas sur un chemin
-        if(!playerCharacter.GetOnPath())
+        if (!playerCharacter.GetOnPath())
         {
             UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
             UpdateUILandscape(playerCharacter.GetCurrentLocationType());
@@ -624,7 +633,6 @@ public class GameManager : MonoBehaviour
 
         if( !(playerIsGoingToFight && CombatManager.instance.playerOnFight) )
         {
-            Debug.Log("bagare!");
             CombatManager.instance.SetUpFight(characters, playerIsGoingToFight);
         }
 
@@ -754,7 +762,7 @@ public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
 
-    public static float TIME_TURN_SEC = 0.6f;    // Le temps de voir les actions se faire
+    public static float TIME_TURN_SEC = 0.2f;    // Le temps de voir les actions se faire
 
     public static float BASIC_SMOOTHTIME = 0.4f;
     public static float HIDE_SMOOTHTIME = 0.8f;

@@ -2656,7 +2656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8928253509181056009
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2700,6 +2700,5 @@ MonoBehaviour:
   nameValue: {fileID: 484373941}
   damageValue: {fileID: 1249918057}
   damageTypeValue: {fileID: 1233169671}
-  rangeTypeValue: {fileID: 0}
   speedValue: {fileID: 606884084}
   targetValue: {fileID: 413243182}
