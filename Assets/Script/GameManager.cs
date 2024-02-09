@@ -527,7 +527,7 @@ public class GameManager : MonoBehaviour
                 if (action.GetPriority() == i && !action.GetUser().isCanceled())
                 {
                     action.PerfomAction();
-                    yield return new WaitForSeconds(0.001f); //[CODE WARNING] Peut etre une source de bug (jsp)
+                    yield return new WaitForSeconds(0.001f); //[CODE WARNING / REFACTOT] Peut etre une source de bug (jsp) si on clic trop vite
 
                 }
             }
@@ -537,7 +537,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Character character in characterList)
         {
-            character.MettingOnPath();
+            character.StartCoroutine("MettingOnPath");
         }
 
 

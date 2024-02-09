@@ -142,7 +142,7 @@ public class Character : MonoBehaviour
     //
     //      RELATION
     //
-    public void MettingOnPath()
+    public IEnumerator MettingOnPath()
     {
         List<Character> charactersOnPath = new List<Character>();
         List<Character> allCharactersInTwoSpot = new List<Character>();
@@ -173,11 +173,10 @@ public class Character : MonoBehaviour
             }
         }
 
-        //yield return new WaitForSeconds(0.3f);
-
         if (wantBattle)
         {
             //Debug.Log(this.gameObject.name + " start fight with count: " + charactersOnPath.Count + "  wantBattle = " + wantBattle);
+            yield return new WaitForSeconds(0.3f);
             GameManager.instance.StartFight(charactersOnPath);
         }
     }
