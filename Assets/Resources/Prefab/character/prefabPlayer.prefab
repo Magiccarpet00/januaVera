@@ -51,12 +51,14 @@ MonoBehaviour:
   collider2d: {fileID: 8508389343032901378}
   animator: {fileID: 7049016750269207359}
   currentSpot: {fileID: 0}
+  lastSpot: {fileID: 0}
   isHide: 0
   currentLife: 0
   isDying: 0
   isDead: 0
-  selectedCharacter: []
+  selectedCharacters: []
   currentLoadedSkill: {fileID: 0}
+  nbGarde: 0
 --- !u!58 &8508389343032901378
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -99,8 +101,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7379619802042984630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.751, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7379619800762806692}

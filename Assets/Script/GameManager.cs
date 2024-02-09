@@ -592,8 +592,8 @@ public class GameManager : MonoBehaviour
                     {
                         List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
                         int rng = Random.Range(0, adjSpot.Count);
-                        //character.CommandMove(adjSpot[rng]);
-                        character.CommandMove(adjSpot[0]);
+                        character.CommandMove(adjSpot[rng]);
+                        //character.CommandMove(adjSpot[0]);
                     }
                 }
             }
@@ -622,7 +622,10 @@ public class GameManager : MonoBehaviour
         }
 
         if( !(playerIsGoingToFight && CombatManager.instance.playerOnFight) )
+        {
+            Debug.Log("bagare!");
             CombatManager.instance.SetUpFight(characters, playerIsGoingToFight);
+        }
 
         if(playerIsGoingToFight)
             ToggleMapSceneFightScene(false);

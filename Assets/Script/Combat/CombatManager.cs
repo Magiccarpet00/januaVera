@@ -23,7 +23,7 @@ public class CombatManager : MonoBehaviour
             cs.GetComponent<SpriteFight>().ResetSelected();
 
         if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
-        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
+        if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
 
         while (speedInstant != 6)
         {
@@ -154,8 +154,6 @@ public class CombatManager : MonoBehaviour
 
     public void SetUpFight(List<Character> _characters, bool playerInFight)
     {
-        Debug.Log("zozo landz ");
-
         playerOnFight = playerInFight; //[CODE GRAMAIRE] bofbof le nommage...
         characters = _characters;
         LoadSkillAI();
@@ -196,7 +194,6 @@ public class CombatManager : MonoBehaviour
         {
             cs.GetComponent<CombatSpot>().SetActiveSpotUI(false);
         }
-
     }
 
     //

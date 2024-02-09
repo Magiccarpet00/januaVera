@@ -195,7 +195,7 @@ public class Character : MonoBehaviour
 
     public bool WantToFight(Character character)
     {
-        if (isDead == true || character == this)
+        if (isDead == true || character == this || character.isDead == true)
             return false;
 
         if(charactersEncountered.ContainsKey(character))
@@ -301,8 +301,6 @@ public class Character : MonoBehaviour
 
         objectInventory.Add(obj);
     }
-
-
 
     //      FIGHT
     public void TakeDamage(int i)
