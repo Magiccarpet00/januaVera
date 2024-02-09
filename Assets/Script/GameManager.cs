@@ -633,7 +633,7 @@ public class GameManager : MonoBehaviour
 
         if( !(playerIsGoingToFight && CombatManager.instance.playerOnFight) )
         {
-            CombatManager.instance.SetUpFight(characters, playerIsGoingToFight);
+            CombatManager.instance.SetUpFight(charactersCanFight, playerIsGoingToFight);
         }
 
         if(playerIsGoingToFight)
