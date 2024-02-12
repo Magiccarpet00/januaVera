@@ -18,7 +18,7 @@ public abstract class Effect
 
     // Cette methode verifie si l'effet dois se lancer à ce tour
     // et renvoie true si il a été lancé
-    public bool Clock() //[CODE ACADEMIE] trouver un autre nom a la methode
+    public bool Clock() //[CODE ACADEMIE] trouver un autre nom a la methode??????????????
     {
         deltaTurn--;
         if (deltaTurn == 0)

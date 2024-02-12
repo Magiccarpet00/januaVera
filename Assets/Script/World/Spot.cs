@@ -14,6 +14,23 @@ public class Spot : MonoBehaviour
     [SerializeField] private GameObject prefabOverMouse_fx;
     private Animator AnimatorOverMouse_fx;
 
+
+    private void Update()
+    {
+        int count = 1;
+        foreach (Character character in charactersOnSpot)
+        {
+            //character.offSetOnSpot.x = Mathf.Cos( (Time.time  % (Mathf.PI*2/count)) / charactersOnSpot.Count);
+            //character.offSetOnSpot.y = Mathf.Sin( (Time.time  % (Mathf.PI*2/count)) / charactersOnSpot.Count);
+
+            character.offSetOnSpot.x = Mathf.Cos(Time.time % (Mathf.PI * 2));
+            character.offSetOnSpot.y = Mathf.Sin(Time.time % (Mathf.PI * 2));
+
+            
+            count++;
+        }
+    }
+
     public void AddAdjacentSpots(GameObject newSpot, bool secretSpot)
     {
         if (secretSpot)

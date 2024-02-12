@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     private Vector3 target;
     private float smoothTime;
     private Vector3 velocity = Vector3.zero;
+    public Vector2 offSetOnSpot;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Collider2D collider2d; //[CODE INUTILE]
     private bool inFight;
@@ -50,17 +51,19 @@ public class Character : MonoBehaviour
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
         if(CombatManager.instance.playerOnFight == false)
-            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime);
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, target+(Vector3)offSetOnSpot, ref velocity, smoothTime);
+        }
 
-        if (isDead)
+        if(isDead)
             Visible(false);
-    }
 
+        
+    }
 
     //
     //      ACTION
     //
-
     // [CODI BUG]
     // Quand on clic sur la même case ça fait quand meme passer un tour, à réparer
     public virtual void Move(GameObject spot)
