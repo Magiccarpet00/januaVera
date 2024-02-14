@@ -22,9 +22,9 @@ public class Spot : MonoBehaviour
         Complex i = Complex.ImaginaryOne;
         foreach (Character character in charactersOnSpot)
         {
-            float f = (Time.time * charactersOnSpot.Count) * 0.03f;
-            character.offSetOnSpot.x = (float)Complex.Exp((2 * Mathf.PI * (count+f) * i ) / charactersOnSpot.Count).Real;
-            character.offSetOnSpot.y = (float)Complex.Exp((2 * Mathf.PI * (count+f) * i ) / charactersOnSpot.Count).Imaginary ;
+            float timeRotate = (Time.time * charactersOnSpot.Count) * 0.03f;
+            character.offSetOnSpot.x = (float)Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Real;
+            character.offSetOnSpot.y = (float)Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Imaginary ;
             count++;
         }
     }
