@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Numerics;
 
 public class Spot : MonoBehaviour
 {
@@ -18,15 +19,12 @@ public class Spot : MonoBehaviour
     private void Update()
     {
         int count = 1;
+        Complex i = Complex.ImaginaryOne;
         foreach (Character character in charactersOnSpot)
         {
-            //character.offSetOnSpot.x = Mathf.Cos( (Time.time  % (Mathf.PI*2/count)) / charactersOnSpot.Count);
-            //character.offSetOnSpot.y = Mathf.Sin( (Time.time  % (Mathf.PI*2/count)) / charactersOnSpot.Count);
-
-            character.offSetOnSpot.x = Mathf.Cos(Time.time % (Mathf.PI * 2));
-            character.offSetOnSpot.y = Mathf.Sin(Time.time % (Mathf.PI * 2));
-
-            
+            float f = (Time.time * charactersOnSpot.Count) * 0.03f;
+            character.offSetOnSpot.x = (float)Complex.Exp((2 * Mathf.PI * (count+f) * i ) / charactersOnSpot.Count).Real;
+            character.offSetOnSpot.y = (float)Complex.Exp((2 * Mathf.PI * (count+f) * i ) / charactersOnSpot.Count).Imaginary ;
             count++;
         }
     }
