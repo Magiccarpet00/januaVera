@@ -71,7 +71,7 @@ public class PlayerCombatManager : MonoBehaviour
     {
         PushPanel(panelWeapon);
 
-        foreach (Weapon weapon in GameManager.instance.playerCharacter.weaponInventory)
+        foreach (Weapon weapon in GameManager.instance.playerCharacter.GetWeaponsInventory())
         {
             GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
             btnWeapon.transform.SetParent(panelWeapon.transform);

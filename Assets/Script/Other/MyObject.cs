@@ -10,4 +10,9 @@ public class MyObject
     {
         objectData = objData;
     }
+
+    public virtual bool isWeapon()
+    {
+        return false;
+    }
 }

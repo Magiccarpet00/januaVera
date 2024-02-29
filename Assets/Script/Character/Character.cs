@@ -35,7 +35,6 @@ public class Character : MonoBehaviour
     public int nbGarde;
 
     //INVENTORY
-    public List<Weapon> weaponInventory = new List<Weapon>();
     public List<MyObject> objectInventory = new List<MyObject>();
 
     //RELATION
@@ -60,8 +59,6 @@ public class Character : MonoBehaviour
 
         if(isDead)
             Visible(false);
-
-        
     }
 
     //
@@ -354,10 +351,25 @@ public class Character : MonoBehaviour
     }
 
     //      IA
+    public Weapon AI_TakeRandomWeapon()
+    {
+        int countInventory = objectInventory.Count;
+        int rng = Random.Range(0, countInventory);
+        for (int i = rng; i < objectInventory.Count + rng; i++)
+        {
+            if(objectInventory[i% objectInventory.Count].isWeapon())
+            {
+                return (Weapon)objectInventory[i % objectInventory.Count];
+            }
+        }
+
+        Debug.LogWarning("AI_TakeRandomWeapon: zero weapon in inventory");
+        return null;
+    }
+
     public void AI_SetRandomLoadedSkill(List<Character> allCharacterInFight) //TODO à ameliorer
     {
-        int countInventory = weaponInventory.Count;
-        Weapon rngWeapon = weaponInventory[Random.Range(0, countInventory)];
+        Weapon rngWeapon = AI_TakeRandomWeapon();
         WeaponData wd = (WeaponData)rngWeapon.objectData;
 
         int countWeapon = wd.skills.Count;
@@ -411,6 +423,15 @@ public class Character : MonoBehaviour
         Transform t_spot = spot.transform;
         this.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
         this.UpdateSmoothTime();
+    }
+
+    public List<Weapon> GetWeaponsInventory()
+    {
+        List<Weapon> weaponsInventory = new List<Weapon>();
+        for (int i = 0; i < objectInventory.Count; i++)
+            if (objectInventory[i].isWeapon())
+                weaponsInventory.Add((Weapon)objectInventory[i]);
+        return weaponsInventory;
     }
 
     public TileType GetCurrentTileType()

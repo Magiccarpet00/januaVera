@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 
 public class Weapon : MyObject
 {
@@ -9,6 +7,11 @@ public class Weapon : MyObject
     public Weapon(WeaponData wd) : base(wd)
     {
         
+    }
+
+    public override bool isWeapon()
+    {
+        return true;
     }
 
 }

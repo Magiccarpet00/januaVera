@@ -224,9 +224,9 @@ public class GameManager : MonoBehaviour
             foreach (Character character in characterList)
             {
                 if (character.isPlayer())
-                    character.weaponInventory.Add(CreateWeapon("CRACKED"));
+                    character.objectInventory.Add(CreateWeapon("CRACKED"));
                 else
-                    character.weaponInventory.Add(CreateWeapon("SWORD"));
+                    character.objectInventory.Add(CreateWeapon("SWORD"));
             }
         }
 
@@ -515,8 +515,6 @@ public class GameManager : MonoBehaviour
                 actionQueue.Add(characterAction);
         }
 
-        Debug.Log("START:" + (Time.fixedTime - debugTime));
-
         // Execution des actions de chaque character
         for (int i = 0; i < GlobalConst.RANGE_PRIOTITY; i++)
         {
@@ -533,8 +531,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Debug.Log("END:" + (Time.fixedTime - debugTime));
-
         foreach (Character character in characterList)
         {
             character.StartCoroutine("MettingOnPath");
@@ -549,7 +545,6 @@ public class GameManager : MonoBehaviour
 
         actionQueue.Clear();
         CommandPnj();
-
 
         //On fait les updates de UI uniquement si le player n'est pas sur un chemin
         if (!playerCharacter.GetOnPath())
