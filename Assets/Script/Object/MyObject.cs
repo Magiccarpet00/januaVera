@@ -11,8 +11,6 @@ public class MyObject
         objectData = objData;
     }
 
-    public virtual bool isWeapon()
-    {
-        return false;
-    }
+    public virtual bool isWeapon() { return false; }
+    public virtual bool isArmor() { return false; }
 }

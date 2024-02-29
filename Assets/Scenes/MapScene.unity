@@ -3163,6 +3163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characters: []
+  playerOnFight: 0
 --- !u!114 &1525517295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3993,7 +3994,6 @@ MonoBehaviour:
   localeSelector: {fileID: 1915923814}
   inputBlock: 0
   characterList: []
-  playerOnFight: 0
   nbTurn: {fileID: 1406182011}
   imgLandscape: {fileID: 556910849}
   allImgLandscape_tile:
@@ -4078,11 +4078,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b80fde956cd53cf4abedc91ef1bad720, type: 2}
   - {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
+  - {fileID: 11400000, guid: b80fde956cd53cf4abedc91ef1bad720, type: 2}
+  - {fileID: 11400000, guid: 12f278db02e09c94f8b03fcad3324e66, type: 2}
   - {fileID: 11400000, guid: 0d73181b5c05a6e44a8954646c5660f1, type: 2}
-  - {fileID: 11400000, guid: d8b9ae35dbcfbfd4c93922f12273838e, type: 2}
-  - {fileID: 11400000, guid: e5b69d78cb00d2947a718963cbfc4e0f, type: 2}
-  - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}
+  - {fileID: 11400000, guid: 0ce628f352ab43c498f43e0d54941719, type: 2}
   - {fileID: 11400000, guid: 499ff98e2dd8dc443a17e53ced3560d2, type: 2}
+  - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}
 --- !u!1 &1947701088
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3ae3a2173582748a57b30d28168597, type: 3}
   m_Name: BLOCK_COUNTER
   m_EditorClassIdentifier: 
-  skillType: 0
-  element: 0
-  speed: 0
+  skillType: 1
+  element: 5
+  speed: 2
   nbTarget: 0
   req_VITALITY: 0
   req_ENDURANCE: 0
   req_STRENGHT: 0
   req_DEXTERITY: 0
   req_FAITH: 0
-  parryType: 0
-  damage: 0
+  parryType: 1
+  damage: 3
   damageType: 0
-  nbGarde: 0
+  nbGarde: 1

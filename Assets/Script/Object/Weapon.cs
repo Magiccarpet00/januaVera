@@ -1,5 +1,4 @@
 
-
 public class Weapon : MyObject
 {
     public int currentState;

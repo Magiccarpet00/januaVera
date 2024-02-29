@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: PIC
   m_EditorClassIdentifier: 
   skillType: 0
-  element: 0
-  speed: 0
-  nbTarget: 0
+  element: 6
+  speed: 4
+  nbTarget: 1
   req_VITALITY: 0
   req_ENDURANCE: 0
   req_STRENGHT: 0
   req_DEXTERITY: 0
   req_FAITH: 0
-  damage: 0
+  damage: 3
   damageType: 0

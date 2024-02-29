@@ -9,17 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e7c9a61ca6c414d84ddaf2d4933afe, type: 3}
-  m_Name: SLASH
+  m_Script: {fileID: 11500000, guid: 395cff1027971254192b670fffb3ba0f, type: 3}
+  m_Name: Breastplate
   m_EditorClassIdentifier: 
-  skillType: 0
-  element: 4
-  speed: 3
-  nbTarget: 1
-  req_VITALITY: 0
-  req_ENDURANCE: 0
-  req_STRENGHT: 0
-  req_DEXTERITY: 0
-  req_FAITH: 0
-  damage: 3
-  damageType: 1
+  material: 4
+  maxState: 5

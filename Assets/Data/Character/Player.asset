@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  race: 0
   shape: 10
   typeDivinity: 0
-  maxLife: 100
-  stamina: 3
-  nbWound: 0
-  dodgeTime: 4
+  init_VITALITY: 10
+  init_ENDURANCE: 5
+  init_STRENGHT: 5
+  init_DEXTERITY: 5
+  init_FAITH: 5
   spriteMap: {fileID: 21300000, guid: 7da1d6f7c24cf85468b02c45979b7573, type: 3}
   spriteFight: {fileID: 21300000, guid: 9ae9a15325134f14d9593bbb89746bb4, type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,8 +63,6 @@ public class GameManager : MonoBehaviour
     public Dictionary<WeaponStyle, string> dic_weaponStyle = new Dictionary<WeaponStyle, string>();
     public Dictionary<Element, string> dic_element = new Dictionary<Element, string>();
 
-
-
     //RACISME
     public List<RelationLine> relationshipsBoard = new List<RelationLine>();
 
@@ -88,13 +86,7 @@ public class GameManager : MonoBehaviour
 
         //UI
         AddTurn(0);
-        
-
-
-
     }
-
-    
 
     public IEnumerator StartLateOne() //[CODE BIZARE] Cette methode est appele dans start mais elle s'execute apres tout les autre starts
     {
@@ -237,6 +229,11 @@ public class GameManager : MonoBehaviour
 
             MyObject obj = CreateObjectOnMap("Bottle");
             spot[0].AddObject(obj);
+
+            MyObject obj2 = CreateObjectOnMap("Breastplate");
+            spot[0].AddObject(obj2);
+
+
         }
 
         if(Input.GetKeyDown(KeyCode.Y))
@@ -262,7 +259,6 @@ public class GameManager : MonoBehaviour
             playerCharacter.CommandRest();
             _ExecuteActionQueue();
         }
-
     }
 
 

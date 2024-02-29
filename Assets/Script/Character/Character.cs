@@ -36,6 +36,7 @@ public class Character : MonoBehaviour
 
     //INVENTORY
     public List<MyObject> objectInventory = new List<MyObject>();
+    public Stack<Armor> armorsEquiped = new Stack<Armor>();
 
     //RELATION
     public Dictionary<Character, Relation> charactersEncountered = new Dictionary<Character, Relation>();
@@ -303,11 +304,23 @@ public class Character : MonoBehaviour
         if (obj == null) return;
 
         objectInventory.Add(obj);
+
+        if (obj.isArmor())
+            armorsEquiped.Push((Armor)obj);
     }
 
     //      FIGHT
     public void TakeDamage(int i)
     {
+        //TODO A REFAIRE
+        if(armorsEquiped.Count != 0) //[CODE TMP] le feux ou foudre passe a travers l'armure par exemple  
+        {
+            while(armorsEquiped.Peek().currentState !=0)
+            {
+                armorsEquiped.Peek().currentState -= i;
+            }
+        }
+        
         s_VITALITY -= i;
         if(s_VITALITY <= 0)
         {
