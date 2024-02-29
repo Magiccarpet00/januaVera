@@ -26,7 +26,6 @@ public class Character : MonoBehaviour
     private bool canceled; // si il est canceled il ne peut par faire sont action de la actionQueue
 
     //LIFE
-    public int currentLife;
     public bool isDying; //pour le fight
     public bool isDead; 
 
@@ -42,10 +41,14 @@ public class Character : MonoBehaviour
     //RELATION
     public Dictionary<Character, Relation> charactersEncountered = new Dictionary<Character, Relation>();
 
+    //STATS
+    public int s_VITALITY, s_ENDURANCE, s_STRENGHT, s_DEXTERITY, s_FAITH;
+
+
     public virtual void Start()
     {
         spriteRenderer.sprite = characterData.spriteMap;
-        currentLife = characterData.maxLife;
+        s_VITALITY = characterData.init_VITALITY;
     }
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
@@ -308,8 +311,8 @@ public class Character : MonoBehaviour
     //      FIGHT
     public void TakeDamage(int i)
     {
-        currentLife -= i;
-        if(currentLife <= 0)
+        s_VITALITY -= i;
+        if(s_VITALITY <= 0)
         {
             Die();
         }
@@ -317,9 +320,9 @@ public class Character : MonoBehaviour
 
     public bool ParryableAttack(SkillData skillDataTaken)
     {
-        if(nbGarde > 0)
-            if (currentLoadedSkill.damageTypeParryable == skillDataTaken.damageType)
-                return true;
+        //if(nbGarde > 0)
+        //    if(currentLoadedSkill.damageTypeParryable == skillDataTaken.damageType)
+        //       return true;
 
         return false;
     }

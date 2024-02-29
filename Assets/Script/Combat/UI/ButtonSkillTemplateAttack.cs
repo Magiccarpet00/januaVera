@@ -17,12 +17,14 @@ public class ButtonSkillTemplateAttack : MonoBehaviour
 
     public void SetUpUI(SkillData skillData)
     {
-        nameValue.SetEntry(skillData.name);
-        
-        damageValue.text = skillData.damage.ToString();
-        damageTypeValue.SetEntry(skillData.damageType.ToString());
-        speedValue.text = skillData.speed.ToString();
-        targetValue.text = skillData.nbTarget.ToString();
+        SkillAttackData skillAttackData = (SkillAttackData)skillData;
+
+        nameValue.SetEntry(skillAttackData.name);
+
+        damageValue.text = skillAttackData.damage.ToString();
+        damageTypeValue.SetEntry(skillAttackData.damageType.ToString());
+        speedValue.text = skillAttackData.speed.ToString();
+        targetValue.text = skillAttackData.nbTarget.ToString();
     }
 
 

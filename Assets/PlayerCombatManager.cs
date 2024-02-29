@@ -217,10 +217,12 @@ public class PlayerCombatManager : MonoBehaviour
         switch (skillData.skillType)
         {
             case SkillType.ATTACK:
-                if (skillData.damageType == DamageType.ELEM)
-                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.element.ToString());
+                SkillAttackData skillAttackData = (SkillAttackData)skillData;
+
+                if (skillAttackData.damageType == DamageType.ELEM)
+                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillAttackData.element.ToString());
                 else
-                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.damageType.ToString());
+                    newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillAttackData.damageType.ToString());
 
                 newFxFightSkill.transform.Translate(Random.Range(-offSet, offSet), Random.Range(-offSet, offSet), 0);
                 break;
@@ -229,13 +231,15 @@ public class PlayerCombatManager : MonoBehaviour
                 //[CODE SEPTIQUE] Je suis pas sur de faire qu'une seul anim de block pour les couters
                 //j'aimerai bien que le mur d'eau, la riposte et le block d'un bouclier est des anims
                 //differentes
+                SkillParryData skillParryData = (SkillParryData)skillData;
+
                 newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill("BLOCK");
                 if (skillComingFromCaster) // [CODE DOUTEUX] j'aime pas trop ce copier la ligne du dessus à revoir
                 {
-                    if (skillData.damageType == DamageType.ELEM)
+                    if (skillParryData.damageType == DamageType.ELEM)
                         newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.element.ToString());
                     else
-                        newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillData.damageType.ToString());
+                        newFxFightSkill.GetComponent<FxFightSkills>().TriggerFxFightSkill(skillParryData.damageType.ToString());
                     newFxFightSkill.transform.Translate(Random.Range(-offSet, offSet), Random.Range(-offSet, offSet), 0);
                 }
                 break;

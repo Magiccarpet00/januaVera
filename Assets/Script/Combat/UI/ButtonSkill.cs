@@ -16,7 +16,7 @@ public class ButtonSkill : MonoBehaviour
     public void SetUpUI(SkillData _skillData)
     {
         skillData = _skillData;
-        
+
         switch (skillData.skillType)
         {
             case SkillType.ATTACK:
@@ -27,7 +27,6 @@ public class ButtonSkill : MonoBehaviour
             case SkillType.PARRY:
                 templateParry.SetActive(true);
                 templateParry.GetComponent<ButtonSkillTemplateParry>().SetUpUI(skillData);
-
                 break;
 
             case SkillType.SUMMON:

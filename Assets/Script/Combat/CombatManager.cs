@@ -63,7 +63,7 @@ public class CombatManager : MonoBehaviour
         {
             if (character.currentLoadedSkill == null) return;
 
-            if(character.currentLoadedSkill.speed == speedInstant &&
+            if (character.currentLoadedSkill.speed == speedInstant &&
                character.isDead == false &&
                character.selectedCharacters != null)
             {
@@ -73,22 +73,27 @@ public class CombatManager : MonoBehaviour
 
                         foreach (Character characterTarget in character.selectedCharacters)
                         {
-                            
-                            if(!characterTarget.isDying)
+
+                            if (!characterTarget.isDying)
                             {
-                                if(characterTarget.ParryableAttack(character.currentLoadedSkill))
+                                if (characterTarget.ParryableAttack(character.currentLoadedSkill))
                                 {
                                     if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
-                                    
-                                    if(characterTarget.currentLoadedSkill.parryType == ParryType.COUNTER)
+
+                                    if (characterTarget.currentLoadedSkill.skillType == SkillType.PARRY)
                                     {
-                                        character.TakeDamage(characterTarget.currentLoadedSkill.damage);
-                                        if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill,true);
+                                        SkillParryData skillParryData = (SkillParryData)characterTarget.currentLoadedSkill;
+                                        if(skillParryData.parryType == ParryType.COUNTER)
+                                        {
+                                            character.TakeDamage(skillParryData.damage);
+                                            if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill, true);
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    characterTarget.TakeDamage(character.currentLoadedSkill.damage);
+                                    SkillAttackData skillAttackData = (SkillAttackData)character.currentLoadedSkill;
+                                    characterTarget.TakeDamage(skillAttackData.damage);
                                     if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
                                 if (playerOnFight) PlayerCombatManager.instance.dic_CharacterSpriteFight[character].AnimAtk();
@@ -97,11 +102,12 @@ public class CombatManager : MonoBehaviour
                         break;
 
                     case SkillType.PARRY:
-                        foreach(Character characterTarget in character.selectedCharacters)
+                        foreach (Character characterTarget in character.selectedCharacters)
                         {
                             //TODO ne marche pas si on a plusieur type de parry en même temps
                             //exemple parrade classique + bouclier aquatique
-                            character.nbGarde = character.currentLoadedSkill.nbGarde;
+                            SkillParryData skillParryData = (SkillParryData)character.currentLoadedSkill;
+                            character.nbGarde = skillParryData.nbGarde;
                         }
                         break;
 

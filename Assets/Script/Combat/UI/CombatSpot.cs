@@ -22,12 +22,12 @@ public class CombatSpot : MonoBehaviour
 
     public void UpdateIntention()
     {
-        intentionTxt.text = character.currentLoadedSkill.damage.ToString() + " " + character.currentLoadedSkill.damageType.ToString() + "\n" + "speed :" + character.currentLoadedSkill.speed.ToString();
+        //intentionTxt.text = character.currentLoadedSkill.damage.ToString() + " " + character.currentLoadedSkill.damageType.ToString() + "\n" + "speed :" + character.currentLoadedSkill.speed.ToString();
     }
 
     public void UpdateLife()
     {
-        lifeTxt.text = character.currentLife + "/" + character.characterData.maxLife;
+        lifeTxt.text = character.s_VITALITY + "/" + character.characterData.init_VITALITY;
     }
 
     public void SetActiveSpotUI(bool b)

@@ -5,19 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillData", menuName = "JanuaVera/Skill Data")]
 public class SkillData : ScriptableObject
 {
-    [Header("Global")]
-    public SkillType skillType;
+    public SkillType skillType; //[CODE DESEPOIRE] Je n'arrive pas a faire une systeme agreable sans enlever ce truc
     public Element element;
     public int speed;
     public int nbTarget;
-
-    [Header("Attack")]
-    public int damage;
-    public DamageType damageType;
-
-    [Header("Parry")]
-    public ParryType parryType;
-    public DamageType damageTypeParryable;
-    public int nbGarde; 
-
+    public int req_VITALITY, req_ENDURANCE, req_STRENGHT, req_DEXTERITY, req_FAITH;
 }

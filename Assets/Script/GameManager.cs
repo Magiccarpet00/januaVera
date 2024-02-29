@@ -408,7 +408,7 @@ public class GameManager : MonoBehaviour
 
         Sprite spr = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
         string shape = character.characterData.shape.ToString();
-        int life = character.characterData.maxLife;
+        int life = character.characterData.init_VITALITY;
         //int dodgeValue = character.characterData.dodgeTime;
 
         //infoCharacter.SetInfoCharacter(spr, shape, life, dodgeValue);

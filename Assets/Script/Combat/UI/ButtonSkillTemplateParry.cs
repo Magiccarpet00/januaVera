@@ -16,10 +16,12 @@ public class ButtonSkillTemplateParry : MonoBehaviour
 
     public void SetUpUI(SkillData skillData)
     {
-        nameValue.SetEntry(skillData.name);
-        blockTypeValue.SetEntry(skillData.damageTypeParryable.ToString());
-        damageValue.text = skillData.damage.ToString();
-        speedValue.text = skillData.speed.ToString();
+        SkillParryData skillParryData = (SkillParryData)skillData;
+
+        nameValue.SetEntry(skillParryData.name);
+        blockTypeValue.SetEntry(skillParryData.damageType.ToString());
+        damageValue.text = skillParryData.damage.ToString();
+        speedValue.text = skillParryData.speed.ToString();
     }
 
 
