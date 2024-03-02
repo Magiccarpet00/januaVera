@@ -315,16 +315,17 @@ public class Character : MonoBehaviour
         //TODO A REFAIRE
         if(armorsEquiped.Count != 0) //[CODE TMP] le feux ou foudre passe a travers l'armure par exemple  
         {
-            while(armorsEquiped.Peek().currentState !=0)
-            {
-                armorsEquiped.Peek().currentState -= i;
-            }
+            armorsEquiped.Peek().currentState -= i;
+            if (armorsEquiped.Peek().currentState <= 0)
+                armorsEquiped.Pop();
         }
-        
-        s_VITALITY -= i;
-        if(s_VITALITY <= 0)
+        else
         {
-            Die();
+            s_VITALITY -= i;
+            if (s_VITALITY <= 0)
+            {
+                Die();
+            }
         }
     }
 

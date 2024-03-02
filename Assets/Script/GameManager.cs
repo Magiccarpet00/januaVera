@@ -227,13 +227,11 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(1,1);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            MyObject obj = CreateObjectOnMap("Bottle");
+            MyObject obj = CreateObject("Bottle");
             spot[0].AddObject(obj);
 
-            MyObject obj2 = CreateObjectOnMap("Breastplate");
+            Armor obj2 = CreateArmor("Breastplate");
             spot[0].AddObject(obj2);
-
-
         }
 
         if(Input.GetKeyDown(KeyCode.Y))
@@ -447,7 +445,9 @@ public class GameManager : MonoBehaviour
         return newCharacter;
     }
 
-    public MyObject CreateObjectOnMap(string nameObject)
+
+    //CREATEUR D'OBJECT [CODE OBJECT PAS SUR]
+    public MyObject CreateObject(string nameObject)
     {
         ObjectData objData = (ObjectData)ScriptableManager.instance.FindData(nameObject);
         MyObject obj = new MyObject(objData);
@@ -460,6 +460,14 @@ public class GameManager : MonoBehaviour
         Weapon w = new Weapon(wp);
         return w;
     }
+    public Armor CreateArmor(string nameWeapon)
+    {
+        ArmorData ar = (ArmorData)ScriptableManager.instance.FindData(nameWeapon);
+        Armor a = new Armor(ar);
+        return a;
+    }
+
+
 
     public string CreateId()
     {

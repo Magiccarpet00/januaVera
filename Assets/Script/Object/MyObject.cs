@@ -5,6 +5,7 @@ using UnityEngine;
 public class MyObject
 {
     public ObjectData objectData;
+    
 
     public MyObject(ObjectData objData)
     {

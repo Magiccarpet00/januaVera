@@ -5,7 +5,7 @@ public class Weapon : MyObject
 
     public Weapon(WeaponData wd) : base(wd)
     {
-        
+        currentState = wd.maxState;
     }
 
     public override bool isWeapon()
