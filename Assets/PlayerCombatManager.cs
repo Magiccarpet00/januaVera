@@ -91,11 +91,17 @@ public class PlayerCombatManager : MonoBehaviour
 
         foreach(ActiveObject activeObject in GameManager.instance.player.GetComponent<Character>().GetActiveObjectInventory())
         {
+            if (activeObject.c_STATE == 0)
+                return;
+
             GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
             btnSkill.transform.SetParent(panelSkill.transform);
             btnSkill.transform.localScale = new Vector3(1, 1, 1);
 
+
             ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
+            bs.myObjectParent = activeObject;
+
             bs.SetUpUI(activeObject.activeObjectData.skillData);
             buttonsSkills.Add(btnSkill);
         }
@@ -106,6 +112,8 @@ public class PlayerCombatManager : MonoBehaviour
         PushPanel(panelSkill);
         WeaponData wd = (WeaponData)weapon.objectData;
 
+        GameManager.instance.playerCharacter.currentLoadedObject = weapon;
+
         foreach (SkillData skill in wd.skills)
         {
             GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
@@ -113,14 +121,18 @@ public class PlayerCombatManager : MonoBehaviour
             btnSkill.transform.localScale = new Vector3(1, 1, 1);
 
             ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
+            bs.myObjectParent = weapon;
+
             bs.SetUpUI(skill);
             buttonsSkills.Add(btnSkill);
         }
     }
 
-    public void ClickButtonSkill(SkillData skillData) //[CODE WARNING] peut etre une source de bug dans pour les skills 0target lancer par des PNJ
+    public void ClickButtonSkill(SkillData skillData, MyObject myObjectParent) //[CODE WARNING] peut etre une source de bug dans pour les skills 0target lancer par des PNJ
     {
+        GameManager.instance.playerCharacter.currentLoadedObject = myObjectParent;
         GameManager.instance.playerCharacter.currentLoadedSkill = skillData;
+
         if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
             TargetMode(skillData.nbTarget);
         else

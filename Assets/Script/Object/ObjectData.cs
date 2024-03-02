@@ -6,5 +6,5 @@ using UnityEngine;
 public class ObjectData : ScriptableObject
 {
     public Element material;
-    public int maxState;
+    public int init_STATE;
 }

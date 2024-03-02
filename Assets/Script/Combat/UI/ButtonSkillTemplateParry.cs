@@ -7,13 +7,9 @@ using UnityEngine.Localization.Components;
 public class ButtonSkillTemplateParry : MonoBehaviour
 {
     public LocalizeStringEvent nameValue;
-
     public LocalizeStringEvent blockTypeValue;
-
     public TextMeshProUGUI damageValue;
-
     public TextMeshProUGUI speedValue;
-
     public void SetUpUI(SkillData skillData)
     {
         SkillParryData skillParryData = (SkillParryData)skillData;

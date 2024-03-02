@@ -5,7 +5,12 @@ public class Weapon : MyObject
 
     public Weapon(WeaponData wd) : base(wd)
     {
-        currentState = wd.maxState;
+        currentState = wd.init_STATE;
+    }
+
+    public override void UseObject()
+    {
+        base.UseObject();
     }
 
     public override bool isWeapon()

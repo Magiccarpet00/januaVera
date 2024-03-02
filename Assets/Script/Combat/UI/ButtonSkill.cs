@@ -8,10 +8,11 @@ public class ButtonSkill : MonoBehaviour
     public GameObject templateAttack;
     public GameObject templateParry;
     public GameObject templaceHeal;
+    public MyObject myObjectParent;
 
     public void Click()
     {
-        PlayerCombatManager.instance.ClickButtonSkill(skillData);
+        PlayerCombatManager.instance.ClickButtonSkill(skillData, myObjectParent);
     }
 
     public void SetUpUI(SkillData _skillData)

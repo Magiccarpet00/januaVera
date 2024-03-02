@@ -12,6 +12,12 @@ public class ActiveObject : MyObject
         activeObjectData = aod;
     }
 
+    public override void UseObject()
+    {
+        base.UseObject();
+        c_STATE = 0;
+    }
+
     public override bool isActiveObject() { return true; }
     
 }

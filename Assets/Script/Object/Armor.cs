@@ -5,7 +5,7 @@ public class Armor : MyObject
 
     public Armor(ArmorData ad) : base(ad)
     {
-        currentState = ad.maxState;
+        currentState = ad.init_STATE;
     }
 
     public override bool isWeapon() {return false;}

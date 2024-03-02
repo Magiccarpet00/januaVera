@@ -7,11 +7,8 @@ using UnityEngine.Localization.Components;
 public class ButtonSkillTemplateHeal : MonoBehaviour
 {
     public LocalizeStringEvent nameValue;
-
     public TextMeshProUGUI damageValue;
-
     public TextMeshProUGUI speedValue;
-
     public TextMeshProUGUI targetValue;
 
     public void SetUpUI(SkillData skillData)

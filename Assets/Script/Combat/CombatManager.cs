@@ -116,10 +116,11 @@ public class CombatManager : MonoBehaviour
                             SkillHealData skillHealData = (SkillHealData)character.currentLoadedSkill;
                             characterTarget.TakeHeal(skillHealData.amount);
                         }
-
-                            
                         break;
                 }
+
+                character.currentLoadedObject.UseObject();
+
             }
         }
     }

@@ -32,6 +32,7 @@ public class Character : MonoBehaviour
     //FIGHT
     public List<Character> selectedCharacters = new List<Character>();
     public SkillData currentLoadedSkill;
+    public MyObject currentLoadedObject;
     public int nbGarde;
 
     //INVENTORY
@@ -405,6 +406,7 @@ public class Character : MonoBehaviour
     {
         Weapon rngWeapon = AI_TakeRandomWeapon();
         WeaponData wd = (WeaponData)rngWeapon.objectData;
+        currentLoadedObject = rngWeapon;
 
         int countWeapon = wd.skills.Count;
         currentLoadedSkill = wd.skills[Random.Range(0, countWeapon)];
