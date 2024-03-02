@@ -230,8 +230,8 @@ public class GameManager : MonoBehaviour
             ActiveObject obj = CreateActiveObject("LifeBottle");
             spot[0].AddObject(obj);
 
-            Armor obj2 = CreateArmor("Breastplate");
-            spot[0].AddObject(obj2);
+            //Armor obj2 = CreateArmor("Breastplate");
+            //spot[0].AddObject(obj2);
         }
 
         if(Input.GetKeyDown(KeyCode.Y))

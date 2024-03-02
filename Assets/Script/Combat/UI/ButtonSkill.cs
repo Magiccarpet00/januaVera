@@ -7,6 +7,7 @@ public class ButtonSkill : MonoBehaviour
     public SkillData skillData;
     public GameObject templateAttack;
     public GameObject templateParry;
+    public GameObject templaceHeal;
 
     public void Click()
     {
@@ -27,6 +28,11 @@ public class ButtonSkill : MonoBehaviour
             case SkillType.PARRY:
                 templateParry.SetActive(true);
                 templateParry.GetComponent<ButtonSkillTemplateParry>().SetUpUI(skillData);
+                break;
+
+            case SkillType.HEAL:
+                templaceHeal.SetActive(true);
+                templaceHeal.GetComponent<ButtonSkillTemplateHeal>().SetUpUI(skillData);
                 break;
 
             case SkillType.SUMMON:

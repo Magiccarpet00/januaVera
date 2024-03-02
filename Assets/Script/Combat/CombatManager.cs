@@ -25,7 +25,7 @@ public class CombatManager : MonoBehaviour
         if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
         if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
 
-        while (speedInstant != 6)
+        while (speedInstant <= 6)
         {
             if (playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
 

@@ -468,6 +468,15 @@ public class Character : MonoBehaviour
         return weaponsInventory;
     }
 
+    public List<ActiveObject> GetActiveObjectInventory()
+    {
+        List<ActiveObject> activeObjectInventory = new List<ActiveObject>();
+        for (int i = 0; i < objectInventory.Count; i++)
+            if (objectInventory[i].isActiveObject())
+                activeObjectInventory.Add((ActiveObject)objectInventory[i]);
+        return activeObjectInventory;
+    }
+
     public TileType GetCurrentTileType()
     {
         return currentSpot.transform.parent.GetComponent<Tile>().GetTileData().tileType;

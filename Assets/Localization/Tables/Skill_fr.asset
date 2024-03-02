@@ -34,6 +34,10 @@ MonoBehaviour:
     m_Localized: Riposte
     m_Metadata:
       m_Items: []
+  - m_Id: 39505393156362240
+    m_Localized: Bandage
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

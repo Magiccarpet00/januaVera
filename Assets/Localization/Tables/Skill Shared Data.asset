@@ -31,6 +31,10 @@ MonoBehaviour:
     m_Key: BLOCK_COUNTER
     m_Metadata:
       m_Items: []
+  - m_Id: 39505393156362240
+    m_Key: BANDAGE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

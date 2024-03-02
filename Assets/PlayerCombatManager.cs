@@ -87,6 +87,18 @@ public class PlayerCombatManager : MonoBehaviour
     public void ClickButtonObjectGlobal()
     {
         //TODO  faire comme ClickButtonWeapon
+        PushPanel(panelSkill);
+
+        foreach(ActiveObject activeObject in GameManager.instance.player.GetComponent<Character>().GetActiveObjectInventory())
+        {
+            GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
+            btnSkill.transform.SetParent(panelSkill.transform);
+            btnSkill.transform.localScale = new Vector3(1, 1, 1);
+
+            ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
+            bs.SetUpUI(activeObject.activeObjectData.skillData);
+            buttonsSkills.Add(btnSkill);
+        }
     }
 
     public void ClickButtonWeapon(Weapon weapon)

@@ -27,7 +27,7 @@ public class CombatSpot : MonoBehaviour
 
     public void UpdateLife()
     {
-        lifeTxt.text = character.s_VITALITY + "/" + character.characterData.init_VITALITY;
+        lifeTxt.text = character.c_VITALITY + "/" + character.s_VITALITY;
     }
 
     public void SetActiveSpotUI(bool b)

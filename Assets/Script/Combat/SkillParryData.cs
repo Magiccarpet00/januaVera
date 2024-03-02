@@ -10,5 +10,4 @@ public class SkillParryData : SkillData
     public int damage;
     public DamageType damageType;
     public int nbGarde;
-
 }
