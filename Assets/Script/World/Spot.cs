@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Numerics;
+
 
 public class Spot : MonoBehaviour
 {
@@ -11,6 +11,8 @@ public class Spot : MonoBehaviour
     [SerializeField] public List<Character> charactersOnSpot = new List<Character>();
 
     [SerializeField] public List<MyObject> objectsOnSpot = new List<MyObject>();
+    [SerializeField] public Stack<GameObject> objectsOnSpotUI = new Stack<GameObject>();
+
     //FX
     [SerializeField] private GameObject prefabOverMouse_fx;
     private Animator AnimatorOverMouse_fx;
@@ -19,12 +21,12 @@ public class Spot : MonoBehaviour
     private void Update()
     {
         int count = 1;
-        Complex i = Complex.ImaginaryOne;
+        System.Numerics.Complex i = System.Numerics.Complex.ImaginaryOne;
         foreach (Character character in charactersOnSpot)
         {
             float timeRotate = (Time.time * charactersOnSpot.Count) * 0.03f;
-            character.offSetOnSpot.x = (float)Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Real;
-            character.offSetOnSpot.y = (float)Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Imaginary ;
+            character.offSetOnSpot.x = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Real;
+            character.offSetOnSpot.y = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Imaginary ;
             count++;
         }
     }
@@ -109,7 +111,6 @@ public class Spot : MonoBehaviour
         }
 
         //TODO Les btn des enemies, pnj sur la map
-        
 
         return res;
     }
@@ -118,8 +119,6 @@ public class Spot : MonoBehaviour
     {
         return charactersOnSpot;
     }
-
-    
 
     public void AddCharacterInSpot(Character c)
     {
@@ -134,6 +133,10 @@ public class Spot : MonoBehaviour
     public void AddObject(MyObject obj)
     {
         objectsOnSpot.Add(obj);
+        float xOff = 0.4f;
+        Vector3 offSet = new Vector3(objectsOnSpot.Count*xOff - xOff, 0f, 0f);
+        GameObject objectUI = Instantiate(GameManager.instance.prefabObjectOnMap, transform.position + offSet, Quaternion.identity);
+        objectsOnSpotUI.Push(objectUI);
     }
 
     public MyObject TakeObject()
@@ -143,6 +146,8 @@ public class Spot : MonoBehaviour
         MyObject obj;
         obj = objectsOnSpot[objectsOnSpot.Count-1];
         objectsOnSpot.RemoveAt(objectsOnSpot.Count-1);
+        GameObject objectUI = objectsOnSpotUI.Pop();
+        Destroy(objectUI);
         return obj;
     }
 

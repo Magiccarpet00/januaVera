@@ -3987,7 +3987,7 @@ MonoBehaviour:
   cam_fight: {fileID: 2092461398}
   prefabPlayer: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   prefabCharacter: {fileID: 468640492003026094, guid: d8742ad2c7d3e00449f51aa4b0c6110d, type: 3}
-  prefabObjectOnMap: {fileID: 0}
+  prefabObjectOnMap: {fileID: 7562818550918909618, guid: 5abd3bc0ecceadc4cb75e0b331b88ee4, type: 3}
   player: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   playerCharacter: {fileID: 0}
   worldBuilder: {fileID: 1915923813}
