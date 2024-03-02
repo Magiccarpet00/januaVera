@@ -55,6 +55,10 @@ MonoBehaviour:
     m_Key: BLOCK
     m_Metadata:
       m_Items: []
+  - m_Id: 123207125744488448
+    m_Key: OBJECT
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

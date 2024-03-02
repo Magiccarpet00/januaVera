@@ -70,7 +70,6 @@ public class CombatManager : MonoBehaviour
                 switch (character.currentLoadedSkill.skillType)
                 {
                     case SkillType.ATTACK:
-
                         foreach (Character characterTarget in character.selectedCharacters)
                         {
 
@@ -111,7 +110,14 @@ public class CombatManager : MonoBehaviour
                         }
                         break;
 
-                    default:
+                    case SkillType.HEAL:
+                        foreach (Character characterTarget in character.selectedCharacters)
+                        {
+                            SkillHealData skillHealData = (SkillHealData)character.currentLoadedSkill;
+                            characterTarget.TakeHeal(skillHealData.amount);
+                        }
+
+                            
                         break;
                 }
             }

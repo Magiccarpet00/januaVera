@@ -58,6 +58,10 @@ MonoBehaviour:
     m_Localized: Bloque
     m_Metadata:
       m_Items: []
+  - m_Id: 123207125744488448
+    m_Localized: Objet
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -84,6 +84,11 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
+    public void ClickButtonObjectGlobal()
+    {
+        //TODO  faire comme ClickButtonWeapon
+    }
+
     public void ClickButtonWeapon(Weapon weapon)
     {
         PushPanel(panelSkill);

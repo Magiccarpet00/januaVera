@@ -41,14 +41,27 @@ public class Character : MonoBehaviour
     //RELATION
     public Dictionary<Character, Relation> charactersEncountered = new Dictionary<Character, Relation>();
 
-    //STATS
+    //STATS 
+    //      s_XXXXX -> stats fixe
+    //      c_XXXXX -> curent stat
     public int s_VITALITY, s_ENDURANCE, s_STRENGHT, s_DEXTERITY, s_FAITH;
+    public int c_VITALITY, c_ENDURANCE, c_STRENGHT, c_DEXTERITY, c_FAITH;
 
 
     public virtual void Start()
     {
         spriteRenderer.sprite = characterData.spriteMap;
-        s_VITALITY = characterData.init_VITALITY;
+        s_VITALITY =  characterData.init_VITALITY;
+        s_ENDURANCE = characterData.init_ENDURANCE;
+        s_STRENGHT =  characterData.init_STRENGHT;
+        s_DEXTERITY = characterData.init_DEXTERITY;
+        s_FAITH =     characterData.init_FAITH;
+
+        c_VITALITY =  s_VITALITY;
+        c_ENDURANCE = s_ENDURANCE;
+        c_STRENGHT =  s_STRENGHT;
+        c_DEXTERITY = s_DEXTERITY;
+        c_FAITH =     s_FAITH;
     }
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
@@ -310,23 +323,30 @@ public class Character : MonoBehaviour
     }
 
     //      FIGHT
-    public void TakeDamage(int i)
+    public void TakeDamage(int amount)
     {
-        //TODO A REFAIRE
-        if(armorsEquiped.Count != 0) //[CODE TMP] le feux ou foudre passe a travers l'armure par exemple  
+        //TODO A REFAIRE POUR ARMOR
+        if(armorsEquiped.Count != 0)
         {
-            armorsEquiped.Peek().currentState -= i;
+            armorsEquiped.Peek().currentState -= amount;
             if (armorsEquiped.Peek().currentState <= 0)
                 armorsEquiped.Pop();
         }
         else
         {
-            s_VITALITY -= i;
-            if (s_VITALITY <= 0)
+            c_VITALITY -= amount;
+            if (c_VITALITY <= 0)
             {
                 Die();
             }
         }
+    }
+
+    public void TakeHeal(int amount)
+    {
+        c_VITALITY += amount;
+        if (c_VITALITY > s_VITALITY)
+            c_VITALITY = s_VITALITY;
     }
 
     public bool ParryableAttack(SkillData skillDataTaken)

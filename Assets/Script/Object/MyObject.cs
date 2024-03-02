@@ -14,4 +14,5 @@ public class MyObject
 
     public virtual bool isWeapon() { return false; }
     public virtual bool isArmor() { return false; }
+    public virtual bool isActiveObject() { return false; }
 }

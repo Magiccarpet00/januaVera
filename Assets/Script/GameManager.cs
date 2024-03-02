@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(1,1);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            MyObject obj = CreateObject("Bottle");
+            ActiveObject obj = CreateActiveObject("LifeBottle");
             spot[0].AddObject(obj);
 
             Armor obj2 = CreateArmor("Breastplate");
@@ -460,11 +460,18 @@ public class GameManager : MonoBehaviour
         Weapon w = new Weapon(wp);
         return w;
     }
-    public Armor CreateArmor(string nameWeapon)
+    public Armor CreateArmor(string nameArmor)
     {
-        ArmorData ar = (ArmorData)ScriptableManager.instance.FindData(nameWeapon);
+        ArmorData ar = (ArmorData)ScriptableManager.instance.FindData(nameArmor);
         Armor a = new Armor(ar);
         return a;
+    }
+
+    public ActiveObject CreateActiveObject(string nameObject)
+    {
+        ActiveObjectData aod  = (ActiveObjectData)ScriptableManager.instance.FindData(nameObject);
+        ActiveObject obj = new ActiveObject(aod);
+        return obj;
     }
 
 
@@ -698,7 +705,10 @@ public enum Element {
     PLUME,
     LEATHER,
     SKIN,
-    DIVIN
+    DIVIN,
+
+    PARENT,
+    NONE
 }
 
 public enum Divinity {
@@ -723,6 +733,7 @@ public enum SkillType {
     ATTACK,
     PARRY,
     SUMMON,
+    HEAL
 }
 
 public enum ParryType {
