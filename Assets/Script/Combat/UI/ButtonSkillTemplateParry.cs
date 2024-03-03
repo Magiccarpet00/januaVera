@@ -19,6 +19,4 @@ public class ButtonSkillTemplateParry : MonoBehaviour
         damageValue.text = skillParryData.damage.ToString();
         speedValue.text = skillParryData.speed.ToString();
     }
-
-
 }

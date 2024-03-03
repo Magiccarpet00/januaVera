@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject CircleTest;
     //public GameObject prefabTmpEnemy;
     public int id = 0;
+    public bool toggle;
 
     // GLOBAL VAR
     [Header("GLOBAL VAR")]
@@ -208,7 +209,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             CameraController cc = cam.GetComponent<CameraController>();
-            cc.ToggleFreezeCam();
+            toggle = !toggle;
+            cc.ToggleFreezeCam(toggle);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -641,23 +643,26 @@ public class GameManager : MonoBehaviour
         {
             CombatManager.instance.SetUpFight(charactersCanFight, playerIsGoingToFight);
         }
-
+        
         if(playerIsGoingToFight)
-            ToggleMapSceneFightScene(false);
+        {
+            Debug.Log("playerIsGoingToFight");
+            ToggleMapSceneFightScene(true);
+        }
     }
 
     public void QuitCombatScene(List<Character> characters)
     {
         CombatManager.instance.playerOnFight = false; //TMP
-        ToggleMapSceneFightScene(true);
+        ToggleMapSceneFightScene(false);
         CombatManager.instance.ClearCombatScene();
     }
 
-    public void ToggleMapSceneFightScene(bool b)
+    public void ToggleMapSceneFightScene(bool b) //[CODE DOUTEUX] Peut etre une source de bug si il ya plus de 2 emplacements de camera
     {
         actionCanvas.SetActive(b);
-        CombatManager.instance.ToggleFight();
-        cam.GetComponent<CameraController>().ToggleCamPos();
+        CombatManager.instance.ToggleFight(b);
+        cam.GetComponent<CameraController>().ToggleCamPos(b);
     }
 }
 

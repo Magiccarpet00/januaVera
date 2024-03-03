@@ -31,7 +31,7 @@ public class CombatSpot : MonoBehaviour
                 break;
             case SkillType.PARRY:
                 SkillParryData loadedParrySkill = (SkillParryData)character.currentLoadedSkill;
-                intentionTxt.text = loadedParrySkill.parryType.ToString();
+                intentionTxt.text = loadedParrySkill.parryType.ToString() + " " + loadedParrySkill.damageType.ToString();
                 break;
             case SkillType.SUMMON:
                 //SkillSummonData loadedSkill = (SkillAttackData)character.currentLoadedSkill;

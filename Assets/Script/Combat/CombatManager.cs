@@ -72,10 +72,10 @@ public class CombatManager : MonoBehaviour
                     case SkillType.ATTACK:
                         foreach (Character characterTarget in character.selectedCharacters)
                         {
-
+                            SkillAttackData skillAttackData = (SkillAttackData)character.currentLoadedSkill;
                             if (!characterTarget.isDying)
                             {
-                                if (characterTarget.ParryableAttack(character.currentLoadedSkill))
+                                if (characterTarget.ParryableAttack(skillAttackData))
                                 {
                                     if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
 
@@ -91,7 +91,6 @@ public class CombatManager : MonoBehaviour
                                 }
                                 else
                                 {
-                                    SkillAttackData skillAttackData = (SkillAttackData)character.currentLoadedSkill;
                                     characterTarget.TakeDamage(skillAttackData.damage);
                                     if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
@@ -150,10 +149,11 @@ public class CombatManager : MonoBehaviour
     
 
     //SET UP
-    public void ToggleFight()
+    public void ToggleFight(bool b)
     {
-        if (onFight == false) onFight = true;
-        else onFight = false;
+        onFight = b;
+        //if (onFight == false) onFight = true;
+        //else onFight = false;
     }
 
     public void SetUpFight(List<Character> _characters, bool playerInFight)

@@ -56,17 +56,20 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void ToggleFreezeCam()
+    public void ToggleFreezeCam(bool b)
     {
-        if (freezeCam) freezeCam = false;
-        else freezeCam = true;
+        freezeCam = b;
+        //if (freezeCam) freezeCam = false;
+        //else freezeCam = true;
     }
 
-    public void ToggleCamPos()
+    public void ToggleCamPos(bool b)
     {
         Camera cam = Camera.main;
 
-        ToggleFreezeCam();
+        ToggleFreezeCam(b);
+
+
         if (!CombatManager.instance.GetOnFight())
         {
             camMapUI.SetActive(true);

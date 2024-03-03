@@ -350,11 +350,16 @@ public class Character : MonoBehaviour
             c_VITALITY = s_VITALITY;
     }
 
-    public bool ParryableAttack(SkillData skillDataTaken)
+    public bool ParryableAttack(SkillAttackData skillAttackDataTaken)
     {
-        //if(nbGarde > 0)
-        //    if(currentLoadedSkill.damageTypeParryable == skillDataTaken.damageType)
-        //       return true;
+        if (currentLoadedSkill.skillType != SkillType.PARRY)
+            return false;
+
+        SkillParryData skillParryData = (SkillParryData)currentLoadedSkill;
+
+        if (nbGarde > 0)
+            if (skillParryData.damageType == skillAttackDataTaken.damageType)
+                return true;
 
         return false;
     }
