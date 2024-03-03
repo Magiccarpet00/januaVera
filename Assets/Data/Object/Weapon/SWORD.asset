@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SWORD
   m_EditorClassIdentifier: 
   material: 4
-  maxState: 4
+  init_STATE: 0
   style: 0
   skills:
-  - {fileID: 11400000, guid: e5b69d78cb00d2947a718963cbfc4e0f, type: 2}
   - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}
+  - {fileID: 11400000, guid: e5b69d78cb00d2947a718963cbfc4e0f, type: 2}

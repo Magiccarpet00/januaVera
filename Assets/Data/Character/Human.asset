@@ -15,7 +15,7 @@ MonoBehaviour:
   race: 0
   shape: 10
   typeDivinity: 0
-  init_VITALITY: 5
+  init_VITALITY: 50
   init_ENDURANCE: 1
   init_STRENGHT: 1
   init_DEXTERITY: 1

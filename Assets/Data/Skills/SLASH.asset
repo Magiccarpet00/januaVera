@@ -22,4 +22,4 @@ MonoBehaviour:
   req_DEXTERITY: 0
   req_FAITH: 0
   damage: 3
-  damageType: 1
+  damageType: 0
