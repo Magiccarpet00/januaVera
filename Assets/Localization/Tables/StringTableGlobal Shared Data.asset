@@ -59,6 +59,10 @@ MonoBehaviour:
     m_Key: OBJECT
     m_Metadata:
       m_Items: []
+  - m_Id: 123553139101798400
+    m_Key: HEAL
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LifeBottle
   m_EditorClassIdentifier: 
   material: 5
-  maxState: 1
+  init_STATE: 1
   skillData: {fileID: 11400000, guid: c48b107ffa26fdc4b9632f8e78f8d4b2, type: 2}

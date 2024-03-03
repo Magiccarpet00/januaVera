@@ -2708,7 +2708,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Damage\t"
+  m_text: Heal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2793,7 +2793,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:c9731ac5e53e94b4aba62b11eb1d7e79
     m_TableEntryReference:
-      m_KeyId: 83781573942185984
+      m_KeyId: 123553139101798400
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

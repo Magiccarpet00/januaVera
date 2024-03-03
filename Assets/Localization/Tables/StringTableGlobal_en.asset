@@ -62,6 +62,10 @@ MonoBehaviour:
     m_Localized: Object
     m_Metadata:
       m_Items: []
+  - m_Id: 123553139101798400
+    m_Localized: Heal
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
