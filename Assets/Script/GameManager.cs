@@ -658,8 +658,9 @@ public class GameManager : MonoBehaviour
         CombatManager.instance.ClearCombatScene();
     }
 
-    public void ToggleMapSceneFightScene(bool b) //[CODE DOUTEUX] Peut etre une source de bug si il ya plus de 2 emplacements de camera
+    public void ToggleMapSceneFightScene(bool b) //[CODE ULTRA DOUTEUX] Peut etre une source de bug si il ya plus de 2 emplacements de camera
     {
+        PlayerCombatManager.instance.CanvasFight.SetActive(b);
         actionCanvas.SetActive(!b);
         CombatManager.instance.ToggleFight(b);
         cam.GetComponent<CameraController>().ToggleCamPos(b);

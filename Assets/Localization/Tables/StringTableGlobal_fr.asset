@@ -66,6 +66,10 @@ MonoBehaviour:
     m_Localized: Soin
     m_Metadata:
       m_Items: []
+  - m_Id: 123979535657734144
+    m_Localized: Inventaire
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

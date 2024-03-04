@@ -59,8 +59,6 @@ public class CameraController : MonoBehaviour
     public void ToggleFreezeCam(bool b)
     {
         freezeCam = b;
-        //if (freezeCam) freezeCam = false;
-        //else freezeCam = true;
     }
 
     public void ToggleCamPos(bool b)

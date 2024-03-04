@@ -27,6 +27,7 @@ public class PlayerCombatManager : MonoBehaviour
     public int nbTarget;
 
     //Panel
+    public GameObject CanvasFight;
     public GameObject panelGlobal;
     public GameObject panelWeapon;
     public GameObject panelSkill;
@@ -225,6 +226,7 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void SetUpPanel()
     {
+        CanvasFight.SetActive(true);
         panelGlobal.SetActive(false);
         panelWeapon.SetActive(false);
         panelSkill.SetActive(false);

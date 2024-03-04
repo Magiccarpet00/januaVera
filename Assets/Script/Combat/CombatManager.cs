@@ -27,23 +27,23 @@ public class CombatManager : MonoBehaviour
 
         while (speedInstant <= 6)
         {
-            if (playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
+            if(playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
 
             CastSkills();
             CheckDying();
 
-            if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
-            if (playerOnFight) yield return new WaitForSeconds(PlayerCombatManager.instance.TIME_FIGHT);
+            if(playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
+            if(playerOnFight) yield return new WaitForSeconds(PlayerCombatManager.instance.TIME_FIGHT);
 
             speedInstant++;
         }
         speedInstant = 0;
 
-        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(false);
-        if (playerOnFight) GameManager.instance.playerCharacter.selectedCharacters = new List<Character>();
+        if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(false);
+        if(playerOnFight) GameManager.instance.playerCharacter.selectedCharacters = new List<Character>();
 
         //TMP pour les parry
-        foreach (Character character in characters)
+        foreach(Character character in characters)
         {
             character.nbGarde = 0;
         }

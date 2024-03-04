@@ -63,6 +63,10 @@ MonoBehaviour:
     m_Key: HEAL
     m_Metadata:
       m_Items: []
+  - m_Id: 123979535657734144
+    m_Key: INVENTORY
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
