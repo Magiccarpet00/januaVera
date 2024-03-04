@@ -1,11 +1,13 @@
+using TMPro;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
     public static InventoryUI instance;
 
-    public Player playerCharacter;
     public GameObject panelInventory;
+    public TextMeshProUGUI tmpStatsText;
+    public TextMeshProUGUI tmpItemText;
     public bool isOpen;
 
     private void Awake()
@@ -13,15 +15,13 @@ public class InventoryUI : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        playerCharacter = GameManager.instance.playerCharacter;
-    }
+
 
     private void OpenInventory()
     {
         panelInventory.SetActive(true);
         isOpen = true;
+        UpdateInventory();
     }
 
     private void CloseInventory()
@@ -36,6 +36,28 @@ public class InventoryUI : MonoBehaviour
             CloseInventory();
         else
             OpenInventory();
+    }
+
+    private void UpdateInventory()
+    {
+        Character playerCharacter = GameManager.instance.playerCharacter;
+        string stats = "    STATS\n";
+        stats += "VITALITY: " + playerCharacter.c_VITALITY + "/" + playerCharacter.s_VITALITY + "\n";
+        stats += "ENDURANCE: " + playerCharacter.c_ENDURANCE + "/" + playerCharacter.c_ENDURANCE + "\n";
+        stats += "STRENGHT: " + playerCharacter.c_STRENGHT + "\n";
+        stats += "DEXTERITY: " + playerCharacter.c_DEXTERITY + "\n";
+        stats += "FAITH: " + playerCharacter.c_FAITH + "\n";
+        tmpStatsText.text = stats;
+
+        string objects = "    OBJECTS\n";
+        foreach (MyObject obj in playerCharacter.objectInventory)
+        {
+            objects += "~" + obj.objectData.name + "\n";
+        }
+        tmpItemText.text = objects;
+
+
+
     }
 
 }
