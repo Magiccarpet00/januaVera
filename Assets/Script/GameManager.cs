@@ -67,11 +67,16 @@ public class GameManager : MonoBehaviour
     //RACISME
     public List<RelationLine> relationshipsBoard = new List<RelationLine>();
 
+
+
+
+
     public void Start()
     {
         SetUpUI();
         SetUpDicEnum();
         SetUpRacisme();
+        SetUpTypeChart();
 
         //--------SEED RNG---------
         //SeedRandom((int)Random.Range(0, 9999999));
@@ -177,7 +182,18 @@ public class GameManager : MonoBehaviour
         relationshipsBoard.Add(new RelationLine(Race.BEAST, Race.BEAST, Relation.FRIEND));
     }
 
+    public void SetUpTypeChart() //TODO A COMPLETER
+    {
 
+        //POKEMON CHART
+        //Dictionary<(string,Element), float)> TypeChart = new Dictionary<(string, Element), float)>();
+        Dictionary<(string, Element), float> typeChart = new Dictionary<(string, Element), float>();
+
+        typeChart.Add((DamageType.SHARP.ToString(),Element.SKIN), 1f);
+        
+
+
+    }
 
 
 
