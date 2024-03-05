@@ -20,13 +20,25 @@ public class Spot : MonoBehaviour
 
     private void Update()
     {
+        UpdatePosCharacter();
+    }
+
+    public void UpdatePosCharacter()
+    {
         int count = 1;
         System.Numerics.Complex i = System.Numerics.Complex.ImaginaryOne;
+
+        List<Character> charactersAliveOnSpot = new List<Character>();
         foreach (Character character in charactersOnSpot)
         {
+            if (!character.isDead)
+                charactersAliveOnSpot.Add(character);
+        }
+        foreach (Character characterAlive in charactersAliveOnSpot)
+        {
             float timeRotate = (Time.time * charactersOnSpot.Count) * 0.03f;
-            character.offSetOnSpot.x = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Real;
-            character.offSetOnSpot.y = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count+timeRotate) * i ) / charactersOnSpot.Count).Imaginary ;
+            characterAlive.offSetOnSpot.x = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / charactersAliveOnSpot.Count).Real;
+            characterAlive.offSetOnSpot.y = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / charactersAliveOnSpot.Count).Imaginary;
             count++;
         }
     }
