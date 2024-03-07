@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
     /*-----------MEGA TODO---------
       |                           |
-      | -Finir inventaire         |
       | -Refactot Stats -> list   |
       | -Refactot armor           |
       | -Skill Invocation         |
