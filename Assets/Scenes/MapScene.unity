@@ -2356,7 +2356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &881966917
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2543,7 +2543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &918051321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2658,7 +2658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1107394934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3745,6 +3745,8 @@ MonoBehaviour:
   panelGlobal: {fileID: 1107394933}
   panelWeapon: {fileID: 92358191}
   panelSkill: {fileID: 881966916}
+  btnEnd: {fileID: 0}
+  btnBack: {fileID: 0}
   prefabButtonWeapon: {fileID: 3133706932334542455, guid: c938034779b97c14fb242a2128625e04, type: 3}
   buttonsWeapons: []
   prefabButtonSkill: {fileID: 4479637842926752871, guid: 36594b56559bba040b6865d87e73f6cf, type: 3}

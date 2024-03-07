@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
       | -Refactot armor           |
       | -Skill Invocation         |
       | -Skill debuff/buff        |
-      | -Refactot racisme         |
       | -Or et echange            |
       | -Recrutement              |
       | -A*                       |

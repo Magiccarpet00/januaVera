@@ -31,6 +31,7 @@ public class PlayerCombatManager : MonoBehaviour
     public GameObject panelGlobal;
     public GameObject panelWeapon;
     public GameObject panelSkill;
+    public GameObject btnEnd, btnBack;
 
     public Stack<GameObject> panelStack = new Stack<GameObject>();
 
