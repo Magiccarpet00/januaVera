@@ -352,7 +352,8 @@ public class Character : MonoBehaviour
 
     public bool ParryableAttack(SkillAttackData skillAttackDataTaken)
     {
-        if (currentLoadedSkill.skillType != SkillType.PARRY)
+        if (currentLoadedSkill == null ||
+            currentLoadedSkill.skillType != SkillType.PARRY)
             return false;
 
         SkillParryData skillParryData = (SkillParryData)currentLoadedSkill;

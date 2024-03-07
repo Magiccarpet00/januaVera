@@ -5,7 +5,6 @@ using UnityEngine;
 public class ActiveObject : MyObject
 {
     public ActiveObjectData activeObjectData;
-    
 
     public ActiveObject(ActiveObjectData aod) : base(aod)
     {

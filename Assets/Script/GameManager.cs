@@ -236,6 +236,12 @@ public class GameManager : MonoBehaviour
             newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            playerCharacter.TakeDamage(1);
+            InventoryUI.instance.UpdateInventory();
+        }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             CameraController cc = cam.GetComponent<CameraController>();

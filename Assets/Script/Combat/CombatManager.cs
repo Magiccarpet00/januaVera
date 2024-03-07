@@ -29,6 +29,11 @@ public class CombatManager : MonoBehaviour
         {
             if(playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
 
+            if(speedInstant == 3)
+            {
+                ;
+            }
+
             CastSkills();
             CheckDying();
 
@@ -61,9 +66,8 @@ public class CombatManager : MonoBehaviour
     {
         foreach (Character character in characters)
         {
-            if (character.currentLoadedSkill == null) return;
-
-            if (character.currentLoadedSkill.speed == speedInstant &&
+            if(character.currentLoadedSkill != null &&
+               character.currentLoadedSkill.speed == speedInstant &&
                character.isDead == false &&
                character.selectedCharacters != null)
             {
@@ -106,6 +110,8 @@ public class CombatManager : MonoBehaviour
                             //exemple parrade classique + bouclier aquatique
                             SkillParryData skillParryData = (SkillParryData)character.currentLoadedSkill;
                             character.nbGarde = skillParryData.nbGarde;
+
+                            if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, characterTarget.currentLoadedSkill);
                         }
                         break;
 

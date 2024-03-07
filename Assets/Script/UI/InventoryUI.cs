@@ -30,8 +30,7 @@ public class InventoryUI : MonoBehaviour
 
     private void CloseInventory()
     {
-        foreach (GameObject item in itemButtons)
-            Destroy(item);
+       
         panelInventory.SetActive(false);
         isOpen = false;
         GameManager.instance.inputBlock = false;
@@ -46,8 +45,11 @@ public class InventoryUI : MonoBehaviour
             OpenInventory();
     }
 
-    private void UpdateInventory()
+    public void UpdateInventory()
     {
+        foreach (GameObject item in itemButtons)
+            Destroy(item);
+
         Character playerCharacter = GameManager.instance.playerCharacter;
         string stats = "    STATS\n";
         stats += "VITALITY: " + playerCharacter.c_VITALITY + "/" + playerCharacter.s_VITALITY + "\n";
@@ -57,22 +59,17 @@ public class InventoryUI : MonoBehaviour
         stats += "FAITH: " + playerCharacter.c_FAITH + "\n";
         tmpStatsText.text = stats;
 
-
-        foreach (MyObject item in playerCharacter.objectInventory)
+        foreach (ActiveObject item in playerCharacter.objectInventory)
         {
             GameObject newItemButton = Instantiate(prefabItemButton, transform.position, Quaternion.identity);
             newItemButton.GetComponentInChildren<TextMeshProUGUI>().text = item.objectData.name;
             newItemButton.transform.SetParent(panelItemButton.transform);
             newItemButton.transform.localScale = new Vector3(1, 1, 1);
+
+            newItemButton.GetComponent<ButtonItem>().activeObject = item;
+
             itemButtons.Add(newItemButton);
         }
-
-        //TODO Continuer l'inventaire tmp
-        //-avec le Highlighted pour les info
-        //-pouvoir utiliser les objet
-
-
-
     }
 
 }

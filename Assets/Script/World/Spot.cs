@@ -36,7 +36,7 @@ public class Spot : MonoBehaviour
         }
         foreach (Character characterAlive in charactersAliveOnSpot)
         {
-            float timeRotate = (Time.time * charactersOnSpot.Count) * 0.03f;
+            float timeRotate = (Time.time * charactersAliveOnSpot.Count) * 0.03f;
             characterAlive.offSetOnSpot.x = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / charactersAliveOnSpot.Count).Real;
             characterAlive.offSetOnSpot.y = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / charactersAliveOnSpot.Count).Imaginary;
             count++;
