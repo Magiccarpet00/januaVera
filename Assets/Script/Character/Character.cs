@@ -324,22 +324,34 @@ public class Character : MonoBehaviour
     }
 
     //      FIGHT
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, DamageType damageTypeAttack, Element elementAttack = Element.NONE)
     {
+        
+
         //TODO A REFAIRE POUR ARMOR
-        if(armorsEquiped.Count != 0)
+        if (armorsEquiped.Count != 0)
         {
-            armorsEquiped.Peek().currentState -= amount;
+            int amountModified;
+            if (damageTypeAttack == DamageType.ELEM)
+                amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
+            else
+                amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
+
+            armorsEquiped.Peek().currentState -= amountModified;
             if (armorsEquiped.Peek().currentState <= 0)
                 armorsEquiped.Pop();
         }
         else
         {
-            c_VITALITY -= amount;
+            int amountModified;
+            if (damageTypeAttack == DamageType.ELEM)
+                amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), characterData.shape)] * amount);
+            else
+                amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), characterData.shape)] * amount);
+
+            c_VITALITY -= amountModified;
             if (c_VITALITY <= 0)
-            {
                 Die();
-            }
         }
     }
 

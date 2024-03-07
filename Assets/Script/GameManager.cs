@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
     //RACISME
     public List<RelationLine> relationshipsBoard = new List<RelationLine>();
 
+    //POKEMON typeChart
+    public Dictionary<(string, Element), float> typeChart = new Dictionary<(string, Element), float>();
 
 
 
@@ -200,13 +202,56 @@ public class GameManager : MonoBehaviour
     {
 
         //POKEMON CHART
-        //Dictionary<(string,Element), float)> TypeChart = new Dictionary<(string, Element), float)>();
-        Dictionary<(string, Element), float> typeChart = new Dictionary<(string, Element), float>();
-
-        typeChart.Add((DamageType.SHARP.ToString(),Element.SKIN), 1f);
         
 
+        typeChart.Add((DamageType.SHARP.ToString(),Element.SKIN), 1f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.FUR), 1f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.PLUME), 1f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.METAL), 0.25f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.WOOD), 0.5f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.ROCK), 0.25f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.LEATHER), 0.5f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.WATER), 0f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.FIRE), 0f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.WIND), 0f);
+        typeChart.Add((DamageType.SHARP.ToString(), Element.LIGHTNING), 0f);
 
+        typeChart.Add((DamageType.SMASH.ToString(), Element.SKIN), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.FUR), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.PLUME), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.METAL), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.WOOD), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.ROCK), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.LEATHER), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.WATER), 1f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.FIRE), 0f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.WIND), 0f);
+        typeChart.Add((DamageType.SMASH.ToString(), Element.LIGHTNING), 0f);
+
+        //ELEM
+        typeChart.Add((Element.FIRE.ToString(), Element.SKIN), 1f);
+        typeChart.Add((Element.FIRE.ToString(), Element.FUR), 4f);
+        typeChart.Add((Element.FIRE.ToString(), Element.PLUME), 4f);
+        typeChart.Add((Element.FIRE.ToString(), Element.METAL), 1f);
+        typeChart.Add((Element.FIRE.ToString(), Element.WOOD), 4f);
+        typeChart.Add((Element.FIRE.ToString(), Element.ROCK), 1f);
+        typeChart.Add((Element.FIRE.ToString(), Element.LEATHER), 1f);
+        typeChart.Add((Element.FIRE.ToString(), Element.WATER), 0.25f);
+        typeChart.Add((Element.FIRE.ToString(), Element.FIRE), 0f);
+        typeChart.Add((Element.FIRE.ToString(), Element.WIND), 0f);
+        typeChart.Add((Element.FIRE.ToString(), Element.LIGHTNING), 0f);
+
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.SKIN), 1f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.FUR), 1f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.PLUME), 1f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.METAL), 4f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.WOOD), 1f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.ROCK), 1f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.LEATHER), 1f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.WATER), 4f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.FIRE), 0f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.WIND), 0f);
+        typeChart.Add((Element.LIGHTNING.ToString(), Element.LIGHTNING), 0f);
     }
 
 
@@ -238,7 +283,7 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.D))
         {
-            playerCharacter.TakeDamage(1);
+            playerCharacter.TakeDamage(1,DamageType.SHARP);
             InventoryUI.instance.UpdateInventory();
         }
 

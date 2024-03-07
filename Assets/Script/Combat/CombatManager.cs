@@ -88,14 +88,14 @@ public class CombatManager : MonoBehaviour
                                         SkillParryData skillParryData = (SkillParryData)characterTarget.currentLoadedSkill;
                                         if(skillParryData.parryType == ParryType.COUNTER)
                                         {
-                                            character.TakeDamage(skillParryData.damage);
+                                            character.TakeDamage(skillParryData.damage, skillParryData.damageType, skillParryData.element);
                                             if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill, true);
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    characterTarget.TakeDamage(skillAttackData.damage);
+                                    characterTarget.TakeDamage(skillAttackData.damage, skillAttackData.damageType, skillAttackData.element);
                                     if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
                                 if (playerOnFight) PlayerCombatManager.instance.dic_CharacterSpriteFight[character].AnimAtk();

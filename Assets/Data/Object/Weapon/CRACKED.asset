@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: CRACKED
   m_EditorClassIdentifier: 
   material: 11
-  maxState: 3
+  init_STATE: 0
   style: 0
   skills:
   - {fileID: 11400000, guid: 0ce628f352ab43c498f43e0d54941719, type: 2}
   - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}
   - {fileID: 11400000, guid: 0d73181b5c05a6e44a8954646c5660f1, type: 2}
+  - {fileID: 11400000, guid: a52c8a8cbead20647aeee0783be2ca5d, type: 2}
