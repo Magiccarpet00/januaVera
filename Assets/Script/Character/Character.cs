@@ -42,12 +42,14 @@ public class Character : MonoBehaviour
     //RELATION
     public Dictionary<Character, Relation> charactersEncountered = new Dictionary<Character, Relation>();
 
-    //STATS 
+    //STATS  [CODE REFACTOT] Faut refaire ça en list
     //      s_XXXXX -> stats fixe
     //      c_XXXXX -> curent stat
     public int s_VITALITY, s_ENDURANCE, s_STRENGHT, s_DEXTERITY, s_FAITH;
     public int c_VITALITY, c_ENDURANCE, c_STRENGHT, c_DEXTERITY, c_FAITH;
 
+    //EFFECT
+    public List<Buff> listBuff = new List<Buff>();
 
     public virtual void Start()
     {
@@ -360,6 +362,12 @@ public class Character : MonoBehaviour
         c_VITALITY += amount;
         if (c_VITALITY > s_VITALITY)
             c_VITALITY = s_VITALITY;
+    }
+
+    public void TakeBuff(SkillBuffData skillBuffData)
+    {
+        Buff buff = new Buff(this, skillBuffData.nbRound, skillBuffData.nbTurn);
+        
     }
 
     public bool RequirementSkill(SkillData skillData)

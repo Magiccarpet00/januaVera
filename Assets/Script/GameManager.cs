@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     /*-----------MEGA TODO---------
       |                           |
       | -Finir inventaire         |
-      | -Finit pokemon chart      |
+      | -Refactot Stats -> list   |
       | -Refactot armor           |
       | -Skill Invocation         |
       | -Skill debuff/buff        |
@@ -820,7 +820,8 @@ public enum SkillType {
     ATTACK,
     PARRY,
     SUMMON,
-    HEAL
+    HEAL,
+    BUFF
 }
 
 public enum ParryType {
@@ -840,6 +841,16 @@ public enum Race {
     HUMAN,
     ELF,
     BEAST
+}
+
+public enum Stats{
+    VITALITY,
+    ENDURANCE, 
+    STRENGHT, 
+    DEXTERITY, 
+    FAITH,
+    SPEED, 
+    DAMAGE
 }
 
 public class RelationLine {

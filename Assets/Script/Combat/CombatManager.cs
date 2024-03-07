@@ -29,11 +29,6 @@ public class CombatManager : MonoBehaviour
         {
             if(playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
 
-            if(speedInstant == 3)
-            {
-                ;
-            }
-
             CastSkills();
             CheckDying();
 
@@ -120,6 +115,15 @@ public class CombatManager : MonoBehaviour
                         {
                             SkillHealData skillHealData = (SkillHealData)character.currentLoadedSkill;
                             characterTarget.TakeHeal(skillHealData.amount);
+                        }
+                        break;
+
+                    case SkillType.BUFF:
+                        foreach (Character characterTarget in character.selectedCharacters)
+                        {
+                            SkillBuffData skillBuffData = (SkillBuffData)character.currentLoadedSkill;
+
+
                         }
                         break;
                 }
