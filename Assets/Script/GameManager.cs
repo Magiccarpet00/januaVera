@@ -7,6 +7,20 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    /*-----------MEGA TODO---------
+      |                           |
+      | -Finir inventaire         |
+      | -Finit pokemon chart      |
+      | -Refactot armor           |
+      | -Skill Invocation         |
+      | -Skill debuff/buff        |
+      | -Refactot racisme         |
+      | -Or et echange            |
+      | -Recrutement              |
+      | -A*                       |
+      |                           |
+      -----------------------------*/
+
     public static GameManager instance;
     void Awake()
     {

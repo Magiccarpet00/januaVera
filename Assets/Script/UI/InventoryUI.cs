@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,27 +8,34 @@ public class InventoryUI : MonoBehaviour
 
     public GameObject panelInventory;
     public TextMeshProUGUI tmpStatsText;
-    public TextMeshProUGUI tmpItemText;
     public bool isOpen;
+
+    public GameObject panelItemButton;
+    public GameObject prefabItemButton;
+    public List<GameObject> itemButtons = new List<GameObject>();
+
 
     private void Awake()
     {
         instance = this;
     }
 
-
-
     private void OpenInventory()
     {
         panelInventory.SetActive(true);
         isOpen = true;
+        GameManager.instance.inputBlock = true;
         UpdateInventory();
     }
 
     private void CloseInventory()
     {
+        foreach (GameObject item in itemButtons)
+            Destroy(item);
         panelInventory.SetActive(false);
         isOpen = false;
+        GameManager.instance.inputBlock = false;
+
     }
 
     public void ClickInventoryButton()
@@ -49,12 +57,19 @@ public class InventoryUI : MonoBehaviour
         stats += "FAITH: " + playerCharacter.c_FAITH + "\n";
         tmpStatsText.text = stats;
 
-        string objects = "    OBJECTS\n";
-        foreach (MyObject obj in playerCharacter.objectInventory)
+
+        foreach (MyObject item in playerCharacter.objectInventory)
         {
-            objects += "~" + obj.objectData.name + "\n";
+            GameObject newItemButton = Instantiate(prefabItemButton, transform.position, Quaternion.identity);
+            newItemButton.GetComponentInChildren<TextMeshProUGUI>().text = item.objectData.name;
+            newItemButton.transform.SetParent(panelItemButton.transform);
+            newItemButton.transform.localScale = new Vector3(1, 1, 1);
+            itemButtons.Add(newItemButton);
         }
-        tmpItemText.text = objects;
+
+        //TODO Continuer l'inventaire tmp
+        //-avec le Highlighted pour les info
+        //-pouvoir utiliser les objet
 
 
 
