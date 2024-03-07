@@ -19,7 +19,7 @@ MonoBehaviour:
   req_VITALITY: 0
   req_ENDURANCE: 0
   req_STRENGHT: 0
-  req_DEXTERITY: 0
+  req_DEXTERITY: 3
   req_FAITH: 0
   parryType: 1
   damage: 3

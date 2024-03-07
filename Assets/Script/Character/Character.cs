@@ -350,6 +350,18 @@ public class Character : MonoBehaviour
             c_VITALITY = s_VITALITY;
     }
 
+    public bool RequirementSkill(SkillData skillData)
+    {
+        if (c_VITALITY >= skillData.req_DEXTERITY &&
+           c_ENDURANCE >= skillData.req_ENDURANCE &&
+           c_DEXTERITY >= skillData.req_DEXTERITY &&
+           c_FAITH >= skillData.req_FAITH &&
+           c_STRENGHT >= skillData.req_STRENGHT)
+            return true;
+        else
+            return false;
+    }
+
     public bool ParryableAttack(SkillAttackData skillAttackDataTaken)
     {
         if (currentLoadedSkill == null ||

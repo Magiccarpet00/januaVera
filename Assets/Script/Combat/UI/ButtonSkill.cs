@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.UI;
 
 public class ButtonSkill : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class ButtonSkill : MonoBehaviour
     public GameObject templateParry;
     public GameObject templaceHeal;
     public MyObject myObjectParent;
+
+    public Button button;
+    public Image image;
 
     public void Click()
     {
@@ -40,6 +44,10 @@ public class ButtonSkill : MonoBehaviour
                 break;
         }
 
-
+        if (!GameManager.instance.playerCharacter.RequirementSkill(skillData))
+        {
+            image.color = Color.red;
+            button.interactable = false;
+        }
     }
 }
