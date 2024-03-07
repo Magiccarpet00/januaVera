@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<Element, string> dic_element = new Dictionary<Element, string>();
 
     //RACISME
-    public List<RelationLine> relationshipsBoard = new List<RelationLine>();
+    public Dictionary<(Race, Race), Relation> relationshipsBoard = new Dictionary<(Race, Race), Relation>();
 
     //POKEMON typeChart
     public Dictionary<(string, Element), float> typeChart = new Dictionary<(string, Element), float>();
@@ -183,19 +183,19 @@ public class GameManager : MonoBehaviour
     public void SetUpRacisme()
     {
         //HUMAIN
-        relationshipsBoard.Add(new RelationLine(Race.HUMAN, Race.HUMAN, Relation.FRIEND));
-        relationshipsBoard.Add(new RelationLine(Race.HUMAN, Race.ELF, Relation.NEUTRAL));
-        relationshipsBoard.Add(new RelationLine(Race.HUMAN, Race.BEAST, Relation.NEUTRAL));
+        relationshipsBoard.Add((Race.HUMAN, Race.HUMAN), Relation.FRIEND);
+        relationshipsBoard.Add((Race.HUMAN, Race.ELF), Relation.NEUTRAL);
+        relationshipsBoard.Add((Race.HUMAN, Race.BEAST), Relation.NEUTRAL);
 
         //ELF
-        relationshipsBoard.Add(new RelationLine(Race.ELF, Race.HUMAN, Relation.NEUTRAL));
-        relationshipsBoard.Add(new RelationLine(Race.ELF, Race.ELF, Relation.FRIEND));
-        relationshipsBoard.Add(new RelationLine(Race.ELF, Race.BEAST, Relation.FRIEND));
+        relationshipsBoard.Add((Race.ELF, Race.HUMAN), Relation.NEUTRAL);
+        relationshipsBoard.Add((Race.ELF, Race.ELF), Relation.FRIEND);
+        relationshipsBoard.Add((Race.ELF, Race.BEAST), Relation.FRIEND);
 
         //BEAST
-        relationshipsBoard.Add(new RelationLine(Race.BEAST, Race.HUMAN, Relation.HOSTIL));
-        relationshipsBoard.Add(new RelationLine(Race.BEAST, Race.ELF, Relation.NEUTRAL));
-        relationshipsBoard.Add(new RelationLine(Race.BEAST, Race.BEAST, Relation.FRIEND));
+        relationshipsBoard.Add((Race.BEAST, Race.HUMAN), Relation.HOSTIL);
+        relationshipsBoard.Add((Race.BEAST, Race.ELF), Relation.NEUTRAL);
+        relationshipsBoard.Add((Race.BEAST, Race.BEAST), Relation.FRIEND);
     }
 
     public void SetUpTypeChart() //TODO A COMPLETER
@@ -413,22 +413,6 @@ public class GameManager : MonoBehaviour
 
         return actionButtonStandar;
     }
-    public Relation GetRelationRace(Race race_judge, Race race_eval)
-    {
-        foreach (RelationLine relation in relationshipsBoard)
-        {
-            if(race_judge == relation.race_jugde && race_eval == relation.race_eval)
-            {
-                return relation.relation;
-            }
-        }
-
-        Debug.LogError("ERROR RELATION");
-        return Relation.ALLY;
-    }
-
-
-
 
     //
     //      UI
@@ -852,19 +836,6 @@ public enum Stats{
     SPEED, 
     DAMAGE
 }
-
-public class RelationLine {
-    public Race race_jugde;
-    public Race race_eval;
-    public Relation relation;
-
-    public RelationLine(Race rj, Race re, Relation rel){
-        race_jugde = rj;
-        race_eval = re;
-        relation = rel;
-    }
-}
-
 
 public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation

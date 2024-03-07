@@ -185,7 +185,7 @@ public class Character : MonoBehaviour
                 charactersOnPath.Add(characterOnPath);
 
                 if (charactersEncountered.ContainsKey(characterOnPath) == false)
-                    charactersEncountered.Add(characterOnPath, GameManager.instance.GetRelationRace(this.characterData.race, characterOnPath.characterData.race));
+                    charactersEncountered.Add(characterOnPath, GameManager.instance.relationshipsBoard[(this.characterData.race, characterOnPath.characterData.race)]);
 
                 if (WantToFight(characterOnPath))
                     wantBattle = true;
@@ -207,7 +207,7 @@ public class Character : MonoBehaviour
         {
             if (charactersEncountered.ContainsKey(characterOnSpot) == false)
             {
-                charactersEncountered.Add(characterOnSpot, GameManager.instance.GetRelationRace(this.characterData.race, characterOnSpot.characterData.race));
+                charactersEncountered.Add(characterOnSpot, GameManager.instance.relationshipsBoard[(this.characterData.race, characterOnSpot.characterData.race)]);
             }
         }
     }
