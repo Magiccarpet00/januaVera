@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -71,6 +72,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject prefabInfoGridLayoutGroupe;
     private GameObject currentInfoGridLayoutGroupe;
     [SerializeField] private GameObject prefabInfoCharacter;
+    public TextMeshProUGUI tmpInfo;
+
+
+    //DIALOG
+    public GameObject panelDialog;
+    public TextMeshProUGUI dialogText;
+    public bool dialogWindowOpened;
+    public DialogAnswer dialogAnswer;
 
     // NAME ENUM
     public Dictionary<WeaponStyle, string> dic_weaponStyle = new Dictionary<WeaponStyle, string>();
@@ -134,6 +143,7 @@ public class GameManager : MonoBehaviour
         dic_button.Add(ButtonType.UNHIDE, allButton[3]);
         dic_button.Add(ButtonType.FIGHT,  allButton[4]);
         dic_button.Add(ButtonType.SEARCH, allButton[5]);
+        dic_button.Add(ButtonType.HIRE, allButton[6]);
     }
 
     private void SetUpDicEnum()
@@ -164,6 +174,7 @@ public class GameManager : MonoBehaviour
         playerCharacter = player.GetComponent<Player>();
         UpdateUILandscape();
         UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
+        UpdateTmpInfo();
 
         //Clean les nuages a la main
         List<GameObject> nearTiles = GetTiles(startLocation.x - 1,
@@ -409,6 +420,8 @@ public class GameManager : MonoBehaviour
         actionButtonStandar.Add(ButtonType.FIGHT);
         actionButtonStandar.Add(ButtonType.SEARCH);
 
+        actionButtonStandar.Add(ButtonType.HIRE);
+
         return actionButtonStandar;
     }
 
@@ -440,6 +453,16 @@ public class GameManager : MonoBehaviour
             GameObject newBtn = Instantiate(dic_button[btnType], btn_grid.transform);
             currentButtons.Add(newBtn);
         }
+    }
+
+    public void UpdateTmpInfo()
+    {
+        string info = "";
+        info += "VIT  " + playerCharacter.c_VITALITY + "/" + playerCharacter.s_VITALITY +"\n";
+        info += "END  " + playerCharacter.c_ENDURANCE + "/" + playerCharacter.s_ENDURANCE + "\n";
+        info += "GOLD " + playerCharacter.gold;
+
+        tmpInfo.text = info;
     }
 
     public void CreateInfoGridLayoutGroupe(Vector3 pos, List<Character> characters)
@@ -478,6 +501,19 @@ public class GameManager : MonoBehaviour
         Destroy(currentInfoGridLayoutGroupe);
     }
 
+
+    public void OpenDialogWindow(string text)
+    {
+        dialogWindowOpened = true;
+        panelDialog.SetActive(true);
+        dialogText.text = text;
+    }
+
+    public void CloseDialogWindow()
+    {
+        panelDialog.SetActive(false);
+        dialogWindowOpened = false;
+    }
 
 
 
@@ -601,6 +637,7 @@ public class GameManager : MonoBehaviour
                 if (action.GetPriority() == i && !action.GetUser().isCanceled())
                 {
                     action.PerfomAction();
+                    yield return new WaitUntil(()=>dialogWindowOpened == false);
                     yield return new WaitForSeconds(0.001f); //[CODE WARNING / REFACTOT] Peut etre une source de bug (jsp) si on clic trop vite
 
                 }
@@ -627,6 +664,7 @@ public class GameManager : MonoBehaviour
         {
             UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
             UpdateUILandscape(playerCharacter.GetCurrentLocationType());
+            UpdateTmpInfo();
         }
 
         // Appele recursif de la fonction tant que la pile d'actions du player n'est pas vide
@@ -671,10 +709,19 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                        int rng = Random.Range(0, adjSpot.Count);
-                        character.CommandMove(adjSpot[rng]);
-                        //character.CommandMove(adjSpot[0]);
+                        if (character.leaderCharacter == null)
+                        {
+                            List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                            int rng = Random.Range(0, adjSpot.Count);
+                            character.CommandMove(adjSpot[rng]);
+                        }
+                        else
+                        {
+                            //character.CommandMove(character.leader.GetCurrentSpot());
+                        }
+                    
+
+                        
                     }
                 }
             }
@@ -759,7 +806,8 @@ public enum ButtonType {
     HIDE,
     UNHIDE,
     FIGHT,
-    SEARCH
+    SEARCH,
+    HIRE
 }
 
 public enum Element {
@@ -835,6 +883,12 @@ public enum Stats{
     DAMAGE
 }
 
+public enum DialogAnswer{
+    WAIT,
+    YES,
+    NO
+}
+
 public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
@@ -851,11 +905,12 @@ public class GlobalConst {
     public static int EMPTY_PRIORITY  = 1;
     public static int FIGHT_PRIORITY  = 2;
     public static int HIDE_PRIORITY   = 3;
-    public static int MOVE_PRIORITY   = 4;
-    public static int SEARCH_PRIORITY = 5;
-    public static int REST_PRIORITY   = 6;
+    public static int HIRE_PRIORITY   = 4;
+    public static int MOVE_PRIORITY   = 5;
+    public static int SEARCH_PRIORITY = 6;
+    public static int REST_PRIORITY   = 7;
 
-    public static int RANGE_PRIOTITY = 6; // Le nombre total de priority d'action
+    public static int RANGE_PRIOTITY = 7; // Le nombre total de priority d'action
 
     // -- PRIOTITE D'EFFET --
     public static int ONPATH_PRIORITY = 1;

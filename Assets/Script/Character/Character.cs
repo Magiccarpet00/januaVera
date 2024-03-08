@@ -42,14 +42,20 @@ public class Character : MonoBehaviour
     //RELATION
     public Dictionary<Character, Relation> charactersEncountered = new Dictionary<Character, Relation>();
 
+    //LEADER
+    public Character leaderCharacter;
+    public List<Character> followersCharacters;
+
     //STATS  [CODE REFACTOT] Faut refaire ça en list
     //      s_XXXXX -> stats fixe
     //      c_XXXXX -> curent stat
     public int s_VITALITY, s_ENDURANCE, s_STRENGHT, s_DEXTERITY, s_FAITH;
     public int c_VITALITY, c_ENDURANCE, c_STRENGHT, c_DEXTERITY, c_FAITH;
+    public int gold;
 
     //EFFECT
     public List<Buff> listBuff = new List<Buff>();
+
 
     public virtual void Start()
     {
@@ -150,6 +156,37 @@ public class Character : MonoBehaviour
         this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
     }
 
+    public void Hire()
+    {
+        StartCoroutine(_Hire());
+    }
+
+    public IEnumerator _Hire()
+    {
+        List<Character> charactersInSpot = GetAllCharactersInSpot();
+
+
+        GameManager.instance.OpenDialogWindow("Recrutement");
+
+        yield return new WaitWhile(() => GameManager.instance.dialogAnswer == DialogAnswer.WAIT);
+
+        GameManager.instance.CloseDialogWindow();
+
+        if (GameManager.instance.dialogAnswer == DialogAnswer.YES)
+        {
+            foreach(Character characterToHire in charactersInSpot)
+            {
+                if(characterToHire != this)
+                {
+                    characterToHire.leaderCharacter = this;
+                    followersCharacters.Add(characterToHire);
+                    characterToHire.CancelAction();
+                }
+            }
+        }
+        GameManager.instance.dialogAnswer = DialogAnswer.WAIT;
+    }
+
     public void UpdateSmoothTime()
     {
         if (isHide)
@@ -189,7 +226,6 @@ public class Character : MonoBehaviour
 
                 if (WantToFight(characterOnPath))
                     wantBattle = true;
-
             }
         }
 
@@ -271,6 +307,12 @@ public class Character : MonoBehaviour
             stackAction.Push(new ActionEmpty(this));
         
         stackAction.Push(new ActionMove(this, spot));
+
+        foreach (Character character in followersCharacters)
+        {
+            character.stackAction.Clear();
+            character.stackAction.Push(new ActionMove(character, spot));
+        }
     }
 
     public virtual void CommandHide()
@@ -291,6 +333,11 @@ public class Character : MonoBehaviour
     public virtual void CommandSearch()
     {
         stackAction.Push(new ActionSearch(this));
+    }
+
+    public virtual void CommandHire()
+    {
+        stackAction.Push(new ActionHire(this));
     }
 
     public void CancelAction()
@@ -367,7 +414,6 @@ public class Character : MonoBehaviour
     public void TakeBuff(SkillBuffData skillBuffData)
     {
         Buff buff = new Buff(this, skillBuffData.nbRound, skillBuffData.nbTurn);
-        
     }
 
     public bool RequirementSkill(SkillData skillData)
@@ -472,14 +518,7 @@ public class Character : MonoBehaviour
         }
 
         return res;
-        
-
     }
-
-
-
-
-
 
 
 

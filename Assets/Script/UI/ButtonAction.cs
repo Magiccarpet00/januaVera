@@ -46,9 +46,18 @@ public class ButtonAction : MonoBehaviour
 
     public void Search()
     {
-        if (GameManager.instance.inputBlock == false)
+        if(GameManager.instance.inputBlock == false)
         {
             GameManager.instance.playerCharacter.CommandSearch();
+            GameManager.instance._ExecuteActionQueue();
+        }
+    }
+
+    public void Hire()
+    {
+        if(GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandHire();
             GameManager.instance._ExecuteActionQueue();
         }
     }
