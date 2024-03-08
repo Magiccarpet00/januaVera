@@ -164,9 +164,21 @@ public class Character : MonoBehaviour
     public IEnumerator _Hire()
     {
         List<Character> charactersInSpot = GetAllCharactersInSpot();
+        List<Character> charactersToHire = new List<Character>();
+        foreach (Character characterToHire in charactersInSpot)
+            if (characterToHire != this && !followersCharacters.Contains(characterToHire))
+                charactersToHire.Add(characterToHire);
 
+        string dialog = "";
+        int goldTotal = 0;
+        foreach (Character characterToHire in charactersToHire)
+        {
+            dialog += characterToHire.characterData.name + " ";
+            goldTotal += characterToHire.characterData.workCost;
+        }
+        dialog += " est recrutable pour " + goldTotal.ToString() + " gold pendant X tour";
 
-        GameManager.instance.OpenDialogWindow("Recrutement");
+        GameManager.instance.OpenDialogWindow(dialog);
 
         yield return new WaitWhile(() => GameManager.instance.dialogAnswer == DialogAnswer.WAIT);
 
@@ -174,9 +186,10 @@ public class Character : MonoBehaviour
 
         if (GameManager.instance.dialogAnswer == DialogAnswer.YES)
         {
-            foreach(Character characterToHire in charactersInSpot)
+            if(gold >= goldTotal)
             {
-                if(characterToHire != this)
+                gold -= goldTotal;
+                foreach (Character characterToHire in charactersToHire)
                 {
                     characterToHire.leaderCharacter = this;
                     followersCharacters.Add(characterToHire);
@@ -489,6 +502,7 @@ public class Character : MonoBehaviour
     public void AI_SetRandomLoadedSkill(List<Character> allCharacterInFight) //TODO à ameliorer
     {
         Weapon rngWeapon = AI_TakeRandomWeapon();
+        if(rngWeapon == null) Debug.LogWarning("AI_SetRandomLoadedSkill: PNJ without weapon");
         WeaponData wd = (WeaponData)rngWeapon.objectData;
         currentLoadedObject = rngWeapon;
 

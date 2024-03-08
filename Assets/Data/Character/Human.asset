@@ -22,3 +22,4 @@ MonoBehaviour:
   init_FAITH: 1
   spriteMap: {fileID: 1770330981, guid: 85963f2d98168604d9dd812b61b5fae0, type: 3}
   spriteFight: {fileID: -435637131, guid: 85963f2d98168604d9dd812b61b5fae0, type: 3}
+  workCost: 5

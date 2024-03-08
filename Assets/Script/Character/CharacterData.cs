@@ -13,4 +13,6 @@ public class CharacterData : ScriptableObject
 
     public Sprite spriteMap;
     public Sprite spriteFight;
+
+    public int workCost;
 }

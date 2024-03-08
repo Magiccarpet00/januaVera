@@ -349,6 +349,12 @@ public class GameManager : MonoBehaviour
             playerCharacter.CommandRest();
             _ExecuteActionQueue();
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            playerCharacter.gold += 10;
+            UpdateTmpInfo();
+        }
     }
 
 
@@ -575,14 +581,11 @@ public class GameManager : MonoBehaviour
         return obj;
     }
 
-
-
     public string CreateId()
     {
         id++;
         return "_" + id.ToString();
     }
-
 
     public void _ExecuteActionQueue()
     {
@@ -639,7 +642,6 @@ public class GameManager : MonoBehaviour
                     action.PerfomAction();
                     yield return new WaitUntil(()=>dialogWindowOpened == false);
                     yield return new WaitForSeconds(0.001f); //[CODE WARNING / REFACTOT] Peut etre une source de bug (jsp) si on clic trop vite
-
                 }
             }
         }
@@ -649,12 +651,10 @@ public class GameManager : MonoBehaviour
             character.StartCoroutine("MettingOnPath");
         }
 
-
         yield return new WaitUntil(() => CombatManager.instance.playerOnFight == false);
 
         foreach (Character character in characterList)
             character.MettingOnSpot();
-
 
         actionQueue.Clear();
         CommandPnj();
@@ -719,15 +719,11 @@ public class GameManager : MonoBehaviour
                         {
                             //character.CommandMove(character.leader.GetCurrentSpot());
                         }
-                    
-
-                        
                     }
                 }
             }
         }
     }
-
 
     //
     //      COMBAT
