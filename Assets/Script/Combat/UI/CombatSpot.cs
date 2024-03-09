@@ -55,4 +55,6 @@ public class CombatSpot : MonoBehaviour
         lifeTxt.gameObject.SetActive(b);
         intentionTxt.gameObject.SetActive(b);
     }
+
+
 }

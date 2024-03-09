@@ -10,15 +10,31 @@ public class SpriteFight : MonoBehaviour
     public SpriteRenderer over;
     public Animator mainAnimator;
     public Animator animatorOver;
+    public LineRenderer lineRenderer;
+    
 
     private void OnMouseExit()
     {
         animatorOver.SetBool("over", false);
+        lineRenderer.positionCount = 0;
     }
 
     private void OnMouseOver()
     {
         animatorOver.SetBool("over", true);
+        ArrowIntention();
+    }
+
+    private void ArrowIntention()
+    {
+        float offSetArrow = 0.5f;
+        float offSetArrow2 = 0.5f;
+        foreach (Character target in character.selectedCharacters)
+        {
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPosition(0, this.transform.position + new Vector3(Mathf.Sin(Time.time * offSetArrow) * offSetArrow2, Mathf.Sin(Time.time * offSetArrow)*offSetArrow2, -1));
+            lineRenderer.SetPosition(1, PlayerCombatManager.instance.dic_CharacterSpriteFight[target].transform.position + Vector3.back);
+        }
     }
 
     private void OnMouseUp()
