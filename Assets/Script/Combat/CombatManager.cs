@@ -59,7 +59,10 @@ public class CombatManager : MonoBehaviour
 
     public void CastSkills() //TODO fonction qui va toujours se remplire
     {
-        foreach (Character character in characters)
+        List<Character> _characters = new List<Character>(); //[CODE BRISCAR] Astuce de vieux forban pour ajouter un element a characters pendant le foreach
+        _characters.AddRange(characters);
+
+        foreach (Character character in _characters)
         {
             if(character.currentLoadedSkill != null &&
                character.currentLoadedSkill.speed == speedInstant &&
@@ -122,10 +125,21 @@ public class CombatManager : MonoBehaviour
                         foreach (Character characterTarget in character.selectedCharacters)
                         {
                             SkillBuffData skillBuffData = (SkillBuffData)character.currentLoadedSkill;
-
-
+                            //TODO BUFF
                         }
                         break;
+
+                    case SkillType.SUMMON:
+                        SkillSummonData skillSummonData = (SkillSummonData)character.currentLoadedSkill;
+                        foreach (CharacterData characterToSummon in skillSummonData.characters)
+                        {
+                            GameObject characterSummoned = GameManager.instance.CreateCharacter(characterToSummon, character.GetCurrentSpot());
+                            characters.Add(characterSummoned.GetComponent<Character>());
+                            if (playerOnFight) PlayerCombatManager.instance.AddCharacterOnSpot(characterSummoned.GetComponent<Character>());
+                        }
+                        break;
+
+                        
                 }
 
                 character.currentLoadedObject.UseObject();

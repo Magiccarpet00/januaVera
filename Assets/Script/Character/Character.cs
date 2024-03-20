@@ -163,10 +163,11 @@ public class Character : MonoBehaviour
 
     public IEnumerator _Hire()
     {
-        List<Character> charactersInSpot = GetAllCharactersInSpot();
+        List<Character> charactersInSpot = GetAllCharactersAliveInSpot();
         List<Character> charactersToHire = new List<Character>();
         foreach (Character characterToHire in charactersInSpot)
-            if (characterToHire != this && !followersCharacters.Contains(characterToHire))
+            if (characterToHire != this &&
+                !followersCharacters.Contains(characterToHire))
                 charactersToHire.Add(characterToHire);
 
         string dialog = "";
@@ -632,6 +633,16 @@ public class Character : MonoBehaviour
     public List<Character> GetAllCharactersInSpot()
     {
         return currentSpot.GetComponent<Spot>().GetAllCharactersInSpot();
+    }
+
+    public List<Character> GetAllCharactersAliveInSpot()
+    {
+        List<Character> charactersInSpot = GetAllCharactersInSpot();
+        List<Character> charactersAlive = new List<Character>();
+        foreach (Character character in charactersInSpot)
+            if (!character.isDead)
+                charactersAlive.Add(character);
+        return charactersAlive;
     }
 
     public bool isCanceled()

@@ -9,6 +9,7 @@ public class ButtonSkill : MonoBehaviour
     public GameObject templateAttack;
     public GameObject templateParry;
     public GameObject templaceHeal;
+    public GameObject templaceSummon;
     public MyObject myObjectParent;
 
     public Button button;
@@ -41,6 +42,8 @@ public class ButtonSkill : MonoBehaviour
                 break;
 
             case SkillType.SUMMON:
+                templaceSummon.SetActive(true);
+                templaceSummon.GetComponent<ButtonSkillTemplateSummon>().SetUpUI(skillData);
                 break;
         }
 

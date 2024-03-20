@@ -44,29 +44,36 @@ public class PlayerCombatManager : MonoBehaviour
     [Header("FX")]
     public GameObject prefabFxSkills;
 
+
+    private int countSpot;
     public void FillSpot()
     {
-        int countSpot = 0;
+        countSpot = 0;
         foreach (Character c in CombatManager.instance.characters)
         {
-            // COMBAT SPOT
-            CombatSpot cs = combatSpots[countSpot].GetComponent<CombatSpot>();
-            cs.character = c;
-            cs.SetActiveSpotUI(true);
-
-            // CHARACTER SPRITE
-            GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
-            characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
-            charactersSprites.Add(characterSprite);
-            characterSprite.GetComponentInChildren<SpriteRenderer>().sprite = CombatManager.instance.characters[countSpot].characterData.spriteFight;
-
-            // DICO
-            dic_CharacterSpriteFight.Add(c, characterSprite.GetComponent<SpriteFight>());
-            dic_CharacterCombatSpot.Add(c, cs);
-
-            // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
-            countSpot++;
+            AddCharacterOnSpot(c);
         }
+    }
+
+    public void AddCharacterOnSpot(Character c)
+    {
+        // COMBAT SPOT
+        CombatSpot cs = combatSpots[countSpot].GetComponent<CombatSpot>();
+        cs.character = c;
+        cs.SetActiveSpotUI(true);
+
+        // CHARACTER SPRITE
+        GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
+        characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
+        charactersSprites.Add(characterSprite);
+        characterSprite.GetComponentInChildren<SpriteRenderer>().sprite = CombatManager.instance.characters[countSpot].characterData.spriteFight;
+
+        // DICO
+        dic_CharacterSpriteFight.Add(c, characterSprite.GetComponent<SpriteFight>());
+        dic_CharacterCombatSpot.Add(c, cs);
+
+        // TODO il faut faire en sort que quand on quitte un combat la scene sois "clean"
+        countSpot++;
     }
 
     public void ClickButtonWeaponGlobal()

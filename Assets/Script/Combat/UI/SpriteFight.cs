@@ -28,7 +28,7 @@ public class SpriteFight : MonoBehaviour
     private void ArrowIntention()
     {
         float offSetArrow = 0.5f;
-        float offSetArrow2 = 0.5f;
+        float offSetArrow2 =0.5f;
         foreach (Character target in character.selectedCharacters)
         {
             lineRenderer.positionCount = 2;

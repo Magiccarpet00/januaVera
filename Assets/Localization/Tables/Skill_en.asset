@@ -38,6 +38,14 @@ MonoBehaviour:
     m_Localized: Bandage
     m_Metadata:
       m_Items: []
+  - m_Id: 46019408380563456
+    m_Localized: Fire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46025590566555648
+    m_Localized: Invoc Human
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

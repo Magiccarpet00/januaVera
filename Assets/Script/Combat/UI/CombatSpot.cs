@@ -22,6 +22,8 @@ public class CombatSpot : MonoBehaviour
 
     public void UpdateIntention()
     {
+        if (character.currentLoadedSkill == null) 
+            return;
 
         switch (character.currentLoadedSkill.skillType)
         {

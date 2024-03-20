@@ -22,5 +22,4 @@ public class ButtonSkillTemplateHeal : MonoBehaviour
         targetValue.text = skillhealData.nbTarget.ToString();
     }
 
-
 }
