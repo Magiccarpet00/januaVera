@@ -337,10 +337,10 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.H))
         {
-            GameObject currentTile = GetTile(2, 2);
+            GameObject currentTile = GetTile(1, 2);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[1].gameObject);
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[0].gameObject);
             newPnj.GetComponent<Character>().CommandEmpty();
         }
 
@@ -771,6 +771,7 @@ public class GameManager : MonoBehaviour
         CombatManager.instance.ToggleFight(b);
         cam.GetComponent<CameraController>().ToggleCamPos(b);
     }
+
 }
 
 public enum TileType {

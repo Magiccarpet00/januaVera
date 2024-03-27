@@ -134,6 +134,7 @@ public class CombatManager : MonoBehaviour
                         foreach (CharacterData characterToSummon in skillSummonData.characters)
                         {
                             GameObject characterSummoned = GameManager.instance.CreateCharacter(characterToSummon, character.GetCurrentSpot());
+                            character.AddFollower(character ,characterSummoned.GetComponent<Character>());
                             characters.Add(characterSummoned.GetComponent<Character>());
                             if (playerOnFight) PlayerCombatManager.instance.AddCharacterOnSpot(characterSummoned.GetComponent<Character>());
                         }

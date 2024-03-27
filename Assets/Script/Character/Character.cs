@@ -93,7 +93,10 @@ public class Character : MonoBehaviour
     {
         
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
-    
+
+        if (adjSpot == null)
+            Debug.Log("WOOOAw");
+
         if (isHide)
         {
             onPath = true;
@@ -192,13 +195,24 @@ public class Character : MonoBehaviour
                 gold -= goldTotal;
                 foreach (Character characterToHire in charactersToHire)
                 {
-                    characterToHire.leaderCharacter = this;
-                    followersCharacters.Add(characterToHire);
+                    AddFollower(this, characterToHire);
                     characterToHire.CancelAction();
                 }
             }
         }
         GameManager.instance.dialogAnswer = DialogAnswer.WAIT;
+    }
+
+    public void AddFollower(Character leader, Character follower)
+    {
+        follower.leaderCharacter = leader;
+        followersCharacters.Add(follower);
+    }
+
+    public void AddFollowers(Character leader, List<Character> followers)
+    {
+        foreach (Character follower in followers)
+            AddFollower(leader, follower);
     }
 
     public void UpdateSmoothTime()
@@ -522,6 +536,17 @@ public class Character : MonoBehaviour
         {
             if (WantToFight(characterTargetable))
                 charactersTarget.Add(characterTargetable);
+        }
+
+        //Shuffle
+        int n = charactersTarget.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n);
+            Character value = charactersTarget[k];
+            charactersTarget[k] = charactersTarget[n];
+            charactersTarget[n] = value;
         }
 
         if (charactersTarget.Count == 0)
