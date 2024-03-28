@@ -93,9 +93,7 @@ public class Character : MonoBehaviour
     {
         
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
-
-        if (adjSpot == null)
-            Debug.Log("WOOOAw");
+            
 
         if (isHide)
         {

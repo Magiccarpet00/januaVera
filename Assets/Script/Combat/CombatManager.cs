@@ -40,20 +40,12 @@ public class CombatManager : MonoBehaviour
         speedInstant = 0;
 
         if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(false);
-        if(playerOnFight) GameManager.instance.playerCharacter.selectedCharacters = new List<Character>();
+        
+        ResetRound();
+        LoadSkillAI();
 
-        //TMP pour les parry
-        foreach(Character character in characters)
-        {
-            character.nbGarde = 0;
-        }
-
-        if(!playerOnFight)
-        {
-            LoadSkillAI();
-            if(!CheckFightEnd())
-                StartCoroutine(FightSequence());
-        }
+        if(!playerOnFight && !CheckFightEnd())
+            StartCoroutine(FightSequence());
     }
 
 
@@ -161,6 +153,15 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void ResetRound()
+    {
+        foreach (Character character in characters)
+        {
+            character.nbGarde = 0;
+            character.selectedCharacters = new List<Character>();
+        }
+    }
+
     public void LoadSkillAI()
     {
         foreach (Character character in characters)
@@ -241,7 +242,5 @@ public class CombatManager : MonoBehaviour
     {
         return onFight;
     }
-
-
 
 }
