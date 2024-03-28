@@ -287,6 +287,7 @@ public class GameManager : MonoBehaviour
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
             GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Wolf"), spot[0].gameObject);
+            newPnj.GetComponent<Character>().objectInventory.Add(CreateWeapon("SWORD"));
         }
 
         if(Input.GetKeyDown(KeyCode.D))
@@ -300,17 +301,6 @@ public class GameManager : MonoBehaviour
             CameraController cc = cam.GetComponent<CameraController>();
             toggle = !toggle;
             cc.ToggleFreezeCam(toggle);
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            foreach (Character character in characterList)
-            {
-                if (character.isPlayer())
-                    character.objectInventory.Add(CreateWeapon("CRACKED"));
-                else
-                    character.objectInventory.Add(CreateWeapon("SWORD"));
-            }
         }
 
         if(Input.GetKeyDown(KeyCode.O))
@@ -340,7 +330,6 @@ public class GameManager : MonoBehaviour
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
             GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[0].gameObject);
-            newPnj.GetComponent<Character>().CommandEmpty();
         }
 
         if(Input.GetKeyDown(KeyCode.R))
@@ -544,9 +533,9 @@ public class GameManager : MonoBehaviour
             newCharacter.name = characterData.name + CreateId();
         }
 
-        Character _chatacter = newCharacter.GetComponent<Character>();
-        _chatacter.SetUp(characterData, spot);
-        characterList.Add(_chatacter);
+        Character _character = newCharacter.GetComponent<Character>();
+        _character.SetUp(characterData, spot);
+        characterList.Add(_character);
 
         return newCharacter;
     }
@@ -800,6 +789,13 @@ public enum DamageType {
     SMASH,
     SHARP,
     ELEM
+}
+
+public enum ObjectType {
+    ACTIVE,
+    ARMOR,
+    OBJECT,
+    WEAPON
 }
 
 public enum WeaponStyle {

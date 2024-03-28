@@ -610,7 +610,9 @@ public class Character : MonoBehaviour
 
         if (!isPlayer())
             AI_Command();
-            
+        else
+            objectInventory.Add(GameManager.instance.CreateWeapon("CRACKED"));
+
     }
 
     public List<Weapon> GetWeaponsInventory()
