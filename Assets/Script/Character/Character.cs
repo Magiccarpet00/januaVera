@@ -76,7 +76,7 @@ public class Character : MonoBehaviour
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
         if(CombatManager.instance.playerOnFight == false)
-        {
+        {   
             transform.position = Vector3.SmoothDamp(transform.position, target+(Vector3)offSetOnSpot, ref velocity, smoothTime);
         }
 
@@ -91,9 +91,7 @@ public class Character : MonoBehaviour
     // Quand on clic sur la même case ça fait quand meme passer un tour, à réparer
     public virtual void Move(GameObject spot)
     {
-        
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
-            
 
         if (isHide)
         {
@@ -102,32 +100,29 @@ public class Character : MonoBehaviour
         }
 
         if (adjSpot.Contains(spot))
-        {
-            if (currentSpot != null)
-            {
-                currentSpot.GetComponent<Spot>().RemoveCharacterInSpot(this);
-                lastSpot = currentSpot;
-            }
-            
-            currentSpot = spot;
-            currentSpot.GetComponent<Spot>().AddCharacterInSpot(this);
-
-            Transform t_spot = currentSpot.transform;
-            target = new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z);
-            
-        }
+            Teleport(spot);
         else
-        {
             AStarMove();
-        }
-
-        
-
     }
 
     private void AStarMove()
     {
         //TODO
+    }
+
+    public void Teleport(GameObject spot)
+    {
+        if (currentSpot != null)
+        {
+            currentSpot.GetComponent<Spot>().RemoveCharacterInSpot(this);
+            lastSpot = currentSpot;
+        }
+
+        currentSpot = spot;
+        currentSpot.GetComponent<Spot>().AddCharacterInSpot(this);
+
+        Transform t_spot = currentSpot.transform;
+        target = new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z);
     }
 
     public void Hide()
@@ -324,6 +319,7 @@ public class Character : MonoBehaviour
     //
     public virtual void CommandEmpty()
     {
+        Debug.Log("zozo");
         stackAction.Push(new ActionEmpty(this));
     }
 
@@ -558,7 +554,43 @@ public class Character : MonoBehaviour
         return res;
     }
 
+    public void AI_Command()
+    {
+        if (isDead == true)
+        {
+            CommandEmpty();
+        }
+        else
+        {
+            bool fightFound = false;
+            List<Character> charactersInSpot = GetAllCharactersInSpot();
+            foreach (Character _characterInSpot in charactersInSpot)
+            {
+                if (WantToFight(_characterInSpot))
+                {
+                    fightFound = true;
+                }
+            }
 
+            if (fightFound)
+            {
+                CommandFight();
+            }
+            else
+            {
+                if (leaderCharacter == null)
+                {
+                    List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                    int rng = Random.Range(0, adjSpot.Count);
+                    CommandMove(adjSpot[rng]);
+                }
+                else
+                {
+                    //character.CommandMove(character.leader.GetCurrentSpot());
+                }
+            }
+        }
+    }
 
 
 
@@ -566,14 +598,19 @@ public class Character : MonoBehaviour
     //
     //      GET & SET
     //
-    public void SetUp(CharacterData characterData, GameObject spot)
+    public void SetUp(CharacterData cd, GameObject spot)
     {
-        this.characterData = characterData;
-        this.currentSpot = spot;
-        this.lastSpot = spot;
+        characterData = cd;
+        currentSpot = spot;
+        lastSpot = spot;
         Transform t_spot = spot.transform;
-        this.SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
-        this.UpdateSmoothTime();
+        SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
+        UpdateSmoothTime();
+        Teleport(spot);
+
+        if (!isPlayer())
+            AI_Command();
+            
     }
 
     public List<Weapon> GetWeaponsInventory()

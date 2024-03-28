@@ -287,7 +287,6 @@ public class GameManager : MonoBehaviour
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
             GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Wolf"), spot[0].gameObject);
-            newPnj.GetComponent<Character>().CommandEmpty(); // [CODE TMP]
         }
 
         if(Input.GetKeyDown(KeyCode.D))
@@ -552,7 +551,6 @@ public class GameManager : MonoBehaviour
         return newCharacter;
     }
 
-
     //CREATEUR D'OBJECT [CODE OBJECT PAS SUR]
     public MyObject CreateObject(string nameObject)
     {
@@ -685,43 +683,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (Character character in characterList)
         {
-            if(character.isPlayer() == false)
-            {
-                if(character.isDead == true)
-                {
-                    character.CommandEmpty();
-                }
-                else
-                {
-                    bool fightFound = false;
-                    List<Character> charactersInSpot = character.GetAllCharactersInSpot();
-                    foreach (Character _characterInSpot in charactersInSpot)
-                    {
-                        if(character.WantToFight(_characterInSpot))
-                        {
-                            fightFound = true;
-                        }
-                    } 
-
-                    if(fightFound)
-                    {
-                        character.CommandFight();
-                    }
-                    else
-                    {
-                        if (character.leaderCharacter == null)
-                        {
-                            List<GameObject> adjSpot = character.GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                            int rng = Random.Range(0, adjSpot.Count);
-                            character.CommandMove(adjSpot[rng]);
-                        }
-                        else
-                        {
-                            //character.CommandMove(character.leader.GetCurrentSpot());
-                        }
-                    }
-                }
-            }
+            if (!character.isPlayer())
+                character.AI_Command();
         }
     }
 
