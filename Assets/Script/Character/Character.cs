@@ -269,6 +269,12 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void Influence(Character influencer)
+    {
+        foreach (var item in influencer.charactersEncountered)
+            charactersEncountered[item.Key] = item.Value;
+    }
+
 
     public bool WantToFight(Character character)
     {
@@ -278,7 +284,7 @@ public class Character : MonoBehaviour
         if(charactersEncountered.ContainsKey(character))
         {
             if (charactersEncountered[character] == Relation.HOSTIL ||
-            charactersEncountered[character] == Relation.ENNMY)
+            charactersEncountered[character] == Relation.ENNEMY)
                 return true;
             else
                 return false;
@@ -319,7 +325,6 @@ public class Character : MonoBehaviour
     //
     public virtual void CommandEmpty()
     {
-        Debug.Log("zozo");
         stackAction.Push(new ActionEmpty(this));
     }
 
@@ -395,9 +400,9 @@ public class Character : MonoBehaviour
     }
 
     //      FIGHT
-    public void TakeDamage(int amount, DamageType damageTypeAttack, Element elementAttack = Element.NONE)
+    public void TakeDamage(Character characterAttacker, int amount, DamageType damageTypeAttack, Element elementAttack = Element.NONE)
     {
-        
+        charactersEncountered[characterAttacker] = Relation.ENNEMY;
 
         //TODO A REFAIRE POUR ARMOR
         if (armorsEquiped.Count != 0)
@@ -525,6 +530,9 @@ public class Character : MonoBehaviour
     {
         List<Character> charactersTarget = new List<Character>();
         List<Character> res = new List<Character>();
+
+        if(leaderCharacter != null)
+            Influence(leaderCharacter);
 
         foreach (Character characterTargetable in allCharacterInFight)
         {

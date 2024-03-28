@@ -43,8 +43,9 @@ public class CombatManager : MonoBehaviour
         
         ResetRound();
         LoadSkillAI();
+        if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
 
-        if(!playerOnFight && !CheckFightEnd())
+        if (!playerOnFight && !CheckFightEnd())
             StartCoroutine(FightSequence());
     }
 
@@ -78,14 +79,14 @@ public class CombatManager : MonoBehaviour
                                         SkillParryData skillParryData = (SkillParryData)characterTarget.currentLoadedSkill;
                                         if(skillParryData.parryType == ParryType.COUNTER)
                                         {
-                                            character.TakeDamage(skillParryData.damage, skillParryData.damageType, skillParryData.element);
+                                            character.TakeDamage(characterTarget, skillParryData.damage, skillParryData.damageType, skillParryData.element);
                                             if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[character].transform, characterTarget.currentLoadedSkill, true);
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    characterTarget.TakeDamage(skillAttackData.damage, skillAttackData.damageType, skillAttackData.element);
+                                    characterTarget.TakeDamage(character, skillAttackData.damage, skillAttackData.damageType, skillAttackData.element);
                                     if (playerOnFight) PlayerCombatManager.instance.CreateFxFightSkill(PlayerCombatManager.instance.dic_CharacterSpriteFight[characterTarget].transform, character.currentLoadedSkill);
                                 }
                                 if (playerOnFight) PlayerCombatManager.instance.dic_CharacterSpriteFight[character].AnimAtk();
@@ -126,13 +127,15 @@ public class CombatManager : MonoBehaviour
                         foreach (CharacterData characterToSummon in skillSummonData.characters)
                         {
                             GameObject characterSummoned = GameManager.instance.CreateCharacter(characterToSummon, character.GetCurrentSpot());
+                            Character _characterSummoned = characterSummoned.GetComponent<Character>();
+                            _characterSummoned.objectInventory.Add(new Weapon(skillSummonData.characterWeaponData));
+                            
+
                             character.AddFollower(character ,characterSummoned.GetComponent<Character>());
                             characters.Add(characterSummoned.GetComponent<Character>());
                             if (playerOnFight) PlayerCombatManager.instance.AddCharacterOnSpot(characterSummoned.GetComponent<Character>());
                         }
                         break;
-
-                        
                 }
 
                 character.currentLoadedObject.UseObject();
@@ -186,6 +189,14 @@ public class CombatManager : MonoBehaviour
     {
         playerOnFight = playerInFight; //[CODE GRAMAIRE] bofbof le nommage...
         characters = _characters;
+
+
+        //Influence des Leaders
+        //foreach (Character character in characters)
+        //    if(character.leaderCharacter == null)
+        //        foreach (Character _character in character.followersCharacters)
+        //            _character.Influence(character);
+
         LoadSkillAI();
 
         if (playerInFight)

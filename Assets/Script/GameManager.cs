@@ -290,12 +290,6 @@ public class GameManager : MonoBehaviour
             newPnj.GetComponent<Character>().objectInventory.Add(CreateWeapon("SWORD"));
         }
 
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            playerCharacter.TakeDamage(1,DamageType.SHARP);
-            InventoryUI.instance.UpdateInventory();
-        }
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             CameraController cc = cam.GetComponent<CameraController>();
@@ -820,7 +814,7 @@ public enum Relation {
     FRIEND,     // Aide au combat sur la même case
     NEUTRAL,    // 
     HOSTIL,     // Attaque si on est sur la même case
-    ENNMY       // Suive si on est pas trop loin
+    ENNEMY       // Suive si on est pas trop loin
 }
 
 public enum Race {

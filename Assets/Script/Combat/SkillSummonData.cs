@@ -6,5 +6,5 @@ using UnityEngine;
 public class SkillSummonData : SkillData
 {
     public List<CharacterData> characters;
-    public List<ObjectData> myObjects;
+    public WeaponData characterWeaponData;
 }
