@@ -254,7 +254,7 @@ public class Character : MonoBehaviour
         {
             //Debug.Log(this.gameObject.name + " start fight with count: " + charactersOnPath.Count + "  wantBattle = " + wantBattle);
             yield return new WaitForSeconds(0.3f);
-            GameManager.instance.StartFight(charactersOnPath);
+            GameManager.instance.StartFight(charactersOnPath,this);
         }
     }
 
@@ -269,10 +269,24 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void Influence(Character influencer)
+
+    //Relation
+    public void RelationInfluence(Character influencer)
     {
         foreach (var item in influencer.charactersEncountered)
             charactersEncountered[item.Key] = item.Value;
+    }
+
+    public void RelationChange(Character character, Relation relation)
+    {
+        charactersEncountered[character] = relation;
+        RelationFollower();
+    }
+
+    public void RelationFollower()
+    {
+        foreach (Character character in followersCharacters)
+            character.RelationInfluence(this);
     }
 
 
@@ -532,7 +546,7 @@ public class Character : MonoBehaviour
         List<Character> res = new List<Character>();
 
         if(leaderCharacter != null)
-            Influence(leaderCharacter);
+            RelationInfluence(leaderCharacter);
 
         foreach (Character characterTargetable in allCharacterInFight)
         {
@@ -588,9 +602,17 @@ public class Character : MonoBehaviour
             {
                 if (leaderCharacter == null)
                 {
-                    List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                    int rng = Random.Range(0, adjSpot.Count);
-                    CommandMove(adjSpot[rng]);
+                    if(characterData.name == "Human")
+                    {
+                        CommandEmpty();
+                    }
+                    else
+                    {
+                        List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                        int rng = Random.Range(0, adjSpot.Count);
+                        CommandMove(adjSpot[rng]);
+                    }
+                    
                 }
                 else
                 {

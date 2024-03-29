@@ -23,4 +23,4 @@ MonoBehaviour:
   req_FAITH: 0
   characters:
   - {fileID: 11400000, guid: 499ff98e2dd8dc443a17e53ced3560d2, type: 2}
-  myObjects: []
+  characterWeaponData: {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}

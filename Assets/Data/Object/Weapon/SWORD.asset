@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
   m_Name: SWORD
   m_EditorClassIdentifier: 
+  objectType: 3
   material: 4
-  init_STATE: 0
+  init_STATE: 3
   style: 0
   skills:
   - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}

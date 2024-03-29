@@ -324,6 +324,7 @@ public class GameManager : MonoBehaviour
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
             GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[0].gameObject);
+            newPnj.GetComponent<Character>().objectInventory.Add(CreateWeapon("SWORD"));
         }
 
         if(Input.GetKeyDown(KeyCode.R))
@@ -674,7 +675,7 @@ public class GameManager : MonoBehaviour
     //
     //      COMBAT
     //
-    public void StartFight(List<Character> characters) 
+    public void StartFight(List<Character> characters, Character initiator)
     {
         List<Character> charactersCanFight = new List<Character>();
         bool playerIsGoingToFight = false;
@@ -688,8 +689,16 @@ public class GameManager : MonoBehaviour
             {
                 character.CancelAction();
                 charactersCanFight.Add(character);
+
+                //RELATION UPDATE
+                if (initiator.charactersEncountered[character] == Relation.ENNEMY ||
+                    initiator.charactersEncountered[character] == Relation.HOSTIL)
+                    character.RelationChange(initiator, initiator.charactersEncountered[character]);
+
             }
         }
+
+        initiator.RelationFollower();
 
         if( !(playerIsGoingToFight && CombatManager.instance.playerOnFight) )
         {

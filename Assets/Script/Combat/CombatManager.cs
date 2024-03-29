@@ -190,13 +190,6 @@ public class CombatManager : MonoBehaviour
         playerOnFight = playerInFight; //[CODE GRAMAIRE] bofbof le nommage...
         characters = _characters;
 
-
-        //Influence des Leaders
-        //foreach (Character character in characters)
-        //    if(character.leaderCharacter == null)
-        //        foreach (Character _character in character.followersCharacters)
-        //            _character.Influence(character);
-
         LoadSkillAI();
 
         if (playerInFight)
