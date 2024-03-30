@@ -694,7 +694,6 @@ public class GameManager : MonoBehaviour
                 if (initiator.charactersEncountered[character] == Relation.ENNEMY ||
                     initiator.charactersEncountered[character] == Relation.HOSTIL)
                     character.RelationChange(initiator, initiator.charactersEncountered[character]);
-
             }
         }
 

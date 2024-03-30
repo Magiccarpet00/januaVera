@@ -15,7 +15,7 @@ public class SpriteFight : MonoBehaviour
     private void OnMouseExit()
     {
         animatorOver.SetBool("over", false);
-        lineRenderer.positionCount = 0;
+        lineRenderer.enabled = false;
     }
 
     private void OnMouseOver()
@@ -29,14 +29,16 @@ public class SpriteFight : MonoBehaviour
         if (character.selectedCharacters == null)
             return;
 
-        float offSetArrow = 0.5f;
-        float offSetArrow2 =0.5f;
+        lineRenderer.enabled = true;
+
+        //float offSetArrow = 0.5f;
+        //float offSetArrow2 =0.5f;
         foreach (Character target in character.selectedCharacters)
         {
             lineRenderer.positionCount = 2;
             lineRenderer.SetPosition(0, this.transform.position);
-            Vector3 oscilation = new Vector3(Mathf.Sin(Time.time * offSetArrow) * offSetArrow2, Mathf.Sin(Time.time * offSetArrow) * offSetArrow2, -1);
-            lineRenderer.SetPosition(1, PlayerCombatManager.instance.dic_CharacterSpriteFight[target].transform.position + oscilation);
+            //Vector3 oscilation = new Vector3(Mathf.Sin(Time.time * offSetArrow) * offSetArrow2, Mathf.Sin(Time.time * offSetArrow) * offSetArrow2, -1);
+            lineRenderer.SetPosition(1, PlayerCombatManager.instance.dic_CharacterSpriteFight[target].transform.position);
         }
     }
 
