@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class CombatSpot : MonoBehaviour
 {
     public Character character;
+    public Slider lifeSlider;
     public TextMeshProUGUI lifeTxt;
     public TextMeshProUGUI intentionTxt;
 
@@ -49,11 +51,14 @@ public class CombatSpot : MonoBehaviour
 
     public void UpdateLife()
     {
+        lifeSlider.maxValue = character.s_VITALITY;
+        lifeSlider.value = character.c_VITALITY;
         lifeTxt.text = character.c_VITALITY + "/" + character.s_VITALITY;
     }
 
     public void SetActiveSpotUI(bool b)
     {
+        lifeSlider.gameObject.SetActive(b);
         lifeTxt.gameObject.SetActive(b);
         intentionTxt.gameObject.SetActive(b);
     }

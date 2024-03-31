@@ -91,7 +91,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00050735474, y: -39.8}
+  m_AnchoredPosition: {x: 0.00050735474, y: -29.1}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &92098226
@@ -362,7 +362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000076293945, y: 4.5}
+  m_AnchoredPosition: {x: 0.00050735474, y: -39.699997}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &209759551
@@ -715,7 +715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00050735474, y: -8.2}
+  m_AnchoredPosition: {x: -0.0000076293945, y: 4.3950005}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &413243183
@@ -1026,7 +1026,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000076293945, y: 4.3}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -39.70002}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &606884085
@@ -1162,7 +1162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.69999695, y: -32.799988}
+  m_AnchoredPosition: {x: 0.69950867, y: -37.5}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &614098502
@@ -1692,7 +1692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.20000076, y: -33.4}
+  m_AnchoredPosition: {x: 0.20003128, y: -38.1}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &961789386
@@ -2861,7 +2861,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -7.1}
+  m_AnchoredPosition: {x: -0.0000076293945, y: 4.395}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2072754575
@@ -3037,7 +3037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000045776367, y: -28.397978}
+  m_AnchoredPosition: {x: 0.000015258789, y: 3.7019997}
   m_SizeDelta: {x: -14.210007, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2044829844509031864
@@ -3212,7 +3212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00050735474, y: -32.299995}
+  m_AnchoredPosition: {x: -0.0000076293945, y: 3.7019997}
   m_SizeDelta: {x: -14.210007, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7866967540768801245
@@ -3407,7 +3407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.70000076, y: -10.1}
+  m_AnchoredPosition: {x: 0, y: -39.9}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6014789509184607033
@@ -3719,7 +3719,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.69999695, y: -5.4000187}
+  m_AnchoredPosition: {x: -0.0000038146973, y: -39.9}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8510102398522564109
@@ -4405,7 +4405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.70000076, y: 11.799999}
+  m_AnchoredPosition: {x: 0, y: 17.099998}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1951815108293737444
