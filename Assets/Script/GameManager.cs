@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
       | -Skill debuff/buff        |
       | -Or et echange            |
       | -Recrutement              |
-      | -A*                       |
+      | -Dijkstra                 |
       |                           |
       -----------------------------*/
 

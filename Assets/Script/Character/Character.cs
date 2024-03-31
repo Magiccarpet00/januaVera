@@ -150,6 +150,29 @@ public class Character : MonoBehaviour
         //Pour l'instant on prend le 1er object
 
         this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
+
+        StartCoroutine(_Search());
+    }
+
+    public IEnumerator _Search()
+    {
+        string dialog = "TAKE FIRST ?\n\n";
+
+        foreach (MyObject obj in currentSpot.GetComponent<Spot>().objectsOnSpot)
+        {
+            Debug.Log("zozoz");
+            dialog += "-" + obj.objectData.name + "\n";
+        }
+
+        //BLOC pour les DialogBox
+        GameManager.instance.OpenDialogWindow(dialog);
+        yield return new WaitWhile(() => GameManager.instance.dialogAnswer == DialogAnswer.WAIT);
+        GameManager.instance.CloseDialogWindow();
+
+        if (GameManager.instance.dialogAnswer == DialogAnswer.YES)
+        {
+            this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
+        }
     }
 
     public void Hire()
@@ -175,10 +198,9 @@ public class Character : MonoBehaviour
         }
         dialog += " est recrutable pour " + goldTotal.ToString() + " gold pendant X tour";
 
+        //BLOC pour les DialogBox
         GameManager.instance.OpenDialogWindow(dialog);
-
         yield return new WaitWhile(() => GameManager.instance.dialogAnswer == DialogAnswer.WAIT);
-
         GameManager.instance.CloseDialogWindow();
 
         if (GameManager.instance.dialogAnswer == DialogAnswer.YES)
@@ -195,6 +217,8 @@ public class Character : MonoBehaviour
         }
         GameManager.instance.dialogAnswer = DialogAnswer.WAIT;
     }
+
+    
 
     public void AddFollower(Character leader, Character follower)
     {
