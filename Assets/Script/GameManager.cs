@@ -12,12 +12,11 @@ public class GameManager : MonoBehaviour
       |                           |
       | -Refactot Stats -> list   |
       | -Refactot armor           |
-      | -Skill Invocation         |
       | -Skill debuff/buff        |
       | -Or et echange            |
-      | -Recrutement              |
       | -Dijkstra                 |
       |                           |
+      | -Bug move meeting path    |
       -----------------------------*/
 
     public static GameManager instance;
@@ -45,7 +44,7 @@ public class GameManager : MonoBehaviour
     public Player playerCharacter;
 
     public WorldBuilder worldBuilder;
-    public LocaleSelector localeSelector; 
+    public LocaleSelector localeSelector;
 
     private int turn = 0;
     public bool inputBlock;
@@ -78,7 +77,7 @@ public class GameManager : MonoBehaviour
     //DIALOG
     public GameObject panelDialog;
     public TextMeshProUGUI dialogText;
-    public bool dialogWindowOpened;
+    public bool dialogWindowOpened; //[CODE OBJECT] Les dialogues box pourais etre plus homogene
     public AnswerButton dialogAnswer;
 
     // NAME ENUM

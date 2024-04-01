@@ -140,7 +140,7 @@ public class Character : MonoBehaviour
 
     public void Rest()
     {
-        //TODO rest
+        lastSpot = currentSpot;
     }
 
     public void Search()
@@ -150,13 +150,11 @@ public class Character : MonoBehaviour
 
     public IEnumerator _Search()
     {
+        lastSpot = currentSpot;
         string dialog = "TAKE FIRST ?\n\n";
 
         foreach (MyObject obj in currentSpot.GetComponent<Spot>().objectsOnSpot)
-        {
-            Debug.Log("zozoz");
             dialog += "-" + obj.objectData.name + "\n";
-        }
 
         //BLOC pour les DialogBox
         GameManager.instance.OpenDialogWindow(dialog);
@@ -164,9 +162,7 @@ public class Character : MonoBehaviour
         GameManager.instance.CloseDialogWindow();
 
         if (GameManager.instance.dialogAnswer == AnswerButton.YES)
-        {
             this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
-        }
 
         GameManager.instance.dialogAnswer = AnswerButton.WAIT;
     }
@@ -178,6 +174,7 @@ public class Character : MonoBehaviour
 
     public IEnumerator _Hire()
     {
+        lastSpot = currentSpot;
         if (isPlayer())
         {
             HireUI.instance.OpenHireUI();
@@ -208,6 +205,7 @@ public class Character : MonoBehaviour
 
     public void AddFollower(Character leader, Character follower)
     {
+        leader.RelationFollower();
         follower.leaderCharacter = leader;
         followersCharacters.Add(follower);
     }
@@ -564,25 +562,24 @@ public class Character : MonoBehaviour
                 charactersTarget.Add(characterTargetable);
         }
 
-        //Shuffle
-        int n = charactersTarget.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = Random.Range(0, n);
-            Character value = charactersTarget[k];
-            charactersTarget[k] = charactersTarget[n];
-            charactersTarget[n] = value;
-        }
-
         if (charactersTarget.Count == 0)
             return null;
 
+        List<int> rngTarget = new List<int>();
+
         for (int i = 0; i < maxTarget; i++)
         {
-            res.Add(charactersTarget[i]);
+            int rng = Random.Range(0, charactersTarget.Count);
+            while (rngTarget.Contains(rng))
+                rng = Random.Range(0, charactersTarget.Count);
+
+            rngTarget.Add(rng);
         }
 
+        for (int i = 0; i < maxTarget; i++)
+            res.Add(charactersTarget[rngTarget[i]]);
+
+            
         return res;
     }
 

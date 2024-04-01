@@ -133,6 +133,7 @@ public class CombatManager : MonoBehaviour
 
                             character.AddFollower(character ,characterSummoned.GetComponent<Character>());
                             characters.Add(characterSummoned.GetComponent<Character>());
+                            
                             if (playerOnFight) PlayerCombatManager.instance.AddCharacterOnSpot(characterSummoned.GetComponent<Character>());
                         }
                         break;
