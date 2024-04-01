@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     public GameObject panelDialog;
     public TextMeshProUGUI dialogText;
     public bool dialogWindowOpened;
-    public DialogAnswer dialogAnswer;
+    public AnswerButton dialogAnswer;
 
     // NAME ENUM
     public Dictionary<WeaponStyle, string> dic_weaponStyle = new Dictionary<WeaponStyle, string>();
@@ -590,18 +590,21 @@ public class GameManager : MonoBehaviour
         inputBlock = true;
         AddTurn(1);
         float debugTime = Time.fixedTime;
-        
+
         // Application des effects
-        List<int> effectToDelete = new List<int>();
-        for (int i = 0; i < effectList.Count; i++)
+        int j = 0;
+        foreach (Effect effect in effectList)
+            effect.Clock();
+        while (j < effectList.Count)
         {
-            if (effectList[i].Clock())
-                effectToDelete.Add(i);
+            if (effectList[j].toDelete)
+                effectList.RemoveAt(j);
+            else
+                j++;
         }
-        for (int i = 0; i < effectToDelete.Count; i++)
-        {
-            effectList.RemoveAt(effectToDelete[i]);
-        }
+
+        
+
 
         // Recuperation des actions de chaque character
         foreach (Character character in characterList) 
@@ -622,7 +625,7 @@ public class GameManager : MonoBehaviour
                 if (action.GetPriority() == i && !action.GetUser().isCanceled())
                 {
                     action.PerfomAction();
-                    yield return new WaitUntil(()=>dialogWindowOpened == false);
+                    yield return new WaitUntil(()=>dialogWindowOpened == false); //[CODE WARNING] dialogWindow sont toute les UI
                     yield return new WaitForSeconds(0.001f); //[CODE WARNING / REFACTOT] Peut etre une source de bug (jsp) si on clic trop vite
                 }
             }
@@ -841,10 +844,12 @@ public enum Stats{
     DAMAGE
 }
 
-public enum DialogAnswer{
+public enum AnswerButton{
     WAIT,
     YES,
-    NO
+    NO,
+    CLOSE,
+    HIRE
 }
 
 public class GlobalConst {

@@ -56,7 +56,6 @@ public class Character : MonoBehaviour
     //EFFECT
     public List<Buff> listBuff = new List<Buff>();
 
-
     public virtual void Start()
     {
         spriteRenderer.sprite = characterData.spriteMap;
@@ -146,11 +145,6 @@ public class Character : MonoBehaviour
 
     public void Search()
     {
-        //TODO Search
-        //Pour l'instant on prend le 1er object
-
-        this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
-
         StartCoroutine(_Search());
     }
 
@@ -166,13 +160,15 @@ public class Character : MonoBehaviour
 
         //BLOC pour les DialogBox
         GameManager.instance.OpenDialogWindow(dialog);
-        yield return new WaitWhile(() => GameManager.instance.dialogAnswer == DialogAnswer.WAIT);
+        yield return new WaitWhile(() => GameManager.instance.dialogAnswer == AnswerButton.WAIT);
         GameManager.instance.CloseDialogWindow();
 
-        if (GameManager.instance.dialogAnswer == DialogAnswer.YES)
+        if (GameManager.instance.dialogAnswer == AnswerButton.YES)
         {
             this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
         }
+
+        GameManager.instance.dialogAnswer = AnswerButton.WAIT;
     }
 
     public void Hire()
@@ -182,43 +178,33 @@ public class Character : MonoBehaviour
 
     public IEnumerator _Hire()
     {
-        List<Character> charactersInSpot = GetAllCharactersAliveInSpot();
-        List<Character> charactersToHire = new List<Character>();
-        foreach (Character characterToHire in charactersInSpot)
-            if (characterToHire != this &&
-                !followersCharacters.Contains(characterToHire))
-                charactersToHire.Add(characterToHire);
-
-        string dialog = "";
-        int goldTotal = 0;
-        foreach (Character characterToHire in charactersToHire)
+        if (isPlayer())
         {
-            dialog += characterToHire.characterData.name + " ";
-            goldTotal += characterToHire.characterData.workCost;
+            HireUI.instance.OpenHireUI();
+            yield return new WaitWhile(() => GameManager.instance.dialogAnswer == AnswerButton.WAIT);
+            GameManager.instance.dialogAnswer = AnswerButton.WAIT;
         }
-        dialog += " est recrutable pour " + goldTotal.ToString() + " gold pendant X tour";
-
-        //BLOC pour les DialogBox
-        GameManager.instance.OpenDialogWindow(dialog);
-        yield return new WaitWhile(() => GameManager.instance.dialogAnswer == DialogAnswer.WAIT);
-        GameManager.instance.CloseDialogWindow();
-
-        if (GameManager.instance.dialogAnswer == DialogAnswer.YES)
+        else
         {
-            if(gold >= goldTotal)
-            {
-                gold -= goldTotal;
-                foreach (Character characterToHire in charactersToHire)
-                {
-                    AddFollower(this, characterToHire);
-                    characterToHire.CancelAction();
-                }
-            }
+            //TODO IA HIRE
         }
-        GameManager.instance.dialogAnswer = DialogAnswer.WAIT;
     }
 
-    
+    public bool HireCharacter(Character characterToHire)
+    {
+        if (characterToHire.characterData.workCost <= gold)
+        {
+            AddFollower(this, characterToHire);
+            characterToHire.CancelAction();
+            GameManager.instance.effectList.Add(new EffectHireEnd(characterToHire, this, 10)); //[CODE WARNING] valeur en dur, dupliqué
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
 
     public void AddFollower(Character leader, Character follower)
     {

@@ -5,6 +5,6 @@ public class EffectOnPath : Effect
 
     public override void PerfomEffect()
     {
-        base.GetTarget().ResetOnPath();
+        target.ResetOnPath();
     }
 }

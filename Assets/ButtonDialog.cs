@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ButtonDialog : MonoBehaviour
 {
-    public DialogAnswer dialogAnswer;
+    public AnswerButton dialogAnswer;
 
     public void ClickDialog()
     {

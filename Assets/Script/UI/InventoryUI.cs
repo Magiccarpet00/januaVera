@@ -31,11 +31,9 @@ public class InventoryUI : MonoBehaviour
 
     private void CloseInventory()
     {
-       
         panelInventory.SetActive(false);
         isOpen = false;
         GameManager.instance.inputBlock = false;
-
     }
 
     public void ClickInventoryButton()
