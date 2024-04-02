@@ -15,6 +15,8 @@ public class InventoryUI : MonoBehaviour
     public GameObject prefabItemButton;
     public List<GameObject> itemButtons = new List<GameObject>();
 
+    public GameObject panelLvlUp;
+
 
     private void Awake()
     {
@@ -49,13 +51,24 @@ public class InventoryUI : MonoBehaviour
         foreach (GameObject item in itemButtons)
             Destroy(item);
 
+        panelLvlUp.SetActive(false);
+
         Character playerCharacter = GameManager.instance.playerCharacter;
-        string stats = "    STATS\n";
+        string stats = "    STATS\n\n";
+        stats += "LVL " + playerCharacter.lvl + "\n";
+        stats += "XP :" + playerCharacter.xp + "\n\n";
         stats += "VITALITY: " + playerCharacter.c_VITALITY + "/" + playerCharacter.s_VITALITY + "\n";
-        stats += "ENDURANCE: " + playerCharacter.c_ENDURANCE + "/" + playerCharacter.c_ENDURANCE + "\n";
+        stats += "ENDURANCE: " + playerCharacter.c_ENDURANCE + "/" + playerCharacter.s_ENDURANCE + "\n";
         stats += "STRENGHT: " + playerCharacter.c_STRENGHT + "\n";
         stats += "DEXTERITY: " + playerCharacter.c_DEXTERITY + "\n";
-        stats += "FAITH: " + playerCharacter.c_FAITH + "\n";
+        stats += "FAITH: " + playerCharacter.c_FAITH + "\n\n";
+        if (playerCharacter.lvlPoint > 0)
+        {
+            stats += "POINT: " + playerCharacter.lvlPoint;
+            panelLvlUp.SetActive(true);
+        }
+
+
         tmpStatsText.text = stats;
 
         foreach (MyObject item in playerCharacter.objectInventory)

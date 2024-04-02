@@ -22,28 +22,30 @@ public class CombatManager : MonoBehaviour
         if (playerOnFight) foreach (GameObject cs in PlayerCombatManager.instance.charactersSprites)
             cs.GetComponent<SpriteFight>().ResetSelected();
 
-        if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
-        if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
+        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
+        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
 
         while (speedInstant <= 6)
         {
-            if(playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
+            if (playerOnFight) PlayerCombatManager.instance.timerFight.SetTimer(speedInstant);
 
             CastSkills();
             CheckDying();
 
-            if(playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
-            if(playerOnFight) yield return new WaitForSeconds(PlayerCombatManager.instance.TIME_FIGHT);
+            if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
+            if (playerOnFight) yield return new WaitForSeconds(PlayerCombatManager.instance.TIME_FIGHT);
 
             speedInstant++;
         }
         speedInstant = 0;
 
-        if(playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(false);
-        
+        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(false);
+        if (playerOnFight) GameManager.instance.playerCharacter.currentLoadedSkill = null;
+
         ResetRound();
         LoadSkillAI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
+
 
         if (!playerOnFight && !CheckFightEnd())
             StartCoroutine(FightSequence());

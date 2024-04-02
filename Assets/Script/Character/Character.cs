@@ -51,7 +51,7 @@ public class Character : MonoBehaviour
     //      c_XXXXX -> curent stat
     public int s_VITALITY, s_ENDURANCE, s_STRENGHT, s_DEXTERITY, s_FAITH;
     public int c_VITALITY, c_ENDURANCE, c_STRENGHT, c_DEXTERITY, c_FAITH;
-    public int gold;
+    public int xp, lvl=1, lvlPoint, gold;
 
     //EFFECT
     public List<Buff> listBuff = new List<Buff>();
@@ -191,9 +191,11 @@ public class Character : MonoBehaviour
     {
         if (characterToHire.characterData.workCost <= gold)
         {
+            gold -= characterToHire.characterData.workCost;
             AddFollower(this, characterToHire);
             characterToHire.CancelAction();
             GameManager.instance.effectList.Add(new EffectHireEnd(characterToHire, this, 10)); //[CODE WARNING] valeur en dur, dupliqué
+            GameManager.instance.UpdateTmpInfo();
             return true;
         }
         else
@@ -419,6 +421,17 @@ public class Character : MonoBehaviour
 
         if (obj.isArmor())
             armorsEquiped.Push((Armor)obj);
+    }
+
+    public void AddXp(int amount)
+    {
+        xp += amount;
+        if (xp > lvl * 10)
+        {
+            lvl++;
+            lvlPoint += 5;
+        }
+        InventoryUI.instance.UpdateInventory();
     }
 
     //      FIGHT

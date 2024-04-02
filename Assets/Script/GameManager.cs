@@ -337,6 +337,13 @@ public class GameManager : MonoBehaviour
             playerCharacter.gold += 10;
             UpdateTmpInfo();
         }
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            playerCharacter.AddXp(1);
+            UpdateTmpInfo();
+            InventoryUI.instance.UpdateInventory();
+        }
     }
 
 

@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSpots:
-  - {fileID: 5230982133689030100}
+  - {fileID: 3115157257122913705}
   adjacentSecretSpots: []
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
@@ -263,7 +263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSpots:
-  - {fileID: 3304758219406729569}
   - {fileID: 3115157257122913705}
   adjacentSecretSpots: []
   charactersOnSpot: []
