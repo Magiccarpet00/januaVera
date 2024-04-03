@@ -143,6 +143,7 @@ public class GameManager : MonoBehaviour
         dic_button.Add(ButtonType.FIGHT,  allButton[4]);
         dic_button.Add(ButtonType.SEARCH, allButton[5]);
         dic_button.Add(ButtonType.HIRE, allButton[6]);
+        dic_button.Add(ButtonType.TRADE, allButton[7]);
     }
 
     private void SetUpDicEnum()
@@ -289,6 +290,16 @@ public class GameManager : MonoBehaviour
             newPnj.GetComponent<Character>().objectInventory.Add(CreateWeapon("SWORD"));
         }
 
+        if (Input.GetKeyDown(KeyCode.M)) //CREATE MERCHENT
+        {
+            GameObject currentTile = GetTile(1, 1);
+            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
+
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[0].gameObject);
+            newPnj.GetComponent<Character>().objectToSell.Add(CreateWeapon("SWORD"));
+            newPnj.GetComponent<Character>().isMerchant = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             CameraController cc = cam.GetComponent<CameraController>();
@@ -416,6 +427,7 @@ public class GameManager : MonoBehaviour
         actionButtonStandar.Add(ButtonType.SEARCH);
 
         actionButtonStandar.Add(ButtonType.HIRE);
+        actionButtonStandar.Add(ButtonType.TRADE);
 
         return actionButtonStandar;
     }
@@ -767,7 +779,8 @@ public enum ButtonType {
     UNHIDE,
     FIGHT,
     SEARCH,
-    HIRE
+    HIRE,
+    TRADE,
 }
 
 public enum Element {
@@ -874,6 +887,7 @@ public class GlobalConst {
     public static int EMPTY_PRIORITY  = 1;
     public static int FIGHT_PRIORITY  = 2;
     public static int HIDE_PRIORITY   = 3;
+    public static int TRADE_PRIORITY  = 4;
     public static int HIRE_PRIORITY   = 4;
     public static int MOVE_PRIORITY   = 5;
     public static int SEARCH_PRIORITY = 6;

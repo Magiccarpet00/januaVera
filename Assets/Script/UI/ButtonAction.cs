@@ -62,4 +62,13 @@ public class ButtonAction : MonoBehaviour
         }
     }
 
+    public void Trade()
+    {
+        if (GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandeTrade();
+            GameManager.instance._ExecuteActionQueue();
+        }
+    }
+
 }

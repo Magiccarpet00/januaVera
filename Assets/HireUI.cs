@@ -18,6 +18,7 @@ public class HireUI : MonoBehaviour
     public GameObject prefabHireLine;
     public List<GameObject> itemHireLine = new List<GameObject>();
 
+
     public void OpenHireUI()
     {
         panelHire.SetActive(true);

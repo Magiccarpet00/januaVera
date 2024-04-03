@@ -8,4 +8,7 @@ public class ObjectData : ScriptableObject
     public ObjectType objectType;
     public Element material;
     public int init_STATE;
+
+    public int price;
+    public string describe;
 }

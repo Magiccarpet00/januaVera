@@ -39,6 +39,10 @@ public class Character : MonoBehaviour
     public List<MyObject> objectInventory = new List<MyObject>();
     public Stack<Armor> armorsEquiped = new Stack<Armor>();
 
+    //SHOP
+    public bool isMerchant;
+    public List<MyObject> objectToSell = new List<MyObject>();
+
     //RELATION
     public Dictionary<Character, Relation> charactersEncountered = new Dictionary<Character, Relation>();
 
@@ -218,6 +222,41 @@ public class Character : MonoBehaviour
             AddFollower(leader, follower);
     }
 
+    public void Trade()
+    {
+        StartCoroutine(_Trade());
+    }
+
+    public IEnumerator _Trade()
+    {
+        lastSpot = currentSpot;
+        if (isPlayer())
+        {
+            ShopUI.instance.OpenShopUI();
+            yield return new WaitWhile(() => GameManager.instance.dialogAnswer == AnswerButton.WAIT);
+            GameManager.instance.dialogAnswer = AnswerButton.WAIT;
+        }
+        else
+        {
+            //TODO IA HIRE
+        }
+    }
+
+    public bool BuyItem(MyObject myObject)
+    {
+        if (myObject.objectData.price <= gold)
+        {
+            gold -= myObject.objectData.price;
+            objectInventory.Add(myObject);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     public void UpdateSmoothTime()
     {
         if (isHide)
@@ -389,6 +428,11 @@ public class Character : MonoBehaviour
     public virtual void CommandHire()
     {
         stackAction.Push(new ActionHire(this));
+    }
+
+    public virtual void CommandeTrade()
+    {
+        stackAction.Push(new ActionTrade(this));
     }
 
     public void CancelAction()
