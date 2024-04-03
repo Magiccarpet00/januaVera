@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ItemShop : MonoBehaviour
+public class ItemShopSell : MonoBehaviour
 {
     public TextMeshProUGUI nameUI;
     public TextMeshProUGUI priceUI;
-    public TextMeshProUGUI descritionUI;
 
     public MyObject myObject;
     public Character characterMerchant;
 
-    public void ClickBuy()
+    public void ClickSell()
     {
-        if (GameManager.instance.playerCharacter.BuyItem(myObject))
+        if (characterMerchant.BuyItem(myObject))
         {
-            characterMerchant.gold += myObject.objectData.price;
-            characterMerchant.objectToSell.Remove(myObject);
+            GameManager.instance.playerCharacter.objectInventory.Remove(myObject);
             ShopUI.instance.UpdateShopUI();
         }
     }

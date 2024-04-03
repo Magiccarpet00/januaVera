@@ -15,6 +15,8 @@ MonoBehaviour:
   objectType: 3
   material: 4
   init_STATE: 3
+  price: 3
+  describe: Simple sword of steal
   style: 0
   skills:
   - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}

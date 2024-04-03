@@ -132,6 +132,36 @@ public class Spot : MonoBehaviour
         return charactersOnSpot;
     }
 
+    public List<Character> GetAllCharactersAliveInSpot()
+    {
+        List<Character> charactersInSpot = GetAllCharactersInSpot();
+        List<Character> charactersAlive = new List<Character>();
+        foreach (Character character in charactersInSpot)
+            if (!character.isDead)
+                charactersAlive.Add(character);
+        return charactersAlive;
+    }
+
+    public List<Character> GetAllCharactersForFightInSpot()
+    {
+        List<Character> charactersInSpot = GetAllCharactersInSpot();
+        List<Character> charactersAlive = new List<Character>();
+        foreach (Character character in charactersInSpot)
+            if (!character.isDead && !character.characterData.inLocation)
+                charactersAlive.Add(character);
+        return charactersAlive;
+    }
+
+    public List<Character> GetAllCharactersOnMapInSpot()
+    {
+        List<Character> charactersInSpot = GetAllCharactersInSpot();
+        List<Character> charactersAlive = new List<Character>();
+        foreach (Character character in charactersInSpot)
+            if (!character.characterData.inLocation)
+                charactersAlive.Add(character);
+        return charactersAlive;
+    }
+
     public void AddCharacterInSpot(Character c)
     {
         charactersOnSpot.Add(c);

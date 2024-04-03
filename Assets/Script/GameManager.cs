@@ -295,9 +295,9 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(1, 1);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[0].gameObject);
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanMarchant"), spot[0].gameObject);
             newPnj.GetComponent<Character>().objectToSell.Add(CreateWeapon("SWORD"));
-            newPnj.GetComponent<Character>().isMerchant = true;
+            newPnj.GetComponent<Character>().gold = 30;
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -698,7 +698,6 @@ public class GameManager : MonoBehaviour
     //
     public void StartFight(List<Character> characters, Character initiator)
     {
-        List<Character> charactersCanFight = new List<Character>();
         bool playerIsGoingToFight = false;
 
         foreach (Character character in characters)
@@ -706,23 +705,20 @@ public class GameManager : MonoBehaviour
             if (character.isPlayer())
                 playerIsGoingToFight = true;
 
-            if (character.isDead == false)
-            {
-                character.CancelAction();
-                charactersCanFight.Add(character);
+            character.CancelAction();
 
-                //RELATION UPDATE
-                if (initiator.charactersEncountered[character] == Relation.ENNEMY ||
-                    initiator.charactersEncountered[character] == Relation.HOSTIL)
-                    character.RelationChange(initiator, initiator.charactersEncountered[character]);
-            }
+            //RELATION UPDATE
+            if (initiator.charactersEncountered[character] == Relation.ENNEMY ||
+                initiator.charactersEncountered[character] == Relation.HOSTIL)
+                character.RelationChange(initiator, initiator.charactersEncountered[character]);
+
         }
 
         initiator.RelationFollower();
 
         if( !(playerIsGoingToFight && CombatManager.instance.playerOnFight) )
         {
-            CombatManager.instance.SetUpFight(charactersCanFight, playerIsGoingToFight);
+            CombatManager.instance.SetUpFight(characters, playerIsGoingToFight);
         }
         
         if(playerIsGoingToFight)

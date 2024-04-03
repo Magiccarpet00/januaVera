@@ -40,7 +40,7 @@ public class Character : MonoBehaviour
     public Stack<Armor> armorsEquiped = new Stack<Armor>();
 
     //SHOP
-    public bool isMerchant;
+    
     public List<MyObject> objectToSell = new List<MyObject>();
 
     //RELATION
@@ -666,7 +666,7 @@ public class Character : MonoBehaviour
             {
                 if (leaderCharacter == null)
                 {
-                    if(characterData.name == "Human")
+                    if(characterData.name == "Human" || characterData.name == "HumanMarchant")
                     {
                         CommandEmpty();
                     }
@@ -791,15 +791,7 @@ public class Character : MonoBehaviour
         return currentSpot.GetComponent<Spot>().GetAllCharactersInSpot();
     }
 
-    public List<Character> GetAllCharactersAliveInSpot()
-    {
-        List<Character> charactersInSpot = GetAllCharactersInSpot();
-        List<Character> charactersAlive = new List<Character>();
-        foreach (Character character in charactersInSpot)
-            if (!character.isDead)
-                charactersAlive.Add(character);
-        return charactersAlive;
-    }
+
 
     public bool isCanceled()
     {

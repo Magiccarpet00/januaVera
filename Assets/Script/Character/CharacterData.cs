@@ -15,4 +15,6 @@ public class CharacterData : ScriptableObject
     public Sprite spriteFight;
 
     public int workCost;
+    public bool isMerchant;
+    public bool inLocation;
 }

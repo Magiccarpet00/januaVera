@@ -42,7 +42,7 @@ public class HireUI : MonoBehaviour
         foreach (GameObject item in itemHireLine)
             Destroy(item);
 
-        List<Character> charactersInSpot = GameManager.instance.playerCharacter.GetAllCharactersAliveInSpot();
+        List<Character> charactersInSpot = GameManager.instance.playerCharacter.GetCurrentSpot().GetComponent<Spot>().GetAllCharactersAliveInSpot();
         List<Character> charactersToHire = new List<Character>();
         foreach (Character characterToHire in charactersInSpot)
             if (characterToHire != GameManager.instance.playerCharacter &&
