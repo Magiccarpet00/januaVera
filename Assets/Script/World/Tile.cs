@@ -83,7 +83,7 @@ public class Tile : MonoBehaviour
                     GameObject g = Instantiate(WorldBuilder.instance.locationPrefab, allSpots[i].transform.position, Quaternion.identity);
                     Location location = g.GetComponent<Location>();
                     location.locationData = locationData.locations[choice];
-                    location.SetUpLocation();
+                    location.SetUpLocation(allSpots[i]);
                     g.transform.parent = allSpots[i].transform;
                 }
             }

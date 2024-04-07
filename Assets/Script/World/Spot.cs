@@ -26,19 +26,15 @@ public class Spot : MonoBehaviour
     public void UpdatePosCharacter()
     {
         int count = 1;
+        int total = GetAllCharactersOnMapInSpot().Count;
         System.Numerics.Complex i = System.Numerics.Complex.ImaginaryOne;
+                    
 
-        List<Character> charactersAliveOnSpot = new List<Character>();
-        foreach (Character character in charactersOnSpot)
+        foreach (Character characterAlive in GetAllCharactersOnMapInSpot())
         {
-            if (!character.isDead)
-                charactersAliveOnSpot.Add(character);
-        }
-        foreach (Character characterAlive in charactersAliveOnSpot)
-        {
-            float timeRotate = (Time.time * charactersAliveOnSpot.Count) * 0.03f;
-            characterAlive.offSetOnSpot.x = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / charactersAliveOnSpot.Count).Real;
-            characterAlive.offSetOnSpot.y = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / charactersAliveOnSpot.Count).Imaginary;
+            float timeRotate = (Time.time * total) * 0.03f;
+            characterAlive.offSetOnSpot.x = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / total).Real;
+            characterAlive.offSetOnSpot.y = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / total).Imaginary;
             count++;
         }
     }
@@ -121,6 +117,20 @@ public class Spot : MonoBehaviour
             Location selfLocation = GetComponentInChildren<Location>();
             res.AddRange(selfLocation.GetAction());
         }
+
+        foreach (Character character in GetAllCharactersInSpot())
+        {
+            if (character.characterData.isMerchant && !character.isDead && !res.Contains(ButtonType.TRADE))
+                res.Add(ButtonType.TRADE);
+
+            if (character.characterData.workCost != 0 && !character.isDead && !res.Contains(ButtonType.HIRE))
+                res.Add(ButtonType.HIRE);
+        }
+
+        if (objectsOnSpot.Count != 0 && !res.Contains(ButtonType.SEARCH))
+            res.Add(ButtonType.SEARCH);
+
+        
 
         //TODO Les btn des enemies, pnj sur la map
 

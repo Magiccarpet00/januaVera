@@ -9,12 +9,17 @@ public class CharacterData : ScriptableObject
     public Element shape;
     public Divinity typeDivinity; //uniquement si le character est divin
 
-    public int init_VITALITY, init_ENDURANCE, init_STRENGHT, init_DEXTERITY, init_FAITH;
+    public int init_VITALITY, init_ENDURANCE, init_STRENGHT, init_DEXTERITY, init_FAITH, init_GOLD;
 
     public Sprite spriteMap;
     public Sprite spriteFight;
 
-    public int workCost;
+    public int workCost; //Si egale a 0 alors character non recrutable
     public bool isMerchant;
     public bool inLocation;
+
+    //OBJECT
+    public List<ObjectData> objectInventory = new List<ObjectData>();
+    public List<ArmorData> armorsEquiped = new List<ArmorData>();
+    public List<ObjectData> objectToSell = new List<ObjectData>();
 }

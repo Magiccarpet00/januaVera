@@ -46,7 +46,8 @@ public class HireUI : MonoBehaviour
         List<Character> charactersToHire = new List<Character>();
         foreach (Character characterToHire in charactersInSpot)
             if (characterToHire != GameManager.instance.playerCharacter &&
-                !GameManager.instance.playerCharacter.followersCharacters.Contains(characterToHire))
+                !GameManager.instance.playerCharacter.followersCharacters.Contains(characterToHire) &&
+                characterToHire.characterData.workCost != 0)
                 charactersToHire.Add(characterToHire);
 
 

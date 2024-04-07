@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
   m_Name: CRACKED
   m_EditorClassIdentifier: 
+  objectType: 3
   material: 11
-  init_STATE: 0
+  init_STATE: 3
+  price: 99
+  describe: 
   style: 0
   skills:
   - {fileID: 11400000, guid: 0ce628f352ab43c498f43e0d54941719, type: 2}

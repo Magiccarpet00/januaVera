@@ -8,8 +8,11 @@ public class Location : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
 
-    public void SetUpLocation()
+    public void SetUpLocation(GameObject spot)
     {
+        if (locationData.charactersInLocation.Count != 0) //[CODE TMP] Ne gere pas plusieurs characters
+            GameManager.instance.CreateCharacter(locationData.charactersInLocation[0], spot);
+
         spriteRenderer.sprite = locationData.sprite;
     }
 

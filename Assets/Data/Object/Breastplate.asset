@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395cff1027971254192b670fffb3ba0f, type: 3}
   m_Name: Breastplate
   m_EditorClassIdentifier: 
+  objectType: 1
   material: 4
-  maxState: 5
+  init_STATE: 0
+  price: 5
+  describe: Armor of steal

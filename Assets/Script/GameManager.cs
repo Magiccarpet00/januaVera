@@ -296,8 +296,6 @@ public class GameManager : MonoBehaviour
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
             GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanMarchant"), spot[0].gameObject);
-            newPnj.GetComponent<Character>().objectToSell.Add(CreateWeapon("SWORD"));
-            newPnj.GetComponent<Character>().gold = 30;
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -334,7 +332,6 @@ public class GameManager : MonoBehaviour
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
             GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[0].gameObject);
-            newPnj.GetComponent<Character>().objectInventory.Add(CreateWeapon("SWORD"));
         }
 
         if(Input.GetKeyDown(KeyCode.R))
@@ -424,10 +421,10 @@ public class GameManager : MonoBehaviour
             actionButtonStandar.Add(ButtonType.UNHIDE);
 
         actionButtonStandar.Add(ButtonType.FIGHT);
-        actionButtonStandar.Add(ButtonType.SEARCH);
 
-        actionButtonStandar.Add(ButtonType.HIRE);
-        actionButtonStandar.Add(ButtonType.TRADE);
+        //actionButtonStandar.Add(ButtonType.SEARCH);
+        //actionButtonStandar.Add(ButtonType.HIRE);
+        //actionButtonStandar.Add(ButtonType.TRADE);
 
         return actionButtonStandar;
     }
@@ -548,19 +545,82 @@ public class GameManager : MonoBehaviour
 
         Character _character = newCharacter.GetComponent<Character>();
         _character.SetUp(characterData, spot);
+
+        foreach (var item in characterData.objectInventory)
+            AddObjectToCharacter(item, InventoryType.INVENTORY, _character);
+
+        foreach (var item in characterData.armorsEquiped)
+            AddObjectToCharacter(item, InventoryType.ARMOR, _character);
+
+        foreach (var item in characterData.objectToSell)
+            AddObjectToCharacter(item, InventoryType.SELL, _character);
+
         characterList.Add(_character);
 
         return newCharacter;
     }
 
     //CREATEUR D'OBJECT [CODE OBJECT PAS SUR]
+ 
+    public void AddObjectToCharacter(ObjectData item, InventoryType inventoryType, Character character) //[CODE CARNAGE] A ne pas reproduire si possible à supprimé plus tard
+    {
+        switch (inventoryType)
+        {
+            case InventoryType.INVENTORY:
+                switch (item.objectType)
+                {
+                    case ObjectType.ACTIVE:
+                        character.objectInventory.Add(new ActiveObject((ActiveObjectData)item));
+                        break;
+                    case ObjectType.ARMOR:
+                        character.objectInventory.Add(new Armor((ArmorData)item));
+                        break;
+                    case ObjectType.OBJECT:
+                        character.objectInventory.Add(new MyObject(item));
+                        break;
+                    case ObjectType.WEAPON:
+                        character.objectInventory.Add(new Weapon((WeaponData)item));
+                        break;
+                }
+                break;
+
+            case InventoryType.ARMOR:
+                switch (item.objectType)
+                {
+                    case ObjectType.ARMOR:
+                        character.armorsEquiped.Push(new Armor((ArmorData)item));
+                        break;
+                }
+                break;
+
+            case InventoryType.SELL:
+                switch (item.objectType)
+                {
+                    case ObjectType.ACTIVE:
+                        character.objectToSell.Add(new ActiveObject((ActiveObjectData)item));
+                        break;
+                    case ObjectType.ARMOR:
+                        character.objectToSell.Add(new Armor((ArmorData)item));
+                        break;
+                    case ObjectType.OBJECT:
+                        character.objectToSell.Add(new MyObject(item));
+                        break;
+                    case ObjectType.WEAPON:
+                        character.objectToSell.Add(new Weapon((WeaponData)item));
+                        break;
+                }
+                break;
+        }
+
+        
+    }
+
     public MyObject CreateObject(string nameObject)
     {
         ObjectData objData = (ObjectData)ScriptableManager.instance.FindData(nameObject);
         MyObject obj = new MyObject(objData);
         return obj;
     }
-
     public Weapon CreateWeapon(string nameWeapon)
     {
         WeaponData wp = (WeaponData)ScriptableManager.instance.FindData(nameWeapon);
@@ -865,6 +925,12 @@ public enum AnswerButton{
     NO,
     CLOSE,
     HIRE
+}
+
+public enum InventoryType{
+    INVENTORY,
+    ARMOR,
+    SELL
 }
 
 public class GlobalConst {

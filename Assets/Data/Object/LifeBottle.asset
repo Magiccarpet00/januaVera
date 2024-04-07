@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a526bb247fc7d48a6457170afb810f, type: 3}
   m_Name: LifeBottle
   m_EditorClassIdentifier: 
+  objectType: 0
   material: 5
   init_STATE: 1
+  price: 2
+  describe: heals wounds
   skillData: {fileID: 11400000, guid: c48b107ffa26fdc4b9632f8e78f8d4b2, type: 2}

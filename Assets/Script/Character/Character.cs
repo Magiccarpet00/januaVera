@@ -40,7 +40,6 @@ public class Character : MonoBehaviour
     public Stack<Armor> armorsEquiped = new Stack<Armor>();
 
     //SHOP
-    
     public List<MyObject> objectToSell = new List<MyObject>();
 
     //RELATION
@@ -62,7 +61,8 @@ public class Character : MonoBehaviour
 
     public virtual void Start()
     {
-        spriteRenderer.sprite = characterData.spriteMap;
+        if(!characterData.inLocation)
+            spriteRenderer.sprite = characterData.spriteMap;
         s_VITALITY =  characterData.init_VITALITY;
         s_ENDURANCE = characterData.init_ENDURANCE;
         s_STRENGHT =  characterData.init_STRENGHT;
@@ -74,6 +74,8 @@ public class Character : MonoBehaviour
         c_STRENGHT =  s_STRENGHT;
         c_DEXTERITY = s_DEXTERITY;
         c_FAITH =     s_FAITH;
+
+        gold +=       characterData.init_GOLD;
     }
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
@@ -206,7 +208,6 @@ public class Character : MonoBehaviour
         {
             return false;
         }
-        
     }
 
     public void AddFollower(Character leader, Character follower)
@@ -276,8 +277,8 @@ public class Character : MonoBehaviour
         bool wantBattle = false;
 
         
-        allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersInSpot());
-        allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersInSpot());
+        allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersForFightInSpot());
+        allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersForFightInSpot());
 
         foreach (Character characterOnPath in allCharactersInTwoSpot)
         {
@@ -309,7 +310,7 @@ public class Character : MonoBehaviour
 
     public void MettingOnSpot()
     {
-        foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersInSpot())
+        foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersForFightInSpot())
         {
             if (charactersEncountered.ContainsKey(characterOnSpot) == false)
             {
@@ -790,8 +791,6 @@ public class Character : MonoBehaviour
     {
         return currentSpot.GetComponent<Spot>().GetAllCharactersInSpot();
     }
-
-
 
     public bool isCanceled()
     {

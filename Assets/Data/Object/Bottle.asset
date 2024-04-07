@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25faa636a5a2624bb2831a0d5bbafa5, type: 3}
   m_Name: Bottle
   m_EditorClassIdentifier: 
+  objectType: 2
   material: 5
-  maxState: 1
+  init_STATE: 0
+  price: 0
+  describe: 
