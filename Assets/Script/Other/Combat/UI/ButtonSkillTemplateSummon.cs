@@ -4,18 +4,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 
-public class ButtonSkillTemplateSummon : MonoBehaviour
+public class ButtonSkillTemplateSummon : ButtonSkillTemplate
 {
-    public LocalizeStringEvent nameValue;
-    public TextMeshProUGUI speedValue;
     public TextMeshProUGUI characterToSummon;
 
-    public void SetUpUI(SkillData skillData)
+    public override void SetUpUI(SkillData skillData)
     {
-        SkillSummonData skillSummonData = (SkillSummonData)skillData;
-        nameValue.SetEntry(skillSummonData.name);
-        speedValue.text = skillSummonData.speed.ToString();
+        base.SetUpUI(skillData);
 
+        SkillSummonData skillSummonData = (SkillSummonData)skillData;
         string strSummonCharacter = "";
         foreach (CharacterData character in skillSummonData.characters)
             strSummonCharacter += character.name + "\n";

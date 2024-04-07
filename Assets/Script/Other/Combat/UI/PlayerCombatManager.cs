@@ -31,7 +31,6 @@ public class PlayerCombatManager : MonoBehaviour
     public GameObject panelGlobal;
     public GameObject panelWeapon;
     public GameObject panelSkill;
-    
 
     public Stack<GameObject> panelStack = new Stack<GameObject>();
 
@@ -43,7 +42,6 @@ public class PlayerCombatManager : MonoBehaviour
 
     [Header("FX")]
     public GameObject prefabFxSkills;
-
 
     private int countSpot;
     public void FillSpot()
@@ -139,6 +137,9 @@ public class PlayerCombatManager : MonoBehaviour
         GameManager.instance.playerCharacter.currentLoadedObject = myObjectParent;
         GameManager.instance.playerCharacter.currentLoadedSkill = skillData;
 
+        ResetAllSelected();
+
+
         if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
             TargetMode(skillData.nbTarget);
         else
@@ -147,6 +148,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonBack()
     {
+        ResetAllSelected();
+        GameManager.instance.playerCharacter.currentLoadedSkill = null;
         PanelBack();
     }
 
@@ -215,6 +218,14 @@ public class PlayerCombatManager : MonoBehaviour
         nbTarget--;
         if (nbTarget == 0)
             inTargetMode = false;
+    }
+
+    public void ResetAllSelected()
+    {
+        foreach (GameObject cs in charactersSprites)
+            cs.GetComponent<SpriteFight>().ResetSelected();
+
+        GameManager.instance.playerCharacter.selectedCharacters = new List<Character>();
     }
 
     //STACK PANEL

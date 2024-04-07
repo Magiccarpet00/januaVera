@@ -4,19 +4,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 
-public class ButtonSkillTemplateParry : MonoBehaviour
+public class ButtonSkillTemplateParry : ButtonSkillTemplate
 {
-    public LocalizeStringEvent nameValue;
     public LocalizeStringEvent blockTypeValue;
     public TextMeshProUGUI damageValue;
-    public TextMeshProUGUI speedValue;
-    public void SetUpUI(SkillData skillData)
+    public override void SetUpUI(SkillData skillData)
     {
-        SkillParryData skillParryData = (SkillParryData)skillData;
+        base.SetUpUI(skillData);
 
-        nameValue.SetEntry(skillParryData.name);
+        SkillParryData skillParryData = (SkillParryData)skillData;
         blockTypeValue.SetEntry(skillParryData.damageType.ToString());
         damageValue.text = skillParryData.damage.ToString();
-        speedValue.text = skillParryData.speed.ToString();
     }
 }

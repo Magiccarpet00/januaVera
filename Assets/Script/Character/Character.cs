@@ -525,11 +525,11 @@ public class Character : MonoBehaviour
 
     public bool RequirementSkill(SkillData skillData)
     {
-        if (c_VITALITY >= skillData.req_DEXTERITY &&
-           c_ENDURANCE >= skillData.req_ENDURANCE &&
-           c_DEXTERITY >= skillData.req_DEXTERITY &&
-           c_FAITH >= skillData.req_FAITH &&
-           c_STRENGHT >= skillData.req_STRENGHT)
+        if (c_VITALITY  >= skillData.req_VITALITY  &&
+            c_ENDURANCE >= skillData.req_ENDURANCE &&
+            c_DEXTERITY >= skillData.req_DEXTERITY &&
+            c_FAITH     >= skillData.req_FAITH     &&
+            c_STRENGHT  >= skillData.req_STRENGHT)
             return true;
         else
             return false;

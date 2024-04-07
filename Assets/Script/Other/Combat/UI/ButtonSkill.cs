@@ -15,6 +15,7 @@ public class ButtonSkill : MonoBehaviour
     public Button button;
     public Image image;
 
+
     public void Click()
     {
         PlayerCombatManager.instance.ClickButtonSkill(skillData, myObjectParent);
