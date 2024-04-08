@@ -588,7 +588,8 @@ public class GameManager : MonoBehaviour
                 switch (item.objectType)
                 {
                     case ObjectType.ARMOR:
-                        character.armorsEquiped.Push(new Armor((ArmorData)item));
+                        Armor armor = new Armor((ArmorData)item);
+                        character.armorsEquiped.Add(armor);
                         break;
                 }
                 break;

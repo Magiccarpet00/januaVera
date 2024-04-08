@@ -44,6 +44,7 @@ public class CombatManager : MonoBehaviour
 
         ResetRound();
         LoadSkillAI();
+        if (playerOnFight) PlayerCombatManager.instance.UpdateEndRoundAllUI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
 
 

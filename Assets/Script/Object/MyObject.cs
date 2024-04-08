@@ -5,12 +5,13 @@ using UnityEngine;
 public class MyObject
 {
     public ObjectData objectData;
-    public int c_STATE;
+    public int c_STATE, s_STATE;
 
     public MyObject(ObjectData objData)
     {
         objectData = objData;
         c_STATE = objectData.init_STATE;
+        s_STATE = objectData.init_STATE;
     }
 
     public virtual void UseObject() {;}

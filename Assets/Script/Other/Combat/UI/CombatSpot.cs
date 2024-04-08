@@ -8,18 +8,35 @@ using UnityEngine.UI;
 public class CombatSpot : MonoBehaviour
 {
     public Character character;
-    public Slider lifeSlider;
-    public TextMeshProUGUI lifeTxt;
+
+    public GameObject intention;
     public TextMeshProUGUI intentionTxt;
+
+    public GameObject lifebars;
+
+    public GameObject prefabLifeLine;
+    public List<GameObject> allLinesInSpot = new List<GameObject>();
+    
+    //public Slider lifeSlider;
+    //public TextMeshProUGUI lifeTxt;
 
     public void UpdateUI()
     {
-        if(lifeTxt.gameObject.activeSelf)
+        if (character != null)
         {
             UpdateLife();
             if (character != GameManager.instance.playerCharacter)
                 UpdateIntention();
         }
+    }
+
+    public void UpdateEndRoundUI()
+    {
+        if (character != null && character.isDead)
+            character = null;
+
+        foreach (GameObject item in allLinesInSpot)
+            Destroy(item);
     }
 
     public void UpdateIntention()
@@ -51,15 +68,37 @@ public class CombatSpot : MonoBehaviour
 
     public void UpdateLife()
     {
-        lifeSlider.maxValue = character.s_VITALITY;
-        lifeSlider.value = character.c_VITALITY;
-        lifeTxt.text = character.c_VITALITY + "/" + character.s_VITALITY;
+        foreach (GameObject item in allLinesInSpot)
+            Destroy(item);
+
+        GameObject trueLifeLine = Instantiate(prefabLifeLine, transform.position, Quaternion.identity);
+        trueLifeLine.transform.SetParent(lifebars.transform);
+        allLinesInSpot.Add(trueLifeLine);
+        LifeLine lifeLine = trueLifeLine.GetComponent<LifeLine>();
+        lifeLine.lifeSlider.maxValue = character.s_VITALITY;
+        lifeLine.lifeSlider.value = character.c_VITALITY;
+        lifeLine.lifeTxt.text = character.c_VITALITY + "/" + character.s_VITALITY;
+        lifeLine.shapeTxt.text = character.characterData.shape.ToString();
+        lifeLine.lifeColor[0].color = new Color(lifeLine.trueLifeRef.r, lifeLine.trueLifeRef.g, lifeLine.trueLifeRef.b, 0.75f);
+        lifeLine.lifeColor[1].color = new Color(lifeLine.trueLifeRef.r, lifeLine.trueLifeRef.g, lifeLine.trueLifeRef.b, 0.40f);
+
+        foreach (Armor armor in character.armorsEquiped)
+        {
+            GameObject armorLifeLine = Instantiate(prefabLifeLine, transform.position, Quaternion.identity);
+            armorLifeLine.transform.SetParent(lifebars.transform);
+            allLinesInSpot.Add(armorLifeLine);
+            LifeLine armorLine = armorLifeLine.GetComponent<LifeLine>();
+            armorLine.lifeSlider.maxValue = armor.s_STATE;
+            armorLine.lifeSlider.value = armor.c_STATE;
+            armorLine.lifeTxt.text = armor.s_STATE + "/" + armor.c_STATE;
+            armorLine.shapeTxt.text = armor.objectData.material.ToString();
+            armorLine.lifeColor[0].color = new Color(armorLine.armorLifeRef.r, armorLine.armorLifeRef.g, armorLine.armorLifeRef.b, 0.75f);
+            armorLine.lifeColor[1].color = new Color(armorLine.armorLifeRef.r, armorLine.armorLifeRef.g, armorLine.armorLifeRef.b, 0.40f);
+        }
     }
 
     public void SetActiveSpotUI(bool b)
     {
-        lifeSlider.gameObject.SetActive(b);
-        lifeTxt.gameObject.SetActive(b);
         intentionTxt.gameObject.SetActive(b);
     }
 

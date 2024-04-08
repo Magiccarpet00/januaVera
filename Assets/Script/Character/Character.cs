@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
 
     //INVENTORY
     public List<MyObject> objectInventory = new List<MyObject>();
-    public Stack<Armor> armorsEquiped = new Stack<Armor>();
+    public List<Armor> armorsEquiped = new List<Armor>();
 
     //SHOP
     public List<MyObject> objectToSell = new List<MyObject>();
@@ -49,7 +49,7 @@ public class Character : MonoBehaviour
     public Character leaderCharacter;
     public List<Character> followersCharacters;
 
-    //STATS  [CODE REFACTOT] Faut refaire ça en list
+    //STATS  [CODE REFACTOT] Faut refaire ça en list peut etre jsp
     //      s_XXXXX -> stats fixe
     //      c_XXXXX -> curent stat
     public int s_VITALITY, s_ENDURANCE, s_STRENGHT, s_DEXTERITY, s_FAITH;
@@ -248,7 +248,10 @@ public class Character : MonoBehaviour
         if (myObject.objectData.price <= gold)
         {
             gold -= myObject.objectData.price;
-            objectInventory.Add(myObject);
+            if (myObject.isArmor())
+                armorsEquiped.Add((Armor)myObject);
+            else
+                objectInventory.Add(myObject);
             return true;
         }
         else
@@ -458,14 +461,14 @@ public class Character : MonoBehaviour
         return true;
     }
 
-    public void AddObject(MyObject obj)
+    public void AddObject(MyObject obj) //[CODE DELETE] Methode a supprimé ne marche pas car il n'y a pas de cast sur obj
     {
         if (obj == null) return;
 
         objectInventory.Add(obj);
 
         if (obj.isArmor())
-            armorsEquiped.Push((Armor)obj);
+            armorsEquiped.Add((Armor)obj);
     }
 
     public void AddXp(int amount)
@@ -487,15 +490,15 @@ public class Character : MonoBehaviour
         //TODO A REFAIRE POUR ARMOR
         if (armorsEquiped.Count != 0)
         {
-            int amountModified;
-            if (damageTypeAttack == DamageType.ELEM)
-                amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
-            else
-                amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
+            //int amountModified;
+            //if (damageTypeAttack == DamageType.ELEM)
+            //    amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
+            //else
+            //    amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
 
-            armorsEquiped.Peek().currentState -= amountModified;
-            if (armorsEquiped.Peek().currentState <= 0)
-                armorsEquiped.Pop();
+            //armorsEquiped.Peek().currentState -= amountModified;
+            //if (armorsEquiped.Peek().currentState <= 0)
+            //    armorsEquiped.Pop();
         }
         else
         {

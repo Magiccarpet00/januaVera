@@ -207,6 +207,15 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
+    public void UpdateEndRoundAllUI()
+    {
+        foreach (GameObject cs in combatSpots)
+        {
+            cs.GetComponent<CombatSpot>().UpdateEndRoundUI();
+        }
+    }
+
+
     public void TargetMode(int _nbTarget)
     {
         nbTarget = _nbTarget;
