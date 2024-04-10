@@ -201,6 +201,7 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void UpdateAllUI()
     {
+        GameManager.instance.UpdateTmpInfo();
         foreach (GameObject cs in combatSpots)
         {
             cs.GetComponent<CombatSpot>().UpdateUI();

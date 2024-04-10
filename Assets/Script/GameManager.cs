@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     private GameObject currentInfoGridLayoutGroupe;
     [SerializeField] private GameObject prefabInfoCharacter;
     public TextMeshProUGUI tmpInfo;
+    public TextMeshProUGUI tmpInfo2;
 
 
     //DIALOG
@@ -467,6 +468,7 @@ public class GameManager : MonoBehaviour
         info += "GOLD " + playerCharacter.gold;
 
         tmpInfo.text = info;
+        tmpInfo2.text = info;
     }
 
     public void CreateInfoGridLayoutGroupe(Vector3 pos, List<Character> characters)

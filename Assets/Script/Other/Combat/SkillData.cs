@@ -10,4 +10,5 @@ public class SkillData : ScriptableObject
     public int speed;
     public int nbTarget;
     public int req_VITALITY, req_ENDURANCE, req_STRENGHT, req_DEXTERITY, req_FAITH;
+    public int cost_VITALITY, cost_ENDURANCE;
 }
