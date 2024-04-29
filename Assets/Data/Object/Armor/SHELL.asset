@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
-  m_Name: CRACKED
+  m_Script: {fileID: 11500000, guid: 395cff1027971254192b670fffb3ba0f, type: 3}
+  m_Name: SHELL
   m_EditorClassIdentifier: 
-  objectType: 3
-  material: 11
-  init_STATE: 3
-  price: 99
-  describe: 
-  style: 0
-  skills:
-  - {fileID: 11400000, guid: 0ce628f352ab43c498f43e0d54941719, type: 2}
+  objectType: 1
+  material: 6
+  init_STATE: 10
+  price: 0
+  describe: shell or scropion

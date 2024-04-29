@@ -19,31 +19,55 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 84222414848
-    m_Localized: Kill
+    m_Localized: KILL
     m_Metadata:
       m_Items: []
-  - m_Id: 217018273792
-    m_Localized: Pic
+  - m_Id: 60506439252971520
+    m_Localized: BLOCK
     m_Metadata:
       m_Items: []
-  - m_Id: 231371182080
-    m_Localized: Slash
+  - m_Id: 60505767782649856
+    m_Localized: HEAL_NORMAL
     m_Metadata:
       m_Items: []
-  - m_Id: 10718984836747264
-    m_Localized: Riposte
+  - m_Id: 60505730465927168
+    m_Localized: HEAL_HEAVY
     m_Metadata:
       m_Items: []
-  - m_Id: 39505393156362240
-    m_Localized: Bandage
+  - m_Id: 60505216751767552
+    m_Localized: FIRE_NORMAL
     m_Metadata:
       m_Items: []
-  - m_Id: 46019408380563456
-    m_Localized: Fire
+  - m_Id: 60505077756727296
+    m_Localized: FIRE_MULTI
     m_Metadata:
       m_Items: []
-  - m_Id: 46025590566555648
-    m_Localized: Invoc Human
+  - m_Id: 60504456785825792
+    m_Localized: SLASH_MULTI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60501719050358784
+    m_Localized: SMASH_NORMAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60502683039830016
+    m_Localized: SLASH_HEAVY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60503145705115648
+    m_Localized: SLASH_SPEED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60503648711217152
+    m_Localized: SMASH_SPEED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60503864617209856
+    m_Localized: SMASH_HEAVY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60506538972549120
+    m_Localized: COUNTER_STRIKE
     m_Metadata:
       m_Items: []
   references:

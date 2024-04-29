@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 395cff1027971254192b670fffb3ba0f, type: 3}
-  m_Name: Breastplate
+  m_Name: BREASTPLATE
   m_EditorClassIdentifier: 
   objectType: 1
   material: 4

@@ -19,5 +19,5 @@ MonoBehaviour:
   describe: Simple sword of steal
   style: 0
   skills:
-  - {fileID: 11400000, guid: 455e08ddf23aa464b89ccc9fdd586bbb, type: 2}
-  - {fileID: 11400000, guid: e5b69d78cb00d2947a718963cbfc4e0f, type: 2}
+  - {fileID: 11400000, guid: a446ca7b85dca254a84c25b0c7838bad, type: 2}
+  - {fileID: 11400000, guid: 14a418ea726d0424eabe6e592e7b5cdc, type: 2}

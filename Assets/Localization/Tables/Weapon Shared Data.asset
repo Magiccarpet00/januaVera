@@ -27,20 +27,28 @@ MonoBehaviour:
     m_Key: MATERIAL
     m_Metadata:
       m_Items: []
-  - m_Id: 9889041354752
-    m_Key: LONG_SWORD
+  - m_Id: 4687323741294592
+    m_Key: CRACKED
     m_Metadata:
       m_Items: []
-  - m_Id: 10995788156928
+  - m_Id: 65890652110196736
+    m_Key: HAMMER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65890681713594368
+    m_Key: HANDS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65890697777778688
+    m_Key: RAPIER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65890736323432448
     m_Key: SWORD
     m_Metadata:
       m_Items: []
-  - m_Id: 16799471767552
-    m_Key: STAFF
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4687323741294592
-    m_Key: CRACKED
+  - m_Id: 65890778694291456
+    m_Key: SWORD_HEAVY
     m_Metadata:
       m_Items: []
   m_Metadata:

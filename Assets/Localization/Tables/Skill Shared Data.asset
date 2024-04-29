@@ -15,32 +15,59 @@ MonoBehaviour:
   m_TableCollectionName: Skill
   m_TableCollectionNameGuidString: 7439f4c014791254c8a2b2d3b646f919
   m_Entries:
+  - m_Id: 60503648711217152
+    m_Key: SMASH_SPEED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60501719050358784
+    m_Key: SMASH_NORMAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60503864617209856
+    m_Key: SMASH_HEAVY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60503145705115648
+    m_Key: SLASH_SPEED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60504456785825792
+    m_Key: SLASH_MULTI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60502683039830016
+    m_Key: 'SLASH_HEAVY
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60506538972549120
+    m_Key: COUNTER_STRIKE
+    m_Metadata:
+      m_Items: []
   - m_Id: 84222414848
     m_Key: KILL
     m_Metadata:
       m_Items: []
-  - m_Id: 217018273792
-    m_Key: PIC
+  - m_Id: 60505767782649856
+    m_Key: HEAL_NORMAL
     m_Metadata:
       m_Items: []
-  - m_Id: 231371182080
-    m_Key: SLASH
+  - m_Id: 60505730465927168
+    m_Key: HEAL_HEAVY
     m_Metadata:
       m_Items: []
-  - m_Id: 10718984836747264
-    m_Key: BLOCK_COUNTER
+  - m_Id: 60505216751767552
+    m_Key: FIRE_NORMAL
     m_Metadata:
       m_Items: []
-  - m_Id: 39505393156362240
-    m_Key: BANDAGE
+  - m_Id: 60505077756727296
+    m_Key: FIRE_MULTI
     m_Metadata:
       m_Items: []
-  - m_Id: 46019408380563456
-    m_Key: FIRE
-    m_Metadata:
-      m_Items: []
-  - m_Id: 46025590566555648
-    m_Key: SUMMON_HUMAN
+  - m_Id: 60506439252971520
+    m_Key: BLOCK
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
-  m_Name: CRACKED
+  m_Name: SWORD_HEAVY
   m_EditorClassIdentifier: 
   objectType: 3
-  material: 11
-  init_STATE: 3
-  price: 99
-  describe: 
+  material: 4
+  init_STATE: 4
+  price: 6
+  describe: Great sword of steal
   style: 0
   skills:
-  - {fileID: 11400000, guid: 0ce628f352ab43c498f43e0d54941719, type: 2}
+  - {fileID: 11400000, guid: 14a418ea726d0424eabe6e592e7b5cdc, type: 2}
+  - {fileID: 11400000, guid: acaf5188543557844a411c78f815e6f3, type: 2}

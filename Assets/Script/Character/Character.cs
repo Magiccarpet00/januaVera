@@ -487,18 +487,17 @@ public class Character : MonoBehaviour
     {
         charactersEncountered[characterAttacker] = Relation.ENNEMY;
 
-        //TODO A REFAIRE POUR ARMOR
         if (armorsEquiped.Count != 0)
         {
-            //int amountModified;
-            //if (damageTypeAttack == DamageType.ELEM)
-            //    amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
-            //else
-            //    amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), armorsEquiped.Peek().objectData.material)] * amount);
+            int amountModified;
+            if (damageTypeAttack == DamageType.ELEM)
+                amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), armorsEquiped[armorsEquiped.Count - 1].objectData.material)] * amount);
+            else
+                amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), armorsEquiped[armorsEquiped.Count - 1].objectData.material)] * amount);
 
-            //armorsEquiped.Peek().currentState -= amountModified;
-            //if (armorsEquiped.Peek().currentState <= 0)
-            //    armorsEquiped.Pop();
+            armorsEquiped[armorsEquiped.Count - 1].c_STATE -= amountModified;
+            if (armorsEquiped[armorsEquiped.Count - 1].c_STATE <= 0)
+                armorsEquiped.RemoveAt(armorsEquiped.Count - 1);
         }
         else
         {

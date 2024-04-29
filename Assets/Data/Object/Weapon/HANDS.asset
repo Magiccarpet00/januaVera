@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
-  m_Name: CRACKED
+  m_Name: HANDS
   m_EditorClassIdentifier: 
   objectType: 3
-  material: 11
-  init_STATE: 3
-  price: 99
-  describe: 
+  material: 10
+  init_STATE: 1
+  price: 0
+  describe: Hands
   style: 0
   skills:
-  - {fileID: 11400000, guid: 0ce628f352ab43c498f43e0d54941719, type: 2}
+  - {fileID: 11400000, guid: 0a1778b894aabcd4c9cd2cc33e4500b3, type: 2}

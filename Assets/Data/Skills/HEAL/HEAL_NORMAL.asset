@@ -9,15 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
-  m_Name: Elf
+  m_Script: {fileID: 11500000, guid: b72a689977c40b841b5e830eaf663906, type: 3}
+  m_Name: HEAL_NORMAL
   m_EditorClassIdentifier: 
-  race: 1
-  shape: 10
-  typeDivinity: 0
-  maxLife: 0
-  stamina: 3
-  nbWound: 0
-  dodgeTime: 4
-  spriteMap: {fileID: 0}
-  spriteFight: {fileID: 0}
+  skillType: 3
+  element: 13
+  speed: 0
+  nbTarget: 0
+  req_VITALITY: 0
+  req_ENDURANCE: 0
+  req_STRENGHT: 0
+  req_DEXTERITY: 0
+  req_FAITH: 0
+  cost_VITALITY: 0
+  cost_ENDURANCE: 0
+  amount: 5

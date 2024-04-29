@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
-  m_Name: Human
+  m_Name: HumanGarde
   m_EditorClassIdentifier: 
   race: 0
   shape: 10
   typeDivinity: 0
-  init_VITALITY: 50
-  init_ENDURANCE: 1
-  init_STRENGHT: 1
-  init_DEXTERITY: 1
-  init_FAITH: 1
+  init_VITALITY: 10
+  init_ENDURANCE: 3
+  init_STRENGHT: 5
+  init_DEXTERITY: 5
+  init_FAITH: 5
   init_GOLD: 10
   spriteMap: {fileID: 1770330981, guid: 85963f2d98168604d9dd812b61b5fae0, type: 3}
   spriteFight: {fileID: 1770330981, guid: 9e40606754b66b048ab928cbdd034d5d, type: 3}

@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
       | -Refactot Stats -> list   |
       | -Refactot armor           |
       | -Skill debuff/buff        |
-      | -Or et echange            |
       | -Dijkstra                 |
       |                           |
       | -Bug move meeting path    |

@@ -30,20 +30,28 @@ MonoBehaviour:
     m_Localized: "Mat\xE9rielle"
     m_Metadata:
       m_Items: []
-  - m_Id: 9889041354752
-    m_Localized: "Ep\xE9e longue"
+  - m_Id: 65890697777778688
+    m_Localized: RAPIER
     m_Metadata:
       m_Items: []
-  - m_Id: 10995788156928
-    m_Localized: "Ep\xE9e"
+  - m_Id: 65890681713594368
+    m_Localized: HANDS
     m_Metadata:
       m_Items: []
-  - m_Id: 16799471767552
-    m_Localized: Baton
+  - m_Id: 65890652110196736
+    m_Localized: HAMMER
     m_Metadata:
       m_Items: []
   - m_Id: 4687323741294592
     m_Localized: "L'ep\xE9e des chads"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65890736323432448
+    m_Localized: SWORD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65890778694291456
+    m_Localized: SWORD_HEAVY
     m_Metadata:
       m_Items: []
   references:
