@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
         
         GameObject currentTile = GetTile(startLocation.x, startLocation.y);
         Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-        player = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Player"), spot[0].gameObject);
+        player = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanPlayer"), spot[0].gameObject, true);
         playerCharacter = player.GetComponent<Player>();
         UpdateUILandscape();
         UpdateUIButtonGrid(playerCharacter.GetCurrentButtonAction());
@@ -531,10 +531,10 @@ public class GameManager : MonoBehaviour
         Random.InitState(seed);
     }
 
-    public GameObject CreateCharacter(CharacterData characterData, GameObject spot)
+    public GameObject CreateCharacter(CharacterData characterData, GameObject spot, bool isPlayer=false)
     {
         GameObject newCharacter;
-        if (characterData.name == "Player")
+        if (isPlayer)
         {
             newCharacter = Instantiate(prefabPlayer, spot.transform.position, Quaternion.identity);
         }

@@ -10,16 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
-  m_Name: Wolf
+  m_Name: ElfBad
   m_EditorClassIdentifier: 
-  race: 2
+  race: 1
   shape: 7
   typeDivinity: 0
-  init_VITALITY: 50
-  init_ENDURANCE: 2
-  init_STRENGHT: 2
-  init_DEXTERITY: 2
-  init_FAITH: 0
+  init_VITALITY: 10
+  init_ENDURANCE: 1
+  init_STRENGHT: 1
+  init_DEXTERITY: 1
+  init_FAITH: 1
+  init_GOLD: 0
   spriteMap: {fileID: 1309982208, guid: 525f900e67f503a4ebeeabfa899a747c, type: 3}
   spriteFight: {fileID: 1309982208, guid: be5e458eff34e7a49a5fceb256bdd204, type: 3}
   workCost: 0
+  isMerchant: 0
+  inLocation: 0
+  objectInventory:
+  - {fileID: 11400000, guid: 7e3943cc564feba48a206f7872d94971, type: 2}
+  armorsEquiped: []
+  objectToSell: []

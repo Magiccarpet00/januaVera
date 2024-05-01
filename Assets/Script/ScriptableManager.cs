@@ -22,7 +22,7 @@ public class ScriptableManager : MonoBehaviour
                 return data;
         }
 
-        Debug.LogError("DATA NOT FIND in ScriptableManager");
+        Debug.LogError("DATA NOT FIND in ScriptableManager = " + name);
         return null;
     }
 }

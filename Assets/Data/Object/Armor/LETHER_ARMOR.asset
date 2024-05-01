@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LETHER_ARMOR
   m_EditorClassIdentifier: 
   objectType: 1
-  material: 4
-  init_STATE: 5
+  material: 9
+  init_STATE: 4
   price: 5
-  describe: Armor of steal
+  describe: Armor of leather
