@@ -286,8 +286,7 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(2, 2);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Wolf"), spot[0].gameObject);
-            newPnj.GetComponent<Character>().objectInventory.Add(CreateWeapon("SWORD"));
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("BeastBad"), spot[0].gameObject);
         }
 
         if (Input.GetKeyDown(KeyCode.M)) //CREATE MERCHENT
@@ -295,7 +294,15 @@ public class GameManager : MonoBehaviour
             GameObject currentTile = GetTile(1, 1);
             Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanMarchant"), spot[0].gameObject);
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanMarchantMap"), spot[0].gameObject);
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GameObject currentTile = GetTile(1, 2);
+            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
+
+            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanGarde"), spot[0].gameObject);
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -326,13 +333,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            GameObject currentTile = GetTile(1, 2);
-            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
 
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("Human"), spot[0].gameObject);
-        }
 
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -933,6 +934,13 @@ public enum InventoryType{
     INVENTORY,
     ARMOR,
     SELL
+}
+
+public enum MoodAI
+{
+    STATIC,
+    MOVING,
+    CHASE
 }
 
 public class GlobalConst {

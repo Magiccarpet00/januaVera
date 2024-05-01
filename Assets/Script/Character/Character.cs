@@ -509,7 +509,10 @@ public class Character : MonoBehaviour
 
             c_VITALITY -= amountModified;
             if (c_VITALITY <= 0)
+            {
+                characterAttacker.AddXp(characterData.drop_XP);
                 Die();
+            }
         }
     }
 
@@ -669,17 +672,19 @@ public class Character : MonoBehaviour
             {
                 if (leaderCharacter == null)
                 {
-                    if(characterData.name == "Human" || characterData.name == "HumanMarchant")
+                    switch (characterData.currentMood)
                     {
-                        CommandEmpty();
+                        case MoodAI.STATIC:
+                            CommandEmpty();
+                            break;
+                        case MoodAI.MOVING:
+                            List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                            int rng = Random.Range(0, adjSpot.Count);
+                            CommandMove(adjSpot[rng]);
+                            break;
+                        case MoodAI.CHASE:
+                            break;
                     }
-                    else
-                    {
-                        List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                        int rng = Random.Range(0, adjSpot.Count);
-                        CommandMove(adjSpot[rng]);
-                    }
-                    
                 }
                 else
                 {

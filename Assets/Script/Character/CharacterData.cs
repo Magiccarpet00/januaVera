@@ -10,6 +10,7 @@ public class CharacterData : ScriptableObject
     public Divinity typeDivinity; //uniquement si le character est divin
 
     public int init_VITALITY, init_ENDURANCE, init_STRENGHT, init_DEXTERITY, init_FAITH, init_GOLD;
+    public int drop_XP;
 
     public Sprite spriteMap;
     public Sprite spriteFight;
@@ -17,6 +18,8 @@ public class CharacterData : ScriptableObject
     public int workCost; //Si egale a 0 alors character non recrutable
     public bool isMerchant;
     public bool inLocation;
+
+    public MoodAI currentMood;
 
     //OBJECT
     public List<ObjectData> objectInventory = new List<ObjectData>();

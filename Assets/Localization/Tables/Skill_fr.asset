@@ -70,6 +70,10 @@ MonoBehaviour:
     m_Localized: COUNTER_STRIKE
     m_Metadata:
       m_Items: []
+  - m_Id: 61260656955625472
+    m_Localized: SLASH_NORMAL
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -16,16 +16,18 @@ MonoBehaviour:
   shape: 10
   typeDivinity: 0
   init_VITALITY: 10
-  init_ENDURANCE: 5
-  init_STRENGHT: 16
+  init_ENDURANCE: 3
+  init_STRENGHT: 5
   init_DEXTERITY: 5
   init_FAITH: 5
-  init_GOLD: 0
+  init_GOLD: 5
+  drop_XP: 0
   spriteMap: {fileID: 21300000, guid: 7da1d6f7c24cf85468b02c45979b7573, type: 3}
   spriteFight: {fileID: 21300000, guid: 9ae9a15325134f14d9593bbb89746bb4, type: 3}
   workCost: 0
   isMerchant: 0
   inLocation: 0
+  currentMood: 0
   objectInventory:
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
   armorsEquiped: []

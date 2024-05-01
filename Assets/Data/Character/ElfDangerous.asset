@@ -21,11 +21,13 @@ MonoBehaviour:
   init_DEXTERITY: 1
   init_FAITH: 1
   init_GOLD: 5
+  drop_XP: 2
   spriteMap: {fileID: 1770330981, guid: 85963f2d98168604d9dd812b61b5fae0, type: 3}
   spriteFight: {fileID: 1770330981, guid: 9e40606754b66b048ab928cbdd034d5d, type: 3}
   workCost: 0
   isMerchant: 0
   inLocation: 0
+  currentMood: 0
   objectInventory:
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
   armorsEquiped:

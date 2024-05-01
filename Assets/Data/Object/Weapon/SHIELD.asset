@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f645c07056ff63b439667dd36c3ca216, type: 3}
   m_Name: SHIELD
   m_EditorClassIdentifier: 
-  objectType: 0
+  objectType: 3
   material: 5
   init_STATE: 5
   price: 3

@@ -31,19 +31,16 @@ MonoBehaviour:
     m_Key: SLASH_SPEED
     m_Metadata:
       m_Items: []
+  - m_Id: 61260656955625472
+    m_Key: SLASH_NORMAL
+    m_Metadata:
+      m_Items: []
   - m_Id: 60504456785825792
     m_Key: SLASH_MULTI
     m_Metadata:
       m_Items: []
   - m_Id: 60502683039830016
-    m_Key: 'SLASH_HEAVY
-
-
-'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 60506538972549120
-    m_Key: COUNTER_STRIKE
+    m_Key: SLASH_HEAVY
     m_Metadata:
       m_Items: []
   - m_Id: 84222414848
@@ -64,6 +61,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 60505077756727296
     m_Key: FIRE_MULTI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 60506538972549120
+    m_Key: COUNTER_STRIKE
     m_Metadata:
       m_Items: []
   - m_Id: 60506439252971520
