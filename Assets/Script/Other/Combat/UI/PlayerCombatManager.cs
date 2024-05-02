@@ -196,6 +196,10 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonEscape()
     {
+        foreach (GameObject combatSpot in combatSpots)
+        {
+            combatSpot.GetComponent<CombatSpot>().UpdateEndRoundUI();
+        }
         GameManager.instance.QuitCombatScene(CombatManager.instance.characters);
     }
 

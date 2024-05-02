@@ -101,10 +101,10 @@ public class GameManager : MonoBehaviour
         SetUpTypeChart();
 
         //--------SEED RNG---------
-        //Random.InitState((int)Random.Range(0, 9999999));
+        Random.InitState((int)Random.Range(0, 9999999));
 
-        string seed = "Miriamo54";
-        Random.InitState(seed.GetHashCode());
+        //string seed = "Miriamo54";
+        //Random.InitState(seed.GetHashCode());
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
