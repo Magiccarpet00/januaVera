@@ -22,8 +22,8 @@ MonoBehaviour:
   init_FAITH: 1
   init_GOLD: 5
   drop_XP: 1
-  spriteMap: {fileID: 1770330981, guid: 85963f2d98168604d9dd812b61b5fae0, type: 3}
-  spriteFight: {fileID: 1770330981, guid: 9e40606754b66b048ab928cbdd034d5d, type: 3}
+  spriteMap: {fileID: -922087607, guid: 024764276ffe0614a92ccc61f0ebce48, type: 3}
+  spriteFight: {fileID: -922087607, guid: 7f03b02b20ee3f44896b30fc51a86e78, type: 3}
   workCost: 0
   isMerchant: 1
   inLocation: 0

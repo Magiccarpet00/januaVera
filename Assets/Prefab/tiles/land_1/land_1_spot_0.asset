@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d676fc5465a7fa4f8c2fd875d4f5ac3, type: 3}
   m_Name: land_1_spot_0
   m_EditorClassIdentifier: 
-  dropChance: 460000001e000000
+  dropChance: 64000000
   locations:
-  - {fileID: 11400000, guid: 3109abff3d5c86347938d7b5142d72af, type: 2}
-  - {fileID: 11400000, guid: 874d275d1a1c33e46a173c6938f6bea7, type: 2}
+  - {fileID: 0}

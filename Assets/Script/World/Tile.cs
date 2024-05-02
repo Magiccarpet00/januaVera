@@ -30,10 +30,27 @@ public class Tile : MonoBehaviour
         gameObject.name = GameManager.instance.CreateId();
         SetUpComponant();
         SetUpLocation();
+
+        TMP_SetUpCharacter();
+    }
+
+    public void TMP_SetUpCharacter()
+    {
+        for (int i = 0; i < tileData.spawnCharacter.Length; i++)
+        {
+            float rng = Random.Range(0, 1);
+            if (rng <= tileData.spawnCharacterProba[i])
+                SpawnCharacter(tileData.spawnCharacter[i]);
+        }
     }
 
 
+    public void SpawnCharacter(CharacterData characterData)
+    {
 
+        int rng = Random.Range(0, allSpots.Count);
+        GameManager.instance.CreateCharacter(characterData, allSpots[rng]);
+    }
 
 
     //

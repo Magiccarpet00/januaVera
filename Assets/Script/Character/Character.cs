@@ -85,7 +85,7 @@ public class Character : MonoBehaviour
             transform.position = Vector3.SmoothDamp(transform.position, target+(Vector3)offSetOnSpot, ref velocity, smoothTime);
         }
 
-        if(isDead)
+        if(isDead || characterData.inLocation)
             Visible(false);
     }
 
@@ -510,7 +510,11 @@ public class Character : MonoBehaviour
             c_VITALITY -= amountModified;
             if (c_VITALITY <= 0)
             {
-                characterAttacker.AddXp(characterData.drop_XP);
+                if (characterAttacker.isPlayer())
+                {
+                    characterAttacker.AddXp(characterData.drop_XP);
+                    characterAttacker.gold += gold;
+                }
                 Die();
             }
         }
@@ -646,6 +650,8 @@ public class Character : MonoBehaviour
         return res;
     }
 
+
+
     public void AI_Command()
     {
         if (isDead == true)
@@ -677,10 +683,21 @@ public class Character : MonoBehaviour
                         case MoodAI.STATIC:
                             CommandEmpty();
                             break;
-                        case MoodAI.MOVING:
+                        case MoodAI.MOVING_AREA:
+                            TileType startTileType = currentSpot.GetComponent<Spot>().parrentTile.GetTileData().tileType;
                             List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                            int rng = Random.Range(0, adjSpot.Count);
+                            Debug.Log("lol");
+                            bool find = false;
+                            int rng = 0;
+                            while (find == false)
+                            {
+                                rng = Random.Range(0, adjSpot.Count);
+                                if (adjSpot[rng].GetComponent<Spot>().parrentTile.GetTileData().tileType == startTileType)
+                                    find = true;
+                            }
                             CommandMove(adjSpot[rng]);
+
+                            
                             break;
                         case MoodAI.CHASE:
                             break;

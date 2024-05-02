@@ -48,6 +48,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 4108778421444586567}
   adjacentSecretSpots: []
+  parrentTile: {fileID: 7502201391846217205}
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &2022078572615381296
@@ -115,6 +116,7 @@ MonoBehaviour:
   - {fileID: 5917908726900004908}
   - {fileID: 2022078572615381299}
   adjacentSecretSpots: []
+  parrentTile: {fileID: 7502201391846217205}
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &4108778421444586564
@@ -182,6 +184,7 @@ MonoBehaviour:
   - {fileID: 5100380616659274983}
   - {fileID: 5917908726900004908}
   adjacentSecretSpots: []
+  parrentTile: {fileID: 7502201391846217205}
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &4429754209036613225
@@ -248,6 +251,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 4429754209036613226}
   adjacentSecretSpots: []
+  parrentTile: {fileID: 7502201391846217205}
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5100380616659274980
@@ -315,6 +319,7 @@ MonoBehaviour:
   - {fileID: 4429754209036613226}
   - {fileID: 4108778421444586567}
   adjacentSecretSpots: []
+  parrentTile: {fileID: 7502201391846217205}
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &5917908726900004911
@@ -467,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740996ef814195d408c96b46092c8df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileData: {fileID: 11400000, guid: 966d58f8d36cdfb4089ec2a913e54f3f, type: 2}
+  tileData: {fileID: 11400000, guid: 17fbe7e33140b22489c8e14e040d473b, type: 2}
   borderSpots:
   - {fileID: 5100380616659274983}
   - {fileID: 0}

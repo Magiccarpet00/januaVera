@@ -20,3 +20,5 @@ MonoBehaviour:
   locationDatas:
   - {fileID: 11400000, guid: 2f41eafbe80bff14ab7c65eb97a0a49b, type: 2}
   - {fileID: 11400000, guid: cb8c5eb6e8c3dc047b5aa2620eda268b, type: 2}
+  spawnCharacter: []
+  spawnCharacterProba: []

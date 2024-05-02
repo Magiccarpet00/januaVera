@@ -10,8 +10,8 @@ public class Location : MonoBehaviour
 
     public void SetUpLocation(GameObject spot)
     {
-        if (locationData.charactersInLocation.Count != 0) //[CODE TMP] Ne gere pas plusieurs characters
-            GameManager.instance.CreateCharacter(locationData.charactersInLocation[0], spot);
+        foreach (CharacterData characterData in locationData.charactersInLocation)
+            GameManager.instance.CreateCharacter(characterData, spot);
 
         spriteRenderer.sprite = locationData.sprite;
     }

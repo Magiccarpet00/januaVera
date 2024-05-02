@@ -15,4 +15,7 @@ public class TileData : ScriptableObject
 
     public SpotLocationRNGData[] locationDatas;
 
+    public CharacterData[] spawnCharacter;
+    public float[] spawnCharacterProba; //0 - 1 
+
 }

@@ -789,7 +789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &92358192
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4692,7 +4692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &918051321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7354,7 +7354,6 @@ MonoBehaviour:
   allSpotInGame: []
   prefabTiles:
   - {fileID: 9159811406765298764, guid: 437621233f67f2243989dd1135c3a7fb, type: 3}
-  - {fileID: 9159811406765298764, guid: c925530c8f1e5b6449e2a387b584f0fd, type: 3}
   - {fileID: 9159811406765298764, guid: d6e9cfbd9f02eb741b31576f68f58c9a, type: 3}
   - {fileID: 9159811406765298764, guid: 7ba2999f6467d264b99fd8d23bd04b01, type: 3}
   - {fileID: 9159811406765298764, guid: 6f61702104ab81144a1fc33853e21f45, type: 3}

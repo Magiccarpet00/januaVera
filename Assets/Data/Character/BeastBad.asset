@@ -13,23 +13,22 @@ MonoBehaviour:
   m_Name: BeastBad
   m_EditorClassIdentifier: 
   race: 2
-  shape: 10
+  shape: 7
   typeDivinity: 0
-  init_VITALITY: 1
+  init_VITALITY: 5
   init_ENDURANCE: 1
   init_STRENGHT: 1
   init_DEXTERITY: 1
   init_FAITH: 1
   init_GOLD: 0
   drop_XP: 1
-  spriteMap: {fileID: 1770330981, guid: 85963f2d98168604d9dd812b61b5fae0, type: 3}
-  spriteFight: {fileID: 1770330981, guid: 9e40606754b66b048ab928cbdd034d5d, type: 3}
+  spriteMap: {fileID: 732423952, guid: 024764276ffe0614a92ccc61f0ebce48, type: 3}
+  spriteFight: {fileID: 732423952, guid: 7f03b02b20ee3f44896b30fc51a86e78, type: 3}
   workCost: 5
   isMerchant: 0
   inLocation: 0
   currentMood: 1
   objectInventory:
   - {fileID: 11400000, guid: 7e3943cc564feba48a206f7872d94971, type: 2}
-  armorsEquiped:
-  - {fileID: 11400000, guid: 12f278db02e09c94f8b03fcad3324e66, type: 2}
+  armorsEquiped: []
   objectToSell: []

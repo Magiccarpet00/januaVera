@@ -48,6 +48,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 8236070018115876258}
   adjacentSecretSpots: []
+  parrentTile: {fileID: 7502201391846217205}
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &473985743643762561
@@ -282,6 +283,7 @@ MonoBehaviour:
   adjacentSpots:
   - {fileID: 473985743643762562}
   adjacentSecretSpots: []
+  parrentTile: {fileID: 7502201391846217205}
   charactersOnSpot: []
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
 --- !u!58 &8236070018115876257

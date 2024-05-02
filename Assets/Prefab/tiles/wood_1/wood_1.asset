@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0390e7b620a0fa347aa32ddea641aa6d, type: 3}
+  m_Name: wood_1
+  m_EditorClassIdentifier: 
+  tileType: 2
+  manaPoolYellow: 0
+  manaPoolBlack: 0
+  manaPoolPurple: 0
+  manaPoolGreen: 0
+  locationDatas:
+  - {fileID: 11400000, guid: b0f808b0fea7a2647985fa32c63f8332, type: 2}
+  - {fileID: 11400000, guid: 8ba6e42baf4e3d64bad1e3ff36a92e75, type: 2}
+  - {fileID: 11400000, guid: fdef5de82a8e9174085b507f5731b58c, type: 2}
+  spawnCharacter:
+  - {fileID: 11400000, guid: 8f2a57c84c01e8c4e866c136342211fd, type: 2}
+  - {fileID: 11400000, guid: 8f2a57c84c01e8c4e866c136342211fd, type: 2}
+  - {fileID: 11400000, guid: 8f2a57c84c01e8c4e866c136342211fd, type: 2}
+  spawnCharacterProba:
+  - 0.9
+  - 0.5
+  - 0.1

@@ -8,6 +8,8 @@ public class Spot : MonoBehaviour
     [SerializeField] private List<GameObject> adjacentSpots = new List<GameObject>();
     [SerializeField] private List<GameObject> adjacentSecretSpots = new List<GameObject>();
 
+    [SerializeField] public Tile parrentTile;
+
     [SerializeField] public List<Character> charactersOnSpot = new List<Character>();
 
     [SerializeField] public List<MyObject> objectsOnSpot = new List<MyObject>();

@@ -101,10 +101,10 @@ public class GameManager : MonoBehaviour
         SetUpTypeChart();
 
         //--------SEED RNG---------
-        //SeedRandom((int)Random.Range(0, 9999999));
-        string seed = "Miriamo54";        
+        //Random.InitState((int)Random.Range(0, 9999999));
 
-        SeedRandom(seed.GetHashCode());
+        string seed = "Miriamo54";
+        Random.InitState(seed.GetHashCode());
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
@@ -527,10 +527,6 @@ public class GameManager : MonoBehaviour
     //
     //      OTHER
     //
-    private void SeedRandom(int seed)
-    {
-        Random.InitState(seed);
-    }
 
     public GameObject CreateCharacter(CharacterData characterData, GameObject spot, bool isPlayer=false)
     {
@@ -707,7 +703,7 @@ public class GameManager : MonoBehaviour
                 {
                     action.PerfomAction();
                     yield return new WaitUntil(()=>dialogWindowOpened == false); //[CODE WARNING] dialogWindow sont toute les UI
-                    yield return new WaitForSeconds(0.001f); //[CODE WARNING / REFACTOT] Peut etre une source de bug (jsp) si on clic trop vite
+                    //yield return new WaitForSeconds(0.001f); //[CODE WARNING / REFACTOT] Peut etre une source de bug (jsp) si on clic trop vite
                 }
             }
         }
@@ -939,7 +935,7 @@ public enum InventoryType{
 public enum MoodAI
 {
     STATIC,
-    MOVING,
+    MOVING_AREA,
     CHASE
 }
 
@@ -947,7 +943,7 @@ public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
 
-    public static float TIME_TURN_SEC = 0.2f;    // Le temps de voir les actions se faire
+    public static float TIME_TURN_SEC = 0.1f;    // Le temps de voir les actions se faire
 
     public static float BASIC_SMOOTHTIME = 0.4f;
     public static float HIDE_SMOOTHTIME = 0.8f;

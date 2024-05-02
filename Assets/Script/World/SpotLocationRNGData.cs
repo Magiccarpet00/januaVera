@@ -15,7 +15,7 @@ public class SpotLocationRNGData : ScriptableObject
         dropChance[2] = 10;    |                                                    |
                                |----------------------------------------------------|
 
-        locations[0] = LAND_STONE;
+        locations[0] = EMPTY;
         locations[0] = LAND_HARVEST;
         locations[0] = LAND_RECLUT;
      */
