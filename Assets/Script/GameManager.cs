@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public GameObject prefabPlayer;
     public GameObject prefabCharacter;
     public GameObject prefabObjectOnMap;
+    public GameObject prefabCombatManagerInstance;
 
     [HideInInspector] public GameObject player;
     public Player playerCharacter;
@@ -713,7 +714,7 @@ public class GameManager : MonoBehaviour
             character.StartCoroutine("MettingOnPath");
         }
 
-        yield return new WaitUntil(() => CombatManager.instance.playerOnFight == false);
+        yield return new WaitUntil(() => playerCharacter.onFight == false);
 
         foreach (Character character in characterList)
             character.MettingOnSpot();
@@ -775,30 +776,31 @@ public class GameManager : MonoBehaviour
 
         initiator.RelationFollower();
 
-        if( !(playerIsGoingToFight && CombatManager.instance.playerOnFight) )
+        if (playerIsGoingToFight)
         {
-            CombatManager.instance.SetUpFight(characters, playerIsGoingToFight);
-        }
-        
-        if(playerIsGoingToFight)
-        {
-            Debug.Log("playerIsGoingToFight");
+            playerCharacter.onFight = true;
             ToggleMapSceneFightScene(true);
         }
+
+        GameObject combatManagerInstance = Instantiate(prefabCombatManagerInstance, transform.position, Quaternion.identity);
+        CombatManager _combatManagerInstance = combatManagerInstance.GetComponent<CombatManager>();
+        _combatManagerInstance.SetUpFight(characters);
+    
     }
 
-    public void QuitCombatScene(List<Character> characters)
+
+    //ClearCombatScene a mettre dans PlayerCombatManager
+    public void QuitCombatScene()
     {
-        CombatManager.instance.playerOnFight = false; //TMP
+        playerCharacter.onFight = false; //TMP
         ToggleMapSceneFightScene(false);
-        CombatManager.instance.ClearCombatScene();
+        playerCharacter.currentCombatManager.ClearCombatScene();
     }
 
     public void ToggleMapSceneFightScene(bool b) //[CODE ULTRA DOUTEUX] Peut etre une source de bug si il ya plus de 2 emplacements de camera
     {
         PlayerCombatManager.instance.CanvasFight.SetActive(b);
         actionCanvas.SetActive(!b);
-        CombatManager.instance.ToggleFight(b);
         cam.GetComponent<CameraController>().ToggleCamPos(b);
     }
 

@@ -37,6 +37,7 @@ public class CombatSpot : MonoBehaviour
 
         foreach (GameObject item in allLinesInSpot)
             Destroy(item);
+        allLinesInSpot.Clear();
     }
 
     public void UpdateIntention()

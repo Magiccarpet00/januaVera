@@ -48,7 +48,7 @@ public class PlayerCombatManager : MonoBehaviour
     public void FillSpot()
     {
         countSpot = 0;
-        foreach (Character c in CombatManager.instance.characters)
+        foreach (Character c in GameManager.instance.playerCharacter.currentCombatManager.characters)
         {
             AddCharacterOnSpot(c);
         }
@@ -65,7 +65,7 @@ public class PlayerCombatManager : MonoBehaviour
         GameObject characterSprite = Instantiate(prefabSpriteCharacter, combatSpots[countSpot].transform.position, Quaternion.identity);
         characterSprite.GetComponent<SpriteFight>().SetCharacter(c);
         charactersSprites.Add(characterSprite);
-        characterSprite.GetComponentInChildren<SpriteRenderer>().sprite = CombatManager.instance.characters[countSpot].characterData.spriteFight;
+        characterSprite.GetComponentInChildren<SpriteRenderer>().sprite = GameManager.instance.playerCharacter.currentCombatManager.characters[countSpot].characterData.spriteFight;
 
         // DICO
         dic_CharacterSpriteFight.Add(c, characterSprite.GetComponent<SpriteFight>());
@@ -173,12 +173,24 @@ public class PlayerCombatManager : MonoBehaviour
         ClearButtonWeapon(); //TMP
         ClearButtonSkill();
         while (panelStack.Peek() != panelGlobal)
-        {
             PanelBack();
-        }
-        StartCoroutine(CombatManager.instance.FightSequence());
+        StartCoroutine(GameManager.instance.playerCharacter.currentCombatManager.FightSequence());
         
     }
+
+    public void ClickButtonEscape()
+    {
+        if (inputBlock) return;
+
+        foreach (GameObject combatSpot in combatSpots)
+        {
+            CombatSpot _combatSpot = combatSpot.GetComponent<CombatSpot>();
+            _combatSpot.UpdateEndRoundUI();
+            _combatSpot.character = null;
+        }
+        GameManager.instance.QuitCombatScene();
+    }
+
 
     public void PanelBack()
     {
@@ -210,17 +222,7 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
-    public void ClickButtonEscape()
-    {
-        if (inputBlock) return;
 
-
-        foreach (GameObject combatSpot in combatSpots)
-        {
-            combatSpot.GetComponent<CombatSpot>().UpdateEndRoundUI();
-        }
-        GameManager.instance.QuitCombatScene(CombatManager.instance.characters);
-    }
 
     public void UpdateAllUI()
     {

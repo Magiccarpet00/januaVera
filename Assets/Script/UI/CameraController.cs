@@ -21,29 +21,21 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {   
-        if(!freezeCam && !CombatManager.instance.GetOnFight())
+        if(!freezeCam && !GameManager.instance.playerCharacter?.onFight == false)
         {
             Vector3 pos = transform.position;
 
             if (Input.mousePosition.y >= Screen.height - panBorder)
-            {
                 pos.y += panSpeed * Time.deltaTime;
-            }
 
             if (Input.mousePosition.y <= panBorder)
-            {
                 pos.y -= panSpeed * Time.deltaTime;
-            }
 
             if (Input.mousePosition.x >= Screen.width - panBorder)
-            {
                 pos.x += panSpeed * Time.deltaTime;
-            }
 
             if (Input.mousePosition.x <= panBorder)
-            {
                 pos.x -= panSpeed * Time.deltaTime;
-            }
 
             Camera cam = Camera.main;
 
@@ -68,7 +60,7 @@ public class CameraController : MonoBehaviour
         ToggleFreezeCam(b);
 
 
-        if (!CombatManager.instance.GetOnFight())
+        if (!GameManager.instance.playerCharacter.onFight)
         {
             camMapUI.SetActive(true);
             GameManager.instance.cam_fight.SetActive(false);

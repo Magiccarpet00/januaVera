@@ -21,15 +21,17 @@ public class Character : MonoBehaviour
     [SerializeField] private GameObject lastSpot;
     [SerializeField] private bool isHide;
     private bool onPath; // quand on est on path on est sur le chemin vers le currentSpot mais on est pas encore sur ce spot à ce tour
+    public bool onFight;
 
     private Stack<Action> stackAction = new Stack<Action>();
     private bool canceled; // si il est canceled il ne peut par faire sont action de la actionQueue
 
     //LIFE
     public bool isDying; //pour le fight
-    public bool isDead; 
+    public bool isDead;
 
     //FIGHT
+    public CombatManager currentCombatManager;
     public List<Character> selectedCharacters = new List<Character>();
     public SkillData currentLoadedSkill;
     public MyObject currentLoadedObject;
@@ -80,7 +82,7 @@ public class Character : MonoBehaviour
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
-        if(CombatManager.instance.playerOnFight == false)
+        if(GameManager.instance.playerCharacter?.onFight == false)
         {   
             transform.position = Vector3.SmoothDamp(transform.position, target+(Vector3)offSetOnSpot, ref velocity, smoothTime);
         }

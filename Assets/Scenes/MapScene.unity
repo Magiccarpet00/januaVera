@@ -6126,7 +6126,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1525517293}
-  - component: {fileID: 1525517294}
   - component: {fileID: 1525517295}
   m_Layer: 0
   m_Name: CombatManager
@@ -6150,20 +6149,6 @@ Transform:
   m_Father: {fileID: 1489098019}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1525517294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525517292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d05d9d5f33e724d9e23cd1f5772814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characters: []
-  playerOnFight: 0
 --- !u!114 &1525517295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7306,6 +7291,7 @@ MonoBehaviour:
   prefabPlayer: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   prefabCharacter: {fileID: 468640492003026094, guid: d8742ad2c7d3e00449f51aa4b0c6110d, type: 3}
   prefabObjectOnMap: {fileID: 7562818550918909618, guid: 5abd3bc0ecceadc4cb75e0b331b88ee4, type: 3}
+  prefabCombatManagerInstance: {fileID: 1720083821645216775, guid: 6f2319ccbce651842a62c806a9734412, type: 3}
   player: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
   playerCharacter: {fileID: 0}
   worldBuilder: {fileID: 1915923813}
