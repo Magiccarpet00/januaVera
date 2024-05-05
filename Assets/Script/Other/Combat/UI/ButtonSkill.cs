@@ -18,6 +18,7 @@ public class ButtonSkill : MonoBehaviour
 
     public void Click()
     {
+        if (PlayerCombatManager.instance.inputBlock) return;
         PlayerCombatManager.instance.ClickButtonSkill(skillData, myObjectParent);
     }
 

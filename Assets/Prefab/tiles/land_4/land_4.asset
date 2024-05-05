@@ -20,3 +20,9 @@ MonoBehaviour:
   locationDatas:
   - {fileID: 11400000, guid: 3f1b365f6c4e3e64cb49e4f845cd41d8, type: 2}
   - {fileID: 11400000, guid: 7257939fbea6af049bc715695efd2ad6, type: 2}
+  spawnCharacter:
+  - {fileID: 11400000, guid: 2475c542c7f4a4146bdace3d5616562c, type: 2}
+  - {fileID: 11400000, guid: 2475c542c7f4a4146bdace3d5616562c, type: 2}
+  spawnCharacterProba:
+  - 0.6
+  - 0.4

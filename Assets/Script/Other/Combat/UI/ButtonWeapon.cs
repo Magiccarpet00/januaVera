@@ -13,6 +13,7 @@ public class ButtonWeapon : MonoBehaviour
 
     public void Click()
     {
+        if (PlayerCombatManager.instance.inputBlock) return;
         PlayerCombatManager.instance.ClickButtonWeapon(weapon);
     }
 

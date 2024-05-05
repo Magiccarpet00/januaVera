@@ -32,6 +32,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
   armorsEquiped: []
   objectToSell:
-  - {fileID: 11400000, guid: e9b48a08dfe9be34585cb3100ff03d61, type: 2}
+  - {fileID: 11400000, guid: 25f547095415add4ba5754ade0cd7161, type: 2}
   - {fileID: 11400000, guid: 4d88de077e8ba8d44b18f9a0b3995e95, type: 2}
   - {fileID: 11400000, guid: 0c731dfdf37cf8a42a990db632b623f6, type: 2}

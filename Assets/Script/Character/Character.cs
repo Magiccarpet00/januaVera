@@ -686,7 +686,6 @@ public class Character : MonoBehaviour
                         case MoodAI.MOVING_AREA:
                             TileType startTileType = currentSpot.GetComponent<Spot>().parrentTile.GetTileData().tileType;
                             List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                            Debug.Log("lol");
                             bool find = false;
                             int rng = 0;
                             while (find == false)

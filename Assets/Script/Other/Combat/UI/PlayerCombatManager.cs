@@ -21,6 +21,7 @@ public class PlayerCombatManager : MonoBehaviour
 
     public float TIME_FIGHT = 0.5f;
     public TimerFight timerFight;
+    public bool inputBlock;
 
     //Target (uniquement pour player)
     public bool inTargetMode;
@@ -76,6 +77,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonWeaponGlobal()
     {
+        if (inputBlock) return;
+       
         PushPanel(panelWeapon);
 
         foreach (Weapon weapon in GameManager.instance.playerCharacter.GetWeaponsInventory())
@@ -93,6 +96,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonObjectGlobal()
     {
+        if (inputBlock) return;
+
         PushPanel(panelSkill);
         foreach(ActiveObject activeObject in GameManager.instance.player.GetComponent<Character>().GetActiveObjectInventory())
         {
@@ -113,6 +118,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonWeapon(Weapon weapon)
     {
+        if (inputBlock) return;
+
         PushPanel(panelSkill);
         WeaponData wd = (WeaponData)weapon.objectData;
 
@@ -134,6 +141,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonSkill(SkillData skillData, MyObject myObjectParent) //[CODE WARNING] peut etre une source de bug dans pour les skills 0target lancer par des PNJ
     {
+        if (inputBlock) return;
+
         GameManager.instance.playerCharacter.currentLoadedObject = myObjectParent;
         GameManager.instance.playerCharacter.currentLoadedSkill = skillData;
 
@@ -148,6 +157,8 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonBack()
     {
+        if (inputBlock) return;
+
         ResetAllSelected();
         GameManager.instance.playerCharacter.currentLoadedSkill = null;
         PanelBack();
@@ -155,6 +166,10 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickEndButton() //A REFACTOT
     {
+        if (inputBlock) return;
+        
+        inputBlock = true;
+
         ClearButtonWeapon(); //TMP
         ClearButtonSkill();
         while (panelStack.Peek() != panelGlobal)
@@ -162,6 +177,7 @@ public class PlayerCombatManager : MonoBehaviour
             PanelBack();
         }
         StartCoroutine(CombatManager.instance.FightSequence());
+        
     }
 
     public void PanelBack()
@@ -196,6 +212,9 @@ public class PlayerCombatManager : MonoBehaviour
 
     public void ClickButtonEscape()
     {
+        if (inputBlock) return;
+
+
         foreach (GameObject combatSpot in combatSpots)
         {
             combatSpot.GetComponent<CombatSpot>().UpdateEndRoundUI();

@@ -23,9 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fdef5de82a8e9174085b507f5731b58c, type: 2}
   spawnCharacter:
   - {fileID: 11400000, guid: 8f2a57c84c01e8c4e866c136342211fd, type: 2}
-  - {fileID: 11400000, guid: 8f2a57c84c01e8c4e866c136342211fd, type: 2}
-  - {fileID: 11400000, guid: 8f2a57c84c01e8c4e866c136342211fd, type: 2}
   spawnCharacterProba:
-  - 0.9
-  - 0.5
-  - 0.1
+  - 1

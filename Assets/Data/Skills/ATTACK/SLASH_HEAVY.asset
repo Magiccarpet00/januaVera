@@ -17,11 +17,11 @@ MonoBehaviour:
   speed: 5
   nbTarget: 1
   req_VITALITY: 0
-  req_ENDURANCE: 0
+  req_ENDURANCE: 2
   req_STRENGHT: 5
   req_DEXTERITY: 0
   req_FAITH: 0
   cost_VITALITY: 0
-  cost_ENDURANCE: 1
+  cost_ENDURANCE: 2
   damage: 10
   damageType: 1

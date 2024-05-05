@@ -19,10 +19,14 @@ public class CombatManager : MonoBehaviour
 
     public IEnumerator FightSequence()
     {
+        if(playerOnFight)
+            Debug.Log("FightSequence PLAYER");
+        else
+            Debug.Log("FightSequence");
+
         if (playerOnFight) foreach (GameObject cs in PlayerCombatManager.instance.charactersSprites)
             cs.GetComponent<SpriteFight>().ResetSelected();
 
-        if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
         if (playerOnFight) PlayerCombatManager.instance.timerFight.ActiveTimer(true);
 
         while (speedInstant <= 6)
@@ -46,10 +50,13 @@ public class CombatManager : MonoBehaviour
         LoadSkillAI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateEndRoundAllUI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
-
+        if (playerOnFight) PlayerCombatManager.instance.inputBlock = false;
 
         if (!playerOnFight && !CheckFightEnd())
             StartCoroutine(FightSequence());
+        else
+            characters = new List<Character>();
+
     }
 
 

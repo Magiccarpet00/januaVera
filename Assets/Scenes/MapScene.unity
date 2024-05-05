@@ -6192,6 +6192,7 @@ MonoBehaviour:
   prefabSpriteCharacter: {fileID: 3934576700232200583, guid: 1e3667177d8883d4a8143da275e8442e, type: 3}
   TIME_FIGHT: 0.5
   timerFight: {fileID: 199920811}
+  inputBlock: 0
   inTargetMode: 0
   nbTarget: 0
   CanvasFight: {fileID: 918051320}
