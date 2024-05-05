@@ -27,12 +27,11 @@ public class Spot : MonoBehaviour
 
     public void UpdatePosCharacter()
     {
-        int count = 1;
-        int total = GetAllCharactersOnMapInSpot().Count;
+        int count = 0;
+        int total = GetAllCharactersAliveOnMapInSpot().Count;
         System.Numerics.Complex i = System.Numerics.Complex.ImaginaryOne;
-                    
 
-        foreach (Character characterAlive in GetAllCharactersOnMapInSpot())
+        foreach (Character characterAlive in GetAllCharactersAliveOnMapInSpot())
         {
             float timeRotate = (Time.time * total) * 0.03f;
             characterAlive.offSetOnSpot.x = (float)System.Numerics.Complex.Exp((2 * Mathf.PI * (count + timeRotate) * i) / total).Real;
@@ -154,7 +153,7 @@ public class Spot : MonoBehaviour
         return charactersAlive;
     }
 
-    public List<Character> GetAllCharactersForFightInSpot()
+    public List<Character> GetAllCharactersAliveOnMapInSpot()
     {
         List<Character> charactersInSpot = GetAllCharactersInSpot();
         List<Character> charactersAlive = new List<Character>();

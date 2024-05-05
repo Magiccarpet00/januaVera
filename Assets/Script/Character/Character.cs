@@ -282,8 +282,8 @@ public class Character : MonoBehaviour
         bool wantBattle = false;
 
         
-        allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersForFightInSpot());
-        allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersForFightInSpot());
+        allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
+        allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
 
         foreach (Character characterOnPath in allCharactersInTwoSpot)
         {
@@ -315,7 +315,7 @@ public class Character : MonoBehaviour
 
     public void MettingOnSpot()
     {
-        foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersForFightInSpot())
+        foreach (Character characterOnSpot in currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot())
         {
             if (charactersEncountered.ContainsKey(characterOnSpot) == false)
             {
@@ -343,7 +343,6 @@ public class Character : MonoBehaviour
         foreach (Character character in followersCharacters)
             character.RelationInfluence(this);
     }
-
 
     public bool WantToFight(Character character)
     {
@@ -476,7 +475,7 @@ public class Character : MonoBehaviour
     public void AddXp(int amount)
     {
         xp += amount;
-        if (xp > lvl * 10)
+        if (xp >= lvl * 5 && xp !=0)
         {
             lvl++;
             lvlPoint += 5;
@@ -489,37 +488,49 @@ public class Character : MonoBehaviour
     {
         charactersEncountered[characterAttacker] = Relation.ENNEMY;
 
-        if (armorsEquiped.Count != 0)
+        
+        int amountRest = amount;
+        int amountModified;
+        while (amountRest > 0)
         {
-            int amountModified;
-            if (damageTypeAttack == DamageType.ELEM)
-                amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), armorsEquiped[armorsEquiped.Count - 1].objectData.material)] * amount);
-            else
-                amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), armorsEquiped[armorsEquiped.Count - 1].objectData.material)] * amount);
-
-            armorsEquiped[armorsEquiped.Count - 1].c_STATE -= amountModified;
-            if (armorsEquiped[armorsEquiped.Count - 1].c_STATE <= 0)
-                armorsEquiped.RemoveAt(armorsEquiped.Count - 1);
-        }
-        else
-        {
-            int amountModified;
-            if (damageTypeAttack == DamageType.ELEM)
-                amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), characterData.shape)] * amount);
-            else
-                amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), characterData.shape)] * amount);
-
-            c_VITALITY -= amountModified;
-            if (c_VITALITY <= 0)
+            if (armorsEquiped.Count != 0)
             {
-                if (characterAttacker.isPlayer())
+                if (damageTypeAttack == DamageType.ELEM)
+                    amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), armorsEquiped[armorsEquiped.Count - 1].objectData.material)] * amountRest);
+                else
+                    amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), armorsEquiped[armorsEquiped.Count - 1].objectData.material)] * amountRest);
+
+                amountRest =  amountModified - armorsEquiped[armorsEquiped.Count - 1].c_STATE;
+                armorsEquiped[armorsEquiped.Count - 1].c_STATE -= amountModified;
+
+                if (armorsEquiped[armorsEquiped.Count - 1].c_STATE <= 0)
+                    armorsEquiped.RemoveAt(armorsEquiped.Count - 1);
+            }
+            else
+            {
+                if (damageTypeAttack == DamageType.ELEM)
+                    amountModified = (int)(GameManager.instance.typeChart[(elementAttack.ToString(), characterData.shape)] * amountRest);
+                else
+                    amountModified = (int)(GameManager.instance.typeChart[(damageTypeAttack.ToString(), characterData.shape)] * amountRest);
+
+                amountRest = 0;
+                c_VITALITY -= amountModified;
+                if (c_VITALITY <= 0)
                 {
-                    characterAttacker.AddXp(characterData.drop_XP);
-                    characterAttacker.gold += gold;
+                    if (characterAttacker.isPlayer())
+                    {
+                        characterAttacker.AddXp(characterData.drop_XP);
+                        characterAttacker.gold += gold;
+                    }
+                    Die();
                 }
-                Die();
             }
         }
+        
+
+
+        
+        
     }
 
     public void TakeHeal(int amount)
@@ -588,6 +599,19 @@ public class Character : MonoBehaviour
     }
 
     //      IA
+    public void AI_MakeCrew()
+    {
+        if (leaderCharacter != null) return;
+
+        foreach (Character character in currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot())
+        {
+            if(character != this && character.characterData.name == this.characterData.name)
+            {
+                AddFollower(this, character);
+            }
+        } 
+    }
+
     public Weapon AI_TakeRandomWeapon()
     {
         int countInventory = objectInventory.Count;

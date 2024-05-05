@@ -102,10 +102,10 @@ public class GameManager : MonoBehaviour
         SetUpTypeChart();
 
         //--------SEED RNG---------
-        //Random.InitState((int)Random.Range(0, 9999999));
+        Random.InitState((int)Random.Range(0, 9999999));
 
-        string seed = "Miriamo54";
-        Random.InitState(seed.GetHashCode());
+        //string seed = "Miriamo54";
+        //Random.InitState(seed.GetHashCode());
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
@@ -717,7 +717,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitUntil(() => playerCharacter.onFight == false);
 
         foreach (Character character in characterList)
+        {
             character.MettingOnSpot();
+            if(!character.isPlayer()) character.AI_MakeCrew();
+        }
 
         actionQueue.Clear();
         CommandPnj();

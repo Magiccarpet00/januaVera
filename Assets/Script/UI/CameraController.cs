@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {   
-        if(!freezeCam && !GameManager.instance.playerCharacter?.onFight == false)
+        if(!freezeCam && GameManager.instance.playerCharacter?.onFight == false)
         {
             Vector3 pos = transform.position;
 
