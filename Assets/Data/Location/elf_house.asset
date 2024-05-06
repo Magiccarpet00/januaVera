@@ -17,3 +17,4 @@ MonoBehaviour:
   sprite: {fileID: 2090837313, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
   charactersInLocation:
   - {fileID: 11400000, guid: e6389f3f1debb4443bc3342f88f4e5bf, type: 2}
+  - {fileID: 11400000, guid: 32a8c789ec13a1441991ba0acffe973e, type: 2}

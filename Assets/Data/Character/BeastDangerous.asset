@@ -15,12 +15,12 @@ MonoBehaviour:
   race: 2
   shape: 7
   typeDivinity: 0
-  init_VITALITY: 10
+  init_VITALITY: 1
   init_ENDURANCE: 1
   init_STRENGHT: 1
   init_DEXTERITY: 1
   init_FAITH: 1
-  init_GOLD: 0
+  init_GOLD: 2
   drop_XP: 2
   spriteMap: {fileID: -1714338562, guid: 024764276ffe0614a92ccc61f0ebce48, type: 3}
   spriteFight: {fileID: -1714338562, guid: 7f03b02b20ee3f44896b30fc51a86e78, type: 3}

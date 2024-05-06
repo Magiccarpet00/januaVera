@@ -5,18 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CombatManager : MonoBehaviour
 {
-    //public static CombatManager instance;
-    //void Awake()
-    //{
-    //    instance = this;
-    //}
-
     //Global
     public List<Character> characters = new List<Character>();
     private int speedInstant = 0;
-
-    //private bool onFight;
-    //public bool playerOnFight = false;
 
     public IEnumerator FightSequence()
     {

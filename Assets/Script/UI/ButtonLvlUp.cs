@@ -13,9 +13,11 @@ public class ButtonLvlUp : MonoBehaviour
         {
             case Stats.VITALITY:
                 player.s_VITALITY++;
+                player.c_VITALITY++;
                 break;
             case Stats.ENDURANCE:
                 player.s_ENDURANCE++;
+                player.c_ENDURANCE++;
                 break;
             case Stats.STRENGHT:
                 player.s_STRENGHT++;

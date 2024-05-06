@@ -101,18 +101,18 @@ public class PlayerCombatManager : MonoBehaviour
         PushPanel(panelSkill);
         foreach(ActiveObject activeObject in GameManager.instance.player.GetComponent<Character>().GetActiveObjectInventory())
         {
-            if (activeObject.c_STATE == 0)
-                return;
+            if (activeObject.c_STATE > 0)
+            {
+                GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
+                btnSkill.transform.SetParent(panelSkill.transform);
+                btnSkill.transform.localScale = new Vector3(1, 1, 1);
 
-            GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
-            btnSkill.transform.SetParent(panelSkill.transform);
-            btnSkill.transform.localScale = new Vector3(1, 1, 1);
+                ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
+                bs.myObjectParent = activeObject;
 
-            ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
-            bs.myObjectParent = activeObject;
-
-            bs.SetUpUI(activeObject.activeObjectData.skillData);
-            buttonsSkills.Add(btnSkill);
+                bs.SetUpUI(activeObject.activeObjectData.skillData);
+                buttonsSkills.Add(btnSkill);
+            }
         }
     }
 

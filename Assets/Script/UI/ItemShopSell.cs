@@ -17,6 +17,7 @@ public class ItemShopSell : MonoBehaviour
         {
             GameManager.instance.playerCharacter.objectInventory.Remove(myObject);
             ShopUI.instance.UpdateShopUI();
+            GameManager.instance.UpdateTmpInfo();
         }
     }
 }

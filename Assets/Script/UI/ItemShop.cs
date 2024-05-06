@@ -19,6 +19,7 @@ public class ItemShop : MonoBehaviour
             characterMerchant.gold += myObject.objectData.price;
             characterMerchant.objectToSell.Remove(myObject);
             ShopUI.instance.UpdateShopUI();
+            GameManager.instance.UpdateTmpInfo();
         }
     }
 }

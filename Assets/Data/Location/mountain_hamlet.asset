@@ -15,4 +15,6 @@ MonoBehaviour:
   locationType: 11
   actionsButton: 
   sprite: {fileID: 1284659729, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
-  charactersInLocation: []
+  charactersInLocation:
+  - {fileID: 11400000, guid: 499ff98e2dd8dc443a17e53ced3560d2, type: 2}
+  - {fileID: 11400000, guid: 499ff98e2dd8dc443a17e53ced3560d2, type: 2}
