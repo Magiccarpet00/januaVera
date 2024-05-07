@@ -106,7 +106,7 @@ public class Character : MonoBehaviour
             GameManager.instance.effectList.Add(new EffectOnPath(this, this));
         }
 
-        if (adjSpot.Contains(spot))
+        if (adjSpot.Contains(spot) || GameManager.instance.debugTeleport)
             Teleport(spot);
         else
             AStarMove();
@@ -214,9 +214,9 @@ public class Character : MonoBehaviour
 
     public void AddFollower(Character leader, Character follower)
     {
-        leader.RelationFollower();
         follower.leaderCharacter = leader;
         followersCharacters.Add(follower);
+        leader.SpreadRelation();
     }
 
     public void AddFollowers(Character leader, List<Character> followers)
@@ -326,22 +326,29 @@ public class Character : MonoBehaviour
 
 
     //Relation
+    public void SpreadRelation()
+    {
+        if(leaderCharacter != null)
+        {
+            leaderCharacter.RelationInfluence(this);
+            leaderCharacter.LeaderSpreadRelation();
+        }
+        else
+        {
+            LeaderSpreadRelation();
+        }
+    }
+
+    public void LeaderSpreadRelation()
+    {
+        foreach (Character character in followersCharacters)
+            character.RelationInfluence(this);
+    }
+
     public void RelationInfluence(Character influencer)
     {
         foreach (var item in influencer.charactersEncountered)
             charactersEncountered[item.Key] = item.Value;
-    }
-
-    public void RelationChange(Character character, Relation relation)
-    {
-        charactersEncountered[character] = relation;
-        RelationFollower();
-    }
-
-    public void RelationFollower()
-    {
-        foreach (Character character in followersCharacters)
-            character.RelationInfluence(this);
     }
 
     public bool WantToFight(Character character)
@@ -487,7 +494,7 @@ public class Character : MonoBehaviour
     public void TakeDamage(Character characterAttacker, int amount, DamageType damageTypeAttack, Element elementAttack = Element.NONE)
     {
         charactersEncountered[characterAttacker] = Relation.ENNEMY;
-
+        SpreadRelation();
         
         int amountRest = amount;
         int amountModified;

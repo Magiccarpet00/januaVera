@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     //public GameObject prefabTmpEnemy;
     public int id = 0;
     public bool toggle;
+    public bool debugTeleport;
 
     // GLOBAL VAR
     [Header("GLOBAL VAR")]
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
     //POKEMON typeChart
     public Dictionary<(string, Element), float> typeChart = new Dictionary<(string, Element), float>();
 
-
+    
 
 
     public void Start()
@@ -102,10 +103,10 @@ public class GameManager : MonoBehaviour
         SetUpTypeChart();
 
         //--------SEED RNG---------
-        Random.InitState((int)Random.Range(0, 9999999));
+        //Random.InitState((int)Random.Range(0, 9999999));
 
-        //string seed = "Miriamo54";
-        //Random.InitState(seed.GetHashCode());
+        string seed = "Miriamo54";
+        Random.InitState(seed.GetHashCode());
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
@@ -353,6 +354,14 @@ public class GameManager : MonoBehaviour
             playerCharacter.AddXp(1);
             UpdateTmpInfo();
             InventoryUI.instance.UpdateInventory();
+        }
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            if (debugTeleport)
+                debugTeleport = false;
+            else
+                debugTeleport = true;
         }
     }
 
@@ -770,14 +779,14 @@ public class GameManager : MonoBehaviour
 
             character.CancelAction();
 
-            //RELATION UPDATE
-            if (initiator.charactersEncountered[character] == Relation.ENNEMY ||
-                initiator.charactersEncountered[character] == Relation.HOSTIL)
-                character.RelationChange(initiator, initiator.charactersEncountered[character]);
+            ////RELATION UPDATE
+            //if (initiator.charactersEncountered[character] == Relation.ENNEMY ||
+            //    initiator.charactersEncountered[character] == Relation.HOSTIL)
+            //    character.RelationChange(initiator, initiator.charactersEncountered[character]);
 
         }
 
-        initiator.RelationFollower();
+        //initiator.RelationFollower();
 
         if (playerIsGoingToFight)
         {
