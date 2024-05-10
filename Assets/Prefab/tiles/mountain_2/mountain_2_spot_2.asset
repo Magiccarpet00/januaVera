@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d676fc5465a7fa4f8c2fd875d4f5ac3, type: 3}
-  m_Name: land_4_spot_1
+  m_Name: mountain_2_spot_2
   m_EditorClassIdentifier: 
-  dropChance: 5000000014000000
+  dropChance: 64000000
   locations:
   - {fileID: 0}
-  - {fileID: 11400000, guid: af3e4a9fcbeb55a439aae65a6572200c, type: 2}

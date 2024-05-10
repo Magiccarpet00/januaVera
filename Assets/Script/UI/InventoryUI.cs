@@ -73,27 +73,30 @@ public class InventoryUI : MonoBehaviour
 
         foreach (MyObject item in playerCharacter.objectInventory)
         {
-            if(item.isActiveObject())
+            if(item.c_STATE > 0)
             {
-                GameObject newItemButton = Instantiate(prefabItemButton, transform.position, Quaternion.identity);
-                newItemButton.GetComponentInChildren<TextMeshProUGUI>().text = item.objectData.name;
-                newItemButton.transform.SetParent(panelItemButton.transform);
-                newItemButton.transform.localScale = new Vector3(1, 1, 1);
+                if (item.isActiveObject())
+                {
+                    GameObject newItemButton = Instantiate(prefabItemButton, transform.position, Quaternion.identity);
+                    newItemButton.GetComponentInChildren<TextMeshProUGUI>().text = item.objectData.name;
+                    newItemButton.transform.SetParent(panelItemButton.transform);
+                    newItemButton.transform.localScale = new Vector3(1, 1, 1);
 
-                newItemButton.GetComponent<ButtonItem>().activeObject = (ActiveObject)item;
+                    newItemButton.GetComponent<ButtonItem>().activeObject = (ActiveObject)item;
 
-                itemButtons.Add(newItemButton);
-            }
-            else
-            {
-                GameObject newItemButton = Instantiate(prefabItemButton, transform.position, Quaternion.identity);
-                newItemButton.GetComponentInChildren<TextMeshProUGUI>().text = item.objectData.name;
-                newItemButton.transform.SetParent(panelItemButton.transform);
-                newItemButton.transform.localScale = new Vector3(1, 1, 1);
+                    itemButtons.Add(newItemButton);
+                }
+                else
+                {
+                    GameObject newItemButton = Instantiate(prefabItemButton, transform.position, Quaternion.identity);
+                    newItemButton.GetComponentInChildren<TextMeshProUGUI>().text = item.objectData.name;
+                    newItemButton.transform.SetParent(panelItemButton.transform);
+                    newItemButton.transform.localScale = new Vector3(1, 1, 1);
 
-                newItemButton.GetComponent<Button>().interactable = false;
+                    newItemButton.GetComponent<Button>().interactable = false;
 
-                itemButtons.Add(newItemButton);
+                    itemButtons.Add(newItemButton);
+                }
             }
         }
     }

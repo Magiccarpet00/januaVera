@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour
     {
         for (int i = 0; i < tileData.spawnCharacter.Length; i++)
         {
-            float rng = Random.Range(0, 1);
+            float rng = Random.Range(0f, 1f);
             if (rng <= tileData.spawnCharacterProba[i])
                 SpawnCharacter(tileData.spawnCharacter[i]);
         }

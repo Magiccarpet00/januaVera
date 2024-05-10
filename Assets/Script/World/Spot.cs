@@ -84,13 +84,6 @@ public class Spot : MonoBehaviour
         }
     }
 
-
-    //
-    //      RELATION
-    //
-
-
-
     //
     //      GET & SET
     //

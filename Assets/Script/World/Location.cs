@@ -16,8 +16,8 @@ public class Location : MonoBehaviour
 
         for (int i = 0; i < locationData.objectInLocation.Count; i++)
         {
-            float rng = Random.Range(0, 1);
-            if(rng < locationData.rngObjet[i])
+            float rng = Random.Range(0f, 1f);
+            if(rng <= locationData.rngObjet[i])
                 spot.GetComponent<Spot>().AddObject(GameManager.instance.CreateObject(locationData.objectInLocation[i]));
         }
 

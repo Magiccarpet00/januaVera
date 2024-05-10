@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
   m_Name: HumanMarchantMap
   m_EditorClassIdentifier: 
-  race: 0
+  race: 3
   shape: 10
   typeDivinity: 0
   init_VITALITY: 5

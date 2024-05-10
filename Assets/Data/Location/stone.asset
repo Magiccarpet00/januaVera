@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: stone
   m_EditorClassIdentifier: 
   locationType: 3
+  actionsButton: 
   sprite: {fileID: -1394799726, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
+  charactersInLocation: []
+  objectInLocation:
+  - {fileID: 11400000, guid: b9521d0dbfde5434ea3ce0137768bb71, type: 2}
+  rngObjet:
+  - 10

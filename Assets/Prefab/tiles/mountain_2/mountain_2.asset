@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0390e7b620a0fa347aa32ddea641aa6d, type: 3}
+  m_Name: mountain_2
+  m_EditorClassIdentifier: 
+  tileType: 3
+  manaPoolYellow: 0
+  manaPoolBlack: 0
+  manaPoolPurple: 0
+  manaPoolGreen: 0
+  locationDatas:
+  - {fileID: 11400000, guid: 94d44f7e963c8594aa50537b7ae27d49, type: 2}
+  - {fileID: 11400000, guid: e77626e5427a5794196623d0855e39a4, type: 2}
+  - {fileID: 11400000, guid: 70865a2e8afa78c45a6634ddfe02b07f, type: 2}
+  - {fileID: 11400000, guid: 22a4cc6e8d8cd4b46a4d87026dc18526, type: 2}
+  - {fileID: 11400000, guid: 11abc67391ac0ba49a49d9afcaddac22, type: 2}
+  spawnCharacter: []
+  spawnCharacterProba: []

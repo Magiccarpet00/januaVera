@@ -149,6 +149,8 @@ public class Character : MonoBehaviour
     public void Rest()
     {
         lastSpot = currentSpot;
+        c_ENDURANCE++;
+        if (c_ENDURANCE > s_ENDURANCE) c_ENDURANCE = s_ENDURANCE;
     }
 
     public void Search()

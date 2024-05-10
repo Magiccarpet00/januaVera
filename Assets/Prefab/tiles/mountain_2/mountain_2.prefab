@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740996ef814195d408c96b46092c8df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileData: {fileID: 11400000, guid: 966d58f8d36cdfb4089ec2a913e54f3f, type: 2}
+  tileData: {fileID: 11400000, guid: d1ea92fda4bbb7c45a7e1a88527786cf, type: 2}
   borderSpots:
   - {fileID: 0}
   - {fileID: 408558540059372386}

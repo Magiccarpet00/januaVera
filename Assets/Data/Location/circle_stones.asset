@@ -16,3 +16,7 @@ MonoBehaviour:
   actionsButton: 
   sprite: {fileID: -536245653, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
   charactersInLocation: []
+  objectInLocation:
+  - {fileID: 11400000, guid: 317cbf1f6a2f2804d9984bc0ce9be173, type: 2}
+  rngObjet:
+  - 0.3

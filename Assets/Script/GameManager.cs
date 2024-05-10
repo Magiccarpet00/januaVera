@@ -103,10 +103,10 @@ public class GameManager : MonoBehaviour
         SetUpTypeChart();
 
         //--------SEED RNG---------
-        //Random.InitState((int)Random.Range(0, 9999999));
+        Random.InitState((int)Random.Range(0, 9999999));
 
-        string seed = "Miriamo54";
-        Random.InitState(seed.GetHashCode());
+        //string seed = "Miriamo54";
+        //Random.InitState(seed.GetHashCode());
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
@@ -197,16 +197,25 @@ public class GameManager : MonoBehaviour
         relationshipsBoard.Add((Race.HUMAN, Race.HUMAN), Relation.FRIEND);
         relationshipsBoard.Add((Race.HUMAN, Race.ELF), Relation.NEUTRAL);
         relationshipsBoard.Add((Race.HUMAN, Race.BEAST), Relation.NEUTRAL);
+        relationshipsBoard.Add((Race.HUMAN, Race.NEUTRAL), Relation.NEUTRAL);
 
         //ELF
         relationshipsBoard.Add((Race.ELF, Race.HUMAN), Relation.NEUTRAL);
         relationshipsBoard.Add((Race.ELF, Race.ELF), Relation.FRIEND);
         relationshipsBoard.Add((Race.ELF, Race.BEAST), Relation.FRIEND);
+        relationshipsBoard.Add((Race.ELF, Race.NEUTRAL), Relation.NEUTRAL);
 
         //BEAST
         relationshipsBoard.Add((Race.BEAST, Race.HUMAN), Relation.HOSTIL);
         relationshipsBoard.Add((Race.BEAST, Race.ELF), Relation.NEUTRAL);
         relationshipsBoard.Add((Race.BEAST, Race.BEAST), Relation.FRIEND);
+        relationshipsBoard.Add((Race.BEAST, Race.NEUTRAL), Relation.NEUTRAL);
+
+        //NEUTRAL
+        relationshipsBoard.Add((Race.NEUTRAL, Race.HUMAN), Relation.NEUTRAL);
+        relationshipsBoard.Add((Race.NEUTRAL, Race.ELF), Relation.NEUTRAL);
+        relationshipsBoard.Add((Race.NEUTRAL, Race.BEAST), Relation.NEUTRAL);
+        relationshipsBoard.Add((Race.NEUTRAL, Race.NEUTRAL), Relation.NEUTRAL);
     }
 
     public void SetUpTypeChart() //TODO A COMPLETER
@@ -858,7 +867,8 @@ public enum Relation {
 public enum Race {
     HUMAN,
     ELF,
-    BEAST
+    BEAST,
+    NEUTRAL
 }
 
 public enum Stats{
