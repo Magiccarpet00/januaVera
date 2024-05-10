@@ -6,14 +6,18 @@ using UnityEngine.Localization.Components;
 
 public class ButtonSkillTemplateParry : ButtonSkillTemplate
 {
-    public LocalizeStringEvent blockTypeValue;
+    public TextMeshProUGUI blockTypeValue;
     public TextMeshProUGUI damageValue;
     public override void SetUpUI(SkillData skillData)
     {
         base.SetUpUI(skillData);
 
         SkillParryData skillParryData = (SkillParryData)skillData;
-        blockTypeValue.SetEntry(skillParryData.damageType.ToString());
+
+        blockTypeValue.text = "";
+        foreach (DamageType item in skillParryData.parryDamageType)
+            blockTypeValue.text += item.ToString() + "\n";
+
         damageValue.text = skillParryData.damage.ToString();
     }
 }

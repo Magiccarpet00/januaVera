@@ -51,6 +51,10 @@ MonoBehaviour:
     m_Key: SWORD_HEAVY
     m_Metadata:
       m_Items: []
+  - m_Id: 69801411231879168
+    m_Key: SHIELD
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

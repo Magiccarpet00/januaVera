@@ -9,5 +9,7 @@ public class SkillParryData : SkillData
 
     public int damage;
     public DamageType damageType;
+
+    public List<DamageType> parryDamageType = new List<DamageType>();
     public int nbGarde;
 }

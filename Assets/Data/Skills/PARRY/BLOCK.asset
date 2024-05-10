@@ -25,5 +25,6 @@ MonoBehaviour:
   cost_ENDURANCE: 0
   parryType: 0
   damage: 0
-  damageType: 0
+  damageType: 1
+  parryDamageType: 0000000001000000
   nbGarde: 2

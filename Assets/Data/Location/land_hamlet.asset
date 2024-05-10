@@ -17,3 +17,13 @@ MonoBehaviour:
   sprite: {fileID: -201997998, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
   charactersInLocation:
   - {fileID: 11400000, guid: 69f36ed76d6d36f47a96885a9dfc6c4d, type: 2}
+  objectInLocation:
+  - {fileID: 11400000, guid: a3ae7b9af0e2f314381000c9e65adc01, type: 2}
+  - {fileID: 11400000, guid: 12f278db02e09c94f8b03fcad3324e66, type: 2}
+  - {fileID: 11400000, guid: 0c731dfdf37cf8a42a990db632b623f6, type: 2}
+  - {fileID: 11400000, guid: cbe9819a04b88e94bbd8398d8488394f, type: 2}
+  rngObjet:
+  - 1
+  - 1
+  - 1
+  - 1

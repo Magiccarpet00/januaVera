@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: INVENTORY
     m_Metadata:
       m_Items: []
+  - m_Id: 148177831607406592
+    m_Key: Order
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

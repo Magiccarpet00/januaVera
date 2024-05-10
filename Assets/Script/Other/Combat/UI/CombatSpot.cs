@@ -58,7 +58,7 @@ public class CombatSpot : MonoBehaviour
                     break;
                 case SkillType.PARRY:
                     SkillParryData loadedParrySkill = (SkillParryData)character.currentLoadedSkill;
-                    intentionTxt.text = loadedParrySkill.parryType.ToString() + " " + loadedParrySkill.damageType.ToString();
+                    intentionTxt.text = loadedParrySkill.parryType.ToString() + " " + loadedParrySkill.parryDamageType.ToString();
                     break;
                 case SkillType.SUMMON:
                     //SkillSummonData loadedSkill = (SkillAttackData)character.currentLoadedSkill;
@@ -99,7 +99,7 @@ public class CombatSpot : MonoBehaviour
             LifeLine armorLine = armorLifeLine.GetComponent<LifeLine>();
             armorLine.lifeSlider.maxValue = armor.s_STATE;
             armorLine.lifeSlider.value = armor.c_STATE;
-            armorLine.lifeTxt.text = armor.s_STATE + "/" + armor.c_STATE;
+            armorLine.lifeTxt.text = armor.c_STATE + "/" + armor.s_STATE;
             armorLine.shapeTxt.text = armor.objectData.material.ToString();
             armorLine.lifeColor[0].color = new Color(armorLine.armorLifeRef.r, armorLine.armorLifeRef.g, armorLine.armorLifeRef.b, 0.75f);
             armorLine.lifeColor[1].color = new Color(armorLine.armorLifeRef.r, armorLine.armorLifeRef.g, armorLine.armorLifeRef.b, 0.40f);

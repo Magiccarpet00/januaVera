@@ -32,6 +32,7 @@ public class PlayerCombatManager : MonoBehaviour
     public GameObject panelGlobal;
     public GameObject panelWeapon;
     public GameObject panelSkill;
+    public GameObject panelOrder;
 
     public Stack<GameObject> panelStack = new Stack<GameObject>();
 
@@ -116,6 +117,38 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
+    public void ClickCommandGlobal()
+    {
+        if (inputBlock) return;
+        PushPanel(panelOrder);
+        TargetMode(10);
+    }
+
+    public void ClickButtonComandReset()
+    {
+        ResetAllSelected();
+        PanelBack();
+    }
+
+    public void ClickButtonComandValide()
+    {
+        foreach (Character selectedCharacter in GameManager.instance.playerCharacter.selectedCharacters)
+        {
+            GameManager.instance.playerCharacter.charactersEncountered[selectedCharacter] = Relation.ENNEMY;
+        }
+
+        GameManager.instance.playerCharacter.SpreadRelation();
+
+        foreach (Character followersCharacters in GameManager.instance.playerCharacter.followersCharacters)
+        {
+            followersCharacters.AI_SetRandomLoadedSkill(followersCharacters.currentCombatManager.characters);
+        }
+        UpdateAllUI();
+        ResetAllSelected();
+        PanelBack();
+    }
+
+
     public void ClickButtonWeapon(Weapon weapon)
     {
         if (inputBlock) return;
@@ -188,6 +221,7 @@ public class PlayerCombatManager : MonoBehaviour
             _combatSpot.UpdateEndRoundUI();
             _combatSpot.character = null;
         }
+        dic_CharacterSpriteFight = new Dictionary<Character, SpriteFight>();
         GameManager.instance.QuitCombatScene();
     }
 
@@ -222,8 +256,6 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
-
-
     public void UpdateAllUI()
     {
         GameManager.instance.UpdateTmpInfo();
@@ -241,7 +273,7 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
-
+    //------TARGET-------
     public void TargetMode(int _nbTarget)
     {
         nbTarget = _nbTarget;

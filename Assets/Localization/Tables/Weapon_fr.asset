@@ -54,6 +54,10 @@ MonoBehaviour:
     m_Localized: SWORD_HEAVY
     m_Metadata:
       m_Items: []
+  - m_Id: 69801411231879168
+    m_Localized: SHIELD
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

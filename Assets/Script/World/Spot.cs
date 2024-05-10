@@ -187,7 +187,8 @@ public class Spot : MonoBehaviour
     {
         objectsOnSpot.Add(obj);
         float xOff = 0.4f;
-        Vector3 offSet = new Vector3(objectsOnSpot.Count*xOff - xOff, 0f, 0f);
+        float xOff2 = 0.6f;
+        Vector3 offSet = new Vector3(objectsOnSpot.Count*xOff + xOff2, 0f, 0f);
         GameObject objectUI = Instantiate(GameManager.instance.prefabObjectOnMap, transform.position + offSet, Quaternion.identity);
         objectsOnSpotUI.Push(objectUI);
     }

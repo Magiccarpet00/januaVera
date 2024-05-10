@@ -30,14 +30,10 @@ public class SpriteFight : MonoBehaviour
             return;
 
         lineRenderer.enabled = true;
-
-        //float offSetArrow = 0.5f;
-        //float offSetArrow2 =0.5f;
         foreach (Character target in character.selectedCharacters)
         {
             lineRenderer.positionCount = 2;
             lineRenderer.SetPosition(0, this.transform.position);
-            //Vector3 oscilation = new Vector3(Mathf.Sin(Time.time * offSetArrow) * offSetArrow2, Mathf.Sin(Time.time * offSetArrow) * offSetArrow2, -1);
             lineRenderer.SetPosition(1, PlayerCombatManager.instance.dic_CharacterSpriteFight[target].transform.position);
         }
     }
@@ -47,7 +43,6 @@ public class SpriteFight : MonoBehaviour
         if (PlayerCombatManager.instance.inTargetMode) 
         {
             animatorOver.SetTrigger("selected");
-            //CombatManager.instance.targetedCharacter.Add(character);
             GameManager.instance.playerCharacter.selectedCharacters.Add(character);
             PlayerCombatManager.instance.MinusTarget();
         }

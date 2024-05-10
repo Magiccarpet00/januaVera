@@ -277,6 +277,7 @@ public class Character : MonoBehaviour
     //
     public IEnumerator MettingOnPath()
     {
+
         List<Character> charactersOnPath = new List<Character>();
         List<Character> allCharactersInTwoSpot = new List<Character>();
         bool wantBattle = false;
@@ -305,7 +306,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        if (wantBattle)
+        if (wantBattle && !isDead)
         {
             //Debug.Log(this.gameObject.name + " start fight with count: " + charactersOnPath.Count + "  wantBattle = " + wantBattle);
             yield return new WaitForSeconds(0.3f);
@@ -323,7 +324,6 @@ public class Character : MonoBehaviour
             }
         }
     }
-
 
     //Relation
     public void SpreadRelation()
@@ -573,7 +573,7 @@ public class Character : MonoBehaviour
         SkillParryData skillParryData = (SkillParryData)currentLoadedSkill;
 
         if (nbGarde > 0)
-            if (skillParryData.damageType == skillAttackDataTaken.damageType)
+            if (skillParryData.parryDamageType.Contains(skillAttackDataTaken.damageType))
                 return true;
 
         return false;
@@ -761,9 +761,6 @@ public class Character : MonoBehaviour
 
         if (!isPlayer())
             AI_Command();
-        else
-            objectInventory.Add(GameManager.instance.CreateWeapon("CRACKED"));
-
     }
 
     public List<Weapon> GetWeaponsInventory()

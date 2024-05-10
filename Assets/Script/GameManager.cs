@@ -314,18 +314,6 @@ public class GameManager : MonoBehaviour
             cc.ToggleFreezeCam(toggle);
         }
 
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            GameObject currentTile = GetTile(1,1);
-            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-
-            ActiveObject obj = CreateActiveObject("LifeBottle");
-            spot[0].AddObject(obj);
-
-            //Armor obj2 = CreateArmor("Breastplate");
-            //spot[0].AddObject(obj2);
-        }
-
         if(Input.GetKeyDown(KeyCode.Y))
         {
             Debug.Log(playerCharacter.objectInventory.Count);
@@ -362,6 +350,11 @@ public class GameManager : MonoBehaviour
                 debugTeleport = false;
             else
                 debugTeleport = true;
+
+            playerCharacter.s_VITALITY += 100;
+            playerCharacter.c_VITALITY += 100;
+            playerCharacter.gold += 100;
+
         }
     }
 
@@ -570,84 +563,36 @@ public class GameManager : MonoBehaviour
 
     //CREATEUR D'OBJECT [CODE OBJECT PAS SUR]
  
-    public void AddObjectToCharacter(ObjectData item, InventoryType inventoryType, Character character) //[CODE CARNAGE] A ne pas reproduire si possible à supprimé plus tard
+    public void AddObjectToCharacter(ObjectData item, InventoryType inventoryType, Character character)
     {
         switch (inventoryType)
         {
             case InventoryType.INVENTORY:
-                switch (item.objectType)
-                {
-                    case ObjectType.ACTIVE:
-                        character.objectInventory.Add(new ActiveObject((ActiveObjectData)item));
-                        break;
-                    case ObjectType.ARMOR:
-                        character.objectInventory.Add(new Armor((ArmorData)item));
-                        break;
-                    case ObjectType.OBJECT:
-                        character.objectInventory.Add(new MyObject(item));
-                        break;
-                    case ObjectType.WEAPON:
-                        character.objectInventory.Add(new Weapon((WeaponData)item));
-                        break;
-                }
+                character.objectInventory.Add(CreateObject(item));
                 break;
-
             case InventoryType.ARMOR:
-                switch (item.objectType)
-                {
-                    case ObjectType.ARMOR:
-                        Armor armor = new Armor((ArmorData)item);
-                        character.armorsEquiped.Add(armor);
-                        break;
-                }
+                character.armorsEquiped.Add((Armor)CreateObject(item));
                 break;
-
             case InventoryType.SELL:
-                switch (item.objectType)
-                {
-                    case ObjectType.ACTIVE:
-                        character.objectToSell.Add(new ActiveObject((ActiveObjectData)item));
-                        break;
-                    case ObjectType.ARMOR:
-                        character.objectToSell.Add(new Armor((ArmorData)item));
-                        break;
-                    case ObjectType.OBJECT:
-                        character.objectToSell.Add(new MyObject(item));
-                        break;
-                    case ObjectType.WEAPON:
-                        character.objectToSell.Add(new Weapon((WeaponData)item));
-                        break;
-                }
+                character.objectToSell.Add(CreateObject(item));
                 break;
         }
-
-        
     }
 
-    public MyObject CreateObject(string nameObject)
+    public MyObject CreateObject(ObjectData item)
     {
-        ObjectData objData = (ObjectData)ScriptableManager.instance.FindData(nameObject);
-        MyObject obj = new MyObject(objData);
-        return obj;
-    }
-    public Weapon CreateWeapon(string nameWeapon)
-    {
-        WeaponData wp = (WeaponData)ScriptableManager.instance.FindData(nameWeapon);
-        Weapon w = new Weapon(wp);
-        return w;
-    }
-    public Armor CreateArmor(string nameArmor)
-    {
-        ArmorData ar = (ArmorData)ScriptableManager.instance.FindData(nameArmor);
-        Armor a = new Armor(ar);
-        return a;
-    }
-
-    public ActiveObject CreateActiveObject(string nameObject)
-    {
-        ActiveObjectData aod  = (ActiveObjectData)ScriptableManager.instance.FindData(nameObject);
-        ActiveObject obj = new ActiveObject(aod);
-        return obj;
+        switch (item.objectType)
+        {
+            case ObjectType.ACTIVE:
+                return new ActiveObject((ActiveObjectData)item);
+            case ObjectType.ARMOR:
+                return new Armor((ArmorData)item);
+            case ObjectType.OBJECT:
+                return new MyObject(item);
+            case ObjectType.WEAPON:
+                return new Weapon((WeaponData)item);
+        }
+        return null;
     }
 
     public string CreateId()
@@ -778,15 +723,7 @@ public class GameManager : MonoBehaviour
                 playerIsGoingToFight = true;
 
             character.CancelAction();
-
-            ////RELATION UPDATE
-            //if (initiator.charactersEncountered[character] == Relation.ENNEMY ||
-            //    initiator.charactersEncountered[character] == Relation.HOSTIL)
-            //    character.RelationChange(initiator, initiator.charactersEncountered[character]);
-
         }
-
-        //initiator.RelationFollower();
 
         if (playerIsGoingToFight)
         {
@@ -796,7 +733,9 @@ public class GameManager : MonoBehaviour
 
         GameObject combatManagerInstance = Instantiate(prefabCombatManagerInstance, transform.position, Quaternion.identity);
         CombatManager _combatManagerInstance = combatManagerInstance.GetComponent<CombatManager>();
+
         _combatManagerInstance.SetUpFight(characters);
+
     
     }
 

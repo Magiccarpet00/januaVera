@@ -10,4 +10,8 @@ public class LocationData : ScriptableObject
     public Sprite sprite;
 
     public List<CharacterData> charactersInLocation = new List<CharacterData>();
+
+
+    public List<ObjectData> objectInLocation = new List<ObjectData>();
+    public List<float> rngObjet = new List<float>();
 }

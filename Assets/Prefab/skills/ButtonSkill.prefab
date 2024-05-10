@@ -228,7 +228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.7000084, y: 11.599998}
+  m_AnchoredPosition: {x: 0.7000084, y: 22.4}
   m_SizeDelta: {x: -14.21, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &183653280
@@ -853,8 +853,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 18.139, y: 22.6}
-  m_SizeDelta: {x: -49.088, y: -86.602}
+  m_AnchoredPosition: {x: 14.331001, y: 0.22100067}
+  m_SizeDelta: {x: -41.471, y: -64.045}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &455169964
 CanvasRenderer:
@@ -2005,7 +2005,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.900002, y: 11.599998}
+  m_AnchoredPosition: {x: -15.334, y: 22.399967}
   m_SizeDelta: {x: -46.279, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1098726016
@@ -2651,7 +2651,7 @@ MonoBehaviour:
   nameValue: {fileID: 735428251}
   speedValue: {fileID: 1505128070}
   requirementValue: {fileID: 1042124077}
-  blockTypeValue: {fileID: 455169965}
+  blockTypeValue: {fileID: 455169963}
   damageValue: {fileID: 183653279}
 --- !u!1 &1565635759
 GameObject:
@@ -2689,7 +2689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.334999, y: 22.6}
+  m_AnchoredPosition: {x: -15.334999, y: 11.5}
   m_SizeDelta: {x: -46.279, y: -86.602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1565635763
