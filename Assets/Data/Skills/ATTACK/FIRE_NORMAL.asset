@@ -23,5 +23,5 @@ MonoBehaviour:
   req_FAITH: 0
   cost_VITALITY: 0
   cost_ENDURANCE: 0
-  damage: 6
+  damage: 8
   damageType: 2

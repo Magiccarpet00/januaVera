@@ -17,7 +17,7 @@ MonoBehaviour:
   speed: 2
   nbTarget: 0
   req_VITALITY: 0
-  req_ENDURANCE: 0
+  req_ENDURANCE: 1
   req_STRENGHT: 0
   req_DEXTERITY: 7
   req_FAITH: 0
@@ -26,4 +26,5 @@ MonoBehaviour:
   parryType: 1
   damage: 5
   damageType: 1
+  parryDamageType: 01000000
   nbGarde: 1

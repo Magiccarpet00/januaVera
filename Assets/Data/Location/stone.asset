@@ -18,5 +18,7 @@ MonoBehaviour:
   charactersInLocation: []
   objectInLocation:
   - {fileID: 11400000, guid: b9521d0dbfde5434ea3ce0137768bb71, type: 2}
+  - {fileID: 11400000, guid: cbe9819a04b88e94bbd8398d8488394f, type: 2}
   rngObjet:
-  - 10
+  - 0.5
+  - 0.5

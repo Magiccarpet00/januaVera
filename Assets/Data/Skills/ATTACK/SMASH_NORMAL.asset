@@ -18,7 +18,7 @@ MonoBehaviour:
   nbTarget: 1
   req_VITALITY: 0
   req_ENDURANCE: 0
-  req_STRENGHT: 0
+  req_STRENGHT: 5
   req_DEXTERITY: 0
   req_FAITH: 0
   cost_VITALITY: 0
