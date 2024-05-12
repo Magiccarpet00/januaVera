@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public int id = 0;
     public bool toggle;
     public bool debugTeleport;
+    public int AstarDeep;
+
 
     // GLOBAL VAR
     [Header("GLOBAL VAR")]
@@ -103,10 +105,10 @@ public class GameManager : MonoBehaviour
         SetUpTypeChart();
 
         //--------SEED RNG---------
-        Random.InitState((int)Random.Range(0, 9999999));
+        //Random.InitState((int)Random.Range(0, 9999999));
 
-        //string seed = "Miriamo54";
-        //Random.InitState(seed.GetHashCode());
+        string seed = "Miriamo54";
+        Random.InitState(seed.GetHashCode());
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
@@ -905,7 +907,7 @@ public class GlobalConst {
     public static float OFF_SET_TILE = 10f;    // La taille entre les tuiles pour la créeation
     public static int SIZE_BOARD = 10;         // Le nombres de tuiles sur un coté lors de la création
 
-    public static float TIME_TURN_SEC = 0.1f;    // Le temps de voir les actions se faire
+    public static float TIME_TURN_SEC = 0.3f;    // Le temps de voir les actions se faire
 
     public static float BASIC_SMOOTHTIME = 0.4f;
     public static float HIDE_SMOOTHTIME = 0.8f;

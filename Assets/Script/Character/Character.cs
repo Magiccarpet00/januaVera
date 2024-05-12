@@ -62,7 +62,8 @@ public class Character : MonoBehaviour
     public List<Buff> listBuff = new List<Buff>();
 
     //ASTAR
-    public List<List<GameObject>> paths = new List<List<GameObject>>();
+    //public List<List<GameObject>> paths = new List<List<GameObject>>();
+    private bool AStarSucces;
 
     public virtual void Start()
     {
@@ -99,6 +100,8 @@ public class Character : MonoBehaviour
     //
     // [CODI BUG]
     // Quand on clic sur la même case ça fait quand meme passer un tour, à réparer
+    public List<List<GameObject>> paths = new List<List<GameObject>>();
+
     public virtual void Move(GameObject spot)
     {
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
@@ -116,58 +119,70 @@ public class Character : MonoBehaviour
             paths = new List<List<GameObject>>();
             List<GameObject> bestPath = new List<GameObject>();
             int bestNbSpot = 1000;
-            AStarMove(spot.GetComponent<Spot>(), new List<GameObject>());
-
-            foreach (List<GameObject> path in paths)
-                if (path.Count < bestNbSpot)
-                {
-                    bestPath = path;
-                    bestNbSpot = path.Count;
-                }
-                    
-
-            foreach (GameObject _spot in bestPath)
+            List<GameObject> way = new List<GameObject>();
+            way.Add(currentSpot);
+            AStarSucces = false;
+            AStarMove(spot,currentSpot, way);
+            if(AStarSucces)
             {
-                Debug.Log(_spot.transform.parent.name);
-                //stackAction.Push(new ActionMove(this, _spot));
+                foreach (List<GameObject> path in paths)
+                    if (path.Count < bestNbSpot)
+                    {
+                        bestPath = path;
+                        bestNbSpot = path.Count;
+                    }
+
+                bestPath.RemoveAt(0);
+                Teleport(bestPath[0]);
+                bestPath.RemoveAt(0);
+                bestPath.Reverse();
+                foreach (GameObject _spot in bestPath)
+                    stackAction.Push(new ActionMove(this, _spot));
+            }
+            else
+            {
+                Debug.Log("AStarMove TO DEEP");
             }
 
+            
         }
     }
 
-    private void AStarMove(Spot destinationSpot, List<GameObject> spots)
-    {
-        if (spots.Count > 10)
-            return;
 
-        if(spots.Count != 0 && spots.Contains(destinationSpot.gameObject))
+    private void AStarMove(GameObject destinationSpot, GameObject currentSpot, List<GameObject> spots)
+    {
+        if(spots.Count > GameManager.instance.AstarDeep)
         {
-            paths.Add(spots);
             return;
         }
 
-        if(spots.Count == 0)
+        if(destinationSpot == currentSpot)
         {
-            foreach (GameObject adjSpot in currentSpot.GetComponent<Spot>().GetAdjacentSpots())
-            {
-                spots.Add(adjSpot);
-                AStarMove(destinationSpot, spots);
-            }
+            paths.Add(spots);
+            AStarSucces = true;
+            return;
         }
         else
         {
-            foreach (GameObject adjSpot in spots[spots.Count-1].GetComponent<Spot>().GetAdjacentSpots())
+            foreach (GameObject adjSpot in currentSpot.GetComponent<Spot>().GetAdjacentSpots())
             {
-                if(!spots.Contains(adjSpot))
+                if(spots.Contains(adjSpot) == false)
                 {
-                    spots.Add(adjSpot);
-                    AStarMove(destinationSpot, spots);
+                    List<GameObject> _spots = new List<GameObject>();
+
+                    foreach (GameObject spot in spots)
+                        _spots.Add(spot);
+
+                    _spots.Add(adjSpot);
+                    AStarMove(destinationSpot, adjSpot, _spots);
                 }
+
             }
+
         }
-        
 
     }
+
 
     public void Teleport(GameObject spot)
     {
@@ -360,7 +375,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        if (wantBattle && !isDead)
+        if (wantBattle && !isDead && leaderCharacter == null)
         {
             //Debug.Log(this.gameObject.name + " start fight with count: " + charactersOnPath.Count + "  wantBattle = " + wantBattle);
             yield return new WaitForSeconds(0.3f);
@@ -757,7 +772,7 @@ public class Character : MonoBehaviour
                 }
             }
 
-            if (fightFound)
+            if (fightFound && leaderCharacter == null)
             {
                 CommandFight();
             }
