@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScriptableManager : MonoBehaviour
 {
+    //CODE PLACARD
+    //Ce code n'est plus vraiment utile
 
     public static ScriptableManager instance;
 

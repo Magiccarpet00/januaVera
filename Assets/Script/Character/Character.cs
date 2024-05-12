@@ -61,6 +61,9 @@ public class Character : MonoBehaviour
     //EFFECT
     public List<Buff> listBuff = new List<Buff>();
 
+    //ASTAR
+    public List<List<GameObject>> paths = new List<List<GameObject>>();
+
     public virtual void Start()
     {
         if(!characterData.inLocation)
@@ -82,12 +85,12 @@ public class Character : MonoBehaviour
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
     {
-        if(GameManager.instance.playerCharacter?.onFight == false)
-        {   
-            transform.position = Vector3.SmoothDamp(transform.position, target+(Vector3)offSetOnSpot, ref velocity, smoothTime);
+        if (GameManager.instance.playerCharacter?.onFight == false)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, target + (Vector3)offSetOnSpot, ref velocity, smoothTime);
         }
 
-        if(isDead || characterData.inLocation)
+        if (isDead || characterData.inLocation)
             Visible(false);
     }
 
@@ -109,12 +112,61 @@ public class Character : MonoBehaviour
         if (adjSpot.Contains(spot) || GameManager.instance.debugTeleport)
             Teleport(spot);
         else
-            AStarMove();
+        {
+            paths = new List<List<GameObject>>();
+            List<GameObject> bestPath = new List<GameObject>();
+            int bestNbSpot = 1000;
+            AStarMove(spot.GetComponent<Spot>(), new List<GameObject>());
+
+            foreach (List<GameObject> path in paths)
+                if (path.Count < bestNbSpot)
+                {
+                    bestPath = path;
+                    bestNbSpot = path.Count;
+                }
+                    
+
+            foreach (GameObject _spot in bestPath)
+            {
+                Debug.Log(_spot.transform.parent.name);
+                //stackAction.Push(new ActionMove(this, _spot));
+            }
+
+        }
     }
 
-    private void AStarMove()
+    private void AStarMove(Spot destinationSpot, List<GameObject> spots)
     {
-        //TODO
+        if (spots.Count > 10)
+            return;
+
+        if(spots.Count != 0 && spots.Contains(destinationSpot.gameObject))
+        {
+            paths.Add(spots);
+            return;
+        }
+
+        if(spots.Count == 0)
+        {
+            foreach (GameObject adjSpot in currentSpot.GetComponent<Spot>().GetAdjacentSpots())
+            {
+                spots.Add(adjSpot);
+                AStarMove(destinationSpot, spots);
+            }
+        }
+        else
+        {
+            foreach (GameObject adjSpot in spots[spots.Count-1].GetComponent<Spot>().GetAdjacentSpots())
+            {
+                if(!spots.Contains(adjSpot))
+                {
+                    spots.Add(adjSpot);
+                    AStarMove(destinationSpot, spots);
+                }
+            }
+        }
+        
+
     }
 
     public void Teleport(GameObject spot)

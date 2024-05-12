@@ -667,7 +667,6 @@ public class GameManager : MonoBehaviour
                 {
                     action.PerfomAction();
                     yield return new WaitUntil(()=>dialogWindowOpened == false); //[CODE WARNING] dialogWindow sont toute les UI
-                    //yield return new WaitForSeconds(0.001f); //[CODE WARNING / REFACTOT] Peut etre une source de bug (jsp) si on clic trop vite
                 }
             }
         }
