@@ -8220,7 +8220,7 @@ MonoBehaviour:
   id: 0
   toggle: 0
   debugTeleport: 0
-  AstarDeep: 10
+  AstarDeep: 20
   cam: {fileID: 519420028}
   cam_fight: {fileID: 2092461398}
   prefabPlayer: {fileID: 7379619800762806694, guid: 5d74131c1b490b84da241d6ddfde7cee, type: 3}
