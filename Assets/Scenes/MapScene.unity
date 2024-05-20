@@ -8572,7 +8572,6 @@ MonoBehaviour:
   tmpInfo: {fileID: 279755572}
   tmpInfo2: {fileID: 654392721}
   prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
-  prefabClick_fx: {fileID: 2629817494258868373, guid: ee9b27b9b7e41b6489a95a583b8cab90, type: 3}
   panelDialog: {fileID: 2041011525}
   dialogText: {fileID: 625281673}
   dialogWindowOpened: 0
