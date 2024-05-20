@@ -8,6 +8,6 @@ public class ActionFight : Action
     public ActionFight(Character u) : base(GlobalConst.FIGHT_PRIORITY, u) {;}
     public override void PerfomAction()
     {
-        GameManager.instance. StartFight(GetUser().GetCurrentSpot().GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot(), GetUser());
+        GameManager.instance._StartFight(GetUser().GetCurrentSpot().GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot(), GetUser());
     }
 }

@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: Order
     m_Metadata:
       m_Items: []
+  - m_Id: 151852924472659968
+    m_Key: WAIT
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

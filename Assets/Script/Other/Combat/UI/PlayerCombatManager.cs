@@ -34,6 +34,9 @@ public class PlayerCombatManager : MonoBehaviour
     public GameObject panelSkill;
     public GameObject panelOrder;
 
+    public GameObject buttonBack;
+    public GameObject buttonEnd;
+
     public Stack<GameObject> panelStack = new Stack<GameObject>();
 
     public GameObject prefabButtonWeapon;
@@ -185,7 +188,10 @@ public class PlayerCombatManager : MonoBehaviour
         if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
             TargetMode(skillData.nbTarget);
         else
+        {
             GameManager.instance.playerCharacter.selectedCharacters.Add(GameManager.instance.playerCharacter);
+            UpdateEndButton();
+        }
     }
 
     public void ClickButtonBack()
@@ -285,6 +291,8 @@ public class PlayerCombatManager : MonoBehaviour
         nbTarget--;
         if (nbTarget == 0)
             inTargetMode = false;
+
+        UpdateEndButton();
     }
 
     public void ResetAllSelected()
@@ -302,12 +310,15 @@ public class PlayerCombatManager : MonoBehaviour
             panelStack.Peek().SetActive(false);
         panelStack.Push(panel);
         panel.SetActive(true);
+        UpdateBackButton();
     }
 
     public void PopPanel()
     {
         panelStack.Pop().SetActive(false);
         panelStack.Peek().SetActive(true);
+        UpdateBackButton();
+        UpdateEndButton();
     }
 
     public void SetUpPanel()
@@ -318,6 +329,28 @@ public class PlayerCombatManager : MonoBehaviour
         panelSkill.SetActive(false);
 
         PushPanel(panelGlobal);
+        UpdateBackButton();
+        UpdateEndButton();
+    }
+
+    public void UpdateBackButton()
+    {
+        if (panelStack.Peek() == panelGlobal)
+            buttonBack.SetActive(false);
+        else
+            buttonBack.SetActive(true);
+    }
+
+    public void UpdateEndButton()
+    {
+        if (panelStack.Peek() == panelOrder)
+            return;
+
+        if (GameManager.instance.playerCharacter.selectedCharacters.Count > 0)
+            buttonEnd.SetActive(true);
+        else
+            buttonEnd.SetActive(false);
+            
     }
 
     //

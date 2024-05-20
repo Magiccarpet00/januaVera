@@ -38,6 +38,7 @@ public class CombatManager : MonoBehaviour
         LoadSkillAI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateEndRoundAllUI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
+        if (playerOnFight) PlayerCombatManager.instance.UpdateEndButton();
         if (playerOnFight) PlayerCombatManager.instance.inputBlock = false;
 
 

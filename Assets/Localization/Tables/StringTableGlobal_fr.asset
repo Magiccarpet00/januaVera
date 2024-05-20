@@ -74,6 +74,10 @@ MonoBehaviour:
     m_Localized: Commander
     m_Metadata:
       m_Items: []
+  - m_Id: 151852924472659968
+    m_Localized: Attendre
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

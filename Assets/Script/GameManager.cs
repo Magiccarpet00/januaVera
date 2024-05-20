@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public bool toggle;
     public bool debugTeleport;
     public int AstarDeep;
+    public string debugName;
 
 
     // GLOBAL VAR
@@ -675,7 +676,7 @@ public class GameManager : MonoBehaviour
 
         foreach (Character character in characterList)
         {
-            if(!character.isDead) character.StartCoroutine("MettingOnPath");
+            if(!character.isDead) character.MettingOnPath();
         }
 
         yield return new WaitUntil(() => playerCharacter.onFight == false);
@@ -723,7 +724,12 @@ public class GameManager : MonoBehaviour
     //
     //      COMBAT
     //
-    public void StartFight(List<Character> characters, Character initiator)
+    public void _StartFight(List<Character> characters, Character initiator, bool fightOnPath = false)
+    {
+        StartCoroutine(StartFight(characters,initiator,fightOnPath));
+    }
+
+    public IEnumerator StartFight(List<Character> characters, Character initiator, bool fightOnPath= false)
     {
         bool playerIsGoingToFight = false;
 
@@ -734,6 +740,9 @@ public class GameManager : MonoBehaviour
 
             character.CancelAction();
         }
+
+        if (fightOnPath) 
+            yield return new WaitForSeconds(0.3f);
 
         if (playerIsGoingToFight)
         {

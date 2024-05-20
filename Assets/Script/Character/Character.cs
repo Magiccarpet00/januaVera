@@ -344,43 +344,44 @@ public class Character : MonoBehaviour
     //
     //      RELATION
     //
-    public IEnumerator MettingOnPath()
+    public void MettingOnPath() //Utiliser dans GameManager dans ExecuteActionQueue
     {
-
-        List<Character> charactersOnPath = new List<Character>();
-        List<Character> allCharactersInTwoSpot = new List<Character>();
-        bool wantBattle = false;
-
-        
-        allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
-        allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
-
-        foreach (Character characterOnPath in allCharactersInTwoSpot)
+        if (currentSpot != lastSpot)
         {
-            if((characterOnPath.lastSpot    == this.currentSpot &&
-                characterOnPath.currentSpot == this.lastSpot &&
-                characterOnPath.isDead      == false) 
-                    ||                
-               (characterOnPath.currentSpot == this.currentSpot &&
-                characterOnPath.lastSpot    == this.lastSpot &&
-                characterOnPath.isDead      == false))
+            List<Character> charactersOnPath = new List<Character>();
+            List<Character> allCharactersInTwoSpot = new List<Character>();
+            bool wantBattle = false;
+            charactersOnPath.Add(this);
+
+            allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
+            allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
+
+            foreach (Character characterOnPath in allCharactersInTwoSpot)
             {
-                charactersOnPath.Add(characterOnPath);
+                if ((characterOnPath.lastSpot == currentSpot &&
+                    characterOnPath.currentSpot == lastSpot &&
+                    characterOnPath.lastSpot != characterOnPath.currentSpot))
+                {
+                    charactersOnPath.Add(characterOnPath);
 
-                if (charactersEncountered.ContainsKey(characterOnPath) == false)
-                    charactersEncountered.Add(characterOnPath, GameManager.instance.relationshipsBoard[(this.characterData.race, characterOnPath.characterData.race)]);
+                    if (charactersEncountered.ContainsKey(characterOnPath) == false)
+                        charactersEncountered.Add(characterOnPath, GameManager.instance.relationshipsBoard[(characterData.race, characterOnPath.characterData.race)]);
 
-                if (WantToFight(characterOnPath))
-                    wantBattle = true;
+                    if (WantToFight(characterOnPath))
+                        wantBattle = true;
+                }
+            }
+
+            if (isPlayer())
+                Debug.Log(charactersOnPath.Count);
+
+            if (wantBattle && leaderCharacter == null)
+            {
+                StartCoroutine(GameManager.instance.StartFight(charactersOnPath, this, true));
             }
         }
-
-        if (wantBattle && !isDead && leaderCharacter == null)
-        {
-            //Debug.Log(this.gameObject.name + " start fight with count: " + charactersOnPath.Count + "  wantBattle = " + wantBattle);
-            yield return new WaitForSeconds(0.3f);
-            GameManager.instance.StartFight(charactersOnPath,this);
-        }
+        
+        
     }
 
     public void MettingOnSpot()
@@ -754,6 +755,11 @@ public class Character : MonoBehaviour
 
     public void AI_Command()
     {
+        if (gameObject.name == GameManager.instance.debugName) 
+        {
+            ;
+        }
+
         if (isDead == true)
         {
             CommandEmpty();
@@ -805,6 +811,11 @@ public class Character : MonoBehaviour
                 else
                 {
                     //character.CommandMove(character.leader.GetCurrentSpot());
+                    if (leaderCharacter.isDead)
+                    {
+                        leaderCharacter = null;
+                        AI_Command();
+                    }
                 }
             }
         }
