@@ -47,6 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   adjacentSpots: []
   adjacentSecretSpots: []
+  parrentTile: {fileID: 0}
+  charactersOnSpot: []
+  prefabOverMouse_fx: {fileID: 0}
+  prefabClick_fx: {fileID: 0}
 --- !u!58 &9041822603583598826
 CircleCollider2D:
   m_ObjectHideFlags: 0

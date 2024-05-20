@@ -142,6 +142,7 @@ public class CombatManager : MonoBehaviour
 
                 //[CODE DOUTEUX] Pas sur de la place de ce code ici
                 character.c_ENDURANCE -= character.currentLoadedSkill.cost_ENDURANCE;
+                if (character.c_ENDURANCE < 0) character.c_ENDURANCE = 0;
                 character.c_VITALITY -= character.currentLoadedSkill.cost_VITALITY;
 
                 character.currentLoadedObject.UseObject();

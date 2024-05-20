@@ -105,6 +105,7 @@ public class Character : MonoBehaviour
     public virtual void Move(GameObject spot)
     {
         List<GameObject> adjSpot = currentSpot.GetComponent<Spot>().GetAdjacentSpots();
+        
 
         if (isHide)
         {
@@ -112,7 +113,7 @@ public class Character : MonoBehaviour
             GameManager.instance.effectList.Add(new EffectOnPath(this, this));
         }
 
-        if (adjSpot.Contains(spot) || GameManager.instance.debugTeleport)
+        if (adjSpot.Contains(spot) || GameManager.instance.debugTeleport || spot == currentSpot)
             Teleport(spot);
         else
         {
@@ -215,9 +216,14 @@ public class Character : MonoBehaviour
 
     public void Rest()
     {
-        lastSpot = currentSpot;
-        c_ENDURANCE++;
-        if (c_ENDURANCE > s_ENDURANCE) c_ENDURANCE = s_ENDURANCE;
+        if(gold > 0)
+        {
+            lastSpot = currentSpot;
+            c_ENDURANCE++;
+            if (c_ENDURANCE > s_ENDURANCE) c_ENDURANCE = s_ENDURANCE;
+            gold--;
+            GameManager.instance.UpdateTmpInfo();
+        }
     }
 
     public void Search()
@@ -471,6 +477,11 @@ public class Character : MonoBehaviour
     public virtual void CommandEmpty()
     {
         stackAction.Push(new ActionEmpty(this));
+    }
+
+    public virtual void CommandWait()
+    {
+        stackAction.Push(new ActionMove(this, currentSpot));
     }
 
     public virtual void CommandMove(GameObject spot)

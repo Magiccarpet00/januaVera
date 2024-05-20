@@ -16,6 +16,7 @@ public class ItemShopSell : MonoBehaviour
         if (characterMerchant.BuyItem(myObject))
         {
             GameManager.instance.playerCharacter.objectInventory.Remove(myObject);
+            GameManager.instance.playerCharacter.gold += myObject.objectData.price;
             ShopUI.instance.UpdateShopUI();
             GameManager.instance.UpdateTmpInfo();
         }

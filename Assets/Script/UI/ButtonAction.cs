@@ -30,6 +30,15 @@ public class ButtonAction : MonoBehaviour
         }
     }
 
+    public void Wait()
+    {
+        if (GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandWait();
+            GameManager.instance._ExecuteActionQueue();
+        }
+    }
+
     public void Talk()
     {
         

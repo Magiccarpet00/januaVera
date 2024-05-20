@@ -626,7 +626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 325, y: 261}
+  m_AnchoredPosition: {x: 300.00003, y: 260.39}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &83350515
@@ -1769,7 +1769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.66, y: -782.62}
+  m_AnchoredPosition: {x: -28, y: -783}
   m_SizeDelta: {x: 592.68, y: 195.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &279755572
@@ -3946,8 +3946,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 304.76, y: 18}
-  m_SizeDelta: {x: -624.74, y: -178.24}
+  m_AnchoredPosition: {x: 260.9, y: 18}
+  m_SizeDelta: {x: -543.78, y: -178.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &614642125
 MonoBehaviour:
@@ -3969,7 +3969,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 175, y: 50}
+  m_CellSize: {x: 250, y: 50}
   m_Spacing: {x: 0, y: 5}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -4151,8 +4151,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: -198.76}
-  m_SizeDelta: {x: 81.562, y: 48.223}
+  m_AnchoredPosition: {x: 259.23618, y: -198.76}
+  m_SizeDelta: {x: 150.034, y: 48.223}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &654392721
 MonoBehaviour:
@@ -7336,8 +7336,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -85.64996, y: 18}
-  m_SizeDelta: {x: -194.45, y: -178.24}
+  m_AnchoredPosition: {x: -136.85999, y: 18}
+  m_SizeDelta: {x: -296.86, y: -178.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549111638
 MonoBehaviour:
@@ -7359,7 +7359,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 300, y: 100}
+  m_CellSize: {x: 250, y: 100}
   m_Spacing: {x: 0, y: 5}
   m_Constraint: 1
   m_ConstraintCount: 2
@@ -8563,6 +8563,7 @@ MonoBehaviour:
   - {fileID: 5700167105990369799, guid: 623f98c66c6c7b24a94eddd88c373671, type: 3}
   - {fileID: 5700167105990369799, guid: 651ea8397c51306408dff905a8fbd0ce, type: 3}
   - {fileID: 7357070788999016275, guid: be7fac6870323bc4ebb02f0bf8501bad, type: 3}
+  - {fileID: 2455649663024616122, guid: caccb487f51f42f41aaa51c96d9ed934, type: 3}
   worldCanvas: {fileID: 113513967}
   actionCanvas: {fileID: 1721163261}
   offSetInfoGrid: {x: 4, y: 0, z: 0}
@@ -8570,6 +8571,8 @@ MonoBehaviour:
   prefabInfoCharacter: {fileID: 4267781497862045117, guid: d85b88c6eee5aa6408c71f0c58fc88b9, type: 3}
   tmpInfo: {fileID: 279755572}
   tmpInfo2: {fileID: 654392721}
+  prefabOverMouse_fx: {fileID: 9037786480112069320, guid: 12ddeeeeda56d70478e476d9538c1bd4, type: 3}
+  prefabClick_fx: {fileID: 2629817494258868373, guid: ee9b27b9b7e41b6489a95a583b8cab90, type: 3}
   panelDialog: {fileID: 2041011525}
   dialogText: {fileID: 625281673}
   dialogWindowOpened: 0

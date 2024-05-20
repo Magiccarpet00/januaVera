@@ -15,8 +15,7 @@ public class Spot : MonoBehaviour
     [SerializeField] public List<MyObject> objectsOnSpot = new List<MyObject>();
     [SerializeField] public Stack<GameObject> objectsOnSpotUI = new Stack<GameObject>();
 
-    //FX
-    [SerializeField] private GameObject prefabOverMouse_fx;
+
     private Animator AnimatorOverMouse_fx;
 
 
@@ -54,34 +53,37 @@ public class Spot : MonoBehaviour
     }
 
 
-
-
-
     //
     //      FX
     //
-    
+
     //[CODE PLACARD] Je ne suis pas sur de cette fonctionaliter.
 
-    //void OnMouseEnter()
-    //{
-    //    GameObject over = Instantiate(prefabOverMouse_fx, this.transform.position, Quaternion.identity);
-    //    AnimatorOverMouse_fx = over.GetComponent<Animator>();
-    //    GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
-    //}
-    //void OnMouseExit()
-    //{
-    //    AnimatorOverMouse_fx.SetTrigger("end");
-    //    GameManager.instance.DestroyInfoGridLayoutGroupe();
-    //}
+    void OnMouseEnter()
+    {
+        if (GameManager.instance.inputBlock)
+            return;
+        GameObject over = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);
+        AnimatorOverMouse_fx = over.GetComponent<Animator>();
+        GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
+    }
+    void OnMouseExit()
+    {
+        if (GameManager.instance.inputBlock)
+            return;
+
+        AnimatorOverMouse_fx.SetTrigger("end");
+        GameManager.instance.DestroyInfoGridLayoutGroupe();
+    }
 
     private void OnMouseUpAsButton()
     {
-        if(GameManager.instance.inputBlock == false)
-        {
-            GameManager.instance.playerCharacter.CommandMove(this.gameObject);
-            GameManager.instance._ExecuteActionQueue();
-        }
+        if (GameManager.instance.inputBlock)
+            return;
+
+        AnimatorOverMouse_fx.SetTrigger("click");
+        GameManager.instance.playerCharacter.CommandMove(this.gameObject);
+        GameManager.instance._ExecuteActionQueue();
     }
 
     //

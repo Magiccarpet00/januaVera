@@ -18,3 +18,5 @@ MonoBehaviour:
   charactersInLocation:
   - {fileID: 11400000, guid: e6389f3f1debb4443bc3342f88f4e5bf, type: 2}
   - {fileID: 11400000, guid: e6389f3f1debb4443bc3342f88f4e5bf, type: 2}
+  objectInLocation: []
+  rngObjet: []

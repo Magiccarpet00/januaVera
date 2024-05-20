@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: farmhouse
   m_EditorClassIdentifier: 
   locationType: 2
-  actionsButton: 
+  actionsButton: 01000000
   sprite: {fileID: 872637560, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
   charactersInLocation:
   - {fileID: 11400000, guid: 32a8c789ec13a1441991ba0acffe973e, type: 2}
+  objectInLocation: []
+  rngObjet: []

@@ -78,6 +78,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI tmpInfo;
     public TextMeshProUGUI tmpInfo2;
 
+    //FX
+    [Header("FX")]
+    public GameObject prefabOverMouse_fx;
+
 
     //DIALOG
     public GameObject panelDialog;
@@ -106,10 +110,10 @@ public class GameManager : MonoBehaviour
         SetUpTypeChart();
 
         //--------SEED RNG---------
-        //Random.InitState((int)Random.Range(0, 9999999));
+        Random.InitState((int)Random.Range(0, 9999999));
 
-        string seed = "Miriamo54";
-        Random.InitState(seed.GetHashCode());
+        //string seed = "Miriamo54";
+        //Random.InitState(seed.GetHashCode());
         //-------------------------
 
         worldBuilder.StartWorldBuilder();
@@ -149,6 +153,7 @@ public class GameManager : MonoBehaviour
         dic_button.Add(ButtonType.SEARCH, allButton[5]);
         dic_button.Add(ButtonType.HIRE, allButton[6]);
         dic_button.Add(ButtonType.TRADE, allButton[7]);
+        dic_button.Add(ButtonType.WAIT, allButton[8]);
     }
 
     private void SetUpDicEnum()
@@ -429,14 +434,16 @@ public class GameManager : MonoBehaviour
     public List<ButtonType> GetStandarActionButton()
     {
         List<ButtonType> actionButtonStandar = new List<ButtonType>();
-        actionButtonStandar.Add(ButtonType.REST);
-
-        if(playerCharacter.GetHide() == false)
-            actionButtonStandar.Add(ButtonType.HIDE);
-        else
-            actionButtonStandar.Add(ButtonType.UNHIDE);
 
         actionButtonStandar.Add(ButtonType.FIGHT);
+        actionButtonStandar.Add(ButtonType.WAIT);
+
+        //actionButtonStandar.Add(ButtonType.REST);
+
+        //if(playerCharacter.GetHide() == false)
+        //    actionButtonStandar.Add(ButtonType.HIDE);
+        //else
+        //    actionButtonStandar.Add(ButtonType.UNHIDE);
 
         //actionButtonStandar.Add(ButtonType.SEARCH);
         //actionButtonStandar.Add(ButtonType.HIRE);
@@ -478,8 +485,8 @@ public class GameManager : MonoBehaviour
     public void UpdateTmpInfo()
     {
         string info = "";
-        info += "VIT  " + playerCharacter.c_VITALITY + "/" + playerCharacter.s_VITALITY +"\n";
-        info += "END  " + playerCharacter.c_ENDURANCE + "/" + playerCharacter.s_ENDURANCE + "\n";
+        info += "VIT  " + playerCharacter.c_VITALITY + "/" + playerCharacter.s_VITALITY + "\t" + "LVL " + playerCharacter.lvl + "\n";
+        info += "END  " + playerCharacter.c_ENDURANCE + "/" + playerCharacter.s_ENDURANCE + "\t" + "XP  " + playerCharacter.xp + "\n";
         info += "GOLD " + playerCharacter.gold;
 
         tmpInfo.text = info;
@@ -808,6 +815,7 @@ public enum ButtonType {
     SEARCH,
     HIRE,
     TRADE,
+    WAIT
 }
 
 public enum Element {
