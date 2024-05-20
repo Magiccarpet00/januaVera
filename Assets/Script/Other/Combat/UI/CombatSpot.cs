@@ -25,8 +25,7 @@ public class CombatSpot : MonoBehaviour
         if (character != null)
         {
             UpdateLife();
-            if (character != GameManager.instance.playerCharacter)
-                UpdateIntention();
+            UpdateIntention();
         }
     }
 
@@ -42,6 +41,12 @@ public class CombatSpot : MonoBehaviour
 
     public void UpdateIntention()
     {
+        if(character == GameManager.instance.playerCharacter)
+        {
+            intentionTxt.text = " ";
+            return;
+        }
+
         if (character.currentLoadedSkill == null || 
             character.selectedCharacters == null || 
             character.selectedCharacters.Contains(character)) 

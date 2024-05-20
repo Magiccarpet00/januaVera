@@ -675,15 +675,15 @@ public class GameManager : MonoBehaviour
 
         foreach (Character character in characterList)
         {
-            character.StartCoroutine("MettingOnPath");
+            if(!character.isDead) character.StartCoroutine("MettingOnPath");
         }
 
         yield return new WaitUntil(() => playerCharacter.onFight == false);
 
         foreach (Character character in characterList)
         {
-            character.MettingOnSpot();
-            if(!character.isPlayer()) character.AI_MakeCrew();
+            if(!character.isDead) character.MettingOnSpot();
+            if(!character.isPlayer() && !character.isDead) character.AI_MakeCrew();
         }
 
         actionQueue.Clear();

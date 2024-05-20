@@ -422,13 +422,13 @@ public class Character : MonoBehaviour
 
     public bool WantToFight(Character character)
     {
-        if (isDead == true || character == this || character.isDead == true)
+        if (character == this)
             return false;
 
         if(charactersEncountered.ContainsKey(character))
         {
             if (charactersEncountered[character] == Relation.HOSTIL ||
-            charactersEncountered[character] == Relation.ENNEMY)
+                charactersEncountered[character] == Relation.ENNEMY)
                 return true;
             else
                 return false;
@@ -747,8 +747,6 @@ public class Character : MonoBehaviour
 
         for (int i = 0; i < maxTarget; i++)
             res.Add(charactersTarget[rngTarget[i]]);
-
-            
         return res;
     }
 
@@ -763,7 +761,7 @@ public class Character : MonoBehaviour
         else
         {
             bool fightFound = false;
-            List<Character> charactersInSpot = GetAllCharactersInSpot();
+            List<Character> charactersInSpot = currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot();
             foreach (Character _characterInSpot in charactersInSpot)
             {
                 if (WantToFight(_characterInSpot))
