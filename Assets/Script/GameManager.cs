@@ -654,9 +654,6 @@ public class GameManager : MonoBehaviour
                 j++;
         }
 
-        
-
-
         // Recuperation des actions de chaque character
         foreach (Character character in characterList) 
         {

@@ -98,6 +98,10 @@ public class InventoryUI : MonoBehaviour
                     itemButtons.Add(newItemButton);
                 }
             }
+            else
+            {
+                playerCharacter.objectInventory.Remove(item); //[CODE CARNAGE] Vraiment pas du tout à sa place
+            }
         }
     }
 

@@ -370,7 +370,6 @@ public class Character : MonoBehaviour
             allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
             allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
 
-            //List<Character> uniqueLst = lst.Distinct().ToList(); 
             
             //BUG AVEC DES DOUBLON 
 
