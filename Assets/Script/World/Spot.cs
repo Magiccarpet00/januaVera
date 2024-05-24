@@ -16,7 +16,8 @@ public class Spot : MonoBehaviour
     [SerializeField] public Stack<GameObject> objectsOnSpotUI = new Stack<GameObject>();
 
 
-    private Animator AnimatorOverMouse_fx;
+    private GameObject overMouse_fx;
+    private Animator animatorOverMouse_fx;
 
 
     private void Update()
@@ -57,31 +58,43 @@ public class Spot : MonoBehaviour
     //      FX
     //
 
-    //[CODE PLACARD] Je ne suis pas sur de cette fonctionaliter.
-
-    void OnMouseEnter()
-    {
-        if (GameManager.instance.inputBlock)
-            return;
-        GameObject over = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);
-        AnimatorOverMouse_fx = over.GetComponent<Animator>();
-        GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
-    }
+    //[CODE PLACARD] Je ne suis pas sur de cette fonctionaliter
+    //void OnMouseEnter()
+    //{
+    //    if (GameManager.instance.inputBlock || GameManager.instance.playerCharacter.GetCurrentSpot() == this.gameObject)
+    //        return;
+    //    overMouse_fx = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);
+    //    animatorOverMouse_fx = overMouse_fx.GetComponent<Animator>();
+    //    GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
+    //}
     void OnMouseExit()
     {
-        if (GameManager.instance.inputBlock)
+        if (GameManager.instance.inputBlock || GameManager.instance.playerCharacter?.GetCurrentSpot() == this.gameObject)
             return;
 
-        AnimatorOverMouse_fx.SetTrigger("end");
-        GameManager.instance.DestroyInfoGridLayoutGroupe();
+        if(overMouse_fx != null)
+            animatorOverMouse_fx?.SetTrigger("end");
+        //GameManager.instance.DestroyInfoGridLayoutGroupe();
     }
 
-    private void OnMouseUpAsButton()
+    void OnMouseOver()
     {
-        if (GameManager.instance.inputBlock)
+        if (GameManager.instance.inputBlock || GameManager.instance.playerCharacter?.GetCurrentSpot() == this.gameObject)
             return;
 
-        AnimatorOverMouse_fx.SetTrigger("click");
+        if(overMouse_fx == null)
+        {
+            overMouse_fx = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);
+            animatorOverMouse_fx = overMouse_fx.GetComponent<Animator>();
+        }
+    }
+
+    void OnMouseUpAsButton()
+    {
+        if (GameManager.instance.inputBlock || GameManager.instance.playerCharacter?.GetCurrentSpot() == this.gameObject)
+            return;
+
+        animatorOverMouse_fx.SetTrigger("click");
         GameManager.instance.playerCharacter.CommandMove(this.gameObject);
         GameManager.instance._ExecuteActionQueue();
     }

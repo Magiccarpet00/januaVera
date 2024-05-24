@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class Character : MonoBehaviour
 {
@@ -216,7 +218,7 @@ public class Character : MonoBehaviour
 
     public void Rest()
     {
-        if(gold > 0)
+        if(gold > 0 && c_ENDURANCE != s_ENDURANCE)
         {
             lastSpot = currentSpot;
             c_ENDURANCE++;
@@ -234,9 +236,10 @@ public class Character : MonoBehaviour
     public IEnumerator _Search()
     {
         lastSpot = currentSpot;
-        string dialog = "TAKE FIRST ?\n\n";
+        Spot _currentSpot = currentSpot.GetComponent<Spot>();
+        string dialog = "TAKE ALL ?\n\n";
 
-        foreach (MyObject obj in currentSpot.GetComponent<Spot>().objectsOnSpot)
+        foreach (MyObject obj in _currentSpot.objectsOnSpot)
             dialog += "-" + obj.objectData.name + "\n";
 
         //BLOC pour les DialogBox
@@ -245,7 +248,8 @@ public class Character : MonoBehaviour
         GameManager.instance.CloseDialogWindow();
 
         if (GameManager.instance.dialogAnswer == AnswerButton.YES)
-            this.AddObject(currentSpot.GetComponent<Spot>().TakeObject());
+            for (int i = 0; i < _currentSpot.objectsOnSpot.Count+1; i++)
+                this.AddObject(_currentSpot.TakeObject());
 
         GameManager.instance.dialogAnswer = AnswerButton.WAIT;
     }
@@ -352,21 +356,33 @@ public class Character : MonoBehaviour
     //
     public void MettingOnPath() //Utiliser dans GameManager dans ExecuteActionQueue
     {
+        if (GameManager.instance.debugName == gameObject.name)
+        {
+            ;
+        }
+
         if (currentSpot != lastSpot)
         {
             List<Character> charactersOnPath = new List<Character>();
             List<Character> allCharactersInTwoSpot = new List<Character>();
             bool wantBattle = false;
-            charactersOnPath.Add(this);
 
             allCharactersInTwoSpot.AddRange(lastSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
             allCharactersInTwoSpot.AddRange(currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot());
 
+            //List<Character> uniqueLst = lst.Distinct().ToList(); 
+            
+            //BUG AVEC DES DOUBLON 
+
             foreach (Character characterOnPath in allCharactersInTwoSpot)
             {
                 if ((characterOnPath.lastSpot == currentSpot &&
-                    characterOnPath.currentSpot == lastSpot &&
-                    characterOnPath.lastSpot != characterOnPath.currentSpot))
+                     characterOnPath.currentSpot == lastSpot &&
+                     characterOnPath.lastSpot != characterOnPath.currentSpot)
+                    ||
+                    (characterOnPath.lastSpot == lastSpot &&
+                     characterOnPath.currentSpot == currentSpot &&
+                     characterOnPath.lastSpot != characterOnPath.currentSpot))
                 {
                     charactersOnPath.Add(characterOnPath);
 
@@ -693,7 +709,9 @@ public class Character : MonoBehaviour
 
         foreach (Character character in currentSpot.GetComponent<Spot>().GetAllCharactersAliveOnMapInSpot())
         {
-            if(character != this && character.characterData.name == this.characterData.name)
+            if(character != this && 
+               character.characterData.name == this.characterData.name &&
+               followersCharacters.Contains(character) == false)
             {
                 AddFollower(this, character);
             }
