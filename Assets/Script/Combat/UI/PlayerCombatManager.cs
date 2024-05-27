@@ -58,6 +58,13 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //TMP
+        if(GameManager.instance.playerCharacter != null)
+            if(GameManager.instance.playerCharacter.isDead) inputBlock = true;
+    }
+
     public void AddCharacterOnSpot(Character c)
     {
         // COMBAT SPOT

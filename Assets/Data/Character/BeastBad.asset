@@ -24,7 +24,7 @@ MonoBehaviour:
   drop_XP: 1
   spriteMap: {fileID: 732423952, guid: 024764276ffe0614a92ccc61f0ebce48, type: 3}
   spriteFight: {fileID: 732423952, guid: 7f03b02b20ee3f44896b30fc51a86e78, type: 3}
-  workCost: 5
+  workCost: 0
   isMerchant: 0
   inLocation: 0
   currentMood: 1

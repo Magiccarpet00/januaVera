@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d676fc5465a7fa4f8c2fd875d4f5ac3, type: 3}
   m_Name: wood_3_spot_1
   m_EditorClassIdentifier: 
-  dropChance: 4b00000019000000
+  dropChance: 190000004b000000
   locations:
   - {fileID: 0}
   - {fileID: 11400000, guid: de66340aa17afbd4db7968d4d900ddc4, type: 2}

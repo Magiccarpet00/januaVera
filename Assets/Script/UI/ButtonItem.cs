@@ -23,5 +23,6 @@ public class ButtonItem : MonoBehaviour
         }
         GameManager.instance.playerCharacter.objectInventory.Remove(activeObject);
         InventoryUI.instance.UpdateInventory();
+        GameManager.instance.UpdateTmpInfo();
     }
 }

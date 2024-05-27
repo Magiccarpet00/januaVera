@@ -24,12 +24,12 @@ MonoBehaviour:
   drop_XP: 2
   spriteMap: {fileID: -1714338562, guid: 024764276ffe0614a92ccc61f0ebce48, type: 3}
   spriteFight: {fileID: -1714338562, guid: 7f03b02b20ee3f44896b30fc51a86e78, type: 3}
-  workCost: 5
+  workCost: 0
   isMerchant: 0
   inLocation: 0
   currentMood: 0
   objectInventory:
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
   armorsEquiped:
-  - {fileID: 11400000, guid: 12f278db02e09c94f8b03fcad3324e66, type: 2}
+  - {fileID: 11400000, guid: e9b48a08dfe9be34585cb3100ff03d61, type: 2}
   objectToSell: []

@@ -283,7 +283,7 @@ public class WorldBuilder : MonoBehaviour
      */
     private void CreateProtoWorld()
     {
-        protoWorld[2, 2] = TileType.LAND; //TODO a refactot pour que les tiles de départ change 
+        protoWorld[5, 5] = TileType.WOOD; //TODO a refactot pour que les tiles de départ change 
 
         for (int y = 0; y < GlobalConst.SIZE_BOARD; y++)
         {

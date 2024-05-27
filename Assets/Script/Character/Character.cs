@@ -583,7 +583,7 @@ public class Character : MonoBehaviour
             lvl++;
             lvlPoint += 5;
         }
-        InventoryUI.instance.UpdateInventory();
+        GameManager.instance.UpdateTmpInfo();
     }
 
     //      FIGHT
@@ -686,6 +686,7 @@ public class Character : MonoBehaviour
         {
             //Debug.Log(this + " dead");
             isDead = true;
+            if(isPlayer()) GameManager.instance.inputBlock = true;
             //DieForMap();
         }
     }
@@ -818,17 +819,27 @@ public class Character : MonoBehaviour
                             CommandEmpty();
                             break;
                         case MoodAI.MOVING_AREA:
-                            TileType startTileType = currentSpot.GetComponent<Spot>().parrentTile.GetTileData().tileType;
-                            List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
-                            bool find = false;
-                            int rng = 0;
-                            while (find == false)
+
+                            float rng2 = Random.Range(0f, 1f);
+                            
+                            if(rng2<0.3f)
                             {
-                                rng = Random.Range(0, adjSpot.Count);
-                                if (adjSpot[rng].GetComponent<Spot>().parrentTile.GetTileData().tileType == startTileType)
-                                    find = true;
+                                TileType startTileType = currentSpot.GetComponent<Spot>().parrentTile.GetTileData().tileType;
+                                List<GameObject> adjSpot = GetCurrentSpot().GetComponent<Spot>().GetAdjacentSpots();
+                                bool find = false;
+                                int rng = 0;
+                                while (find == false)
+                                {
+                                    rng = Random.Range(0, adjSpot.Count);
+                                    if (adjSpot[rng].GetComponent<Spot>().parrentTile.GetTileData().tileType == startTileType)
+                                        find = true;
+                                }
+                                CommandMove(adjSpot[rng]);
                             }
-                            CommandMove(adjSpot[rng]);
+                            else
+                            {
+                                CommandWait();
+                            }
 
                             
                             break;
@@ -848,9 +859,6 @@ public class Character : MonoBehaviour
             }
         }
     }
-
-
-
 
     //
     //      GET & SET

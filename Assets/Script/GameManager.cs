@@ -176,7 +176,7 @@ public class GameManager : MonoBehaviour
 
     private void SetUpPlayer()
     {
-        Vector2Int startLocation = new Vector2Int(1, 1);
+        Vector2Int startLocation = new Vector2Int(5, 5);
         
         GameObject currentTile = GetTile(startLocation.x, startLocation.y);
         Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
