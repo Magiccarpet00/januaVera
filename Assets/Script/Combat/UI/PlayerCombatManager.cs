@@ -58,6 +58,12 @@ public class PlayerCombatManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        foreach (GameObject cs in combatSpots)
+            cs.GetComponent<CombatSpot>().SetActiveSpotUI(false);
+    }
+
     private void Update()
     {
         //TMP

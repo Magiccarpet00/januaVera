@@ -197,6 +197,7 @@ public class GameManager : MonoBehaviour
             tile.GetComponentInChildren<Tile>().CleanCloud();
         }
 
+
     }
 
     public void SetUpRacisme()
