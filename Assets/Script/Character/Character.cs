@@ -42,6 +42,8 @@ public class Character : MonoBehaviour
     //INVENTORY
     public List<MyObject> objectInventory = new List<MyObject>();
     public List<Armor> armorsEquiped = new List<Armor>();
+    public Weapon[] weaponHands = new Weapon[2];
+    private int pointerHands = 0;
 
     //SHOP
     public List<MyObject> objectToSell = new List<MyObject>();
@@ -563,6 +565,63 @@ public class Character : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    public bool isEquipedObject(MyObject obj)
+    {
+        if (armorsEquiped.Contains(obj)) return true;
+        if (weaponHands.Contains(obj)) return true;
+        return false;
+    }
+
+    public void EquipArmor(Armor armor)
+    {
+        ArmorData firstArmorDataEquiped = null;
+        ArmorData armorDataToEquip = (ArmorData)armor.objectData;
+
+        if (armorsEquiped.Count == 0)
+        {
+            armorsEquiped.Add(armor);
+        }
+        else
+        {
+            firstArmorDataEquiped = (ArmorData)armorsEquiped[0].objectData;
+            if(firstArmorDataEquiped.isAdditive == false)
+            {
+                if (armorDataToEquip.isAdditive == false)
+                    armorsEquiped[0] =armor;
+                else
+                    armorsEquiped.Insert(0, armor);
+            }
+            else
+            {
+                if (armorDataToEquip.isAdditive == false)
+                    armorsEquiped.Insert(0, armor);
+                else
+                    armorsEquiped.Add(armor);
+            }
+        }
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        WeaponData weaponData = (WeaponData)weapon.objectData;
+        if (weaponData.nbHand == 2)
+        {
+            weaponHands[0] = weapon;
+            weaponHands[1] = weapon;
+        }
+        else
+        {
+            if(weaponHands[1] == weaponHands[0])
+            {
+                weaponHands[0] = null;
+                weaponHands[1] = null;
+            }
+            
+            weaponHands[pointerHands] = weapon;
+            pointerHands = (pointerHands + 1) % 2;
+        }
     }
 
     public void AddObject(MyObject obj) //[CODE DELETE] Methode a supprimé ne marche pas car il n'y a pas de cast sur obj

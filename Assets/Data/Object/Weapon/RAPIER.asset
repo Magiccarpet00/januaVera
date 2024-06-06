@@ -21,3 +21,4 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 2d9f092ab002c7744a028b18bf42a970, type: 2}
   - {fileID: 11400000, guid: 04da40895d446fc4d8371dbf03f893d1, type: 2}
+  nbHand: 1

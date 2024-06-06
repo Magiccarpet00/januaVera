@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour
 
     public GameObject panelInventory;
     public TextMeshProUGUI tmpStatsText;
+    public TextMeshProUGUI tmpEquipedText;
     public bool isOpen;
 
     public GameObject panelItemButton;
@@ -48,6 +49,9 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateInventory()
     {
+
+        //-----STAT-----
+
         foreach (GameObject item in itemButtons)
             Destroy(item);
 
@@ -67,22 +71,47 @@ public class InventoryUI : MonoBehaviour
             stats += "POINT: " + playerCharacter.lvlPoint;
             panelLvlUp.SetActive(true);
         }
-
-
         tmpStatsText.text = stats;
+
+        //-----EQUIP-----
+
+        tmpEquipedText.text = "EQUIP:\n\n";
+        tmpEquipedText.text += "Armor: ";
+        if (playerCharacter.armorsEquiped.Count > 0)
+            tmpEquipedText.text += playerCharacter.armorsEquiped[0].objectData.name + "\n";
+        else
+            tmpEquipedText.text += "\n";
+
+        WeaponData weaponDataFirstHand = (WeaponData)(playerCharacter.weaponHands[0]?.objectData);
+        WeaponData weaponDataSecondHand = (WeaponData)(playerCharacter.weaponHands[1]?.objectData);
+
+        tmpEquipedText.text += "Right hand: ";
+        if(weaponDataFirstHand != null)
+            tmpEquipedText.text += weaponDataFirstHand.name + "\n";
+        else
+            tmpEquipedText.text +="\n";
+
+        tmpEquipedText.text += "Left hand: ";
+        if (weaponDataSecondHand != null)
+            tmpEquipedText.text += weaponDataSecondHand.name + "\n";
+        else
+            tmpEquipedText.text += "\n";
+
+        //-----INVENTORY-----
+
 
         foreach (MyObject item in playerCharacter.objectInventory)
         {
-            if(item.c_STATE > 0)
+            if(item.c_STATE > 0 && playerCharacter.isEquipedObject(item) == false)
             {
-                if (item.isActiveObject())
+                if (item.isActiveObject() || item.isArmor() || item.isWeapon())
                 {
                     GameObject newItemButton = Instantiate(prefabItemButton, transform.position, Quaternion.identity);
                     newItemButton.GetComponentInChildren<TextMeshProUGUI>().text = item.objectData.name;
                     newItemButton.transform.SetParent(panelItemButton.transform);
                     newItemButton.transform.localScale = new Vector3(1, 1, 1);
 
-                    newItemButton.GetComponent<ButtonItem>().activeObject = (ActiveObject)item;
+                    newItemButton.GetComponent<ButtonItem>().myObject = item;
 
                     itemButtons.Add(newItemButton);
                 }
@@ -100,7 +129,7 @@ public class InventoryUI : MonoBehaviour
             }
             else
             {
-                playerCharacter.objectInventory.Remove(item); //[CODE CARNAGE] Vraiment pas du tout à sa place
+                //playerCharacter.objectInventory.Remove(item); //[CODE CARNAGE] Vraiment pas du tout à sa place
             }
         }
     }

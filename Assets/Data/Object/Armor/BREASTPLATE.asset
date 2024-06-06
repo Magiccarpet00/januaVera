@@ -17,3 +17,4 @@ MonoBehaviour:
   init_STATE: 8
   price: 10
   describe: Armor of steel
+  isAdditive: 0

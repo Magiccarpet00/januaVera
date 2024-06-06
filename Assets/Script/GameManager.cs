@@ -763,7 +763,6 @@ public class GameManager : MonoBehaviour
     
     }
 
-
     //ClearCombatScene a mettre dans PlayerCombatManager
     public void QuitCombatScene()
     {

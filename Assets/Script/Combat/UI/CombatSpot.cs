@@ -74,7 +74,7 @@ public class CombatSpot : MonoBehaviour
                     intentionTxt.text = loadedHealSkill.amount.ToString() + " " + "HEAL"; //[CODE CARNAGE]
                     break;
             }
-            intentionTxt.text += "\n" + "speed :" + character.currentLoadedSkill.speed.ToString();
+            intentionTxt.text += "\n" + "time :" + character.currentLoadedSkill.speed.ToString();
         }
 
 

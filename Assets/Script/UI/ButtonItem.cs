@@ -4,24 +4,42 @@ using UnityEngine;
 
 public class ButtonItem : MonoBehaviour
 {
-    public ActiveObject activeObject;
+    public MyObject myObject;
 
     public void ClickItem()
     {
-        switch (activeObject.activeObjectData.skillData.skillType)
+        Character playerCharacter = GameManager.instance.playerCharacter;
+
+        if (myObject.isActiveObject())
         {
-            case SkillType.ATTACK:
-                break;
-            case SkillType.PARRY:
-                break;
-            case SkillType.SUMMON:
-                break;
-            case SkillType.HEAL:
-                SkillHealData skillHealData = (SkillHealData)activeObject.activeObjectData.skillData;
-                GameManager.instance.playerCharacter.TakeHeal(skillHealData.amount);
-                break;
+            ActiveObject activeObject = (ActiveObject)myObject;
+            switch (activeObject.activeObjectData.skillData.skillType)
+            {
+                case SkillType.ATTACK:
+                    break;
+                case SkillType.PARRY:
+                    break;
+                case SkillType.SUMMON:
+                    break;
+                case SkillType.HEAL:
+                    SkillHealData skillHealData = (SkillHealData)activeObject.activeObjectData.skillData;
+                    playerCharacter.TakeHeal(skillHealData.amount);
+                    break;
+            }
+            playerCharacter.objectInventory.Remove(activeObject);
         }
-        GameManager.instance.playerCharacter.objectInventory.Remove(activeObject);
+
+        if (myObject.isArmor())
+        {
+            playerCharacter.EquipArmor((Armor)myObject);
+        }
+
+        if(myObject.isWeapon())
+        {
+            playerCharacter.EquipWeapon((Weapon)myObject);
+        }
+
+
         InventoryUI.instance.UpdateInventory();
         GameManager.instance.UpdateTmpInfo();
     }
