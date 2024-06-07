@@ -41,8 +41,8 @@ public class Character : MonoBehaviour
 
     //INVENTORY
     public List<MyObject> objectInventory = new List<MyObject>();
-    public List<Armor> armorsEquiped = new List<Armor>();
-    public Weapon[] weaponHands = new Weapon[2];
+    [HideInInspector] public List<Armor> armorsEquiped = new List<Armor>();
+    [HideInInspector] public Weapon[] weaponHands = new Weapon[2];
     private int pointerHands = 0;
 
     //SHOP
@@ -624,6 +624,24 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void AutoEquip()
+    {
+
+        if(this == GameManager.instance.playerCharacter)
+        {
+            ;
+        }
+
+        foreach (MyObject obj in objectInventory)
+        {
+            if (obj.isArmor())
+                EquipArmor((Armor)obj);
+
+            if (obj.isWeapon())
+                EquipWeapon((Weapon)obj);
+        }
+    }
+
     public void AddObject(MyObject obj) //[CODE DELETE] Methode a supprimé ne marche pas car il n'y a pas de cast sur obj
     {
         if (obj == null) return;
@@ -931,6 +949,7 @@ public class Character : MonoBehaviour
         SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
         UpdateSmoothTime();
         Teleport(spot);
+        
 
         if (!isPlayer())
             AI_Command();

@@ -30,6 +30,7 @@ public class PlayerCombatManager : MonoBehaviour
     //Panel
     public GameObject CanvasFight;
     public GameObject panelGlobal;
+    public GameObject panelReadyWeapon;
     public GameObject panelWeapon;
     public GameObject panelSkill;
     public GameObject panelOrder;
@@ -248,7 +249,10 @@ public class PlayerCombatManager : MonoBehaviour
     public void PanelBack()
     {
         if (panelStack.Peek() == panelGlobal)
+        {
+            FillReadyToUseWeapons();
             return;
+        }
 
         if (panelStack.Peek() == panelWeapon)
             ClearButtonWeapon();
@@ -257,6 +261,38 @@ public class PlayerCombatManager : MonoBehaviour
             ClearButtonSkill();
 
         PopPanel();
+    }
+
+    public void FillReadyToUseWeapons() //TODO A REFACTOT DEMAIN, BUG QUAND JE FAIT CHANGE WEAPON -> BACK
+    {
+        ClearButtonWeapon();
+        if (GameManager.instance.playerCharacter.weaponHands[0] != null)
+        {
+            GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
+            btnWeapon.transform.SetParent(panelReadyWeapon.transform);
+            btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
+
+            ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
+            bw.SetUpUI(GameManager.instance.playerCharacter.weaponHands[0]);
+
+            buttonsWeapons.Add(btnWeapon);
+        }
+
+        if (GameManager.instance.playerCharacter.weaponHands[1] != null &&
+           GameManager.instance.playerCharacter.weaponHands[1] != GameManager.instance.playerCharacter.weaponHands[0])
+        {
+            GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
+            btnWeapon.transform.SetParent(panelReadyWeapon.transform);
+            btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
+
+            ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
+            bw.SetUpUI(GameManager.instance.playerCharacter.weaponHands[1]);
+
+            buttonsWeapons.Add(btnWeapon);
+        }
+
+
+        
     }
 
     public void ClearButtonWeapon()
@@ -342,6 +378,7 @@ public class PlayerCombatManager : MonoBehaviour
         panelSkill.SetActive(false);
 
         PushPanel(panelGlobal);
+        FillReadyToUseWeapons();
         UpdateBackButton();
         UpdateEndButton();
     }

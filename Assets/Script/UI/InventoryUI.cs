@@ -78,28 +78,26 @@ public class InventoryUI : MonoBehaviour
         tmpEquipedText.text = "EQUIP:\n\n";
         tmpEquipedText.text += "Armor: ";
         if (playerCharacter.armorsEquiped.Count > 0)
-            tmpEquipedText.text += playerCharacter.armorsEquiped[0].objectData.name + "\n";
+            tmpEquipedText.text += playerCharacter.armorsEquiped[0].getTmpInfo() +   "\n";
         else
             tmpEquipedText.text += "\n";
 
-        WeaponData weaponDataFirstHand = (WeaponData)(playerCharacter.weaponHands[0]?.objectData);
-        WeaponData weaponDataSecondHand = (WeaponData)(playerCharacter.weaponHands[1]?.objectData);
+        Weapon weaponDataFirstHand = playerCharacter.weaponHands[0];
+        Weapon weaponDataSecondHand = playerCharacter.weaponHands[1];
 
         tmpEquipedText.text += "Right hand: ";
         if(weaponDataFirstHand != null)
-            tmpEquipedText.text += weaponDataFirstHand.name + "\n";
+            tmpEquipedText.text += weaponDataFirstHand.getTmpInfo() + "\n";
         else
             tmpEquipedText.text +="\n";
 
         tmpEquipedText.text += "Left hand: ";
         if (weaponDataSecondHand != null)
-            tmpEquipedText.text += weaponDataSecondHand.name + "\n";
+            tmpEquipedText.text += weaponDataSecondHand.getTmpInfo() + "\n";
         else
             tmpEquipedText.text += "\n";
 
         //-----INVENTORY-----
-
-
         foreach (MyObject item in playerCharacter.objectInventory)
         {
             if(item.c_STATE > 0 && playerCharacter.isEquipedObject(item) == false)

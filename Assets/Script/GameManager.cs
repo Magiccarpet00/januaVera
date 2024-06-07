@@ -576,6 +576,8 @@ public class GameManager : MonoBehaviour
         foreach (var item in characterData.objectToSell)
             AddObjectToCharacter(item, InventoryType.SELL, _character);
 
+        _character.AutoEquip();
+
         characterList.Add(_character);
 
         return newCharacter;

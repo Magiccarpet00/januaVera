@@ -14,6 +14,11 @@ public class MyObject
         s_STATE = objectData.init_STATE;
     }
 
+    public string getTmpInfo()
+    {
+        return objectData.name + " " + c_STATE + "/" + s_STATE;
+    }
+
     public virtual void UseObject() {;}
 
     public virtual bool isWeapon() { return false; }
