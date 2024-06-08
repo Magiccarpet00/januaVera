@@ -101,14 +101,18 @@ public class PlayerCombatManager : MonoBehaviour
 
         foreach (Weapon weapon in GameManager.instance.playerCharacter.GetWeaponsInventory())
         {
-            GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
-            btnWeapon.transform.SetParent(panelWeapon.transform);
-            btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
+            if(!GameManager.instance.playerCharacter.weaponHands.Contains(weapon))
+            {
+                GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
+                btnWeapon.transform.SetParent(panelWeapon.transform);
+                btnWeapon.transform.localScale = new Vector3(1, 1, 1);
 
-            ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
-            bw.SetUpUI(weapon);
+                ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
+                bw.activeWeapon = false;
+                bw.SetUpUI(weapon);
 
-            buttonsWeapons.Add(btnWeapon);
+                buttonsWeapons.Add(btnWeapon);
+            }
         }
     }
 
@@ -166,7 +170,7 @@ public class PlayerCombatManager : MonoBehaviour
     }
 
 
-    public void ClickButtonWeapon(Weapon weapon)
+    public void ClickButtonWeapon(Weapon weapon, bool activeWeapon)
     {
         if (inputBlock) return;
 
@@ -184,7 +188,7 @@ public class PlayerCombatManager : MonoBehaviour
             ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
             bs.myObjectParent = weapon;
 
-            bs.SetUpUI(skill);
+            bs.SetUpUI(skill, activeWeapon);
             buttonsSkills.Add(btnSkill);
         }
     }
@@ -249,10 +253,7 @@ public class PlayerCombatManager : MonoBehaviour
     public void PanelBack()
     {
         if (panelStack.Peek() == panelGlobal)
-        {
-            FillReadyToUseWeapons();
             return;
-        }
 
         if (panelStack.Peek() == panelWeapon)
             ClearButtonWeapon();
@@ -261,6 +262,9 @@ public class PlayerCombatManager : MonoBehaviour
             ClearButtonSkill();
 
         PopPanel();
+
+        if (panelStack.Peek() == panelGlobal)
+            FillReadyToUseWeapons();
     }
 
     public void FillReadyToUseWeapons() //TODO A REFACTOT DEMAIN, BUG QUAND JE FAIT CHANGE WEAPON -> BACK
@@ -273,6 +277,7 @@ public class PlayerCombatManager : MonoBehaviour
             btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
 
             ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
+            bw.activeWeapon = true;
             bw.SetUpUI(GameManager.instance.playerCharacter.weaponHands[0]);
 
             buttonsWeapons.Add(btnWeapon);
@@ -286,6 +291,7 @@ public class PlayerCombatManager : MonoBehaviour
             btnWeapon.transform.localScale = new Vector3(1, 1, 1); //[CODE BIZZARE] Je ne sais pas pourquoi je dois faire ce changement de scale
 
             ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
+            bw.activeWeapon = true;
             bw.SetUpUI(GameManager.instance.playerCharacter.weaponHands[1]);
 
             buttonsWeapons.Add(btnWeapon);

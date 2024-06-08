@@ -10,11 +10,12 @@ public class ButtonWeapon : MonoBehaviour
     public LocalizeStringEvent materialValue;
 
     public Weapon weapon;
+    public bool activeWeapon;
 
     public void Click()
     {
         if (PlayerCombatManager.instance.inputBlock) return;
-        PlayerCombatManager.instance.ClickButtonWeapon(weapon);
+        PlayerCombatManager.instance.ClickButtonWeapon(weapon, activeWeapon);
     }
 
     public void SetUpUI(Weapon w)

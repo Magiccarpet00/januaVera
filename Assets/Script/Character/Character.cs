@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
     //INVENTORY
     public List<MyObject> objectInventory = new List<MyObject>();
     [HideInInspector] public List<Armor> armorsEquiped = new List<Armor>();
-    [HideInInspector] public Weapon[] weaponHands = new Weapon[2];
+    [HideInInspector] public List<Weapon> weaponHands = new List<Weapon>();
     private int pointerHands = 0;
 
     //SHOP
@@ -949,7 +949,9 @@ public class Character : MonoBehaviour
         SetTarget(new Vector3(t_spot.position.x, t_spot.position.y, t_spot.position.z));
         UpdateSmoothTime();
         Teleport(spot);
-        
+
+        weaponHands.Add(null);
+        weaponHands.Add(null);
 
         if (!isPlayer())
             AI_Command();

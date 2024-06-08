@@ -29,8 +29,10 @@ MonoBehaviour:
   inLocation: 0
   currentMood: 0
   objectInventory:
-  - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
   - {fileID: 11400000, guid: b9521d0dbfde5434ea3ce0137768bb71, type: 2}
   - {fileID: 11400000, guid: 12f278db02e09c94f8b03fcad3324e66, type: 2}
+  - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
+  - {fileID: 11400000, guid: 63ee6e5a0ff21244aa843d1abb8bd00d, type: 2}
+  - {fileID: 11400000, guid: 4d88de077e8ba8d44b18f9a0b3995e95, type: 2}
   armorsEquiped: []
   objectToSell: []

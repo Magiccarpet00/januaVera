@@ -15,14 +15,13 @@ public class ButtonSkill : MonoBehaviour
     public Button button;
     public Image image;
 
-
     public void Click()
     {
         if (PlayerCombatManager.instance.inputBlock) return;
         PlayerCombatManager.instance.ClickButtonSkill(skillData, myObjectParent);
     }
 
-    public void SetUpUI(SkillData _skillData)
+    public void SetUpUI(SkillData _skillData, bool activeWeapon = false)
     {
         skillData = _skillData;
 
@@ -54,5 +53,21 @@ public class ButtonSkill : MonoBehaviour
             image.color = Color.red;
             button.interactable = false;
         }
+
+        if (!activeWeapon)
+            DisableButton();
+
+    }
+
+    public void DisableButton()
+    {
+        TextMeshProUGUI[] allText = GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (TextMeshProUGUI textMeshProUGUI in allText)
+        {
+            textMeshProUGUI.color = new Color(1f, 1f, 1f);
+        }
+
+        button.interactable = false;
+        image.enabled = false;
     }
 }
