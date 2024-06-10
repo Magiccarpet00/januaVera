@@ -37,6 +37,7 @@ public class Character : MonoBehaviour
     public List<Character> selectedCharacters = new List<Character>();
     public SkillData currentLoadedSkill;
     public MyObject currentLoadedObject;
+    public Weapon selectedWeaponToEquip;
     public int nbGarde;
 
     //INVENTORY
@@ -603,7 +604,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(Weapon weapon)
+    public void EquipWeapon(Weapon weapon, int selectedHand=0) // selectedHand=0 -> null
     {
         WeaponData weaponData = (WeaponData)weapon.objectData;
         if (weaponData.nbHand == 2)
@@ -613,14 +614,22 @@ public class Character : MonoBehaviour
         }
         else
         {
-            if(weaponHands[1] == weaponHands[0])
+            if(weaponHands[1] == weaponHands[0]) //remove 2 hands weapon
             {
                 weaponHands[0] = null;
                 weaponHands[1] = null;
             }
+         
+            if(selectedHand == 0)
+            {
+                weaponHands[pointerHands] = weapon;
+                pointerHands = (pointerHands + 1) % 2;
+            }
+            else
+            {
+                weaponHands[selectedHand-1] = weapon;
+            }
             
-            weaponHands[pointerHands] = weapon;
-            pointerHands = (pointerHands + 1) % 2;
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerCombatManager : MonoBehaviour
@@ -34,6 +35,10 @@ public class PlayerCombatManager : MonoBehaviour
     public GameObject panelWeapon;
     public GameObject panelSkill;
     public GameObject panelOrder;
+    public GameObject panelHand;
+    public TextMeshProUGUI textHandRight;
+    public TextMeshProUGUI textHandLeft;
+    public int handSelected; //0 = none     1 = right    2 = left;
 
     public GameObject buttonBack;
     public GameObject buttonEnd;
@@ -177,7 +182,10 @@ public class PlayerCombatManager : MonoBehaviour
         PushPanel(panelSkill);
         WeaponData wd = (WeaponData)weapon.objectData;
 
-        GameManager.instance.playerCharacter.currentLoadedObject = weapon;
+        if(activeWeapon)
+            GameManager.instance.playerCharacter.currentLoadedObject = weapon;
+        else
+            GameManager.instance.playerCharacter.selectedWeaponToEquip = weapon;
 
         foreach (SkillData skill in wd.skills)
         {
@@ -190,6 +198,20 @@ public class PlayerCombatManager : MonoBehaviour
 
             bs.SetUpUI(skill, activeWeapon);
             buttonsSkills.Add(btnSkill);
+        }
+
+        if(!activeWeapon)
+        {
+            panelHand.SetActive(true);
+            if (GameManager.instance.playerCharacter.weaponHands[0] != null)
+                textHandRight.text = GameManager.instance.playerCharacter.weaponHands[0].objectData.name;
+            else
+                textHandRight.text = "empty";
+
+            if (GameManager.instance.playerCharacter.weaponHands[1] != null)
+                textHandLeft.text = GameManager.instance.playerCharacter.weaponHands[1].objectData.name;
+            else
+                textHandLeft.text = "------";
         }
     }
 
@@ -215,10 +237,22 @@ public class PlayerCombatManager : MonoBehaviour
     public void ClickButtonBack()
     {
         if (inputBlock) return;
-
+        panelHand.SetActive(false);
         ResetAllSelected();
         GameManager.instance.playerCharacter.currentLoadedSkill = null;
         PanelBack();
+    }
+
+    public void ClickButtonRightHand()
+    {
+        handSelected = 2;
+        UpdateEndButton();
+    }
+
+    public void ClickButtonLeftHand()
+    {
+        handSelected = 1;
+        UpdateEndButton();
     }
 
     public void ClickEndButton() //A REFACTOT
@@ -229,10 +263,14 @@ public class PlayerCombatManager : MonoBehaviour
 
         ClearButtonWeapon(); //TMP
         ClearButtonSkill();
+        panelHand.SetActive(false);
+
+        if (GameManager.instance.playerCharacter.selectedWeaponToEquip != null)
+            GameManager.instance.playerCharacter.EquipWeapon(GameManager.instance.playerCharacter.selectedWeaponToEquip, handSelected);
+
         while (panelStack.Peek() != panelGlobal)
             PanelBack();
         StartCoroutine(GameManager.instance.playerCharacter.currentCombatManager.FightSequence());
-        
     }
 
     public void ClickButtonEscape()
@@ -401,6 +439,19 @@ public class PlayerCombatManager : MonoBehaviour
     {
         if (panelStack.Peek() == panelOrder)
             return;
+
+        if (inputBlock)
+        {
+            buttonEnd.SetActive(false);
+            return;
+        }
+
+        if(handSelected != 0)
+        {
+            buttonEnd.SetActive(true);
+            return;
+        }
+
 
         if (GameManager.instance.playerCharacter.selectedCharacters.Count > 0)
             buttonEnd.SetActive(true);
