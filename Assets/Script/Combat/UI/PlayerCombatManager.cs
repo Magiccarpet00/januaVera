@@ -237,6 +237,7 @@ public class PlayerCombatManager : MonoBehaviour
     public void ClickButtonBack()
     {
         if (inputBlock) return;
+        handSelected = 0;
         panelHand.SetActive(false);
         ResetAllSelected();
         GameManager.instance.playerCharacter.currentLoadedSkill = null;
@@ -267,6 +268,8 @@ public class PlayerCombatManager : MonoBehaviour
 
         if (GameManager.instance.playerCharacter.selectedWeaponToEquip != null)
             GameManager.instance.playerCharacter.EquipWeapon(GameManager.instance.playerCharacter.selectedWeaponToEquip, handSelected);
+
+        handSelected = 0;
 
         while (panelStack.Peek() != panelGlobal)
             PanelBack();

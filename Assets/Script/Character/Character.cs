@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
     public List<MyObject> objectInventory = new List<MyObject>();
     [HideInInspector] public List<Armor> armorsEquiped = new List<Armor>();
     [HideInInspector] public List<Weapon> weaponHands = new List<Weapon>();
-    private int pointerHands = 0;
+    
 
     //SHOP
     public List<MyObject> objectToSell = new List<MyObject>();
@@ -344,6 +344,16 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void SellItem(MyObject obj) //for player
+    {
+        if (weaponHands.Contains(obj))
+            weaponHands[weaponHands.IndexOf((Weapon)obj)] = null;
+        if (armorsEquiped.Contains(obj))
+            armorsEquiped.Remove((Armor)obj);
+
+        objectInventory.Remove(obj);
+        gold += obj.objectData.price;
+    }
 
     public void UpdateSmoothTime()
     {
@@ -622,8 +632,10 @@ public class Character : MonoBehaviour
          
             if(selectedHand == 0)
             {
-                weaponHands[pointerHands] = weapon;
-                pointerHands = (pointerHands + 1) % 2;
+                if (weaponHands[0] == null) weaponHands[0] = weapon;
+                else if (weaponHands[1] == null) weaponHands[1] = weapon;
+                else Debug.LogWarning("EquipWeapon()");
+                
             }
             else
             {

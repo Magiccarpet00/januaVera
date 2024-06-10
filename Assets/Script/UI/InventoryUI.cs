@@ -18,7 +18,6 @@ public class InventoryUI : MonoBehaviour
 
     public GameObject panelLvlUp;
 
-
     private void Awake()
     {
         instance = this;
@@ -82,20 +81,9 @@ public class InventoryUI : MonoBehaviour
         else
             tmpEquipedText.text += "\n";
 
-        Weapon weaponDataFirstHand = playerCharacter.weaponHands[0];
-        Weapon weaponDataSecondHand = playerCharacter.weaponHands[1];
-
-        tmpEquipedText.text += "Right hand: ";
-        if(weaponDataFirstHand != null)
-            tmpEquipedText.text += weaponDataFirstHand.getTmpInfo() + "\n";
-        else
-            tmpEquipedText.text +="\n";
-
-        tmpEquipedText.text += "Left hand: ";
-        if (weaponDataSecondHand != null)
-            tmpEquipedText.text += weaponDataSecondHand.getTmpInfo() + "\n";
-        else
-            tmpEquipedText.text += "\n";
+        foreach (Weapon weapon in playerCharacter.weaponHands)
+            if(weapon !=null)tmpEquipedText.text += weapon.getTmpInfo() + "\n";
+            else             tmpEquipedText.text += "------\n";
 
         //-----INVENTORY-----
         foreach (MyObject item in playerCharacter.objectInventory)
