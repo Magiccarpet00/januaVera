@@ -21,6 +21,7 @@ MonoBehaviour:
   init_DEXTERITY: 5
   init_FAITH: 5
   init_GOLD: 5
+  init_LVL: 1
   drop_XP: 0
   spriteMap: {fileID: 21300000, guid: 7da1d6f7c24cf85468b02c45979b7573, type: 3}
   spriteFight: {fileID: 21300000, guid: 9ae9a15325134f14d9593bbb89746bb4, type: 3}

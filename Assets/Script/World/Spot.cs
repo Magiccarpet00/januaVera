@@ -59,29 +59,22 @@ public class Spot : MonoBehaviour
     //
 
     //[CODE PLACARD] Je ne suis pas sur de cette fonctionaliter
-    //void OnMouseEnter()
-    //{
-    //    if (GameManager.instance.inputBlock || GameManager.instance.playerCharacter.GetCurrentSpot() == this.gameObject)
-    //        return;
-    //    overMouse_fx = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);
-    //    animatorOverMouse_fx = overMouse_fx.GetComponent<Animator>();
-    //    GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
-    //}
+    void OnMouseEnter()
+    {
+        overMouse_fx = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);
+        animatorOverMouse_fx = overMouse_fx.GetComponent<Animator>();
+        GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
+    }
+
     void OnMouseExit()
     {
-        if (GameManager.instance.inputBlock || GameManager.instance.playerCharacter?.GetCurrentSpot() == this.gameObject)
-            return;
-
         if(overMouse_fx != null)
             animatorOverMouse_fx?.SetTrigger("end");
-        //GameManager.instance.DestroyInfoGridLayoutGroupe();
+        GameManager.instance.DestroyInfoGridLayoutGroupe();
     }
 
     void OnMouseOver()
     {
-        if (GameManager.instance.inputBlock || GameManager.instance.playerCharacter?.GetCurrentSpot() == this.gameObject)
-            return;
-
         if(overMouse_fx == null)
         {
             overMouse_fx = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);

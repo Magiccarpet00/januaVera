@@ -61,7 +61,7 @@ public class Character : MonoBehaviour
     //      c_XXXXX -> curent stat
     public int s_VITALITY, s_ENDURANCE, s_STRENGHT, s_DEXTERITY, s_FAITH;
     public int c_VITALITY, c_ENDURANCE, c_STRENGHT, c_DEXTERITY, c_FAITH;
-    public int xp, lvl=1, lvlPoint, gold;
+    public int xp, lvl, lvlPoint, gold;
 
     //EFFECT
     public List<Buff> listBuff = new List<Buff>();
@@ -87,6 +87,7 @@ public class Character : MonoBehaviour
         c_FAITH =     s_FAITH;
 
         gold +=       characterData.init_GOLD;
+        lvl = characterData.init_LVL;
     }
 
     void Update() // [CODE PRUDENCE] faire attention au modification de valeur dans cette update
@@ -634,7 +635,12 @@ public class Character : MonoBehaviour
             {
                 if (weaponHands[0] == null) weaponHands[0] = weapon;
                 else if (weaponHands[1] == null) weaponHands[1] = weapon;
-                else Debug.LogWarning("EquipWeapon()");
+                else
+                {
+                    weaponHands[0] = weapon;
+                    weaponHands[1] = null;
+                }
+
                 
             }
             else

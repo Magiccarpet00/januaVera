@@ -10,19 +10,19 @@ using UnityEngine.Localization.Components;
 public class InfoCharacter : MonoBehaviour
 {
     [SerializeField] private Image image;
-    [SerializeField] private LocalizeStringEvent shapeString;
-    [SerializeField] private LocalizeStringEvent dodgeString;
-    [SerializeField] private TextMeshProUGUI shapeValue;
-    [SerializeField] private TextMeshProUGUI dodgeValue;
+    [SerializeField] private TextMeshProUGUI name;
+    [SerializeField] private TextMeshProUGUI lvl;
 
 
-    public void SetInfoCharacter(Sprite spr, String shape, int _shapeValue, int _dodgeValue)
+    public void SetInfoCharacter(Sprite spr, string _name, int _lvl, Color color)
     {
         image.sprite = spr;
-        shapeString.SetEntry(shape);
-        shapeValue.text = _shapeValue.ToString();
-        //dodgeString.SetEntry("DODGE"); 
-        dodgeValue.text = _dodgeValue.ToString();
+        name.text = _name;
+        lvl.text += " " + _lvl.ToString();
+
+        name.color = color;
+        lvl.color = color;
+        
     }
 
 

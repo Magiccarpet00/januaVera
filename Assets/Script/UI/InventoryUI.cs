@@ -75,7 +75,6 @@ public class InventoryUI : MonoBehaviour
         //-----EQUIP-----
 
         tmpEquipedText.text = "EQUIP:\n\n";
-        tmpEquipedText.text += "Armor: ";
         if (playerCharacter.armorsEquiped.Count > 0)
             tmpEquipedText.text += playerCharacter.armorsEquiped[0].getTmpInfo() +   "\n";
         else

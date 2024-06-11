@@ -516,13 +516,28 @@ public class GameManager : MonoBehaviour
         GameObject currentInfoCharacter = Instantiate(prefabInfoCharacter, pos, Quaternion.identity);
         InfoCharacter infoCharacter = currentInfoCharacter.GetComponent<InfoCharacter>();
         currentInfoCharacter.transform.SetParent(InfoGridLayoutGroupe);
-
         Sprite spr = character.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
-        string shape = character.characterData.shape.ToString();
-        int life = character.characterData.init_VITALITY;
-        //int dodgeValue = character.characterData.dodgeTime;
 
-        //infoCharacter.SetInfoCharacter(spr, shape, life, dodgeValue);
+
+        //COLOR
+        Color _color = new Color(1f,1f,1f);
+        switch (relationshipsBoard[(character.characterData.race, playerCharacter.characterData.race)])
+        {
+            case Relation.ALLY:
+                _color = new Color(0f, 1f, 0f);
+                break;
+            case Relation.FRIEND:
+                _color = new Color(0f, 1f, 0f);
+                break;
+            case Relation.HOSTIL:
+                _color = new Color(1f, 0f, 0f);
+                break;
+            case Relation.ENNEMY:
+                _color = new Color(1f, 0f, 0f);
+                break;
+        }
+
+        infoCharacter.SetInfoCharacter(spr, character.name, character.lvl, _color);
     }
 
     public void DestroyInfoGridLayoutGroupe()

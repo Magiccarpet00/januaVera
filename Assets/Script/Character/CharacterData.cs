@@ -9,7 +9,7 @@ public class CharacterData : ScriptableObject
     public Element shape;
     public Divinity typeDivinity; //uniquement si le character est divin
 
-    public int init_VITALITY, init_ENDURANCE, init_STRENGHT, init_DEXTERITY, init_FAITH, init_GOLD;
+    public int init_VITALITY, init_ENDURANCE, init_STRENGHT, init_DEXTERITY, init_FAITH, init_GOLD, init_LVL;
     public int drop_XP;
 
     public Sprite spriteMap;
