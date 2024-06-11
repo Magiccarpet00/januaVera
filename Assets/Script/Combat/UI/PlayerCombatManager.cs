@@ -33,7 +33,10 @@ public class PlayerCombatManager : MonoBehaviour
     public GameObject panelGlobal;
     public GameObject panelReadyWeapon;
     public GameObject panelWeapon;
+    public GameObject gridWeapon;
     public GameObject panelSkill;
+    public GameObject gridSkill;
+    public GameObject helpSkill;
     public GameObject panelOrder;
     public GameObject panelHand;
     public TextMeshProUGUI textHandRight;
@@ -109,7 +112,7 @@ public class PlayerCombatManager : MonoBehaviour
             if(!GameManager.instance.playerCharacter.weaponHands.Contains(weapon))
             {
                 GameObject btnWeapon = Instantiate(prefabButtonWeapon, transform.position, Quaternion.identity);
-                btnWeapon.transform.SetParent(panelWeapon.transform);
+                btnWeapon.transform.SetParent(gridWeapon.transform);
                 btnWeapon.transform.localScale = new Vector3(1, 1, 1);
 
                 ButtonWeapon bw = btnWeapon.GetComponent<ButtonWeapon>();
@@ -119,6 +122,8 @@ public class PlayerCombatManager : MonoBehaviour
                 buttonsWeapons.Add(btnWeapon);
             }
         }
+
+        
     }
 
     public void ClickButtonObjectGlobal()
@@ -131,7 +136,7 @@ public class PlayerCombatManager : MonoBehaviour
             if (activeObject.c_STATE > 0)
             {
                 GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
-                btnSkill.transform.SetParent(panelSkill.transform);
+                btnSkill.transform.SetParent(gridSkill.transform);
                 btnSkill.transform.localScale = new Vector3(1, 1, 1);
 
                 ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();
@@ -141,6 +146,8 @@ public class PlayerCombatManager : MonoBehaviour
                 buttonsSkills.Add(btnSkill);
             }
         }
+
+        helpSkill.SetActive(true);
     }
 
     public void ClickCommandGlobal()
@@ -190,7 +197,7 @@ public class PlayerCombatManager : MonoBehaviour
         foreach (SkillData skill in wd.skills)
         {
             GameObject btnSkill = Instantiate(prefabButtonSkill, transform.position, Quaternion.identity);
-            btnSkill.transform.SetParent(panelSkill.transform);
+            btnSkill.transform.SetParent(gridSkill.transform);
             btnSkill.transform.localScale = new Vector3(1, 1, 1);
 
             ButtonSkill bs = btnSkill.GetComponent<ButtonSkill>();

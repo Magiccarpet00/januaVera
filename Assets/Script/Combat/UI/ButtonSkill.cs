@@ -21,7 +21,7 @@ public class ButtonSkill : MonoBehaviour
         PlayerCombatManager.instance.ClickButtonSkill(skillData, myObjectParent);
     }
 
-    public void SetUpUI(SkillData _skillData, bool activeWeapon = false)
+    public void SetUpUI(SkillData _skillData, bool activeWeapon = true)
     {
         skillData = _skillData;
 
@@ -55,7 +55,14 @@ public class ButtonSkill : MonoBehaviour
         }
 
         if (!activeWeapon)
+        {
             DisableButton();
+            PlayerCombatManager.instance.helpSkill.SetActive(false);
+        }
+        else
+        {
+            PlayerCombatManager.instance.helpSkill.SetActive(true);
+        }
 
     }
 

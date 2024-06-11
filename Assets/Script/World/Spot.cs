@@ -63,7 +63,7 @@ public class Spot : MonoBehaviour
     {
         overMouse_fx = Instantiate(GameManager.instance.prefabOverMouse_fx, this.transform.position, Quaternion.identity);
         animatorOverMouse_fx = overMouse_fx.GetComponent<Animator>();
-        GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, charactersOnSpot);
+        GameManager.instance.CreateInfoGridLayoutGroupe(this.transform.position, GetAllCharactersAliveOnMapInSpot());
     }
 
     void OnMouseExit()

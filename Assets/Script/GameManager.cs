@@ -506,9 +506,7 @@ public class GameManager : MonoBehaviour
         Transform gridTransform = currentInfoGridLayoutGroupe.transform;
 
         foreach (Character character in characters)
-        {
-            CreateInfoCharacter(character, pos, gridTransform);
-        }
+            if(!character.isPlayer()) CreateInfoCharacter(character, pos, gridTransform);
     }
 
     public void CreateInfoCharacter(Character character, Vector3 pos, Transform InfoGridLayoutGroupe) //[CODE PLACARD] (cf OnMouseEnter() in Spot.cs)
