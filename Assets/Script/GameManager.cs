@@ -301,29 +301,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.I)) //CREATE ENEMY
-        {
-            GameObject currentTile = GetTile(2, 2);
-            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("BeastBad"), spot[0].gameObject);
-        }
-
-        if (Input.GetKeyDown(KeyCode.M)) //CREATE MERCHENT
-        {
-            GameObject currentTile = GetTile(1, 1);
-            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanMarchantMap"), spot[0].gameObject);
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            GameObject currentTile = GetTile(1, 2);
-            Spot[] spot = currentTile.GetComponentsInChildren<Spot>();
-
-            GameObject newPnj = CreateCharacter((CharacterData)ScriptableManager.instance.FindData("HumanGarde"), spot[0].gameObject);
-        }
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -332,37 +309,13 @@ public class GameManager : MonoBehaviour
             cc.ToggleFreezeCam(toggle);
         }
 
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            Debug.Log(playerCharacter.objectInventory.Count);
-            foreach (MyObject obj in playerCharacter.objectInventory)
-            {
-                Debug.Log(obj.objectData.name);
-            }
-        }
-
-
-
         if(Input.GetKeyDown(KeyCode.R))
         {
-            playerCharacter.CommandRest();
-            _ExecuteActionQueue();
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            playerCharacter.gold += 10;
-            UpdateTmpInfo();
-        }
-
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            playerCharacter.AddXp(1);
-            UpdateTmpInfo();
-            InventoryUI.instance.UpdateInventory();
-        }
-
-        if(Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             if (debugTeleport)
                 debugTeleport = false;

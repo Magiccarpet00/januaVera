@@ -87,18 +87,21 @@ public class ShopUI : MonoBehaviour
 
         foreach (MyObject myObject in GameManager.instance.playerCharacter.objectInventory)
         {
-            GameObject newItem = Instantiate(prefabItemInventory, transform.position, Quaternion.identity);
-            ItemShopSell itemShopSell = newItem.GetComponent<ItemShopSell>();
-            newItem.transform.SetParent(gridInventory.transform);
-            newItem.transform.localScale = new Vector3(1, 1, 1);
+            if(myObject.c_STATE > 0)
+            {
+                GameObject newItem = Instantiate(prefabItemInventory, transform.position, Quaternion.identity);
+                ItemShopSell itemShopSell = newItem.GetComponent<ItemShopSell>();
+                newItem.transform.SetParent(gridInventory.transform);
+                newItem.transform.localScale = new Vector3(1, 1, 1);
 
-            itemShopSell.nameUI.text = myObject.objectData.name;
-            itemShopSell.priceUI.text = myObject.objectData.price.ToString() + "gold";
+                itemShopSell.nameUI.text = myObject.objectData.name;
+                itemShopSell.priceUI.text = myObject.objectData.price.ToString() + "gold";
 
-            itemShopSell.myObject = myObject;
-            itemShopSell.characterMerchant = characterMerchant;
+                itemShopSell.myObject = myObject;
+                itemShopSell.characterMerchant = characterMerchant;
 
-            itemItemInventoryUI.Add(newItem);
+                itemItemInventoryUI.Add(newItem);
+            }
         }
     }
 }

@@ -3077,7 +3077,10 @@ MonoBehaviour:
   panSpeed: 20
   scrollSpeed: 2000
   panBorder: 20
-  panLimit: {x: 0, y: 0}
+  limitUp: 87
+  limitRight: 84
+  limitDown: 5
+  limitLeft: 3
   clampZoom: {x: 8, y: 20}
   bufferedPos: {x: 0, y: 0, z: 0}
   bufferedZoom: 0
@@ -8608,7 +8611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -136.85999, y: 18}
+  m_AnchoredPosition: {x: -136.85995, y: 18}
   m_SizeDelta: {x: -296.86, y: -178.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549111638

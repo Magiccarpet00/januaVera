@@ -10,7 +10,10 @@ public class CameraController : MonoBehaviour
     public float scrollSpeed;
 
     public float panBorder;
-    public Vector2 panLimit; //TODO pour ne pas sortir de la map
+    public float limitUp;
+    public float limitRight;
+    public float limitDown;
+    public float limitLeft;
     public Vector2 clampZoom;
 
     public Vector3 bufferedPos;
@@ -19,22 +22,22 @@ public class CameraController : MonoBehaviour
     public GameObject camMapUI;
     public GameObject camFight;
 
-    void Update()
+    void FixedUpdate()
     {   
         if(!freezeCam && GameManager.instance.playerCharacter?.onFight == false)
         {
             Vector3 pos = transform.position;
 
-            if (Input.mousePosition.y >= Screen.height - panBorder)
+            if (Input.mousePosition.y >= Screen.height - panBorder && transform.position.y < limitUp)
                 pos.y += panSpeed * Time.deltaTime;
 
-            if (Input.mousePosition.y <= panBorder)
+            if (Input.mousePosition.y <= panBorder && transform.position.y > limitDown)
                 pos.y -= panSpeed * Time.deltaTime;
 
-            if (Input.mousePosition.x >= Screen.width - panBorder)
+            if (Input.mousePosition.x >= Screen.width - panBorder && transform.position.x < limitRight)
                 pos.x += panSpeed * Time.deltaTime;
 
-            if (Input.mousePosition.x <= panBorder)
+            if (Input.mousePosition.x <= panBorder && transform.position.x > limitLeft)
                 pos.x -= panSpeed * Time.deltaTime;
 
             Camera cam = Camera.main;

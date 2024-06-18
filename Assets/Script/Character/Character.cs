@@ -348,7 +348,18 @@ public class Character : MonoBehaviour
     public void SellItem(MyObject obj) //for player
     {
         if (weaponHands.Contains(obj))
-            weaponHands[weaponHands.IndexOf((Weapon)obj)] = null;
+        {
+            Weapon weapon = (Weapon)obj;
+            if(((WeaponData)weapon.objectData).nbHand == 2)
+            {
+                weaponHands[0] = null;
+                weaponHands[1] = null;
+            }
+            else
+            {
+                weaponHands[weaponHands.IndexOf(weapon)] = null;
+            }
+        }
         if (armorsEquiped.Contains(obj))
             armorsEquiped.Remove((Armor)obj);
 
