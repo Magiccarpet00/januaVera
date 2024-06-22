@@ -53,6 +53,7 @@ public class PlayerCombatManager : MonoBehaviour
 
     public GameObject prefabButtonSkill;
     public List<GameObject> buttonsSkills = new List<GameObject>();
+    public ButtonSkill buttonSkillBuffer;
 
     [Header("FX")]
     public GameObject prefabFxSkills;
@@ -230,7 +231,6 @@ public class PlayerCombatManager : MonoBehaviour
         GameManager.instance.playerCharacter.currentLoadedSkill = skillData;
 
         ResetAllSelected();
-
 
         if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
             TargetMode(skillData.nbTarget);

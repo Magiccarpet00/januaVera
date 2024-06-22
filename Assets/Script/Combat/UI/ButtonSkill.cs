@@ -18,6 +18,7 @@ public class ButtonSkill : MonoBehaviour
     public void Click()
     {
         if (PlayerCombatManager.instance.inputBlock) return;
+        PlayerCombatManager.instance.buttonSkillBuffer = this;
         PlayerCombatManager.instance.ClickButtonSkill(skillData, myObjectParent);
     }
 
@@ -63,7 +64,6 @@ public class ButtonSkill : MonoBehaviour
         {
             PlayerCombatManager.instance.helpSkill.SetActive(true);
         }
-
     }
 
     public void DisableButton()

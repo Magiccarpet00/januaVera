@@ -43,8 +43,7 @@ public class Character : MonoBehaviour
     //INVENTORY
     public List<MyObject> objectInventory = new List<MyObject>();
     [HideInInspector] public List<Armor> armorsEquiped = new List<Armor>();
-    [HideInInspector] public List<Weapon> weaponHands = new List<Weapon>();
-    
+    [HideInInspector] public List<Weapon> weaponHands = new List<Weapon>();    
 
     //SHOP
     public List<MyObject> objectToSell = new List<MyObject>();
@@ -69,6 +68,9 @@ public class Character : MonoBehaviour
     //ASTAR
     //public List<List<GameObject>> paths = new List<List<GameObject>>();
     private bool AStarSucces;
+
+    //QUEST
+    
 
     public virtual void Start()
     {
@@ -805,7 +807,7 @@ public class Character : MonoBehaviour
             //DieForMap();
         }
     }
-
+    
     private void DieForMap()
     {
         spriteRenderer.gameObject.SetActive(false);
@@ -899,10 +901,7 @@ public class Character : MonoBehaviour
 
     public void AI_Command()
     {
-        if (gameObject.name == GameManager.instance.debugName) 
-        {
-            ;
-        }
+        if (gameObject.name == GameManager.instance.debugName){;}
 
         if (isDead == true)
         {
@@ -915,9 +914,7 @@ public class Character : MonoBehaviour
             foreach (Character _characterInSpot in charactersInSpot)
             {
                 if (WantToFight(_characterInSpot))
-                {
                     fightFound = true;
-                }
             }
 
             if (fightFound && leaderCharacter == null)

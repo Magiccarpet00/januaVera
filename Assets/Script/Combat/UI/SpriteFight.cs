@@ -24,6 +24,15 @@ public class SpriteFight : MonoBehaviour
         ArrowIntention();
     }
 
+    private void OnMouseEnter()
+    {
+        if(PlayerCombatManager.instance?.buttonSkillBuffer.skillData.skillType == SkillType.ATTACK)
+            PlayerCombatManager.instance.buttonSkillBuffer.templateAttack.GetComponent<ButtonSkillTemplateAttack>().UpdateDamageInfo(character);
+
+
+        
+    }
+
     private void ArrowIntention()
     {
         if (character.selectedCharacters == null)
