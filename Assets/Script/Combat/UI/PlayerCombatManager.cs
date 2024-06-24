@@ -30,6 +30,7 @@ public class PlayerCombatManager : MonoBehaviour
 
     //Panel
     public GameObject CanvasFight;
+    public GameObject uiPanel;
     public GameObject panelGlobal;
     public GameObject panelReadyWeapon;
     public GameObject panelWeapon;
@@ -227,6 +228,11 @@ public class PlayerCombatManager : MonoBehaviour
     {
         if (inputBlock) return;
 
+        if(GameManager.instance.playerCharacter.currentLoadedSkill != null)
+        {
+            buttonSkillBuffer.templateAttack.GetComponent<ButtonSkillTemplateAttack>().ColorSwitch(false);
+        }
+
         GameManager.instance.playerCharacter.currentLoadedObject = myObjectParent;
         GameManager.instance.playerCharacter.currentLoadedSkill = skillData;
 
@@ -235,10 +241,9 @@ public class PlayerCombatManager : MonoBehaviour
         if (skillData.nbTarget > 0) // Si nb target == 0 -> cible == lanceur
             TargetMode(skillData.nbTarget);
         else
-        {
             GameManager.instance.playerCharacter.selectedCharacters.Add(GameManager.instance.playerCharacter);
-            UpdateEndButton();
-        }
+
+        UpdateEndButton();
     }
 
     public void ClickButtonBack()
@@ -266,7 +271,6 @@ public class PlayerCombatManager : MonoBehaviour
     public void ClickEndButton() //A REFACTOT
     {
         if (inputBlock) return;
-        
         inputBlock = true;
 
         ClearButtonWeapon(); //TMP
@@ -280,7 +284,11 @@ public class PlayerCombatManager : MonoBehaviour
 
         while (panelStack.Peek() != panelGlobal)
             PanelBack();
+
+        GameManager.instance.cam_fight.GetComponent<Animator>().SetTrigger("fight");
+        uiPanel.SetActive(false);
         StartCoroutine(GameManager.instance.playerCharacter.currentCombatManager.FightSequence());
+
     }
 
     public void ClickButtonEscape()

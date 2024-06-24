@@ -12,25 +12,37 @@ public class SpriteFight : MonoBehaviour
     public Animator animatorOver;
     public LineRenderer lineRenderer;
 
+    [System.Obsolete]
     private void OnMouseExit()
     {
+        if (PlayerCombatManager.instance.inputBlock) return;
+
         animatorOver.SetBool("over", false);
         lineRenderer.enabled = false;
+
+        if (GameManager.instance.playerCharacter.currentLoadedSkill != null &&
+            PlayerCombatManager.instance.buttonSkillBuffer.skillData.skillType == SkillType.ATTACK &&
+            PlayerCombatManager.instance.buttonEnd.active == false)
+            PlayerCombatManager.instance.buttonSkillBuffer.templateAttack.GetComponent<ButtonSkillTemplateAttack>().ColorSwitch(false);
+
+        
     }
 
     private void OnMouseOver()
     {
+        if (PlayerCombatManager.instance.inputBlock) return;
+
         animatorOver.SetBool("over", true);
         ArrowIntention();
     }
 
     private void OnMouseEnter()
     {
-        if(PlayerCombatManager.instance?.buttonSkillBuffer.skillData.skillType == SkillType.ATTACK)
+        if (PlayerCombatManager.instance.inputBlock) return;
+
+        if (GameManager.instance.playerCharacter.currentLoadedSkill != null && 
+           PlayerCombatManager.instance.buttonSkillBuffer.skillData.skillType == SkillType.ATTACK)
             PlayerCombatManager.instance.buttonSkillBuffer.templateAttack.GetComponent<ButtonSkillTemplateAttack>().UpdateDamageInfo(character);
-
-
-        
     }
 
     private void ArrowIntention()

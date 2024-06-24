@@ -36,10 +36,12 @@ public class CombatManager : MonoBehaviour
 
         ResetRound();
         LoadSkillAI();
+        if (playerOnFight) PlayerCombatManager.instance.uiPanel.SetActive(true);
         if (playerOnFight) PlayerCombatManager.instance.UpdateEndRoundAllUI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateAllUI();
         if (playerOnFight) PlayerCombatManager.instance.UpdateEndButton();
         if (playerOnFight) PlayerCombatManager.instance.inputBlock = false;
+        
 
 
         bool fightEnd = CheckFightEnd();

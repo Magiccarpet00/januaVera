@@ -18,8 +18,8 @@ public class ButtonSkill : MonoBehaviour
     public void Click()
     {
         if (PlayerCombatManager.instance.inputBlock) return;
-        PlayerCombatManager.instance.buttonSkillBuffer = this;
         PlayerCombatManager.instance.ClickButtonSkill(skillData, myObjectParent);
+        PlayerCombatManager.instance.buttonSkillBuffer = this;
     }
 
     public void SetUpUI(SkillData _skillData, bool activeWeapon = true)

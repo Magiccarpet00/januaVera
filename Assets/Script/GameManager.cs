@@ -317,6 +317,12 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
+            for (int i = 0; i < 25; i++)
+                playerCharacter.AddXp(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
             if (debugTeleport)
                 debugTeleport = false;
             else

@@ -9,12 +9,13 @@ public class ButtonSkillTemplateAttack : ButtonSkillTemplate
     public TextMeshProUGUI damageValue;
     public LocalizeStringEvent damageTypeValue;
     public TextMeshProUGUI targetValue;
+    public SkillAttackData skillAttackData;
 
     public override void SetUpUI(SkillData skillData)
     {
         base.SetUpUI(skillData);
 
-        SkillAttackData skillAttackData = (SkillAttackData)skillData;
+        skillAttackData = (SkillAttackData)skillData;
         damageValue.text = skillAttackData.damage.ToString();
         damageTypeValue.SetEntry(skillAttackData.damageType.ToString());
         speedValue.text = skillAttackData.speed.ToString();
@@ -23,7 +24,6 @@ public class ButtonSkillTemplateAttack : ButtonSkillTemplate
 
     public void UpdateDamageInfo(Character characterTarget)
     {
-        SkillAttackData skillAttackData = (SkillAttackData)skillData;
         int amountModified;
 
         if (characterTarget.armorsEquiped.Count != 0)
@@ -41,20 +41,31 @@ public class ButtonSkillTemplateAttack : ButtonSkillTemplate
                 amountModified = (int)(GameManager.instance.typeChart[(skillAttackData.damageType.ToString(), characterTarget.characterData.shape)] * skillAttackData.damage);
         }
 
-        damageValue.text = amountModified.ToString();
 
         if (skillAttackData.damage != amountModified) 
         {
+            damageValue.text = amountModified.ToString();
+            ColorSwitch(true);
+        }
+
+    }
+
+    public void ColorSwitch(bool isChange)
+    {
+        if(isChange)
+        {
             damageValue.color = new Color(1.0f, 0.0f, 0.0f);
+            damageValue.fontSize = 15.0f;
+            damageValue.fontStyle = FontStyles.Bold;
         }
         else
         {
-            damageValue.color = new Color(0.0f, 0.0f, 0.0f);
+            damageValue.color = new Color(0.20f, 0.20f, 0.20f);
+            damageValue.fontSize = 10.0f;
+            damageValue.fontStyle = FontStyles.Normal;
+            damageValue.text = skillAttackData.damage.ToString();
         }
-
-        //TODO continer la previsualisation des degats 
-
-
     }
+
 
 }
