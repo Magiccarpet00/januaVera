@@ -17,5 +17,6 @@ MonoBehaviour:
   sprite: {fileID: -201997998, guid: 498f0dd789f0dd34da9b912b15752173, type: 3}
   charactersInLocation:
   - {fileID: 11400000, guid: 69f36ed76d6d36f47a96885a9dfc6c4d, type: 2}
+  - {fileID: 11400000, guid: b7fa7f5f21f4688458e18170dd3dc5aa, type: 2}
   objectInLocation: []
   rngObjet: []

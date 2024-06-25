@@ -25,4 +25,7 @@ public class CharacterData : ScriptableObject
     public List<ObjectData> objectInventory = new List<ObjectData>();
     public List<ArmorData> armorsEquiped = new List<ArmorData>();
     public List<ObjectData> objectToSell = new List<ObjectData>();
+
+    //QUEST
+    public List<GameObject> quests = new List<GameObject>();
 }

@@ -69,9 +69,7 @@ public class Character : MonoBehaviour
     //public List<List<GameObject>> paths = new List<List<GameObject>>();
     private bool AStarSucces;
 
-    //QUEST
     
-
     public virtual void Start()
     {
         if(!characterData.inLocation)
@@ -987,6 +985,9 @@ public class Character : MonoBehaviour
 
         weaponHands.Add(null);
         weaponHands.Add(null);
+
+        foreach (GameObject quest in cd.quests)
+            QuestManager.instance.AddQuest(quest);
 
         if (!isPlayer())
             AI_Command();

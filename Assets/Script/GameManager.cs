@@ -666,6 +666,8 @@ public class GameManager : MonoBehaviour
             if(!character.isPlayer() && !character.isDead) character.AI_MakeCrew();
         }
 
+        QuestManager.instance.UpdateQuests();
+
         actionQueue.Clear();
         CommandPnj();
 
