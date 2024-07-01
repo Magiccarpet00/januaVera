@@ -45,5 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questState: 1
+  questGiver: {fileID: 0}
+  nbTurn: 0
+  nbTurnMax: 30
   nbScorpionKill: 0
-  req_nbScorpionKill: 3
+  req_nbScorpionKill: 1
+  scorpion: {fileID: 11400000, guid: 2b38b224124ceb34baab4c6a0d39570f, type: 2}

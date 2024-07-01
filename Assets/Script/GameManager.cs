@@ -911,6 +911,7 @@ public class GlobalConst {
     public static int HIDE_PRIORITY   = 3;
     public static int TRADE_PRIORITY  = 4;
     public static int HIRE_PRIORITY   = 4;
+    public static int TALK_PRIORITY   = 4;
     public static int MOVE_PRIORITY   = 5;
     public static int SEARCH_PRIORITY = 6;
     public static int REST_PRIORITY   = 7;

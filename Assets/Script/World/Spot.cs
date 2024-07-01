@@ -127,6 +127,9 @@ public class Spot : MonoBehaviour
 
             if (character.characterData.workCost != 0 && !character.isDead && !res.Contains(ButtonType.HIRE))
                 res.Add(ButtonType.HIRE);
+
+            if (character.characterData.quests.Count != 0 && !character.isDead && !res.Contains(ButtonType.TALK))
+                res.Add(ButtonType.TALK);
         }
 
         if (objectsOnSpot.Count != 0 && !res.Contains(ButtonType.SEARCH))

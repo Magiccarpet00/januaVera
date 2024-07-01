@@ -33,4 +33,4 @@ MonoBehaviour:
   armorsEquiped: []
   objectToSell: []
   quests:
-  - {fileID: 3689994812968089931, guid: 86704127c0dc997408f19bfb66db1f93, type: 3}
+  - {fileID: 6151185545441747279, guid: 86704127c0dc997408f19bfb66db1f93, type: 3}

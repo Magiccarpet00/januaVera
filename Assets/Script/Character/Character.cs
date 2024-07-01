@@ -258,6 +258,38 @@ public class Character : MonoBehaviour
         GameManager.instance.dialogAnswer = AnswerButton.WAIT;
     }
 
+    public void Talk()
+    {
+        StartCoroutine(_Talk());
+    }
+
+    public IEnumerator _Talk()
+    {
+        lastSpot = currentSpot;
+
+        string nameQuestGiver = "";
+        Quest quest;
+
+        foreach (Character character in GetAllCharactersInSpot())
+            if (character.characterData.quests.Count != 0)
+                nameQuestGiver = character.name;
+
+        quest = QuestManager.instance.quests[nameQuestGiver];
+
+
+        GameManager.instance.OpenDialogWindow(quest.DialogString());
+        yield return new WaitWhile(() => GameManager.instance.dialogAnswer == AnswerButton.WAIT);
+        GameManager.instance.CloseDialogWindow();
+
+        if (GameManager.instance.dialogAnswer == AnswerButton.YES && quest.QuestState == QuestState.CAN_START)
+        {
+            quest.StartQuest();
+        }
+
+        GameManager.instance.dialogAnswer = AnswerButton.WAIT;
+
+    }
+
     public void Hire()
     {
         StartCoroutine(_Hire());
@@ -563,10 +595,17 @@ public class Character : MonoBehaviour
         stackAction.Push(new ActionHire(this));
     }
 
-    public virtual void CommandeTrade()
+    public virtual void CommandTrade()
     {
         stackAction.Push(new ActionTrade(this));
     }
+
+    public virtual void CommandTalk()
+    {
+        stackAction.Push(new ActionTalk(this));
+    }
+
+
 
     public void CancelAction()
     {
@@ -987,7 +1026,7 @@ public class Character : MonoBehaviour
         weaponHands.Add(null);
 
         foreach (GameObject quest in cd.quests)
-            QuestManager.instance.AddQuest(quest);
+            QuestManager.instance.AddQuest(this,quest);
 
         if (!isPlayer())
             AI_Command();

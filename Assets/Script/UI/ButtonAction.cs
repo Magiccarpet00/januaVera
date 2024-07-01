@@ -41,7 +41,11 @@ public class ButtonAction : MonoBehaviour
 
     public void Talk()
     {
-        
+        if (GameManager.instance.inputBlock == false)
+        {
+            GameManager.instance.playerCharacter.CommandTalk();
+            GameManager.instance._ExecuteActionQueue();
+        }
     }
 
     public void Fight()
@@ -75,7 +79,7 @@ public class ButtonAction : MonoBehaviour
     {
         if (GameManager.instance.inputBlock == false)
         {
-            GameManager.instance.playerCharacter.CommandeTrade();
+            GameManager.instance.playerCharacter.CommandTrade();
             GameManager.instance._ExecuteActionQueue();
         }
     }

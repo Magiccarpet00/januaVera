@@ -7,8 +7,8 @@ public class QuestManager : MonoBehaviour
     public static QuestManager instance;
 
     //public GameObject[] allQuest;
-
-    public List<Quest> quests = new List<Quest>();
+    public int idCount = 0;
+    public Dictionary<string,Quest> quests = new Dictionary<string, Quest>();
 
     private void Awake()
     {
@@ -21,20 +21,26 @@ public class QuestManager : MonoBehaviour
     //        quests.Add(quest.GetComponent<Quest>());
     //}
 
-    public void AddQuest(GameObject quest)
+    public void AddQuest(Character questGiver,GameObject quest)
     {
         GameObject gameObjectQuest = Instantiate(quest);
         gameObjectQuest.transform.parent = transform;
-        quests.Add(gameObjectQuest.GetComponent<Quest>());
+
+        Quest _quest = gameObjectQuest.GetComponent<Quest>();
+        _quest.questGiver = questGiver;
+
+        quests.Add(questGiver.name, _quest);
+        
+        gameObjectQuest.name = questGiver.name;
 
         //TODO REPRENDRE ICI
     }
 
     public void UpdateQuests()
     {
-        foreach (Quest quest in quests)
+        foreach (var quest in quests)
         {
-            quest.UpdateState();
+            quest.Value.UpdateState();
         }
     }
 
