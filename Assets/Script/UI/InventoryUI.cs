@@ -10,6 +10,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject panelInventory;
     public TextMeshProUGUI tmpStatsText;
     public TextMeshProUGUI tmpEquipedText;
+    public TextMeshProUGUI tmpQuestText;
     public bool isOpen;
 
     public GameObject panelItemButton;
@@ -83,6 +84,14 @@ public class InventoryUI : MonoBehaviour
         foreach (Weapon weapon in playerCharacter.weaponHands)
             if(weapon !=null)tmpEquipedText.text += weapon.getTmpInfo() + "\n";
             else             tmpEquipedText.text += "------\n";
+
+        //-----QUEST------
+        tmpQuestText.text = "QUEST:\n\n";
+        foreach (var item in QuestManager.instance.quests)
+        {
+            if(item.Value.QuestState == QuestState.IN_PROGRES)
+                tmpQuestText.text += item.Value.questName + " " + item.Value.nbTurn + "/" + item.Value.nbTurnMax + " turn\n";
+        }
 
         //-----INVENTORY-----
         foreach (MyObject item in playerCharacter.objectInventory)

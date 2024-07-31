@@ -9,6 +9,7 @@ public abstract class Quest : MonoBehaviour
     public QuestState QuestState { get => questState;}
 
     public Character questGiver;
+    public string questName;
 
     public int nbTurn, nbTurnMax;
 
@@ -17,6 +18,14 @@ public abstract class Quest : MonoBehaviour
     {
         questState = QuestState.IN_PROGRES;        
     }
+
+    public void Reward()
+    {
+        questState = QuestState.FINISHED;
+        _Reward();
+    }
+    public abstract void _Reward();
+
 
     public void UpdateState()
     {
@@ -35,7 +44,6 @@ public abstract class Quest : MonoBehaviour
                 if(Test_4_CAN_FINISH())
                 {
                     questState = QuestState.CAN_FINISH;
-                    Reward();
                 }
                 nbTurn++;
                 break;
@@ -87,7 +95,7 @@ public abstract class Quest : MonoBehaviour
     public abstract bool Test_4_CAN_FINISH();
 
 
-    public abstract void Reward();
+ 
 
 }
 

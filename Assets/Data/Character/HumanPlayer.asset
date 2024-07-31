@@ -32,5 +32,7 @@ MonoBehaviour:
   objectInventory:
   - {fileID: 11400000, guid: a3ae7b9af0e2f314381000c9e65adc01, type: 2}
   - {fileID: 11400000, guid: 320f29881183d2b4f849deb4ffe96e81, type: 2}
+  - {fileID: 11400000, guid: fb4e20592ab82f048a66a0ae4bd5a570, type: 2}
   armorsEquiped: []
   objectToSell: []
+  quests: []

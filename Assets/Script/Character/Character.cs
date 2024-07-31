@@ -281,10 +281,17 @@ public class Character : MonoBehaviour
         yield return new WaitWhile(() => GameManager.instance.dialogAnswer == AnswerButton.WAIT);
         GameManager.instance.CloseDialogWindow();
 
-        if (GameManager.instance.dialogAnswer == AnswerButton.YES && quest.QuestState == QuestState.CAN_START)
+        if (GameManager.instance.dialogAnswer == AnswerButton.YES)
         {
-            quest.StartQuest();
+            if(quest.QuestState == QuestState.CAN_START)
+                quest.StartQuest();
+
+            if (quest.QuestState == QuestState.CAN_FINISH)
+                quest.Reward();
         }
+
+
+
 
         GameManager.instance.dialogAnswer = AnswerButton.WAIT;
 
@@ -375,6 +382,14 @@ public class Character : MonoBehaviour
         {
             return false;
         }
+    }
+    
+    public int CountItem(ObjectData objectData)
+    {
+        int count = 0;
+        foreach (var item in objectInventory)
+            if (item.objectData == objectData) count++;
+        return count;
     }
 
     public void SellItem(MyObject obj) //for player
@@ -737,6 +752,12 @@ public class Character : MonoBehaviour
             lvl++;
             lvlPoint += 5;
         }
+        GameManager.instance.UpdateTmpInfo();
+    }
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
         GameManager.instance.UpdateTmpInfo();
     }
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6151185545441747279
+--- !u!1 &170243734549842416
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8109703009545693568}
-  - component: {fileID: 3689994812968089931}
+  - component: {fileID: 8228572616289266797}
+  - component: {fileID: 2691736356143020775}
   m_Layer: 0
-  m_Name: QuestTest
+  m_Name: QuestApple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8109703009545693568
+--- !u!4 &8228572616289266797
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6151185545441747279}
+  m_GameObject: {fileID: 170243734549842416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,22 +32,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3689994812968089931
+--- !u!114 &2691736356143020775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6151185545441747279}
+  m_GameObject: {fileID: 170243734549842416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19de75f6ae4879a4ea443b6a83b737ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 898fc768fa0230a49aa10eb5ec6617f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questState: 1
   questGiver: {fileID: 0}
+  questName: Good golden potion
   nbTurn: 0
   nbTurnMax: 30
-  nbScorpionKill: 0
-  req_nbScorpionKill: 1
-  scorpion: {fileID: 11400000, guid: 2b38b224124ceb34baab4c6a0d39570f, type: 2}
+  req_nbGoldenAppleTake: 3
+  goldenApple: {fileID: 11400000, guid: 23b037d5c29edc04784dfbb18cc3beb3, type: 2}
+  goldenPotion: {fileID: 11400000, guid: 640781a1dbf27a14dbfc2c134dfb3d73, type: 2}

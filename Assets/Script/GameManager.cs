@@ -376,7 +376,7 @@ public class GameManager : MonoBehaviour
         ###  ###  ###       x1    +    +
         ###  ###  ###       y1    +    +
      */
-    public List<GameObject> GetTiles(int x1, int y1, int x2, int y2, bool debugDraw = false)
+    public List<GameObject> GetTiles(int x1, int y1, int x2, int y2, bool debugDraw = false) //TODO [REFACTOT AOUT]
     {
         List<GameObject> res = new List<GameObject>();
 

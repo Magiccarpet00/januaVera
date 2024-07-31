@@ -34,3 +34,4 @@ MonoBehaviour:
   armorsEquiped:
   - {fileID: 11400000, guid: b9521d0dbfde5434ea3ce0137768bb71, type: 2}
   objectToSell: []
+  quests: []

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class QuestTest : Quest
 {
-    public int nbScorpionKill;
-    public int req_nbScorpionKill;
+    public CharacterData scorpionData;
+    private Character scorpion;
 
-    public CharacterData scorpion;
+    private int goldReward = 5;
 
     protected override string Dialog_1_NOT_REQUIREMENTS()
     {
@@ -26,7 +26,7 @@ public class QuestTest : Quest
 
     protected override string Dialog_4_CAN_FINISH()
     {
-        return "Thanks for your help wanderer \n +10 gold";
+        return "Thanks for your help wanderer \n +"+goldReward.ToString() +" gold";
     }
 
     protected override string Dialog_5_FINISHED()
@@ -46,21 +46,19 @@ public class QuestTest : Quest
         List<Spot> spots = tiles[rng].GetComponentInChildren<Tile>().GetSpots();
         int rng2 = Random.Range(0, spots.Count);
 
-        GameManager.instance.CreateCharacter(scorpion, spots[rng2].gameObject);
+        GameObject go = GameManager.instance.CreateCharacter(scorpionData, spots[rng2].gameObject);
+        scorpion = go.GetComponent<Character>();
     }
-    
-
 
     public override bool Test_4_CAN_FINISH()
     {
-        if (nbScorpionKill == req_nbScorpionKill)
-            return true;
-        else
-            return false;
+        if (scorpion == null) return false;
+
+        return scorpion.isDead;
     }
 
-    public override void Reward()
+    public override void _Reward()
     {
-        Debug.Log("Reward");
+        GameManager.instance.playerCharacter.AddGold(goldReward);
     }
 }

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61309c1fff315ec4a8a4b487b215091e, type: 3}
+  m_Name: ElfQuestApple
+  m_EditorClassIdentifier: 
+  race: 1
+  shape: 10
+  typeDivinity: 0
+  init_VITALITY: 0
+  init_ENDURANCE: 0
+  init_STRENGHT: 0
+  init_DEXTERITY: 0
+  init_FAITH: 0
+  init_GOLD: 0
+  init_LVL: 0
+  drop_XP: 0
+  spriteMap: {fileID: 0}
+  spriteFight: {fileID: 0}
+  workCost: 0
+  isMerchant: 0
+  inLocation: 1
+  currentMood: 0
+  objectInventory: []
+  armorsEquiped: []
+  objectToSell: []
+  quests:
+  - {fileID: 170243734549842416, guid: 54e1274dfa7bc4a42a35f5385e6008df, type: 3}
